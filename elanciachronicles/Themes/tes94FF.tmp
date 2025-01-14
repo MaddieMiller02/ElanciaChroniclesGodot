@@ -1,0 +1,237 @@
+[gd_scene load_steps=9 format=3 uid="uid://dr7r0g45hxmpj"]
+
+[ext_resource type="Script" path="res://Scripts/battle.gd" id="1_d70km"]
+[ext_resource type="Theme" uid="uid://cgegsgwnyevm8" path="res://Themes/default_window_theme.tres" id="1_gyxs5"]
+[ext_resource type="PackedScene" uid="uid://c1vcjjdval25x" path="res://Scenes/UI/ui_window.tscn" id="2_fpkmk"]
+[ext_resource type="Theme" uid="uid://qxrxrm4x1ftn" path="res://Themes/default_button_theme.tres" id="3_fgkmc"]
+[ext_resource type="Script" path="res://Scripts/menu.gd" id="4_pa02r"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_t8jv2"]
+albedo_color = Color(0, 0.364706, 0, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ujmev"]
+albedo_color = Color(0.290196, 0, 0.545098, 1)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bdlw1"]
+albedo_color = Color(0.189666, 0.37646, 0.184867, 1)
+
+[node name="Battle" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 3
+size_flags_vertical = 3
+script = ExtResource("1_d70km")
+metadata/_edit_group_ = true
+
+[node name="BattleUI" type="HBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -640.0
+offset_top = -175.0
+offset_right = 640.0
+grow_horizontal = 2
+grow_vertical = 0
+theme = ExtResource("1_gyxs5")
+alignment = 1
+
+[node name="CharacterStatsWindow" parent="BattleUI" instance=ExtResource("2_fpkmk")]
+layout_mode = 2
+
+[node name="PartyStats" type="GridContainer" parent="BattleUI/CharacterStatsWindow"]
+layout_mode = 1
+anchors_preset = 10
+anchor_right = 1.0
+offset_bottom = 74.0
+grow_horizontal = 2
+columns = 3
+
+[node name="Party1Button" type="Button" parent="BattleUI/CharacterStatsWindow/PartyStats"]
+layout_mode = 2
+theme = ExtResource("3_fgkmc")
+theme_override_font_sizes/font_size = 20
+text = "Party Member 1"
+
+[node name="Party2Button" type="Button" parent="BattleUI/CharacterStatsWindow/PartyStats"]
+layout_mode = 2
+theme = ExtResource("3_fgkmc")
+theme_override_font_sizes/font_size = 20
+text = "Party Member 2"
+
+[node name="Party3Button" type="Button" parent="BattleUI/CharacterStatsWindow/PartyStats"]
+layout_mode = 2
+theme = ExtResource("3_fgkmc")
+theme_override_font_sizes/font_size = 20
+text = "Party Member 3"
+
+[node name="Party4Button" type="Button" parent="BattleUI/CharacterStatsWindow/PartyStats"]
+layout_mode = 2
+theme = ExtResource("3_fgkmc")
+theme_override_font_sizes/font_size = 20
+text = "Party Member 4"
+
+[node name="Party5Button" type="Button" parent="BattleUI/CharacterStatsWindow/PartyStats"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_fgkmc")
+theme_override_font_sizes/font_size = 20
+text = "Party Member 5"
+
+[node name="EnemyStats" type="GridContainer" parent="BattleUI/CharacterStatsWindow"]
+layout_mode = 1
+anchors_preset = 12
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_top = -74.0
+grow_horizontal = 2
+grow_vertical = 0
+columns = 3
+
+[node name="Enemy1Button" type="Button" parent="BattleUI/CharacterStatsWindow/EnemyStats"]
+layout_mode = 2
+theme = ExtResource("3_fgkmc")
+theme_override_font_sizes/font_size = 20
+text = "Enemy 1"
+
+[node name="Enemy2Button" type="Button" parent="BattleUI/CharacterStatsWindow/EnemyStats"]
+layout_mode = 2
+theme = ExtResource("3_fgkmc")
+theme_override_font_sizes/font_size = 20
+text = "Enemy 2"
+
+[node name="Enemy3Button" type="Button" parent="BattleUI/CharacterStatsWindow/EnemyStats"]
+layout_mode = 2
+theme = ExtResource("3_fgkmc")
+theme_override_font_sizes/font_size = 20
+text = "Enemy 3"
+
+[node name="Enemy4Button" type="Button" parent="BattleUI/CharacterStatsWindow/EnemyStats"]
+layout_mode = 2
+theme = ExtResource("3_fgkmc")
+theme_override_font_sizes/font_size = 20
+text = "Enemy 4"
+
+[node name="Enemy5Button" type="Button" parent="BattleUI/CharacterStatsWindow/EnemyStats"]
+layout_mode = 2
+size_flags_horizontal = 4
+theme = ExtResource("3_fgkmc")
+theme_override_font_sizes/font_size = 20
+text = "Enemy 5"
+
+[node name="PlayerActionsWindow" parent="BattleUI" instance=ExtResource("2_fpkmk")]
+layout_mode = 2
+
+[node name="ActionsMenu" type="GridContainer" parent="BattleUI/PlayerActionsWindow"]
+layout_mode = 0
+offset_right = 347.0
+offset_bottom = 362.0
+columns = 3
+script = ExtResource("4_pa02r")
+
+[node name="MeleeButton" type="Button" parent="BattleUI/PlayerActionsWindow/ActionsMenu"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../ItemsButton")
+focus_neighbor_top = NodePath("../ItemsButton")
+focus_neighbor_right = NodePath("../RangedButton")
+focus_neighbor_bottom = NodePath("../RangedButton")
+theme = ExtResource("3_fgkmc")
+text = "Melee Attack"
+
+[node name="RangedButton" type="Button" parent="BattleUI/PlayerActionsWindow/ActionsMenu"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../MeleeButton")
+focus_neighbor_top = NodePath("../MeleeButton")
+focus_neighbor_right = NodePath("../SpecialButton")
+focus_neighbor_bottom = NodePath("../SpecialButton")
+theme = ExtResource("3_fgkmc")
+text = "Ranged Attack"
+
+[node name="SpecialButton" type="Button" parent="BattleUI/PlayerActionsWindow/ActionsMenu"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../RangedButton")
+focus_neighbor_top = NodePath("../RangedButton")
+focus_neighbor_right = NodePath("../DefendButton")
+focus_neighbor_bottom = NodePath("../DefendButton")
+theme = ExtResource("3_fgkmc")
+text = "Special Moves"
+
+[node name="DefendButton" type="Button" parent="BattleUI/PlayerActionsWindow/ActionsMenu"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../SpecialButton")
+focus_neighbor_top = NodePath("../SpecialButton")
+focus_neighbor_right = NodePath("../RepositionButton")
+focus_neighbor_bottom = NodePath("../RepositionButton")
+theme = ExtResource("3_fgkmc")
+text = "Defend"
+
+[node name="RepositionButton" type="Button" parent="BattleUI/PlayerActionsWindow/ActionsMenu"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../DefendButton")
+focus_neighbor_top = NodePath("../DefendButton")
+focus_neighbor_right = NodePath("../ItemsButton")
+focus_neighbor_bottom = NodePath("../ItemsButton")
+theme = ExtResource("3_fgkmc")
+text = "Reposition"
+
+[node name="ItemsButton" type="Button" parent="BattleUI/PlayerActionsWindow/ActionsMenu"]
+layout_mode = 2
+focus_neighbor_left = NodePath("../RepositionButton")
+focus_neighbor_top = NodePath("../RepositionButton")
+focus_neighbor_right = NodePath("../MeleeButton")
+focus_neighbor_bottom = NodePath("../MeleeButton")
+theme = ExtResource("3_fgkmc")
+text = "Items"
+
+[node name="BattleVisuals" type="Node3D" parent="."]
+
+[node name="Camera3D" type="Camera3D" parent="BattleVisuals"]
+transform = Transform3D(1, 0, 0, 0, 0.975392, 0.220476, 0, -0.220476, 0.975392, 0, 3.98798, 8.45461)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BattleVisuals"]
+material_override = SubResource("StandardMaterial3D_t8jv2")
+size = Vector3(50, 1, 50)
+
+[node name="Sun" type="DirectionalLight3D" parent="BattleVisuals"]
+transform = Transform3D(0.996264, -0.0747862, 0.0431784, -9.83848e-09, 0.5, 0.866025, -0.0863551, -0.86279, 0.498132, 0, 0, 0)
+shadow_enabled = true
+
+[node name="Party" type="Node3D" parent="BattleVisuals"]
+
+[node name="Verse" type="Node3D" parent="BattleVisuals/Party"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.35, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BattleVisuals/Party/Verse"]
+material_override = SubResource("StandardMaterial3D_ujmev")
+size = Vector3(1, 1.7, 1)
+
+[node name="Xan" type="Node3D" parent="BattleVisuals/Party"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -5, 1.35, -5)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BattleVisuals/Party/Xan"]
+material_override = SubResource("StandardMaterial3D_bdlw1")
+size = Vector3(1, 1.7, 1)
+
+[node name="Enemies" type="Node3D" parent="BattleVisuals"]
+
+[node name="Sailor1" type="Node3D" parent="BattleVisuals/Enemies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.35, 0)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BattleVisuals/Enemies/Sailor1"]
+size = Vector3(1, 1.7, 1)
+
+[node name="Sailor2" type="Node3D" parent="BattleVisuals/Enemies"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 5, 1.35, -5)
+
+[node name="CSGBox3D" type="CSGBox3D" parent="BattleVisuals/Enemies/Sailor2"]
+size = Vector3(1, 1.7, 1)
+
+[connection signal="button_focused" from="BattleUI/PlayerActionsWindow/ActionsMenu" to="." method="_on_actions_menu_button_focused"]
+[connection signal="button_pressed" from="BattleUI/PlayerActionsWindow/ActionsMenu" to="." method="_on_actions_menu_button_pressed"]
