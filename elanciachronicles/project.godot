@@ -12,6 +12,7 @@ config_version=5
 
 config/name="ElanciaChronicles"
 config/features=PackedStringArray("4.3", "Forward Plus")
+run/max_fps=165
 config/icon="res://icon.svg"
 
 [display]
