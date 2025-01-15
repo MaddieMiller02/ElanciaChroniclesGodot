@@ -1,3 +1,32 @@
-[gd_scene format=3 uid="uid://76oylgsktakg"]
+[gd_scene load_steps=4 format=3 uid="uid://76oylgsktakg"]
+
+[ext_resource type="PackedScene" uid="uid://2grlqiefj6p8" path="res://Scenes/Characters/Overworld/Party/VerseOverworld.tscn" id="1_5km53"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_sxr5v"]
+size = Vector3(10.0557, 1, 10.1085)
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ektyt"]
+albedo_color = Color(0, 0.373541, 1.92523e-07, 1)
 
 [node name="TestOverworld" type="Node3D"]
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.866023, -0.433016, 0.250001, 0, 0.499998, 0.866027, -0.500003, 0.749999, -0.43301, 0, 0, 0)
+light_energy = 1.3
+shadow_enabled = true
+
+[node name="VerseOverworld" parent="." instance=ExtResource("1_5km53")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 1.75233, 0)
+
+[node name="Camera3D" type="Camera3D" parent="VerseOverworld"]
+transform = Transform3D(1, 0, 0, 0, 0.979771, 0.20012, 0, -0.20012, 0.979771, 0, 0.499785, 2.51911)
+
+[node name="Ground" type="StaticBody3D" parent="."]
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="Ground"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.0112305, 0, -0.0628967)
+shape = SubResource("BoxShape3D_sxr5v")
+
+[node name="CSGBox3D" type="CSGBox3D" parent="Ground"]
+material_override = SubResource("StandardMaterial3D_ektyt")
+size = Vector3(10, 1, 10)

@@ -1,10 +1,11 @@
-[gd_scene load_steps=11 format=3 uid="uid://2grlqiefj6p8"]
+[gd_scene load_steps=12 format=3 uid="uid://2grlqiefj6p8"]
 
 [ext_resource type="Texture2D" uid="uid://c0ry2hw1fulky" path="res://Art/SpriteSheets/VerseTestSheet.png" id="1_8jlfr"]
+[ext_resource type="Script" path="res://Scripts/overworld_leader.gd" id="1_at27b"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_nwhyv"]
-radius = 0.474184
-height = 0.973338
+radius = 0.100378
+height = 0.456062
 
 [sub_resource type="Animation" id="Animation_bxseb"]
 length = 0.001
@@ -139,6 +140,7 @@ _data = {
 
 [node name="VerseOverworld" type="CharacterBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.224072, 0)
+script = ExtResource("1_at27b")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
 shape = SubResource("CapsuleShape3D_nwhyv")
