@@ -34,10 +34,11 @@ func _physics_process(delta):
 	
 func walk_animation(direction):
 	#Sets direction for character to face
+	print(last_dir.z)
 	var face_direction = "side"
-	if last_dir.z < 0:
+	if last_dir.z < -0.5:
 		face_direction = "forward"
-	elif last_dir.z > 0:
+	elif last_dir.z > 0.5:
 		face_direction = "back"
 	
 	#Play walk animation if moving...
@@ -56,3 +57,5 @@ func walk_animation(direction):
 		$Sprite3D.flip_h = true
 	elif face_direction != "side" or direction.x < 0:
 		$Sprite3D.flip_h = false
+		
+	print(face_direction)
