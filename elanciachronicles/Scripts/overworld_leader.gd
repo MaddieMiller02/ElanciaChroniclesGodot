@@ -35,23 +35,24 @@ func _physics_process(delta):
 func walk_animation(direction):
 	#Sets direction for character to face
 	var face_direction = "side"
-	if last_dir.z > 0:
-		face_direction = "front"
-	elif last_dir.z < 0:
+	if last_dir.z < 0:
+		face_direction = "forward"
+	elif last_dir.z > 0:
 		face_direction = "back"
-		
-	#Start idle or walk animation based on directional input
-	if direction == Vector3(0, 0, 0):
+	
+	#Play walk animation if moving...
+	if direction != Vector3(0, 0, 0):
+		#Or run animation if running
+		if abs(velocity.x) > SPEED or abs(velocity.z) > SPEED:
+			$AnimationPlayer.play(face_direction + "_run")
+		else:
+			$AnimationPlayer.play(face_direction + "_walk")
+	#Play idle animation if not moving
+	else:
 		$AnimationPlayer.play(face_direction + "_idle")
-	elif direction.x != 0:
-		$AnimationPlayer.play("side_walk")
-	elif direction.z > 0:
-		$AnimationPlayer.play("front_walk")
-	elif direction.z < 0:
-		$AnimationPlayer.play("back_walk")
 		
 	#Flip sprite if moving right/left
-	if direction.x > 0:
+	if face_direction == "side" and direction.x > 0 :
 		$Sprite3D.flip_h = true
-	elif direction.x < 0:
+	elif face_direction != "side" or direction.x < 0:
 		$Sprite3D.flip_h = false
