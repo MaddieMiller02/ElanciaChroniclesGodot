@@ -3,6 +3,7 @@ extends CharacterBody3D
 
 const SPEED = 3
 
+var last_dir = Vector3.ZERO
 
 func _physics_process(delta):
 	# Add the gravity.
@@ -27,10 +28,21 @@ func _physics_process(delta):
 	walk_animation(direction)
 	move_and_slide()
 	
+	#Sets last direction moved in unless the player is not moving (to determine idle animation)
+	if direction != Vector3.ZERO:
+		last_dir = direction
+	
 func walk_animation(direction):
+	#Sets direction for character to face
+	var face_direction = "side"
+	if last_dir.z > 0:
+		face_direction = "front"
+	elif last_dir.z < 0:
+		face_direction = "back"
+		
 	#Start idle or walk animation based on directional input
 	if direction == Vector3(0, 0, 0):
-		$AnimationPlayer.play("side_idle")
+		$AnimationPlayer.play(face_direction + "_idle")
 	elif direction.x != 0:
 		$AnimationPlayer.play("side_walk")
 	elif direction.z > 0:
