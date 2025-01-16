@@ -1,7 +1,7 @@
 extends CharacterBody3D
 
 
-const SPEED = 5.0
+const SPEED = 3
 
 
 func _physics_process(delta):
@@ -18,6 +18,11 @@ func _physics_process(delta):
 	else:
 		velocity.x = move_toward(velocity.x, 0, SPEED)
 		velocity.z = move_toward(velocity.z, 0, SPEED)
+	
+	# Check for if sprinting
+	if Input.is_action_pressed("dash") and input_dir != Vector2(0,0):
+		velocity.x *= 2
+		velocity.z *= 2
 	
 	walk_animation(direction)
 	move_and_slide()
