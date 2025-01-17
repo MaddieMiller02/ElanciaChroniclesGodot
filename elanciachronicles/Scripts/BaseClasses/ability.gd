@@ -9,6 +9,6 @@ var SPCost:int
 var Reflectable:bool
 var DamageMultiplier:float
 var SplitDamage:bool
-var StatusEffects:Array[String]
-var Element:String
+var StatusEffects:Array[Enums.STATUS]
+var Element:Enums.ELEMENT
 var IsActive:bool

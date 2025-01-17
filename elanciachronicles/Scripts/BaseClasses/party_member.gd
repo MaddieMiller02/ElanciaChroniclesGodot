@@ -28,13 +28,13 @@ var IsWounded:bool
 var SpecialList:Array[Ability]
 var SpecialActivationList:Dictionary
 
-var Statuses:Array[String]
-var StatusImmunities:Array[String]
+var Statuses:Array[Enums.STATUS]
+var StatusImmunities:Array[Enums.STATUS]
 
 var DefaultPosition:String
 var IsPartyLeader:bool
 
-var Resistances:Array[String]
-var Weaknesses:Array[String]
+var Resistances:Array[Enums.ELEMENT]
+var Weaknesses:Array[Enums.ELEMENT]
 
 var Experience:int
