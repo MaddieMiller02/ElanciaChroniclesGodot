@@ -2,39 +2,40 @@ extends Node
 
 const Ability = preload("res://Scripts/BaseClasses/ability.gd")
 
-var BattlerName:String
-var Level:int
+@export var BattlerName:String
+@export var Level:int
 
-var Strength:int #physical ability power
-var Magic:int #magical ability power
-var Defense:int #physical damage reduction
-var Resistance:int #magical damage reduction
-var Speed:int #determines starting turn order, ability to hit dodge physical attacks
-var Charisma:int #ability to hit and dodge magic attacks, healing amount for non-magic healing
-var EscapeSuccess:int
+@export var Strength:int #physical ability power
+@export var Magic:int #magical ability power
+@export var Defense:int #physical damage reduction
+@export var Resistance:int #magical damage reduction
+@export var Speed:int #determines starting turn order, ability to hit dodge physical attacks
+@export var Charisma:int #ability to hit and dodge magic attacks, healing amount for non-magic healing
 
-var TempHP:int
-var TempSP:int
-var CurrentHP:int
-var CurrentSP:int
-var MaxHP:int
-var MaxSP:int
+@export var EscapeSuccess:int
 
-var InitialLevelOffset:int
+@export var TempHP:int
+@export var TempSP:int
+@export var CurrentHP:int
+@export var CurrentSP:int
+@export var MaxHP:int
+@export var MaxSP:int
 
-var InParty:bool
-var IsWounded:bool
+@export var InitialLevelOffset:int
 
-var SpecialList:Array[Ability]
-var SpecialActivationList:Dictionary
+@export var InParty:bool
+@export var IsWounded:bool
 
-var Statuses:Array[Enums.STATUS]
-var StatusImmunities:Array[Enums.STATUS]
+@export var SpecialList:Array[Ability]
+@export var SpecialActivationList:Dictionary
 
-var DefaultPosition:String
-var IsPartyLeader:bool
+@export var Statuses:Array[Enums.STATUS]
+@export var StatusImmunities:Array[Enums.STATUS]
 
-var Resistances:Array[Enums.ELEMENT]
-var Weaknesses:Array[Enums.ELEMENT]
+@export var DefaultPosition:Enums.BATTLE_POSITION
+@export var IsPartyLeader:bool
 
-var Experience:int
+@export var Resistances:Array[Enums.ELEMENT]
+@export var Weaknesses:Array[Enums.ELEMENT]
+
+@export var Experience:int
