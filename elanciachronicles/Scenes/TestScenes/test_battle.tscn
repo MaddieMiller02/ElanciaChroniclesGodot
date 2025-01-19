@@ -2,7 +2,7 @@
 
 [ext_resource type="Script" path="res://Scripts/battle.gd" id="1_8vs0b"]
 [ext_resource type="Theme" uid="uid://cgegsgwnyevm8" path="res://Themes/default_window_theme.tres" id="2_fecio"]
-[ext_resource type="PackedScene" uid="uid://c1vcjjdval25x" path="res://Scenes/UI/ui_window.tscn" id="3_3vh5x"]
+[ext_resource type="PackedScene" uid="uid://c1vcjjdval25x" path="res://Scenes/UI/UIWindow.tscn" id="3_3vh5x"]
 [ext_resource type="Theme" uid="uid://qxrxrm4x1ftn" path="res://Themes/default_theme.tres" id="4_jc3j5"]
 
 [sub_resource type="StyleBoxFlat" id="StyleBoxFlat_3md0j"]
@@ -20,21 +20,12 @@ albedo_color = Color(0.290196, 0, 0.545098, 1)
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_bdlw1"]
 albedo_color = Color(0.189666, 0.37646, 0.184867, 1)
 
-[node name="Battle" type="Control"]
-layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-size_flags_horizontal = 3
-size_flags_vertical = 3
+[node name="BattleUI" type="CanvasLayer"]
 script = ExtResource("1_8vs0b")
 metadata/_edit_group_ = true
 metadata/_edit_lock_ = true
 
-[node name="BattleUI" type="HBoxContainer" parent="."]
-layout_mode = 1
+[node name="MainBattleUI" type="HBoxContainer" parent="."]
 anchors_preset = 7
 anchor_left = 0.5
 anchor_top = 1.0
@@ -48,11 +39,11 @@ grow_vertical = 0
 theme = ExtResource("2_fecio")
 alignment = 1
 
-[node name="PartyWindow" parent="BattleUI" instance=ExtResource("3_3vh5x")]
+[node name="PartyWindow" parent="MainBattleUI" instance=ExtResource("3_3vh5x")]
 layout_mode = 2
 script = null
 
-[node name="PartyUI" type="GridContainer" parent="BattleUI/PartyWindow"]
+[node name="PartyUI" type="GridContainer" parent="MainBattleUI/PartyWindow"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -60,7 +51,7 @@ offset_bottom = 30.0
 grow_horizontal = 2
 columns = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="BattleUI/PartyWindow/PartyUI"]
+[node name="MarginContainer" type="MarginContainer" parent="MainBattleUI/PartyWindow/PartyUI"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
@@ -68,26 +59,26 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BattleUI/PartyWindow/PartyUI/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer"]
 layout_mode = 2
 
-[node name="PartyBattleBar" type="HBoxContainer" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer"]
+[node name="PartyBattleBar1" type="HBoxContainer" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Name" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar"]
+[node name="Name" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar1"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "Player"
 
-[node name="HPLabel" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar"]
+[node name="HPLabel" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar1"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "HP"
 
-[node name="HPBar" type="ProgressBar" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar"]
+[node name="HPBar" type="ProgressBar" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar1"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -95,12 +86,12 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3md0j")
 value = 100.0
 
-[node name="StaminaLabel" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar"]
+[node name="StaminaLabel" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar1"]
 layout_mode = 2
 theme = ExtResource("4_jc3j5")
 text = "STA"
 
-[node name="StaminaBar" type="ProgressBar" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar"]
+[node name="StaminaBar" type="ProgressBar" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar1"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -108,23 +99,23 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_80uvj")
 value = 100.0
 
-[node name="PartyBattleBar2" type="HBoxContainer" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer"]
+[node name="PartyBattleBar2" type="HBoxContainer" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Name" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar2"]
+[node name="Name" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "Player"
 
-[node name="HPLabel" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar2"]
+[node name="HPLabel" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "HP"
 
-[node name="HPBar" type="ProgressBar" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar2"]
+[node name="HPBar" type="ProgressBar" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar2"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -132,12 +123,12 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3md0j")
 value = 100.0
 
-[node name="StaminaLabel" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar2"]
+[node name="StaminaLabel" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar2"]
 layout_mode = 2
 theme = ExtResource("4_jc3j5")
 text = "STA"
 
-[node name="StaminaBar" type="ProgressBar" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar2"]
+[node name="StaminaBar" type="ProgressBar" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar2"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -145,23 +136,23 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_80uvj")
 value = 100.0
 
-[node name="PartyBattleBar3" type="HBoxContainer" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer"]
+[node name="PartyBattleBar3" type="HBoxContainer" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Name" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar3"]
+[node name="Name" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar3"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "Player"
 
-[node name="HPLabel" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar3"]
+[node name="HPLabel" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar3"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "HP"
 
-[node name="HPBar" type="ProgressBar" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar3"]
+[node name="HPBar" type="ProgressBar" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar3"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -169,12 +160,12 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3md0j")
 value = 100.0
 
-[node name="StaminaLabel" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar3"]
+[node name="StaminaLabel" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar3"]
 layout_mode = 2
 theme = ExtResource("4_jc3j5")
 text = "STA"
 
-[node name="StaminaBar" type="ProgressBar" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar3"]
+[node name="StaminaBar" type="ProgressBar" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar3"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -182,23 +173,23 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_80uvj")
 value = 100.0
 
-[node name="PartyBattleBar4" type="HBoxContainer" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer"]
+[node name="PartyBattleBar4" type="HBoxContainer" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Name" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar4"]
+[node name="Name" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar4"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "Player"
 
-[node name="HPLabel" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar4"]
+[node name="HPLabel" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar4"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "HP"
 
-[node name="HPBar" type="ProgressBar" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar4"]
+[node name="HPBar" type="ProgressBar" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar4"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -206,12 +197,12 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3md0j")
 value = 100.0
 
-[node name="StaminaLabel" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar4"]
+[node name="StaminaLabel" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar4"]
 layout_mode = 2
 theme = ExtResource("4_jc3j5")
 text = "STA"
 
-[node name="StaminaBar" type="ProgressBar" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar4"]
+[node name="StaminaBar" type="ProgressBar" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar4"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -219,23 +210,23 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_80uvj")
 value = 100.0
 
-[node name="PartyBattleBar5" type="HBoxContainer" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer"]
+[node name="PartyBattleBar5" type="HBoxContainer" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Name" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar5"]
+[node name="Name" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar5"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "Player"
 
-[node name="HPLabel" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar5"]
+[node name="HPLabel" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar5"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "HP"
 
-[node name="HPBar" type="ProgressBar" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar5"]
+[node name="HPBar" type="ProgressBar" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar5"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -243,12 +234,12 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3md0j")
 value = 100.0
 
-[node name="StaminaLabel" type="Label" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar5"]
+[node name="StaminaLabel" type="Label" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar5"]
 layout_mode = 2
 theme = ExtResource("4_jc3j5")
 text = "STA"
 
-[node name="StaminaBar" type="ProgressBar" parent="BattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar5"]
+[node name="StaminaBar" type="ProgressBar" parent="MainBattleUI/PartyWindow/PartyUI/MarginContainer/VBoxContainer/PartyBattleBar5"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -256,11 +247,11 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_80uvj")
 value = 100.0
 
-[node name="PlayerActionsWindow" parent="BattleUI" instance=ExtResource("3_3vh5x")]
+[node name="PlayerActionsWindow" parent="MainBattleUI" instance=ExtResource("3_3vh5x")]
 layout_mode = 2
 script = null
 
-[node name="ActionsMenu" type="GridContainer" parent="BattleUI/PlayerActionsWindow"]
+[node name="ActionsMenu" type="GridContainer" parent="MainBattleUI/PlayerActionsWindow"]
 layout_mode = 1
 anchors_preset = 8
 anchor_left = 0.5
@@ -275,7 +266,7 @@ grow_horizontal = 2
 grow_vertical = 2
 columns = 3
 
-[node name="MeleeButton" type="Button" parent="BattleUI/PlayerActionsWindow/ActionsMenu"]
+[node name="MeleeButton" type="Button" parent="MainBattleUI/PlayerActionsWindow/ActionsMenu"]
 layout_mode = 2
 size_flags_vertical = 3
 focus_neighbor_left = NodePath("../ItemsButton")
@@ -285,7 +276,7 @@ focus_neighbor_bottom = NodePath("../RangedButton")
 theme = ExtResource("4_jc3j5")
 text = "Melee Attack"
 
-[node name="RangedButton" type="Button" parent="BattleUI/PlayerActionsWindow/ActionsMenu"]
+[node name="RangedButton" type="Button" parent="MainBattleUI/PlayerActionsWindow/ActionsMenu"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -296,7 +287,7 @@ focus_neighbor_bottom = NodePath("../SpecialButton")
 theme = ExtResource("4_jc3j5")
 text = "Ranged Attack"
 
-[node name="SpecialButton" type="Button" parent="BattleUI/PlayerActionsWindow/ActionsMenu"]
+[node name="SpecialButton" type="Button" parent="MainBattleUI/PlayerActionsWindow/ActionsMenu"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -307,7 +298,7 @@ focus_neighbor_bottom = NodePath("../DefendButton")
 theme = ExtResource("4_jc3j5")
 text = "Special Moves"
 
-[node name="DefendButton" type="Button" parent="BattleUI/PlayerActionsWindow/ActionsMenu"]
+[node name="DefendButton" type="Button" parent="MainBattleUI/PlayerActionsWindow/ActionsMenu"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -318,7 +309,7 @@ focus_neighbor_bottom = NodePath("../RepositionButton")
 theme = ExtResource("4_jc3j5")
 text = "Defend"
 
-[node name="RepositionButton" type="Button" parent="BattleUI/PlayerActionsWindow/ActionsMenu"]
+[node name="RepositionButton" type="Button" parent="MainBattleUI/PlayerActionsWindow/ActionsMenu"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -329,7 +320,7 @@ focus_neighbor_bottom = NodePath("../ItemsButton")
 theme = ExtResource("4_jc3j5")
 text = "Reposition"
 
-[node name="ItemsButton" type="Button" parent="BattleUI/PlayerActionsWindow/ActionsMenu"]
+[node name="ItemsButton" type="Button" parent="MainBattleUI/PlayerActionsWindow/ActionsMenu"]
 layout_mode = 2
 size_flags_horizontal = 3
 size_flags_vertical = 3
@@ -340,11 +331,11 @@ focus_neighbor_bottom = NodePath("../MeleeButton")
 theme = ExtResource("4_jc3j5")
 text = "Items"
 
-[node name="EnemyWindow" parent="BattleUI" instance=ExtResource("3_3vh5x")]
+[node name="EnemyWindow" parent="MainBattleUI" instance=ExtResource("3_3vh5x")]
 layout_mode = 2
 script = null
 
-[node name="EnemyUI" type="GridContainer" parent="BattleUI/EnemyWindow"]
+[node name="EnemyUI" type="GridContainer" parent="MainBattleUI/EnemyWindow"]
 layout_mode = 1
 anchors_preset = 10
 anchor_right = 1.0
@@ -352,7 +343,7 @@ offset_bottom = 30.0
 grow_horizontal = 2
 columns = 3
 
-[node name="MarginContainer" type="MarginContainer" parent="BattleUI/EnemyWindow/EnemyUI"]
+[node name="MarginContainer" type="MarginContainer" parent="MainBattleUI/EnemyWindow/EnemyUI"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme_override_constants/margin_left = 10
@@ -360,26 +351,26 @@ theme_override_constants/margin_top = 10
 theme_override_constants/margin_right = 10
 theme_override_constants/margin_bottom = 10
 
-[node name="VBoxContainer" type="VBoxContainer" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer"]
+[node name="VBoxContainer" type="VBoxContainer" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer"]
 layout_mode = 2
 
-[node name="EnemyBattleBar" type="HBoxContainer" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer"]
+[node name="EnemyBattleBar1" type="HBoxContainer" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Name" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar"]
+[node name="Name" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar1"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "Enemy"
 
-[node name="HPLabel" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar"]
+[node name="HPLabel" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar1"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "HP"
 
-[node name="HPBar" type="ProgressBar" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar"]
+[node name="HPBar" type="ProgressBar" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar1"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -387,12 +378,12 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3md0j")
 value = 100.0
 
-[node name="StaminaLabel" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar"]
+[node name="StaminaLabel" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar1"]
 layout_mode = 2
 theme = ExtResource("4_jc3j5")
 text = "STA"
 
-[node name="StaminaBar" type="ProgressBar" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar"]
+[node name="StaminaBar" type="ProgressBar" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar1"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -400,23 +391,23 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_80uvj")
 value = 100.0
 
-[node name="EnemyBattleBar2" type="HBoxContainer" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer"]
+[node name="EnemyBattleBar2" type="HBoxContainer" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Name" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar2"]
+[node name="Name" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "Enemy"
 
-[node name="HPLabel" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar2"]
+[node name="HPLabel" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar2"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "HP"
 
-[node name="HPBar" type="ProgressBar" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar2"]
+[node name="HPBar" type="ProgressBar" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar2"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -424,12 +415,12 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3md0j")
 value = 100.0
 
-[node name="StaminaLabel" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar2"]
+[node name="StaminaLabel" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar2"]
 layout_mode = 2
 theme = ExtResource("4_jc3j5")
 text = "STA"
 
-[node name="StaminaBar" type="ProgressBar" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar2"]
+[node name="StaminaBar" type="ProgressBar" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar2"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -437,23 +428,23 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_80uvj")
 value = 100.0
 
-[node name="EnemyBattleBar3" type="HBoxContainer" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer"]
+[node name="EnemyBattleBar3" type="HBoxContainer" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Name" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar3"]
+[node name="Name" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar3"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "Enemy"
 
-[node name="HPLabel" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar3"]
+[node name="HPLabel" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar3"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "HP"
 
-[node name="HPBar" type="ProgressBar" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar3"]
+[node name="HPBar" type="ProgressBar" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar3"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -461,12 +452,12 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3md0j")
 value = 100.0
 
-[node name="StaminaLabel" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar3"]
+[node name="StaminaLabel" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar3"]
 layout_mode = 2
 theme = ExtResource("4_jc3j5")
 text = "STA"
 
-[node name="StaminaBar" type="ProgressBar" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar3"]
+[node name="StaminaBar" type="ProgressBar" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar3"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -474,23 +465,23 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_80uvj")
 value = 100.0
 
-[node name="EnemyBattleBar4" type="HBoxContainer" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer"]
+[node name="EnemyBattleBar4" type="HBoxContainer" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Name" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar4"]
+[node name="Name" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar4"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "Enemy"
 
-[node name="HPLabel" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar4"]
+[node name="HPLabel" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar4"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "HP"
 
-[node name="HPBar" type="ProgressBar" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar4"]
+[node name="HPBar" type="ProgressBar" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar4"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -498,12 +489,12 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3md0j")
 value = 100.0
 
-[node name="StaminaLabel" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar4"]
+[node name="StaminaLabel" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar4"]
 layout_mode = 2
 theme = ExtResource("4_jc3j5")
 text = "STA"
 
-[node name="StaminaBar" type="ProgressBar" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar4"]
+[node name="StaminaBar" type="ProgressBar" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar4"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -511,23 +502,23 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_80uvj")
 value = 100.0
 
-[node name="EnemyBattleBar5" type="HBoxContainer" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer"]
+[node name="EnemyBattleBar5" type="HBoxContainer" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer"]
 layout_mode = 2
 size_flags_vertical = 3
 
-[node name="Name" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar5"]
+[node name="Name" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar5"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "Enemy"
 
-[node name="HPLabel" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar5"]
+[node name="HPLabel" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar5"]
 layout_mode = 2
 size_flags_horizontal = 3
 theme = ExtResource("4_jc3j5")
 text = "HP"
 
-[node name="HPBar" type="ProgressBar" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar5"]
+[node name="HPBar" type="ProgressBar" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar5"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -535,12 +526,12 @@ theme = ExtResource("4_jc3j5")
 theme_override_styles/fill = SubResource("StyleBoxFlat_3md0j")
 value = 100.0
 
-[node name="StaminaLabel" type="Label" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar5"]
+[node name="StaminaLabel" type="Label" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar5"]
 layout_mode = 2
 theme = ExtResource("4_jc3j5")
 text = "STA"
 
-[node name="StaminaBar" type="ProgressBar" parent="BattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar5"]
+[node name="StaminaBar" type="ProgressBar" parent="MainBattleUI/EnemyWindow/EnemyUI/MarginContainer/VBoxContainer/EnemyBattleBar5"]
 custom_minimum_size = Vector2(90, 0)
 layout_mode = 2
 size_flags_horizontal = 3
@@ -552,6 +543,7 @@ value = 100.0
 
 [node name="Camera3D" type="Camera3D" parent="BattleVisuals"]
 transform = Transform3D(1, 0, 0, 0, 0.975392, 0.220476, 0, -0.220476, 0.975392, 0, 3.98798, 8.45461)
+current = true
 
 [node name="CSGBox3D" type="CSGBox3D" parent="BattleVisuals"]
 material_override = SubResource("StandardMaterial3D_t8jv2")

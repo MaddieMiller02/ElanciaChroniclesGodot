@@ -1,0 +1,74 @@
+[gd_scene load_steps=2 format=3 uid="uid://b0kkabubbo5u7"]
+
+[ext_resource type="Texture2D" uid="uid://bqo8756i8p6kc" path="res://Art/UI/UI_window_blue.png" id="1_05isc"]
+
+[node name="BattleCanvas" type="CanvasLayer"]
+
+[node name="Background_PartyMenu" type="TextureRect" parent="."]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 384.0
+offset_top = -275.0
+offset_right = 1024.0
+grow_vertical = 0
+texture = ExtResource("1_05isc")
+expand_mode = 1
+
+[node name="Control_PartyMenu" type="Control" parent="Background_PartyMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 920.0
+offset_top = 1000.0
+offset_right = 960.0
+offset_bottom = 1040.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Background_PartyMenu/Control_PartyMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background_PartyMenu/Control_PartyMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="Background_EnemyMenu" type="TextureRect" parent="."]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -896.0
+offset_top = -275.0
+offset_right = -256.0
+grow_horizontal = 0
+grow_vertical = 0
+texture = ExtResource("1_05isc")
+expand_mode = 1
+
+[node name="Control_EnemyMenu" type="Control" parent="Background_EnemyMenu"]
+layout_mode = 1
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = 920.0
+offset_top = 1000.0
+offset_right = 960.0
+offset_bottom = 1040.0
+grow_horizontal = 2
+grow_vertical = 0
+
+[node name="MarginContainer" type="MarginContainer" parent="Background_EnemyMenu/Control_EnemyMenu"]
+layout_mode = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Background_EnemyMenu/Control_EnemyMenu/MarginContainer"]
+layout_mode = 2
