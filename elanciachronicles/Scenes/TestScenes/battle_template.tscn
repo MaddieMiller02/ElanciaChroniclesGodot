@@ -1,8 +1,9 @@
-[gd_scene load_steps=4 format=3 uid="uid://d3od1a50wjpjk"]
+[gd_scene load_steps=5 format=3 uid="uid://d3od1a50wjpjk"]
 
 [ext_resource type="Texture2D" uid="uid://pnho70oa50d6" path="res://Art/UI/ui_movement_blue.png" id="1_4h4gm"]
 [ext_resource type="Texture2D" uid="uid://cybnd3p1ovf7j" path="res://Art/UI/ui_movement_red.png" id="2_1a5q0"]
 [ext_resource type="PackedScene" uid="uid://b0kkabubbo5u7" path="res://Scenes/UI/BattleCanvas.tscn" id="3_vmr8g"]
+[ext_resource type="AudioStream" uid="uid://bvnv5temg2ook" path="res://Audio/Music/55_-_Battle_Theme_2_Enmity.mp3" id="4_cisby"]
 
 [node name="BattleTemplate" type="Node3D"]
 
@@ -52,9 +53,15 @@ texture = ExtResource("2_1a5q0")
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5, 0, -6)
 texture = ExtResource("2_1a5q0")
 
-[node name="Camera3D" type="Camera3D" parent="."]
+[node name="Camera_DefaultPosition" type="Node3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 4.5, 14.5)
+
+[node name="Camera3D" type="Camera3D" parent="Camera_DefaultPosition"]
+transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0)
 
 [node name="BattleCanvas" parent="." instance=ExtResource("3_vmr8g")]
 
-[node name="Node3D" type="Node3D" parent="."]
+[node name="BattleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_cisby")
+autoplay = true
+parameters/looping = true
