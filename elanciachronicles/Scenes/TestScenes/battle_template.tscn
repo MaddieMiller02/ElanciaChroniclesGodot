@@ -1,0 +1,60 @@
+[gd_scene load_steps=4 format=3 uid="uid://d3od1a50wjpjk"]
+
+[ext_resource type="Texture2D" uid="uid://pnho70oa50d6" path="res://Art/UI/ui_movement_blue.png" id="1_4h4gm"]
+[ext_resource type="Texture2D" uid="uid://cybnd3p1ovf7j" path="res://Art/UI/ui_movement_red.png" id="2_1a5q0"]
+[ext_resource type="PackedScene" uid="uid://b0kkabubbo5u7" path="res://Scenes/UI/BattleCanvas.tscn" id="3_vmr8g"]
+
+[node name="BattleTemplate" type="Node3D"]
+
+[node name="Control_PartyLines" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="PartyLine1" type="Sprite3D" parent="Control_PartyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5, 0, 6)
+texture = ExtResource("1_4h4gm")
+
+[node name="PartyLine2" type="Sprite3D" parent="Control_PartyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5, 0, 3)
+texture = ExtResource("1_4h4gm")
+
+[node name="PartyLine3" type="Sprite3D" parent="Control_PartyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5, 0, 0)
+texture = ExtResource("1_4h4gm")
+
+[node name="PartyLine4" type="Sprite3D" parent="Control_PartyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5, 0, -3)
+texture = ExtResource("1_4h4gm")
+
+[node name="PartyLine5" type="Sprite3D" parent="Control_PartyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5, 0, -6)
+texture = ExtResource("1_4h4gm")
+
+[node name="Control_EnemyLines" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="PartyLine1" type="Sprite3D" parent="Control_EnemyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5, 0, 6)
+texture = ExtResource("2_1a5q0")
+
+[node name="PartyLine2" type="Sprite3D" parent="Control_EnemyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5, 0, 3)
+texture = ExtResource("2_1a5q0")
+
+[node name="PartyLine3" type="Sprite3D" parent="Control_EnemyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5, 0, 0)
+texture = ExtResource("2_1a5q0")
+
+[node name="PartyLine4" type="Sprite3D" parent="Control_EnemyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5, 0, -3)
+texture = ExtResource("2_1a5q0")
+
+[node name="PartyLine5" type="Sprite3D" parent="Control_EnemyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5, 0, -6)
+texture = ExtResource("2_1a5q0")
+
+[node name="Camera3D" type="Camera3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 4.5, 14.5)
+
+[node name="BattleCanvas" parent="." instance=ExtResource("3_vmr8g")]
+
+[node name="Node3D" type="Node3D" parent="."]
