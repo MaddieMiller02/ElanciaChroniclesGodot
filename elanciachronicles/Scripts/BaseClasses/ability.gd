@@ -1,6 +1,7 @@
 extends Node
 
 var AbilityName:String
+var Description:String
 var Power:int
 var Physical:bool
 var IgnoreDefense:bool

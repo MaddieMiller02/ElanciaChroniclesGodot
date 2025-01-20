@@ -1,7 +1,10 @@
-[gd_resource type="Theme" format=3 uid="uid://qxrxrm4x1ftn"]
+[gd_resource type="Theme" load_steps=2 format=3 uid="uid://qxrxrm4x1ftn"]
+
+[ext_resource type="FontFile" uid="uid://dpv16f7bxkhep" path="res://Art/Fonts/Ultra.ttf" id="1_r5pdj"]
 
 [resource]
-default_font_size = 22
+default_font = ExtResource("1_r5pdj")
+default_font_size = 20
 Button/font_sizes/font_size = 14
 Label/font_sizes/font_size = 16
 MarginContainer/constants/margin_bottom = 5

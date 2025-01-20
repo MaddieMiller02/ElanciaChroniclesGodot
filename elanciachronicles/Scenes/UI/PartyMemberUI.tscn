@@ -1,0 +1,73 @@
+[gd_scene load_steps=3 format=3 uid="uid://bkxbdpucf2q2s"]
+
+[ext_resource type="Texture2D" uid="uid://oilmb1a4ttqt" path="res://Art/UI/ui_hexagon_blue.png" id="1_k24bf"]
+[ext_resource type="Theme" uid="uid://qxrxrm4x1ftn" path="res://Themes/default_theme.tres" id="2_cysp8"]
+
+[node name="Control_PartyMember1" type="Control"]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="UI_Hexagon1" type="TextureRect" parent="."]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 344.0
+offset_bottom = 81.0
+texture = ExtResource("1_k24bf")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="."]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -19.0
+offset_right = 310.0
+offset_bottom = 97.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 17
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 9
+alignment = 2
+
+[node name="NameLabel" type="Label" parent="MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_cysp8")
+theme_override_font_sizes/font_size = 15
+text = "VERSE"
+
+[node name="HPContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="MarginContainer/HBoxContainer/HPContainer"]
+layout_mode = 2
+theme = ExtResource("2_cysp8")
+theme_override_font_sizes/font_size = 10
+text = "HP"
+
+[node name="HPBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/HPContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="APContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="APLabel" type="Label" parent="MarginContainer/HBoxContainer/APContainer"]
+layout_mode = 2
+theme = ExtResource("2_cysp8")
+theme_override_font_sizes/font_size = 10
+text = "AP"
+
+[node name="APBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/APContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0

@@ -1,74 +1,959 @@
-[gd_scene load_steps=2 format=3 uid="uid://b0kkabubbo5u7"]
+[gd_scene load_steps=7 format=3 uid="uid://b0kkabubbo5u7"]
 
-[ext_resource type="Texture2D" uid="uid://bqo8756i8p6kc" path="res://Art/UI/UI_window_blue.png" id="1_05isc"]
+[ext_resource type="PackedScene" uid="uid://bkxbdpucf2q2s" path="res://Scenes/UI/PartyMemberUI.tscn" id="2_6ydee"]
+[ext_resource type="Theme" uid="uid://qxrxrm4x1ftn" path="res://Themes/default_theme.tres" id="2_piavv"]
+[ext_resource type="Texture2D" uid="uid://oilmb1a4ttqt" path="res://Art/UI/ui_hexagon_blue.png" id="3_5yi3i"]
+[ext_resource type="Texture2D" uid="uid://dqahu7poxno1e" path="res://Art/UI/ui_hexagon_red.png" id="5_kd0u0"]
+[ext_resource type="Texture2D" uid="uid://dsd1561pk2vdb" path="res://Art/UI/ui_hexagon_cyan.png" id="5_r7qec"]
+[ext_resource type="Texture2D" uid="uid://bqo8756i8p6kc" path="res://Art/UI/UI_window_blue.png" id="6_pq5mx"]
 
 [node name="BattleCanvas" type="CanvasLayer"]
 
-[node name="Background_PartyMenu" type="TextureRect" parent="."]
-anchors_preset = 2
-anchor_top = 1.0
-anchor_bottom = 1.0
-offset_left = 384.0
-offset_top = -275.0
-offset_right = 1024.0
-grow_vertical = 0
-texture = ExtResource("1_05isc")
+[node name="Control_PartyUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 72.0
+offset_top = 880.0
+offset_right = 72.0
+offset_bottom = 880.0
+
+[node name="Control_PartyMember1" parent="Control_PartyUI" instance=ExtResource("2_6ydee")]
+
+[node name="Control_PartyMember2" type="Control" parent="Control_PartyUI"]
+anchors_preset = 0
+offset_left = 175.0
+offset_top = 59.0
+offset_right = 215.0
+offset_bottom = 99.0
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_PartyUI/Control_PartyMember2"]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 344.0
+offset_bottom = 81.0
+texture = ExtResource("3_5yi3i")
 expand_mode = 1
 
-[node name="Control_PartyMenu" type="Control" parent="Background_PartyMenu"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 920.0
-offset_top = 1000.0
-offset_right = 960.0
-offset_bottom = 1040.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="Background_PartyMenu/Control_PartyMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Control_PartyUI/Control_PartyMember2"]
 layout_mode = 0
+offset_left = -3.0
+offset_top = -19.0
+offset_right = 310.0
+offset_bottom = 97.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 17
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 9
+alignment = 2
+
+[node name="NameLabel" type="Label" parent="Control_PartyUI/Control_PartyMember2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 15
+text = "XAN"
+
+[node name="HPContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="Control_PartyUI/Control_PartyMember2/MarginContainer/HBoxContainer/HPContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "HP"
+
+[node name="HPBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember2/MarginContainer/HBoxContainer/HPContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="APContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="APLabel" type="Label" parent="Control_PartyUI/Control_PartyMember2/MarginContainer/HBoxContainer/APContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "AP"
+
+[node name="APBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember2/MarginContainer/HBoxContainer/APContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="Control_PartyMember3" type="Control" parent="Control_PartyUI"]
+anchors_preset = 0
+offset_left = 349.0
+offset_right = 389.0
+offset_bottom = 40.0
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_PartyUI/Control_PartyMember3"]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 344.0
+offset_bottom = 81.0
+texture = ExtResource("3_5yi3i")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_PartyUI/Control_PartyMember3"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -19.0
+offset_right = 310.0
+offset_bottom = 97.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 17
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember3/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 9
+alignment = 2
+
+[node name="NameLabel" type="Label" parent="Control_PartyUI/Control_PartyMember3/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 15
+text = "CECELIA"
+
+[node name="HPContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember3/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="Control_PartyUI/Control_PartyMember3/MarginContainer/HBoxContainer/HPContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "HP"
+
+[node name="HPBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember3/MarginContainer/HBoxContainer/HPContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="APContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember3/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="APLabel" type="Label" parent="Control_PartyUI/Control_PartyMember3/MarginContainer/HBoxContainer/APContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "AP"
+
+[node name="APBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember3/MarginContainer/HBoxContainer/APContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="Control_PartyMember4" type="Control" parent="Control_PartyUI"]
+anchors_preset = 0
+offset_left = 523.0
+offset_top = 59.0
+offset_right = 563.0
+offset_bottom = 99.0
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_PartyUI/Control_PartyMember4"]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 344.0
+offset_bottom = 81.0
+texture = ExtResource("3_5yi3i")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_PartyUI/Control_PartyMember4"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -19.0
+offset_right = 310.0
+offset_bottom = 97.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 17
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember4/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 9
+alignment = 2
+
+[node name="NameLabel" type="Label" parent="Control_PartyUI/Control_PartyMember4/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 15
+text = "KARINA"
+
+[node name="HPContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember4/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="Control_PartyUI/Control_PartyMember4/MarginContainer/HBoxContainer/HPContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "HP"
+
+[node name="HPBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember4/MarginContainer/HBoxContainer/HPContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="APContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember4/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="APLabel" type="Label" parent="Control_PartyUI/Control_PartyMember4/MarginContainer/HBoxContainer/APContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "AP"
+
+[node name="APBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember4/MarginContainer/HBoxContainer/APContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="Control_PartyMember5" type="Control" parent="Control_PartyUI"]
+anchors_preset = 0
+offset_left = 699.0
+offset_right = 739.0
+offset_bottom = 40.0
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_PartyUI/Control_PartyMember5"]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 344.0
+offset_bottom = 81.0
+texture = ExtResource("3_5yi3i")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_PartyUI/Control_PartyMember5"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -19.0
+offset_right = 310.0
+offset_bottom = 97.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 17
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember5/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 9
+alignment = 2
+
+[node name="NameLabel" type="Label" parent="Control_PartyUI/Control_PartyMember5/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 15
+text = "BASIL"
+
+[node name="HPContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember5/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="Control_PartyUI/Control_PartyMember5/MarginContainer/HBoxContainer/HPContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "HP"
+
+[node name="HPBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember5/MarginContainer/HBoxContainer/HPContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="APContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember5/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="APLabel" type="Label" parent="Control_PartyUI/Control_PartyMember5/MarginContainer/HBoxContainer/APContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "AP"
+
+[node name="APBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember5/MarginContainer/HBoxContainer/APContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="Control_EnemyUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 816.0
+offset_top = 64.0
+offset_right = 816.0
+offset_bottom = 64.0
+
+[node name="Control_Enemy1" parent="Control_EnemyUI" instance=ExtResource("2_6ydee")]
+
+[node name="UI_Hexagon1" parent="Control_EnemyUI/Control_Enemy1" index="0"]
+texture = ExtResource("5_kd0u0")
+
+[node name="NameLabel" parent="Control_EnemyUI/Control_Enemy1/MarginContainer/HBoxContainer" index="0"]
+text = "STELLA"
+
+[node name="Control_Enemy2" type="Control" parent="Control_EnemyUI"]
+anchors_preset = 0
+offset_left = 175.0
+offset_top = 59.0
+offset_right = 215.0
+offset_bottom = 99.0
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_EnemyUI/Control_Enemy2"]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 344.0
+offset_bottom = 81.0
+texture = ExtResource("5_kd0u0")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_EnemyUI/Control_Enemy2"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -19.0
+offset_right = 310.0
+offset_bottom = 97.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 17
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy2/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 9
+alignment = 2
+
+[node name="NameLabel" type="Label" parent="Control_EnemyUI/Control_Enemy2/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 15
+text = "RELLIN"
+
+[node name="HPContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="Control_EnemyUI/Control_Enemy2/MarginContainer/HBoxContainer/HPContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "HP"
+
+[node name="HPBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy2/MarginContainer/HBoxContainer/HPContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="APContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy2/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="APLabel" type="Label" parent="Control_EnemyUI/Control_Enemy2/MarginContainer/HBoxContainer/APContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "AP"
+
+[node name="APBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy2/MarginContainer/HBoxContainer/APContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="Control_Enemy3" type="Control" parent="Control_EnemyUI"]
+anchors_preset = 0
+offset_left = 349.0
+offset_right = 389.0
+offset_bottom = 40.0
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_EnemyUI/Control_Enemy3"]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 344.0
+offset_bottom = 81.0
+texture = ExtResource("5_kd0u0")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_EnemyUI/Control_Enemy3"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -19.0
+offset_right = 310.0
+offset_bottom = 97.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 17
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy3/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 9
+alignment = 2
+
+[node name="NameLabel" type="Label" parent="Control_EnemyUI/Control_Enemy3/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 15
+text = "SAYTOR"
+
+[node name="HPContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy3/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="Control_EnemyUI/Control_Enemy3/MarginContainer/HBoxContainer/HPContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "HP"
+
+[node name="HPBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy3/MarginContainer/HBoxContainer/HPContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="APContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy3/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="APLabel" type="Label" parent="Control_EnemyUI/Control_Enemy3/MarginContainer/HBoxContainer/APContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "AP"
+
+[node name="APBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy3/MarginContainer/HBoxContainer/APContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="Control_Enemy4" type="Control" parent="Control_EnemyUI"]
+anchors_preset = 0
+offset_left = 523.0
+offset_top = 59.0
+offset_right = 563.0
+offset_bottom = 99.0
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_EnemyUI/Control_Enemy4"]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 344.0
+offset_bottom = 81.0
+texture = ExtResource("5_kd0u0")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_EnemyUI/Control_Enemy4"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -19.0
+offset_right = 310.0
+offset_bottom = 97.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 17
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy4/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 9
+alignment = 2
+
+[node name="NameLabel" type="Label" parent="Control_EnemyUI/Control_Enemy4/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 15
+text = "RYADEL"
+
+[node name="HPContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy4/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="Control_EnemyUI/Control_Enemy4/MarginContainer/HBoxContainer/HPContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "HP"
+
+[node name="HPBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy4/MarginContainer/HBoxContainer/HPContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="APContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy4/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="APLabel" type="Label" parent="Control_EnemyUI/Control_Enemy4/MarginContainer/HBoxContainer/APContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "AP"
+
+[node name="APBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy4/MarginContainer/HBoxContainer/APContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="Control_Enemy5" type="Control" parent="Control_EnemyUI"]
+anchors_preset = 0
+offset_left = 699.0
+offset_right = 739.0
+offset_bottom = 40.0
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_EnemyUI/Control_Enemy5"]
+layout_mode = 0
+offset_left = -8.0
+offset_right = 344.0
+offset_bottom = 81.0
+texture = ExtResource("5_kd0u0")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_EnemyUI/Control_Enemy5"]
+layout_mode = 0
+offset_left = -3.0
+offset_top = -19.0
+offset_right = 310.0
+offset_bottom = 97.0
+theme_override_constants/margin_left = 5
+theme_override_constants/margin_top = 10
+theme_override_constants/margin_right = 17
+theme_override_constants/margin_bottom = 10
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy5/MarginContainer"]
+layout_mode = 2
+theme_override_constants/separation = 9
+alignment = 2
+
+[node name="NameLabel" type="Label" parent="Control_EnemyUI/Control_Enemy5/MarginContainer/HBoxContainer"]
+custom_minimum_size = Vector2(78, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 15
+text = "FATE"
+
+[node name="HPContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy5/MarginContainer/HBoxContainer"]
+layout_mode = 2
+
+[node name="HPLabel" type="Label" parent="Control_EnemyUI/Control_Enemy5/MarginContainer/HBoxContainer/HPContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "HP"
+
+[node name="HPBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy5/MarginContainer/HBoxContainer/HPContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="APContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy5/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_constants/separation = 6
+
+[node name="APLabel" type="Label" parent="Control_EnemyUI/Control_Enemy5/MarginContainer/HBoxContainer/APContainer"]
+layout_mode = 2
+theme = ExtResource("2_piavv")
+theme_override_font_sizes/font_size = 10
+text = "AP"
+
+[node name="APBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy5/MarginContainer/HBoxContainer/APContainer"]
+custom_minimum_size = Vector2(100, 0)
+layout_mode = 2
+size_flags_vertical = 4
+value = 100.0
+
+[node name="Control_ActionMenu" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 151.0
+offset_top = 72.0
+offset_right = 191.0
+offset_bottom = 112.0
+
+[node name="Control_Melee" type="Control" parent="Control_ActionMenu"]
+anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Background_PartyMenu/Control_PartyMenu/MarginContainer"]
-layout_mode = 2
-
-[node name="Background_EnemyMenu" type="TextureRect" parent="."]
-anchors_preset = 3
-anchor_left = 1.0
-anchor_top = 1.0
-anchor_right = 1.0
-anchor_bottom = 1.0
-offset_left = -896.0
-offset_top = -275.0
-offset_right = -256.0
-grow_horizontal = 0
-grow_vertical = 0
-texture = ExtResource("1_05isc")
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/Control_Melee"]
+layout_mode = 0
+offset_left = 1184.0
+offset_top = 696.0
+offset_right = 1536.0
+offset_bottom = 777.0
+texture = ExtResource("5_r7qec")
 expand_mode = 1
 
-[node name="Control_EnemyMenu" type="Control" parent="Background_EnemyMenu"]
-layout_mode = 1
-anchors_preset = 7
-anchor_left = 0.5
-anchor_top = 1.0
-anchor_right = 0.5
-anchor_bottom = 1.0
-offset_left = 920.0
-offset_top = 1000.0
-offset_right = 960.0
-offset_bottom = 1040.0
-grow_horizontal = 2
-grow_vertical = 0
-
-[node name="MarginContainer" type="MarginContainer" parent="Background_EnemyMenu/Control_EnemyMenu"]
+[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/Control_Melee"]
 layout_mode = 0
-offset_right = 40.0
-offset_bottom = 40.0
+offset_left = 1212.0
+offset_top = 712.0
+offset_right = 1508.0
+offset_bottom = 760.0
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Background_EnemyMenu/Control_EnemyMenu/MarginContainer"]
+[node name="Label" type="Label" parent="Control_ActionMenu/Control_Melee/MarginContainer"]
 layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Melee Attack"
+horizontal_alignment = 1
+
+[node name="Control_Ranged" type="Control" parent="Control_ActionMenu"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -174.0
+offset_top = 58.0
+offset_right = -134.0
+offset_bottom = 98.0
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/Control_Ranged"]
+layout_mode = 0
+offset_left = 1184.0
+offset_top = 696.0
+offset_right = 1536.0
+offset_bottom = 777.0
+texture = ExtResource("5_r7qec")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/Control_Ranged"]
+layout_mode = 0
+offset_left = 1212.0
+offset_top = 712.0
+offset_right = 1508.0
+offset_bottom = 760.0
+
+[node name="Label" type="Label" parent="Control_ActionMenu/Control_Ranged/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Ranged Attack"
+horizontal_alignment = 1
+
+[node name="Control_Specials" type="Control" parent="Control_ActionMenu"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 174.0
+offset_top = 58.0
+offset_right = 214.0
+offset_bottom = 98.0
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/Control_Specials"]
+layout_mode = 0
+offset_left = 1184.0
+offset_top = 696.0
+offset_right = 1536.0
+offset_bottom = 777.0
+texture = ExtResource("5_r7qec")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/Control_Specials"]
+layout_mode = 0
+offset_left = 1212.0
+offset_top = 712.0
+offset_right = 1508.0
+offset_bottom = 760.0
+
+[node name="Label" type="Label" parent="Control_ActionMenu/Control_Specials/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Specials"
+horizontal_alignment = 1
+
+[node name="Control_Reposition" type="Control" parent="Control_ActionMenu"]
+layout_mode = 3
+anchors_preset = 0
+offset_top = 116.0
+offset_right = 40.0
+offset_bottom = 156.0
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/Control_Reposition"]
+layout_mode = 0
+offset_left = 1184.0
+offset_top = 696.0
+offset_right = 1536.0
+offset_bottom = 777.0
+texture = ExtResource("5_r7qec")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/Control_Reposition"]
+layout_mode = 0
+offset_left = 1212.0
+offset_top = 712.0
+offset_right = 1508.0
+offset_bottom = 760.0
+
+[node name="Label" type="Label" parent="Control_ActionMenu/Control_Reposition/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Reposition"
+horizontal_alignment = 1
+
+[node name="Control_Defend" type="Control" parent="Control_ActionMenu"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = -174.0
+offset_top = 175.0
+offset_right = -134.0
+offset_bottom = 215.0
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/Control_Defend"]
+layout_mode = 0
+offset_left = 1184.0
+offset_top = 696.0
+offset_right = 1536.0
+offset_bottom = 777.0
+texture = ExtResource("5_r7qec")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/Control_Defend"]
+layout_mode = 0
+offset_left = 1212.0
+offset_top = 712.0
+offset_right = 1508.0
+offset_bottom = 760.0
+
+[node name="Label" type="Label" parent="Control_ActionMenu/Control_Defend/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Defend"
+horizontal_alignment = 1
+
+[node name="Control_Items" type="Control" parent="Control_ActionMenu"]
+layout_mode = 3
+anchors_preset = 0
+offset_left = 174.0
+offset_top = 175.0
+offset_right = 214.0
+offset_bottom = 215.0
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/Control_Items"]
+layout_mode = 0
+offset_left = 1184.0
+offset_top = 696.0
+offset_right = 1536.0
+offset_bottom = 777.0
+texture = ExtResource("5_r7qec")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/Control_Items"]
+layout_mode = 0
+offset_left = 1212.0
+offset_top = 712.0
+offset_right = 1508.0
+offset_bottom = 760.0
+
+[node name="Label" type="Label" parent="Control_ActionMenu/Control_Items/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Items"
+horizontal_alignment = 1
+
+[node name="Control_SpecialsMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 0
+offset_left = 1144.0
+offset_top = 656.0
+offset_right = 1184.0
+offset_bottom = 696.0
+
+[node name="TextureRect" type="TextureRect" parent="Control_SpecialsMenu"]
+layout_mode = 0
+offset_right = 716.965
+offset_bottom = 393.425
+texture = ExtResource("6_pq5mx")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_SpecialsMenu"]
+layout_mode = 0
+offset_right = 720.0
+offset_bottom = 392.0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 30
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control_SpecialsMenu/MarginContainer"]
+layout_mode = 2
+
+[node name="ScrollContainer" type="ScrollContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer"]
+layout_mode = 2
+size_flags_vertical = 3
+horizontal_scroll_mode = 0
+
+[node name="GridContainer" type="GridContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer"]
+layout_mode = 2
+theme_override_constants/h_separation = 25
+theme_override_constants/v_separation = 25
+columns = 3
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer2"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer2"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
+[node name="HBoxContainer3" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer3"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer3"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
+[node name="HBoxContainer4" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer4"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer4"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
+[node name="HBoxContainer5" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer5"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer5"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
+[node name="HBoxContainer6" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer6"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer6"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
+[node name="HBoxContainer7" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer7"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer7"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
+[node name="HBoxContainer8" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer8"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer8"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
+[node name="HBoxContainer9" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer9"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer9"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
+[node name="SpecialDescriptionLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer"]
+custom_minimum_size = Vector2(100, 100)
+layout_mode = 2
+size_flags_vertical = 3
+text = "This is a test description for the currently highlighted special. Specials can be physical or magical attacks, healing or status moves, or anything of the sort. If you're seeing this in-game, it's probably a bug. If your special description exceeds dthe space of this box, you need to write shorter."
+vertical_alignment = 2
+autowrap_mode = 2
+
+[editable path="Control_EnemyUI/Control_Enemy1"]
