@@ -1,6 +1,7 @@
-[gd_scene load_steps=8 format=3 uid="uid://b0kkabubbo5u7"]
+[gd_scene load_steps=9 format=3 uid="uid://b0kkabubbo5u7"]
 
 [ext_resource type="PackedScene" uid="uid://bkxbdpucf2q2s" path="res://Scenes/UI/PartyMemberUI.tscn" id="2_6ydee"]
+[ext_resource type="Script" path="res://Scripts/UI/menu_item.gd" id="2_c6mnl"]
 [ext_resource type="Theme" uid="uid://qxrxrm4x1ftn" path="res://Themes/default_theme.tres" id="2_piavv"]
 [ext_resource type="Texture2D" uid="uid://oilmb1a4ttqt" path="res://Art/UI/ui_hexagon_blue.png" id="3_5yi3i"]
 [ext_resource type="Texture2D" uid="uid://dqahu7poxno1e" path="res://Art/UI/ui_hexagon_red.png" id="5_kd0u0"]
@@ -26,6 +27,7 @@ offset_left = 175.0
 offset_top = 59.0
 offset_right = 215.0
 offset_bottom = 99.0
+script = ExtResource("2_c6mnl")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_PartyUI/Control_PartyMember2"]
 layout_mode = 0
@@ -95,6 +97,7 @@ anchors_preset = 0
 offset_left = 349.0
 offset_right = 389.0
 offset_bottom = 40.0
+script = ExtResource("2_c6mnl")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_PartyUI/Control_PartyMember3"]
 layout_mode = 0
@@ -165,6 +168,7 @@ offset_left = 523.0
 offset_top = 59.0
 offset_right = 563.0
 offset_bottom = 99.0
+script = ExtResource("2_c6mnl")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_PartyUI/Control_PartyMember4"]
 layout_mode = 0
@@ -234,6 +238,7 @@ anchors_preset = 0
 offset_left = 699.0
 offset_right = 739.0
 offset_bottom = 40.0
+script = ExtResource("2_c6mnl")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_PartyUI/Control_PartyMember5"]
 layout_mode = 0
@@ -320,6 +325,7 @@ offset_left = 175.0
 offset_top = 59.0
 offset_right = 215.0
 offset_bottom = 99.0
+script = ExtResource("2_c6mnl")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_EnemyUI/Control_Enemy2"]
 layout_mode = 0
@@ -389,6 +395,7 @@ anchors_preset = 0
 offset_left = 349.0
 offset_right = 389.0
 offset_bottom = 40.0
+script = ExtResource("2_c6mnl")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_EnemyUI/Control_Enemy3"]
 layout_mode = 0
@@ -459,6 +466,7 @@ offset_left = 523.0
 offset_top = 59.0
 offset_right = 563.0
 offset_bottom = 99.0
+script = ExtResource("2_c6mnl")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_EnemyUI/Control_Enemy4"]
 layout_mode = 0
@@ -528,6 +536,7 @@ anchors_preset = 0
 offset_left = 699.0
 offset_right = 739.0
 offset_bottom = 40.0
+script = ExtResource("2_c6mnl")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_EnemyUI/Control_Enemy5"]
 layout_mode = 0
@@ -610,6 +619,7 @@ columns = 2
 
 [node name="Control_Melee" type="Control" parent="Control_ActionMenu/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Melee"]
 layout_mode = 0
@@ -633,6 +643,7 @@ horizontal_alignment = 1
 
 [node name="Control_Ranged" type="Control" parent="Control_ActionMenu/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Ranged"]
 layout_mode = 0
@@ -656,6 +667,7 @@ horizontal_alignment = 1
 
 [node name="Control_Specials" type="Control" parent="Control_ActionMenu/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Specials"]
 layout_mode = 0
@@ -679,6 +691,7 @@ horizontal_alignment = 1
 
 [node name="Control_Reposition" type="Control" parent="Control_ActionMenu/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Reposition"]
 layout_mode = 0
@@ -702,6 +715,7 @@ horizontal_alignment = 1
 
 [node name="Control_Defend" type="Control" parent="Control_ActionMenu/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Defend"]
 layout_mode = 0
@@ -725,6 +739,7 @@ horizontal_alignment = 1
 
 [node name="Control_Items" type="Control" parent="Control_ActionMenu/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Items"]
 layout_mode = 0
@@ -784,136 +799,145 @@ theme_override_constants/h_separation = 25
 theme_override_constants/v_separation = 25
 columns = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="SpecialContainer1" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer"]
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer1"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer"]
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer1"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "0 AP"
 horizontal_alignment = 2
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="SpecialContainer2" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer2"]
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer2"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer2"]
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer2"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "0 AP"
 horizontal_alignment = 2
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="SpecialContainer3" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer3"]
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer3"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer3"]
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer3"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "0 AP"
 horizontal_alignment = 2
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="SpecialContainer4" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer4"]
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer4"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer4"]
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer4"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "0 AP"
 horizontal_alignment = 2
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="SpecialContainer5" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer5"]
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer5"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer5"]
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer5"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "0 AP"
 horizontal_alignment = 2
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="SpecialContainer6" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer6"]
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer6"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer6"]
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer6"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "0 AP"
 horizontal_alignment = 2
 
-[node name="HBoxContainer7" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="SpecialContainer7" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer7"]
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer7"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer7"]
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer7"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "0 AP"
 horizontal_alignment = 2
 
-[node name="HBoxContainer8" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="SpecialContainer8" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer8"]
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer8"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer8"]
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer8"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "0 AP"
 horizontal_alignment = 2
 
-[node name="HBoxContainer9" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="SpecialContainer9" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer9"]
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer9"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer9"]
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer9"]
 layout_mode = 2
 size_flags_horizontal = 8
 text = "0 AP"
@@ -965,82 +989,91 @@ theme_override_constants/h_separation = 25
 theme_override_constants/v_separation = 25
 columns = 3
 
-[node name="HBoxContainer" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="ItemContainer1" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer"]
+[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/ItemContainer1"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="HBoxContainer2" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="ItemContainer2" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer2"]
+[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/ItemContainer2"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="HBoxContainer3" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="ItemContainer3" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer3"]
+[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/ItemContainer3"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="HBoxContainer4" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="ItemContainer4" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer4"]
+[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/ItemContainer4"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="HBoxContainer5" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="ItemContainer5" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer5"]
+[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/ItemContainer5"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="HBoxContainer6" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="ItemContainer6" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer6"]
+[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/ItemContainer6"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="HBoxContainer7" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="ItemContainer7" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer7"]
+[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/ItemContainer7"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="HBoxContainer8" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="ItemContainer8" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer8"]
+[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/ItemContainer8"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0
 text = "Example"
 
-[node name="HBoxContainer9" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+[node name="ItemContainer9" type="HBoxContainer" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
 layout_mode = 2
+script = ExtResource("2_c6mnl")
 
-[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/HBoxContainer9"]
+[node name="ItemLabel" type="Label" parent="Control_ItemsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/ItemContainer9"]
 custom_minimum_size = Vector2(153.795, 0)
 layout_mode = 2
 size_flags_horizontal = 0

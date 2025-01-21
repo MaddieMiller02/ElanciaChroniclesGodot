@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://brslib2v2l2h8"]
 
 [ext_resource type="Texture2D" uid="uid://cpoje8d3un43w" path="res://Art/TestCursor.png" id="1_bhrxa"]
-[ext_resource type="Script" path="res://Scripts/menu_cursor.gd" id="2_fnm23"]
+[ext_resource type="Script" path="res://Scripts/UI/menu_cursor.gd" id="2_fnm23"]
 
 [node name="MenuCursor" type="TextureRect"]
 anchors_preset = 15

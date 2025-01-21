@@ -26,6 +26,13 @@ func _process(delta):
 	elif menu_parent is GridContainer:
 		set_cursor_from_index(cursor_index + input.x + input.y * menu_parent.columns)
 
+	if Input.is_action_just_pressed("ui_select"):
+		var current_menu_item := get_menu_item_at_index(cursor_index)
+		if current_menu_item != null:
+			if current_menu_item.has_method("cursor_select"):
+				current_menu_item.cursor_select()
+				
+
 func get_menu_item_at_index(index:int) -> Control:
 		if menu_parent == null:
 			return null
