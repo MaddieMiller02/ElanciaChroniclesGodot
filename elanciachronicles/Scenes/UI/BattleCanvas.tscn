@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0kkabubbo5u7"]
+[gd_scene load_steps=8 format=3 uid="uid://b0kkabubbo5u7"]
 
 [ext_resource type="PackedScene" uid="uid://bkxbdpucf2q2s" path="res://Scenes/UI/PartyMemberUI.tscn" id="2_6ydee"]
 [ext_resource type="Theme" uid="uid://qxrxrm4x1ftn" path="res://Themes/default_theme.tres" id="2_piavv"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dqahu7poxno1e" path="res://Art/UI/ui_hexagon_red.png" id="5_kd0u0"]
 [ext_resource type="Texture2D" uid="uid://dsd1561pk2vdb" path="res://Art/UI/ui_hexagon_cyan.png" id="5_r7qec"]
 [ext_resource type="Texture2D" uid="uid://bqo8756i8p6kc" path="res://Art/UI/UI_window_blue.png" id="6_pq5mx"]
+[ext_resource type="PackedScene" uid="uid://brslib2v2l2h8" path="res://Scenes/UI/MenuCursor.tscn" id="7_4qu8s"]
 
 [node name="BattleCanvas" type="CanvasLayer"]
 
@@ -594,182 +595,152 @@ value = 100.0
 [node name="Control_ActionMenu" type="Control" parent="."]
 layout_mode = 3
 anchors_preset = 0
-offset_left = 151.0
-offset_top = 72.0
-offset_right = 191.0
-offset_bottom = 112.0
+offset_left = 1159.0
+offset_top = 784.0
+offset_right = 1199.0
+offset_bottom = 824.0
 
-[node name="Control_Melee" type="Control" parent="Control_ActionMenu"]
-anchors_preset = 0
-offset_right = 40.0
-offset_bottom = 40.0
-
-[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/Control_Melee"]
+[node name="GridContainer" type="GridContainer" parent="Control_ActionMenu"]
 layout_mode = 0
-offset_left = 1184.0
-offset_top = 696.0
-offset_right = 1536.0
-offset_bottom = 777.0
+offset_right = 350.0
+offset_bottom = 160.0
+theme_override_constants/h_separation = 350
+theme_override_constants/v_separation = 80
+columns = 2
+
+[node name="Control_Melee" type="Control" parent="Control_ActionMenu/GridContainer"]
+layout_mode = 2
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Melee"]
+layout_mode = 0
+offset_right = 352.0
+offset_bottom = 81.0
 texture = ExtResource("5_r7qec")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/Control_Melee"]
+[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/GridContainer/Control_Melee"]
 layout_mode = 0
-offset_left = 1212.0
-offset_top = 712.0
-offset_right = 1508.0
-offset_bottom = 760.0
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 324.0
+offset_bottom = 64.0
 
-[node name="Label" type="Label" parent="Control_ActionMenu/Control_Melee/MarginContainer"]
+[node name="Label" type="Label" parent="Control_ActionMenu/GridContainer/Control_Melee/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Melee Attack"
 horizontal_alignment = 1
 
-[node name="Control_Ranged" type="Control" parent="Control_ActionMenu"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -174.0
-offset_top = 58.0
-offset_right = -134.0
-offset_bottom = 98.0
+[node name="Control_Ranged" type="Control" parent="Control_ActionMenu/GridContainer"]
+layout_mode = 2
 
-[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/Control_Ranged"]
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Ranged"]
 layout_mode = 0
-offset_left = 1184.0
-offset_top = 696.0
-offset_right = 1536.0
-offset_bottom = 777.0
+offset_right = 352.0
+offset_bottom = 81.0
 texture = ExtResource("5_r7qec")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/Control_Ranged"]
+[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/GridContainer/Control_Ranged"]
 layout_mode = 0
-offset_left = 1212.0
-offset_top = 712.0
-offset_right = 1508.0
-offset_bottom = 760.0
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 324.0
+offset_bottom = 64.0
 
-[node name="Label" type="Label" parent="Control_ActionMenu/Control_Ranged/MarginContainer"]
+[node name="Label" type="Label" parent="Control_ActionMenu/GridContainer/Control_Ranged/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Ranged Attack"
 horizontal_alignment = 1
 
-[node name="Control_Specials" type="Control" parent="Control_ActionMenu"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 174.0
-offset_top = 58.0
-offset_right = 214.0
-offset_bottom = 98.0
+[node name="Control_Specials" type="Control" parent="Control_ActionMenu/GridContainer"]
+layout_mode = 2
 
-[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/Control_Specials"]
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Specials"]
 layout_mode = 0
-offset_left = 1184.0
-offset_top = 696.0
-offset_right = 1536.0
-offset_bottom = 777.0
+offset_right = 352.0
+offset_bottom = 81.0
 texture = ExtResource("5_r7qec")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/Control_Specials"]
+[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/GridContainer/Control_Specials"]
 layout_mode = 0
-offset_left = 1212.0
-offset_top = 712.0
-offset_right = 1508.0
-offset_bottom = 760.0
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 324.0
+offset_bottom = 64.0
 
-[node name="Label" type="Label" parent="Control_ActionMenu/Control_Specials/MarginContainer"]
+[node name="Label" type="Label" parent="Control_ActionMenu/GridContainer/Control_Specials/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Specials"
 horizontal_alignment = 1
 
-[node name="Control_Reposition" type="Control" parent="Control_ActionMenu"]
-layout_mode = 3
-anchors_preset = 0
-offset_top = 116.0
-offset_right = 40.0
-offset_bottom = 156.0
+[node name="Control_Reposition" type="Control" parent="Control_ActionMenu/GridContainer"]
+layout_mode = 2
 
-[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/Control_Reposition"]
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Reposition"]
 layout_mode = 0
-offset_left = 1184.0
-offset_top = 696.0
-offset_right = 1536.0
-offset_bottom = 777.0
+offset_right = 352.0
+offset_bottom = 81.0
 texture = ExtResource("5_r7qec")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/Control_Reposition"]
+[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/GridContainer/Control_Reposition"]
 layout_mode = 0
-offset_left = 1212.0
-offset_top = 712.0
-offset_right = 1508.0
-offset_bottom = 760.0
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 324.0
+offset_bottom = 64.0
 
-[node name="Label" type="Label" parent="Control_ActionMenu/Control_Reposition/MarginContainer"]
+[node name="Label" type="Label" parent="Control_ActionMenu/GridContainer/Control_Reposition/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Reposition"
 horizontal_alignment = 1
 
-[node name="Control_Defend" type="Control" parent="Control_ActionMenu"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = -174.0
-offset_top = 175.0
-offset_right = -134.0
-offset_bottom = 215.0
+[node name="Control_Defend" type="Control" parent="Control_ActionMenu/GridContainer"]
+layout_mode = 2
 
-[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/Control_Defend"]
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Defend"]
 layout_mode = 0
-offset_left = 1184.0
-offset_top = 696.0
-offset_right = 1536.0
-offset_bottom = 777.0
+offset_right = 352.0
+offset_bottom = 81.0
 texture = ExtResource("5_r7qec")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/Control_Defend"]
+[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/GridContainer/Control_Defend"]
 layout_mode = 0
-offset_left = 1212.0
-offset_top = 712.0
-offset_right = 1508.0
-offset_bottom = 760.0
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 324.0
+offset_bottom = 64.0
 
-[node name="Label" type="Label" parent="Control_ActionMenu/Control_Defend/MarginContainer"]
+[node name="Label" type="Label" parent="Control_ActionMenu/GridContainer/Control_Defend/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Defend"
 horizontal_alignment = 1
 
-[node name="Control_Items" type="Control" parent="Control_ActionMenu"]
-layout_mode = 3
-anchors_preset = 0
-offset_left = 174.0
-offset_top = 175.0
-offset_right = 214.0
-offset_bottom = 215.0
+[node name="Control_Items" type="Control" parent="Control_ActionMenu/GridContainer"]
+layout_mode = 2
 
-[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/Control_Items"]
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Items"]
 layout_mode = 0
-offset_left = 1184.0
-offset_top = 696.0
-offset_right = 1536.0
-offset_bottom = 777.0
+offset_right = 352.0
+offset_bottom = 81.0
 texture = ExtResource("5_r7qec")
 expand_mode = 1
 
-[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/Control_Items"]
+[node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/GridContainer/Control_Items"]
 layout_mode = 0
-offset_left = 1212.0
-offset_top = 712.0
-offset_right = 1508.0
-offset_bottom = 760.0
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 324.0
+offset_bottom = 64.0
 
-[node name="Label" type="Label" parent="Control_ActionMenu/Control_Items/MarginContainer"]
+[node name="Label" type="Label" parent="Control_ActionMenu/GridContainer/Control_Items/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Items"
@@ -1082,5 +1053,9 @@ size_flags_vertical = 3
 text = "This is a test description for the currently highlighted item. Items can heal the party, change the stats of a party member or an enemy, or serve as a special kind of attack. If you're seeing this in-game, it's probably a bug. If your item description exceeds the space of this box, you need to write shorter."
 vertical_alignment = 2
 autowrap_mode = 2
+
+[node name="MenuCursor" parent="." instance=ExtResource("7_4qu8s")]
+menu_parent_path = NodePath("../Control_ActionMenu/GridContainer")
+cursor_offset = Vector2(30, -15)
 
 [editable path="Control_EnemyUI/Control_Enemy1"]
