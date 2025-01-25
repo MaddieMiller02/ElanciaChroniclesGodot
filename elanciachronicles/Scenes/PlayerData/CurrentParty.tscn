@@ -1,0 +1,10 @@
+[gd_scene load_steps=3 format=3 uid="uid://cs8tmi1ub8grw"]
+
+[ext_resource type="PackedScene" uid="uid://bkd7q3awnkgvt" path="res://Scenes/Characters/Battles/Party/VerseBattle.tscn" id="1_f07yc"]
+[ext_resource type="PackedScene" uid="uid://cllhj43hhbl4q" path="res://Scenes/Characters/Battles/Party/XanBattle.tscn" id="2_mtjsi"]
+
+[node name="CurrentParty" type="Node3D"]
+
+[node name="VerseBattle" parent="." instance=ExtResource("1_f07yc")]
+
+[node name="XanBattle" parent="." instance=ExtResource("2_mtjsi")]

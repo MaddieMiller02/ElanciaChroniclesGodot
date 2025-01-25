@@ -1,0 +1,14 @@
+[gd_scene load_steps=3 format=3 uid="uid://n43vi87y3d5k"]
+
+[ext_resource type="Script" path="res://Scripts/BaseClasses/battle_area.gd" id="1_vfgfb"]
+[ext_resource type="PackedScene" uid="uid://cudxa1nlapdcx" path="res://Scenes/Characters/Battles/Enemies/SailorBattle.tscn" id="2_ah3rw"]
+
+[node name="FirstBattle" type="Node" node_paths=PackedStringArray("EnemyList")]
+script = ExtResource("1_vfgfb")
+EnemyList = [NodePath("Enemies/SailorBattle"), NodePath("Enemies/SailorBattle2")]
+
+[node name="Enemies" type="Node3D" parent="."]
+
+[node name="SailorBattle" parent="Enemies" instance=ExtResource("2_ah3rw")]
+
+[node name="SailorBattle2" parent="Enemies" instance=ExtResource("2_ah3rw")]

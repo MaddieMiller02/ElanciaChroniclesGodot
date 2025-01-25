@@ -7,6 +7,9 @@ albedo_color = Color(0.290196, 0, 0.545098, 1)
 
 [node name="VerseBattle" type="Node3D"]
 script = ExtResource("1_i4hi3")
+InParty = true
+IsPartyLeader = true
+BattlerName = "Verse"
 Level = 1
 Strength = 6
 Magic = 7
@@ -15,11 +18,11 @@ Resistance = 8
 Speed = 9
 Charisma = 4
 CurrentHP = 20
-CurrentSP = 10
+CurrentAP = 15
 MaxHP = 20
-MaxSP = 10
-InParty = true
-IsPartyLeader = true
+MaxAP = 15
+DefaultPosition = 2
+CurrentPosition = 2
 Resistances = Array[int]([0, 3, 4])
 Weaknesses = Array[int]([1, 6, 8])
 

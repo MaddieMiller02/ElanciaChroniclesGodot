@@ -4,6 +4,7 @@
 
 [node name="SailorBattle" type="Node3D"]
 script = ExtResource("1_6ajke")
+BattlerName = "Sailor"
 Level = 1
 Strength = 8
 Magic = 6
@@ -11,7 +12,12 @@ Defense = 7
 Resistance = 3
 Speed = 5
 Charisma = 4
-DefaultPosition = 4
+CurrentHP = 15
+CurrentAP = 10
+MaxHP = 15
+MaxAP = 10
+DefaultPosition = 2
+CurrentPosition = 2
 Resistances = Array[int]([3])
 Weaknesses = Array[int]([4])
 

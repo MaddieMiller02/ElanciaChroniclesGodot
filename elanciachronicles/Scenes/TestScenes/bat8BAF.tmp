@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://d3od1a50wjpjk"]
+[gd_scene load_steps=8 format=3 uid="uid://d3od1a50wjpjk"]
 
 [ext_resource type="Texture2D" uid="uid://pnho70oa50d6" path="res://Art/UI/ui_movement_blue.png" id="1_4h4gm"]
 [ext_resource type="Script" path="res://Scripts/BattleManagement/battle_manager.gd" id="1_iposc"]
@@ -6,24 +6,17 @@
 [ext_resource type="PackedScene" uid="uid://b0kkabubbo5u7" path="res://Scenes/UI/BattleCanvas.tscn" id="3_vmr8g"]
 [ext_resource type="AudioStream" uid="uid://bvnv5temg2ook" path="res://Audio/Music/55_-_Battle_Theme_2_Enmity.mp3" id="4_cisby"]
 [ext_resource type="PackedScene" uid="uid://cs8tmi1ub8grw" path="res://Scenes/PlayerData/CurrentParty.tscn" id="5_isfwl"]
-[ext_resource type="PackedScene" uid="uid://duvkajc20mui7" path="res://Scenes/UI/TargetCursor.tscn" id="5_rq0xl"]
 [ext_resource type="PackedScene" uid="uid://n43vi87y3d5k" path="res://Scenes/BattleAreas/FirstBattle.tscn" id="6_vah62"]
-[ext_resource type="PackedScene" uid="uid://bkaff4lqkrgs2" path="res://Scenes/Abilities/Basic/RangedAttack.tscn" id="8_3rrvi"]
 
-[node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIContainer", "EnemyUIControl", "EnemyUIContainer", "ActionMenuContainer", "RangedAttackButton", "PartyLinesControl", "EnemyLinesControl", "MenuCursor", "TargetCursor")]
+[node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIContainer", "EnemyUIContainer", "PartyLinesControl", "EnemyLinesControl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 script = ExtResource("1_iposc")
 PartyControlNode = NodePath("CurrentParty")
 EnemyControlNode = NodePath("FirstBattle/Enemies")
 PartyUIContainer = NodePath("BattleCanvas/Control_PartyUI/GridContainer")
-EnemyUIControl = NodePath("BattleCanvas/Control_EnemyUI")
 EnemyUIContainer = NodePath("BattleCanvas/Control_EnemyUI/GridContainer")
-ActionMenuContainer = NodePath("BattleCanvas/Control_ActionMenu/GridContainer")
-RangedAttackButton = NodePath("BattleCanvas/Control_ActionMenu/GridContainer/Control_Ranged")
 PartyLinesControl = NodePath("Control_PartyLines")
 EnemyLinesControl = NodePath("Control_EnemyLines")
-MenuCursor = NodePath("BattleCanvas/MenuCursor")
-TargetCursor = NodePath("TargetCursor")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.870311, -0.426521, 0.24625, 0.470738, -0.57341, 0.670527, -0.144791, 0.699486, 0.699825, -16.2304, 4.4172, 10.636)
@@ -35,7 +28,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
 
 [node name="PartyLine1" type="Sprite3D" parent="Control_PartyLines"]
 transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5, 0, 6)
-visible = false
 texture = ExtResource("1_4h4gm")
 
 [node name="FrontlinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine1"]
@@ -174,28 +166,55 @@ transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0)
 
 [node name="BattleCanvas" parent="." instance=ExtResource("3_vmr8g")]
 
-[node name="Control_Ranged" parent="BattleCanvas/Control_ActionMenu/GridContainer" index="1" node_paths=PackedStringArray("NextAbility")]
-NextAbility = NodePath("../../../../DefaultAbilities/RangedAttack")
-
-[node name="TargetCursor" parent="." instance=ExtResource("5_rq0xl")]
-visible = false
+[node name="BattleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_cisby")
+volume_db = -18.739
+autoplay = true
+parameters/looping = true
 
 [node name="CurrentParty" parent="." instance=ExtResource("5_isfwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
-[node name="XanBattle" parent="CurrentParty" index="1"]
-CurrentPosition = 0
+[node name="VerseBattle" parent="CurrentParty" index="0"]
+InitialLevelOffset = 0
+IsWounded = false
+SpecialActivationList = {}
+EscapeSuccess = 0
+TempHP = 0
+TempAP = 0
+CurrentAP = 0
+MaxAP = 0
+Statuses = Array[int]([])
+StatusImmunities = Array[int]([])
+Experience = 0
 
 [node name="FirstBattle" parent="." instance=ExtResource("6_vah62")]
 
-[node name="DefaultAbilities" type="Node3D" parent="."]
+[node name="SailorBattle" parent="FirstBattle/Enemies" index="0"]
+EscapeSuccess = null
+TempHP = null
+TempAP = null
+CurrentHP = null
+CurrentAP = null
+MaxHP = null
+MaxAP = null
+Statuses = null
+StatusImmunities = null
+Experience = null
+DroppedItems = null
 
-[node name="RangedAttack" parent="DefaultAbilities" instance=ExtResource("8_3rrvi")]
-
-[node name="BattleMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_cisby")
-autoplay = true
-parameters/looping = true
+[node name="SailorBattle2" parent="FirstBattle/Enemies" index="1"]
+EscapeSuccess = null
+TempHP = null
+TempAP = null
+CurrentHP = null
+CurrentAP = null
+MaxHP = null
+MaxAP = null
+Statuses = null
+StatusImmunities = null
+Experience = null
+DroppedItems = null
 
 [editable path="BattleCanvas"]
 [editable path="CurrentParty"]

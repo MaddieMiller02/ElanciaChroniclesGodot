@@ -1,0 +1,7 @@
+[gd_scene load_steps=2 format=3 uid="uid://duvkajc20mui7"]
+
+[ext_resource type="Texture2D" uid="uid://blycj3v8gnkiy" path="res://Art/UI/DownArrowTemp.png" id="1_jhruh"]
+
+[node name="TargetCursor" type="Sprite3D"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+texture = ExtResource("1_jhruh")

@@ -1,4 +1,7 @@
+class_name BattleArea
 extends Node
 
-var BattleAreaName:String
-var EnemyList:Array[String]
+const Enemy = preload("res://Scripts/BaseClasses/enemy.gd")
+
+@export var BattleAreaName:Enemy
+@export var EnemyList:Array[Enemy]

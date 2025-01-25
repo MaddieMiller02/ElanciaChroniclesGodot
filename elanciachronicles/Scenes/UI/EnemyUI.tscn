@@ -1,9 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://bkxbdpucf2q2s"]
+[gd_scene load_steps=5 format=3 uid="uid://dfql31wcx0641"]
 
-[ext_resource type="Script" path="res://Scripts/UI/character_ui.gd" id="1_1ol6n"]
-[ext_resource type="Texture2D" uid="uid://oilmb1a4ttqt" path="res://Art/UI/ui_hexagon_blue.png" id="1_k24bf"]
-[ext_resource type="Theme" uid="uid://qxrxrm4x1ftn" path="res://Themes/default_theme.tres" id="2_cysp8"]
-[ext_resource type="Texture2D" uid="uid://c62kcexfhw3dw" path="res://Art/UI/ui_hexagon_purple.png" id="3_lt07o"]
+[ext_resource type="Script" path="res://Scripts/UI/character_ui.gd" id="1_miaxt"]
+[ext_resource type="Texture2D" uid="uid://dqahu7poxno1e" path="res://Art/UI/ui_hexagon_red.png" id="2_phi4g"]
+[ext_resource type="Theme" uid="uid://qxrxrm4x1ftn" path="res://Themes/default_theme.tres" id="3_3io2f"]
+[ext_resource type="Texture2D" uid="uid://c62kcexfhw3dw" path="res://Art/UI/ui_hexagon_purple.png" id="3_kebgn"]
 
 [node name="Control_CharacterUI" type="Control" node_paths=PackedStringArray("NameLabel", "HPBar", "APBar", "ImageScene")]
 layout_mode = 3
@@ -11,12 +11,12 @@ anchors_preset = 0
 offset_left = 8.0
 offset_right = 48.0
 offset_bottom = 40.0
-script = ExtResource("1_1ol6n")
+script = ExtResource("1_miaxt")
 NameLabel = NodePath("MarginContainer/HBoxContainer/NameLabel")
 HPBar = NodePath("MarginContainer/HBoxContainer/HPContainer/HPBar")
 APBar = NodePath("MarginContainer/HBoxContainer/APContainer/APBar")
-DefaultBackground = ExtResource("1_k24bf")
-FocusedBackground = ExtResource("3_lt07o")
+DefaultBackground = ExtResource("2_phi4g")
+FocusedBackground = ExtResource("3_kebgn")
 ImageScene = NodePath("UI_Hexagon1")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="."]
@@ -24,7 +24,7 @@ layout_mode = 0
 offset_left = -8.0
 offset_right = 344.0
 offset_bottom = 81.0
-texture = ExtResource("1_k24bf")
+texture = ExtResource("2_phi4g")
 expand_mode = 1
 
 [node name="MarginContainer" type="MarginContainer" parent="."]
@@ -47,7 +47,7 @@ alignment = 2
 custom_minimum_size = Vector2(78, 0)
 layout_mode = 2
 size_flags_horizontal = 0
-theme = ExtResource("2_cysp8")
+theme = ExtResource("3_3io2f")
 theme_override_font_sizes/font_size = 15
 text = "TEST"
 
@@ -56,7 +56,7 @@ layout_mode = 2
 
 [node name="HPLabel" type="Label" parent="MarginContainer/HBoxContainer/HPContainer"]
 layout_mode = 2
-theme = ExtResource("2_cysp8")
+theme = ExtResource("3_3io2f")
 theme_override_font_sizes/font_size = 10
 text = "HP"
 
@@ -72,7 +72,7 @@ theme_override_constants/separation = 6
 
 [node name="APLabel" type="Label" parent="MarginContainer/HBoxContainer/APContainer"]
 layout_mode = 2
-theme = ExtResource("2_cysp8")
+theme = ExtResource("3_3io2f")
 theme_override_font_sizes/font_size = 10
 text = "AP"
 

@@ -7,6 +7,8 @@ albedo_color = Color(0.189666, 0.37646, 0.184867, 1)
 
 [node name="XanBattle" type="Node3D"]
 script = ExtResource("1_lknl8")
+InParty = true
+BattlerName = "Xan"
 Level = 1
 Strength = 9
 Magic = 4
@@ -15,11 +17,9 @@ Resistance = 5
 Speed = 8
 Charisma = 7
 CurrentHP = 22
-CurrentSP = 8
 MaxHP = 22
-MaxSP = 8
-InParty = true
-DefaultPosition = 2
+DefaultPosition = 1
+CurrentPosition = 1
 Resistances = Array[int]([2, 10, 7])
 Weaknesses = Array[int]([4, 3, 11])
 

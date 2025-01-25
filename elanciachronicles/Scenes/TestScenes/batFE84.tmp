@@ -10,7 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://n43vi87y3d5k" path="res://Scenes/BattleAreas/FirstBattle.tscn" id="6_vah62"]
 [ext_resource type="PackedScene" uid="uid://bkaff4lqkrgs2" path="res://Scenes/Abilities/Basic/RangedAttack.tscn" id="8_3rrvi"]
 
-[node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIContainer", "EnemyUIControl", "EnemyUIContainer", "ActionMenuContainer", "RangedAttackButton", "PartyLinesControl", "EnemyLinesControl", "MenuCursor", "TargetCursor")]
+[node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIContainer", "EnemyUIControl", "EnemyUIContainer", "ActionMenuContainer", "RangedAttackButton", "PartyLinesControl", "EnemyLinesControl", "MenuCursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 script = ExtResource("1_iposc")
 PartyControlNode = NodePath("CurrentParty")
@@ -23,7 +23,6 @@ RangedAttackButton = NodePath("BattleCanvas/Control_ActionMenu/GridContainer/Con
 PartyLinesControl = NodePath("Control_PartyLines")
 EnemyLinesControl = NodePath("Control_EnemyLines")
 MenuCursor = NodePath("BattleCanvas/MenuCursor")
-TargetCursor = NodePath("TargetCursor")
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.870311, -0.426521, 0.24625, 0.470738, -0.57341, 0.670527, -0.144791, 0.699486, 0.699825, -16.2304, 4.4172, 10.636)

@@ -1,10 +1,8 @@
-[gd_scene load_steps=9 format=3 uid="uid://b0kkabubbo5u7"]
+[gd_scene load_steps=7 format=3 uid="uid://b0kkabubbo5u7"]
 
-[ext_resource type="PackedScene" uid="uid://bkxbdpucf2q2s" path="res://Scenes/UI/PartyMemberUI.tscn" id="2_6ydee"]
-[ext_resource type="Script" path="res://Scripts/UI/menu_item.gd" id="2_c6mnl"]
-[ext_resource type="Theme" uid="uid://qxrxrm4x1ftn" path="res://Themes/default_theme.tres" id="2_piavv"]
-[ext_resource type="Texture2D" uid="uid://oilmb1a4ttqt" path="res://Art/UI/ui_hexagon_blue.png" id="3_5yi3i"]
-[ext_resource type="Texture2D" uid="uid://dqahu7poxno1e" path="res://Art/UI/ui_hexagon_red.png" id="5_kd0u0"]
+[ext_resource type="Script" path="res://Scripts/BaseClasses/action_menu_button.gd" id="2_c6mnl"]
+[ext_resource type="Texture2D" uid="uid://c62kcexfhw3dw" path="res://Art/UI/ui_hexagon_purple.png" id="3_fncp4"]
+[ext_resource type="Script" path="res://Scripts/UI/ranged_attack_button.gd" id="3_hxuvf"]
 [ext_resource type="Texture2D" uid="uid://dsd1561pk2vdb" path="res://Art/UI/ui_hexagon_cyan.png" id="5_r7qec"]
 [ext_resource type="Texture2D" uid="uid://bqo8756i8p6kc" path="res://Art/UI/UI_window_blue.png" id="6_pq5mx"]
 [ext_resource type="PackedScene" uid="uid://brslib2v2l2h8" path="res://Scenes/UI/MenuCursor.tscn" id="7_4qu8s"]
@@ -13,613 +11,82 @@
 
 [node name="Control_PartyUI" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 72.0
-offset_top = 880.0
-offset_right = 72.0
-offset_bottom = 880.0
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
 
-[node name="Control_PartyMember1" parent="Control_PartyUI" instance=ExtResource("2_6ydee")]
-
-[node name="Control_PartyMember2" type="Control" parent="Control_PartyUI"]
-anchors_preset = 0
-offset_left = 175.0
-offset_top = 59.0
-offset_right = 215.0
-offset_bottom = 99.0
-script = ExtResource("2_c6mnl")
-
-[node name="UI_Hexagon1" type="TextureRect" parent="Control_PartyUI/Control_PartyMember2"]
-layout_mode = 0
-offset_left = -8.0
-offset_right = 344.0
-offset_bottom = 81.0
-texture = ExtResource("3_5yi3i")
-expand_mode = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="Control_PartyUI/Control_PartyMember2"]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -19.0
-offset_right = 310.0
-offset_bottom = 97.0
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 17
-theme_override_constants/margin_bottom = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember2/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 9
-alignment = 2
-
-[node name="NameLabel" type="Label" parent="Control_PartyUI/Control_PartyMember2/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(78, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 15
-text = "XAN"
-
-[node name="HPContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember2/MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="HPLabel" type="Label" parent="Control_PartyUI/Control_PartyMember2/MarginContainer/HBoxContainer/HPContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "HP"
-
-[node name="HPBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember2/MarginContainer/HBoxContainer/HPContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
-
-[node name="APContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember2/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="APLabel" type="Label" parent="Control_PartyUI/Control_PartyMember2/MarginContainer/HBoxContainer/APContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "AP"
-
-[node name="APBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember2/MarginContainer/HBoxContainer/APContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
-
-[node name="Control_PartyMember3" type="Control" parent="Control_PartyUI"]
-anchors_preset = 0
-offset_left = 349.0
-offset_right = 389.0
-offset_bottom = 40.0
-script = ExtResource("2_c6mnl")
-
-[node name="UI_Hexagon1" type="TextureRect" parent="Control_PartyUI/Control_PartyMember3"]
-layout_mode = 0
-offset_left = -8.0
-offset_right = 344.0
-offset_bottom = 81.0
-texture = ExtResource("3_5yi3i")
-expand_mode = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="Control_PartyUI/Control_PartyMember3"]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -19.0
-offset_right = 310.0
-offset_bottom = 97.0
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 17
-theme_override_constants/margin_bottom = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember3/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 9
-alignment = 2
-
-[node name="NameLabel" type="Label" parent="Control_PartyUI/Control_PartyMember3/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(78, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 15
-text = "CECELIA"
-
-[node name="HPContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember3/MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="HPLabel" type="Label" parent="Control_PartyUI/Control_PartyMember3/MarginContainer/HBoxContainer/HPContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "HP"
-
-[node name="HPBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember3/MarginContainer/HBoxContainer/HPContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
-
-[node name="APContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember3/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="APLabel" type="Label" parent="Control_PartyUI/Control_PartyMember3/MarginContainer/HBoxContainer/APContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "AP"
-
-[node name="APBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember3/MarginContainer/HBoxContainer/APContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
-
-[node name="Control_PartyMember4" type="Control" parent="Control_PartyUI"]
-anchors_preset = 0
-offset_left = 523.0
-offset_top = 59.0
-offset_right = 563.0
-offset_bottom = 99.0
-script = ExtResource("2_c6mnl")
-
-[node name="UI_Hexagon1" type="TextureRect" parent="Control_PartyUI/Control_PartyMember4"]
-layout_mode = 0
-offset_left = -8.0
-offset_right = 344.0
-offset_bottom = 81.0
-texture = ExtResource("3_5yi3i")
-expand_mode = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="Control_PartyUI/Control_PartyMember4"]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -19.0
-offset_right = 310.0
-offset_bottom = 97.0
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 17
-theme_override_constants/margin_bottom = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember4/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 9
-alignment = 2
-
-[node name="NameLabel" type="Label" parent="Control_PartyUI/Control_PartyMember4/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(78, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 15
-text = "KARINA"
-
-[node name="HPContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember4/MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="HPLabel" type="Label" parent="Control_PartyUI/Control_PartyMember4/MarginContainer/HBoxContainer/HPContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "HP"
-
-[node name="HPBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember4/MarginContainer/HBoxContainer/HPContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
-
-[node name="APContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember4/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="APLabel" type="Label" parent="Control_PartyUI/Control_PartyMember4/MarginContainer/HBoxContainer/APContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "AP"
-
-[node name="APBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember4/MarginContainer/HBoxContainer/APContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
-
-[node name="Control_PartyMember5" type="Control" parent="Control_PartyUI"]
-anchors_preset = 0
-offset_left = 699.0
-offset_right = 739.0
-offset_bottom = 40.0
-script = ExtResource("2_c6mnl")
-
-[node name="UI_Hexagon1" type="TextureRect" parent="Control_PartyUI/Control_PartyMember5"]
-layout_mode = 0
-offset_left = -8.0
-offset_right = 344.0
-offset_bottom = 81.0
-texture = ExtResource("3_5yi3i")
-expand_mode = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="Control_PartyUI/Control_PartyMember5"]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -19.0
-offset_right = 310.0
-offset_bottom = 97.0
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 17
-theme_override_constants/margin_bottom = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember5/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 9
-alignment = 2
-
-[node name="NameLabel" type="Label" parent="Control_PartyUI/Control_PartyMember5/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(78, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 15
-text = "BASIL"
-
-[node name="HPContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember5/MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="HPLabel" type="Label" parent="Control_PartyUI/Control_PartyMember5/MarginContainer/HBoxContainer/HPContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "HP"
-
-[node name="HPBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember5/MarginContainer/HBoxContainer/HPContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
-
-[node name="APContainer" type="HBoxContainer" parent="Control_PartyUI/Control_PartyMember5/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="APLabel" type="Label" parent="Control_PartyUI/Control_PartyMember5/MarginContainer/HBoxContainer/APContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "AP"
-
-[node name="APBar" type="ProgressBar" parent="Control_PartyUI/Control_PartyMember5/MarginContainer/HBoxContainer/APContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
+[node name="GridContainer" type="GridContainer" parent="Control_PartyUI"]
+layout_mode = 1
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_left = 74.425
+offset_top = -219.83
+offset_right = 774.425
+offset_bottom = -134.83
+grow_vertical = 0
+theme_override_constants/h_separation = 350
+theme_override_constants/v_separation = 85
+columns = 3
 
 [node name="Control_EnemyUI" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 816.0
-offset_top = 64.0
-offset_right = 816.0
-offset_bottom = 64.0
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+grow_horizontal = 0
 
-[node name="Control_Enemy1" parent="Control_EnemyUI" instance=ExtResource("2_6ydee")]
-
-[node name="UI_Hexagon1" parent="Control_EnemyUI/Control_Enemy1" index="0"]
-texture = ExtResource("5_kd0u0")
-
-[node name="NameLabel" parent="Control_EnemyUI/Control_Enemy1/MarginContainer/HBoxContainer" index="0"]
-text = "STELLA"
-
-[node name="Control_Enemy2" type="Control" parent="Control_EnemyUI"]
-anchors_preset = 0
-offset_left = 175.0
-offset_top = 59.0
-offset_right = 215.0
-offset_bottom = 99.0
-script = ExtResource("2_c6mnl")
-
-[node name="UI_Hexagon1" type="TextureRect" parent="Control_EnemyUI/Control_Enemy2"]
-layout_mode = 0
-offset_left = -8.0
-offset_right = 344.0
-offset_bottom = 81.0
-texture = ExtResource("5_kd0u0")
-expand_mode = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="Control_EnemyUI/Control_Enemy2"]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -19.0
-offset_right = 310.0
-offset_bottom = 97.0
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 17
-theme_override_constants/margin_bottom = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy2/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 9
-alignment = 2
-
-[node name="NameLabel" type="Label" parent="Control_EnemyUI/Control_Enemy2/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(78, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 15
-text = "RELLIN"
-
-[node name="HPContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy2/MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="HPLabel" type="Label" parent="Control_EnemyUI/Control_Enemy2/MarginContainer/HBoxContainer/HPContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "HP"
-
-[node name="HPBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy2/MarginContainer/HBoxContainer/HPContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
-
-[node name="APContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy2/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="APLabel" type="Label" parent="Control_EnemyUI/Control_Enemy2/MarginContainer/HBoxContainer/APContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "AP"
-
-[node name="APBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy2/MarginContainer/HBoxContainer/APContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
-
-[node name="Control_Enemy3" type="Control" parent="Control_EnemyUI"]
-anchors_preset = 0
-offset_left = 349.0
-offset_right = 389.0
-offset_bottom = 40.0
-script = ExtResource("2_c6mnl")
-
-[node name="UI_Hexagon1" type="TextureRect" parent="Control_EnemyUI/Control_Enemy3"]
-layout_mode = 0
-offset_left = -8.0
-offset_right = 344.0
-offset_bottom = 81.0
-texture = ExtResource("5_kd0u0")
-expand_mode = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="Control_EnemyUI/Control_Enemy3"]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -19.0
-offset_right = 310.0
-offset_bottom = 97.0
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 17
-theme_override_constants/margin_bottom = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy3/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 9
-alignment = 2
-
-[node name="NameLabel" type="Label" parent="Control_EnemyUI/Control_Enemy3/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(78, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 15
-text = "SAYTOR"
-
-[node name="HPContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy3/MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="HPLabel" type="Label" parent="Control_EnemyUI/Control_Enemy3/MarginContainer/HBoxContainer/HPContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "HP"
-
-[node name="HPBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy3/MarginContainer/HBoxContainer/HPContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
-
-[node name="APContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy3/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="APLabel" type="Label" parent="Control_EnemyUI/Control_Enemy3/MarginContainer/HBoxContainer/APContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "AP"
-
-[node name="APBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy3/MarginContainer/HBoxContainer/APContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
-
-[node name="Control_Enemy4" type="Control" parent="Control_EnemyUI"]
-anchors_preset = 0
-offset_left = 523.0
-offset_top = 59.0
-offset_right = 563.0
-offset_bottom = 99.0
-script = ExtResource("2_c6mnl")
-
-[node name="UI_Hexagon1" type="TextureRect" parent="Control_EnemyUI/Control_Enemy4"]
-layout_mode = 0
-offset_left = -8.0
-offset_right = 344.0
-offset_bottom = 81.0
-texture = ExtResource("5_kd0u0")
-expand_mode = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="Control_EnemyUI/Control_Enemy4"]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -19.0
-offset_right = 310.0
-offset_bottom = 97.0
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 17
-theme_override_constants/margin_bottom = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy4/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 9
-alignment = 2
-
-[node name="NameLabel" type="Label" parent="Control_EnemyUI/Control_Enemy4/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(78, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 15
-text = "RYADEL"
-
-[node name="HPContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy4/MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="HPLabel" type="Label" parent="Control_EnemyUI/Control_Enemy4/MarginContainer/HBoxContainer/HPContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "HP"
-
-[node name="HPBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy4/MarginContainer/HBoxContainer/HPContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
-
-[node name="APContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy4/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="APLabel" type="Label" parent="Control_EnemyUI/Control_Enemy4/MarginContainer/HBoxContainer/APContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "AP"
-
-[node name="APBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy4/MarginContainer/HBoxContainer/APContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
-
-[node name="Control_Enemy5" type="Control" parent="Control_EnemyUI"]
-anchors_preset = 0
-offset_left = 699.0
-offset_right = 739.0
-offset_bottom = 40.0
-script = ExtResource("2_c6mnl")
-
-[node name="UI_Hexagon1" type="TextureRect" parent="Control_EnemyUI/Control_Enemy5"]
-layout_mode = 0
-offset_left = -8.0
-offset_right = 344.0
-offset_bottom = 81.0
-texture = ExtResource("5_kd0u0")
-expand_mode = 1
-
-[node name="MarginContainer" type="MarginContainer" parent="Control_EnemyUI/Control_Enemy5"]
-layout_mode = 0
-offset_left = -3.0
-offset_top = -19.0
-offset_right = 310.0
-offset_bottom = 97.0
-theme_override_constants/margin_left = 5
-theme_override_constants/margin_top = 10
-theme_override_constants/margin_right = 17
-theme_override_constants/margin_bottom = 10
-
-[node name="HBoxContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy5/MarginContainer"]
-layout_mode = 2
-theme_override_constants/separation = 9
-alignment = 2
-
-[node name="NameLabel" type="Label" parent="Control_EnemyUI/Control_Enemy5/MarginContainer/HBoxContainer"]
-custom_minimum_size = Vector2(78, 0)
-layout_mode = 2
-size_flags_horizontal = 0
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 15
-text = "FATE"
-
-[node name="HPContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy5/MarginContainer/HBoxContainer"]
-layout_mode = 2
-
-[node name="HPLabel" type="Label" parent="Control_EnemyUI/Control_Enemy5/MarginContainer/HBoxContainer/HPContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "HP"
-
-[node name="HPBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy5/MarginContainer/HBoxContainer/HPContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
-
-[node name="APContainer" type="HBoxContainer" parent="Control_EnemyUI/Control_Enemy5/MarginContainer/HBoxContainer"]
-layout_mode = 2
-theme_override_constants/separation = 6
-
-[node name="APLabel" type="Label" parent="Control_EnemyUI/Control_Enemy5/MarginContainer/HBoxContainer/APContainer"]
-layout_mode = 2
-theme = ExtResource("2_piavv")
-theme_override_font_sizes/font_size = 10
-text = "AP"
-
-[node name="APBar" type="ProgressBar" parent="Control_EnemyUI/Control_Enemy5/MarginContainer/HBoxContainer/APContainer"]
-custom_minimum_size = Vector2(100, 0)
-layout_mode = 2
-size_flags_vertical = 4
-value = 100.0
+[node name="GridContainer" type="GridContainer" parent="Control_EnemyUI"]
+layout_direction = 2
+layout_mode = 1
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_left = -1098.0
+offset_top = 72.0
+offset_right = -400.0
+offset_bottom = 152.0
+grow_horizontal = 0
+theme_override_constants/h_separation = 349
+theme_override_constants/v_separation = 80
+columns = 3
 
 [node name="Control_ActionMenu" type="Control" parent="."]
 layout_mode = 3
-anchors_preset = 0
-offset_left = 1159.0
-offset_top = 784.0
-offset_right = 1199.0
-offset_bottom = 824.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="GridContainer" type="GridContainer" parent="Control_ActionMenu"]
-layout_mode = 0
-offset_right = 350.0
-offset_bottom = 160.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -761.285
+offset_top = -291.145
+offset_right = -411.285
+offset_bottom = -131.145
+grow_horizontal = 0
+grow_vertical = 0
 theme_override_constants/h_separation = 350
 theme_override_constants/v_separation = 80
 columns = 2
 
-[node name="Control_Melee" type="Control" parent="Control_ActionMenu/GridContainer"]
+[node name="Control_Melee" type="Control" parent="Control_ActionMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
 layout_mode = 2
 script = ExtResource("2_c6mnl")
+DefaultBackground = ExtResource("5_r7qec")
+FocusedBackground = ExtResource("3_fncp4")
+ImageScene = NodePath("UI_Hexagon1")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Melee"]
 layout_mode = 0
@@ -641,9 +108,12 @@ theme_override_font_sizes/font_size = 25
 text = "Melee Attack"
 horizontal_alignment = 1
 
-[node name="Control_Ranged" type="Control" parent="Control_ActionMenu/GridContainer"]
+[node name="Control_Ranged" type="Control" parent="Control_ActionMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
 layout_mode = 2
-script = ExtResource("2_c6mnl")
+script = ExtResource("3_hxuvf")
+DefaultBackground = ExtResource("5_r7qec")
+FocusedBackground = ExtResource("3_fncp4")
+ImageScene = NodePath("UI_Hexagon1")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Ranged"]
 layout_mode = 0
@@ -665,9 +135,12 @@ theme_override_font_sizes/font_size = 25
 text = "Ranged Attack"
 horizontal_alignment = 1
 
-[node name="Control_Specials" type="Control" parent="Control_ActionMenu/GridContainer"]
+[node name="Control_Specials" type="Control" parent="Control_ActionMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
 layout_mode = 2
 script = ExtResource("2_c6mnl")
+DefaultBackground = ExtResource("5_r7qec")
+FocusedBackground = ExtResource("3_fncp4")
+ImageScene = NodePath("UI_Hexagon1")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Specials"]
 layout_mode = 0
@@ -689,9 +162,12 @@ theme_override_font_sizes/font_size = 25
 text = "Specials"
 horizontal_alignment = 1
 
-[node name="Control_Reposition" type="Control" parent="Control_ActionMenu/GridContainer"]
+[node name="Control_Reposition" type="Control" parent="Control_ActionMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
 layout_mode = 2
 script = ExtResource("2_c6mnl")
+DefaultBackground = ExtResource("5_r7qec")
+FocusedBackground = ExtResource("3_fncp4")
+ImageScene = NodePath("UI_Hexagon1")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Reposition"]
 layout_mode = 0
@@ -713,9 +189,12 @@ theme_override_font_sizes/font_size = 25
 text = "Reposition"
 horizontal_alignment = 1
 
-[node name="Control_Defend" type="Control" parent="Control_ActionMenu/GridContainer"]
+[node name="Control_Defend" type="Control" parent="Control_ActionMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
 layout_mode = 2
 script = ExtResource("2_c6mnl")
+DefaultBackground = ExtResource("5_r7qec")
+FocusedBackground = ExtResource("3_fncp4")
+ImageScene = NodePath("UI_Hexagon1")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Defend"]
 layout_mode = 0
@@ -737,9 +216,12 @@ theme_override_font_sizes/font_size = 25
 text = "Defend"
 horizontal_alignment = 1
 
-[node name="Control_Items" type="Control" parent="Control_ActionMenu/GridContainer"]
+[node name="Control_Items" type="Control" parent="Control_ActionMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
 layout_mode = 2
 script = ExtResource("2_c6mnl")
+DefaultBackground = ExtResource("5_r7qec")
+FocusedBackground = ExtResource("3_fncp4")
+ImageScene = NodePath("UI_Hexagon1")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_ActionMenu/GridContainer/Control_Items"]
 layout_mode = 0
@@ -764,22 +246,44 @@ horizontal_alignment = 1
 [node name="Control_SpecialsMenu" type="Control" parent="."]
 visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_left = 1144.0
-offset_top = 656.0
-offset_right = 1184.0
-offset_bottom = 696.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="TextureRect" type="TextureRect" parent="Control_SpecialsMenu"]
-layout_mode = 0
-offset_right = 716.965
-offset_bottom = 393.425
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -773.0
+offset_top = -417.0
+offset_right = -56.0349
+offset_bottom = -23.575
+grow_horizontal = 0
+grow_vertical = 0
 texture = ExtResource("6_pq5mx")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control_SpecialsMenu"]
-layout_mode = 0
-offset_right = 720.0
-offset_bottom = 392.0
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -786.0
+offset_top = -416.0
+offset_right = -48.0
+offset_bottom = -24.0
+grow_horizontal = 0
+grow_vertical = 0
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 40
@@ -943,6 +447,102 @@ size_flags_horizontal = 8
 text = "0 AP"
 horizontal_alignment = 2
 
+[node name="SpecialContainer10" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+script = ExtResource("2_c6mnl")
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer10"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer10"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
+[node name="SpecialContainer11" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+script = ExtResource("2_c6mnl")
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer11"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer11"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
+[node name="SpecialContainer12" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+script = ExtResource("2_c6mnl")
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer12"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer12"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
+[node name="SpecialContainer13" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+script = ExtResource("2_c6mnl")
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer13"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer13"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
+[node name="SpecialContainer14" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+script = ExtResource("2_c6mnl")
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer14"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer14"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
+[node name="SpecialContainer15" type="HBoxContainer" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer"]
+layout_mode = 2
+script = ExtResource("2_c6mnl")
+
+[node name="SpecialNameLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer15"]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer/SpecialContainer15"]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2
+
 [node name="SpecialDescriptionLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
@@ -954,22 +554,37 @@ autowrap_mode = 2
 [node name="Control_ItemsMenu" type="Control" parent="."]
 visible = false
 layout_mode = 3
-anchors_preset = 0
-offset_left = 1144.0
-offset_top = 656.0
-offset_right = 1184.0
-offset_bottom = 696.0
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
 
 [node name="TextureRect" type="TextureRect" parent="Control_ItemsMenu"]
-layout_mode = 0
-offset_right = 716.965
-offset_bottom = 393.425
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -773.0
+offset_top = -417.0
+offset_right = -56.0349
+offset_bottom = -23.575
+grow_horizontal = 0
+grow_vertical = 0
 texture = ExtResource("6_pq5mx")
 
 [node name="MarginContainer" type="MarginContainer" parent="Control_ItemsMenu"]
 layout_mode = 0
-offset_right = 720.0
-offset_bottom = 392.0
+offset_left = -736.0
+offset_top = -368.0
+offset_right = -16.0
+offset_bottom = 24.0
 theme_override_constants/margin_left = 40
 theme_override_constants/margin_top = 30
 theme_override_constants/margin_right = 40
@@ -1087,8 +702,45 @@ text = "This is a test description for the currently highlighted item. Items can
 vertical_alignment = 2
 autowrap_mode = 2
 
-[node name="MenuCursor" parent="." instance=ExtResource("7_4qu8s")]
-menu_parent_path = NodePath("../Control_ActionMenu/GridContainer")
-cursor_offset = Vector2(30, -15)
+[node name="Control_TextBox" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 7
+anchor_left = 0.5
+anchor_top = 1.0
+anchor_right = 0.5
+anchor_bottom = 1.0
+offset_left = -356.0
+offset_top = -392.0
+offset_right = -316.0
+offset_bottom = -352.0
+grow_horizontal = 2
+grow_vertical = 0
 
-[editable path="Control_EnemyUI/Control_Enemy1"]
+[node name="MarginContainer" type="MarginContainer" parent="Control_TextBox"]
+layout_mode = 0
+offset_left = 16.0
+offset_top = 8.0
+offset_right = 22.685
+offset_bottom = 82.645
+scale = Vector2(100, 1)
+
+[node name="TextureRect" type="TextureRect" parent="Control_TextBox"]
+layout_mode = 1
+offset_right = 716.965
+offset_bottom = 360.0
+scale = Vector2(1, 0.27)
+texture = ExtResource("6_pq5mx")
+
+[node name="MenuCursor" parent="." node_paths=PackedStringArray("menu_parent") instance=ExtResource("7_4qu8s")]
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_left = 1184.0
+offset_top = 968.0
+offset_right = 1842.0
+offset_bottom = 1018.0
+grow_horizontal = 1
+grow_vertical = 1
+menu_parent = NodePath("../Control_ActionMenu/GridContainer")
+cursor_offset = Vector2(45, -15)
