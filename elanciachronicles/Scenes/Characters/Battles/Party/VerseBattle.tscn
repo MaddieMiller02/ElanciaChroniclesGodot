@@ -21,8 +21,8 @@ CurrentHP = 20
 CurrentAP = 15
 MaxHP = 20
 MaxAP = 15
-DefaultPosition = 2
-CurrentPosition = 2
+DefaultPosition = 1
+CurrentPosition = 1
 Resistances = Array[int]([0, 3, 4])
 Weaknesses = Array[int]([1, 6, 8])
 

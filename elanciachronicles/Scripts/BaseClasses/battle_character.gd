@@ -25,6 +25,8 @@ const Ability = preload("res://Scripts/BaseClasses/ability.gd")
 @export var MaxHP:int
 @export var MaxAP:int
 
+@export var HasRepositioned:bool = false
+
 @export var SpecialList:Array[Ability]
 
 @export var Statuses:Array[Enums.STATUS]

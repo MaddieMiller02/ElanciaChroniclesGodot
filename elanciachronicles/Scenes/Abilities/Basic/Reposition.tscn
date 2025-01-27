@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://cbxfie77qxd0t"]
+
+[ext_resource type="Script" path="res://Scripts/Abilities/Basic/reposition.gd" id="1_anp6h"]
+
+[node name="Reposition" type="Node"]
+script = ExtResource("1_anp6h")
+AbilityName = "Reposition"
+Description = "Character moves closer to or further away from the enemy."

@@ -41,7 +41,8 @@ func _process(delta):
 				if current_menu_item.has_method("cursor_select"):
 					current_menu_item.cursor_select()
 					
-		get_menu_item_at_index(previous_index).button_unfocused()
+		if get_menu_item_at_index(previous_index) != null:
+			get_menu_item_at_index(previous_index).button_unfocused()
 		get_menu_item_at_index(cursor_index).button_focused()
 	else:
 		get_menu_item_at_index(cursor_index).button_unfocused()

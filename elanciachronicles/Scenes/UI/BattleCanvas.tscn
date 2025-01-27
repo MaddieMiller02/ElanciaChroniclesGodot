@@ -1,4 +1,4 @@
-[gd_scene load_steps=7 format=3 uid="uid://b0kkabubbo5u7"]
+[gd_scene load_steps=8 format=3 uid="uid://b0kkabubbo5u7"]
 
 [ext_resource type="Script" path="res://Scripts/BaseClasses/action_menu_button.gd" id="2_c6mnl"]
 [ext_resource type="Texture2D" uid="uid://c62kcexfhw3dw" path="res://Art/UI/ui_hexagon_purple.png" id="3_fncp4"]
@@ -6,6 +6,7 @@
 [ext_resource type="Texture2D" uid="uid://dsd1561pk2vdb" path="res://Art/UI/ui_hexagon_cyan.png" id="5_r7qec"]
 [ext_resource type="Texture2D" uid="uid://bqo8756i8p6kc" path="res://Art/UI/UI_window_blue.png" id="6_pq5mx"]
 [ext_resource type="PackedScene" uid="uid://brslib2v2l2h8" path="res://Scenes/UI/MenuCursor.tscn" id="7_4qu8s"]
+[ext_resource type="Script" path="res://Scripts/BaseClasses/ui_button.gd" id="7_opgly"]
 
 [node name="BattleCanvas" type="CanvasLayer"]
 
@@ -701,6 +702,88 @@ size_flags_vertical = 3
 text = "This is a test description for the currently highlighted item. Items can heal the party, change the stats of a party member or an enemy, or serve as a special kind of attack. If you're seeing this in-game, it's probably a bug. If your item description exceeds the space of this box, you need to write shorter."
 vertical_alignment = 2
 autowrap_mode = 2
+
+[node name="Control_RepositionMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="GridContainer" type="GridContainer" parent="Control_RepositionMenu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -761.285
+offset_top = -291.145
+offset_right = -411.285
+offset_bottom = -131.145
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/h_separation = 350
+theme_override_constants/v_separation = 80
+columns = 2
+
+[node name="Control_Backward" type="Control" parent="Control_RepositionMenu/GridContainer"]
+layout_mode = 2
+script = ExtResource("7_opgly")
+DefaultBackground = ExtResource("5_r7qec")
+FocusedBackground = ExtResource("3_fncp4")
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_RepositionMenu/GridContainer/Control_Backward"]
+layout_mode = 0
+offset_right = 352.0
+offset_bottom = 81.0
+texture = ExtResource("5_r7qec")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_RepositionMenu/GridContainer/Control_Backward"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 324.0
+offset_bottom = 64.0
+
+[node name="Label" type="Label" parent="Control_RepositionMenu/GridContainer/Control_Backward/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Backward"
+horizontal_alignment = 1
+
+[node name="Control_Forward" type="Control" parent="Control_RepositionMenu/GridContainer"]
+layout_mode = 2
+script = ExtResource("7_opgly")
+DefaultBackground = ExtResource("5_r7qec")
+FocusedBackground = ExtResource("3_fncp4")
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_RepositionMenu/GridContainer/Control_Forward"]
+layout_mode = 0
+offset_right = 352.0
+offset_bottom = 81.0
+texture = ExtResource("5_r7qec")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_RepositionMenu/GridContainer/Control_Forward"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 324.0
+offset_bottom = 64.0
+
+[node name="Label" type="Label" parent="Control_RepositionMenu/GridContainer/Control_Forward/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Forward"
+horizontal_alignment = 1
 
 [node name="MenuCursor" parent="." node_paths=PackedStringArray("menu_parent") instance=ExtResource("7_4qu8s")]
 anchors_preset = 0

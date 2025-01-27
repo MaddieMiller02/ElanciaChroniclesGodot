@@ -1,6 +1,6 @@
 extends Ability
 
-func perform_ability(User:BattleCharacter, Target:BattleCharacter):
+func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
 	# Calculations
 	var Damage = (User.Strength + Power) - (Target.Defense)
 	var HitChance = (HitRate + User.Speed) - Target.Speed

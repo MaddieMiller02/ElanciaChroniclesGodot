@@ -198,11 +198,42 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
 [node name="FirstBattle" parent="." instance=ExtResource("6_vah62")]
 
+[node name="SailorBattle" parent="FirstBattle/Enemies" index="0"]
+DroppedItems = null
+EscapeSuccess = null
+TempHP = null
+TempAP = null
+HasRepositioned = null
+Statuses = null
+StatusImmunities = null
+Experience = null
+
+[node name="SailorBattle2" parent="FirstBattle/Enemies" index="1"]
+DroppedItems = null
+EscapeSuccess = null
+TempHP = null
+TempAP = null
+HasRepositioned = null
+Statuses = null
+StatusImmunities = null
+Experience = null
+
 [node name="DefaultAbilities" type="Node3D" parent="."]
 
 [node name="RangedAttack" parent="DefaultAbilities" instance=ExtResource("8_3rrvi")]
 
 [node name="Reposition" parent="DefaultAbilities" instance=ExtResource("9_0vs8f")]
+Power = null
+Physical = null
+IgnoreDefense = null
+HitRate = null
+APCost = null
+Reflectable = null
+DamageMultiplier = null
+TargetType = null
+StatusEffects = null
+Element = null
+IsActive = null
 
 [node name="BattleMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_cisby")

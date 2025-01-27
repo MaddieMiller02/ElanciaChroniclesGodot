@@ -1,7 +1,9 @@
+class_name BattleManager
 extends Node3D
 
 var PartyMemberUI = preload("res://Scenes/UI/PartyMemberUI.tscn")
 var EnemyUI = preload("res://Scenes/UI/EnemyUI.tscn")
+var TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
 
 @export var PartyControlNode:Node
 var PartyMembers:Array[PartyMember]
@@ -19,7 +21,10 @@ var TargetCharacter:BattleCharacter
 @export var EnemyUIContainer:Container
 
 @export var ActionMenuContainer:Container
+@export var RepositionMenuControl:Node
+@export var RepositionMenuContainer:Container
 @export var RangedAttackButton:ActionMenuButton
+@export var RepositionButton:ActionMenuButton
 
 @export var PartyLinesControl:Node
 @export var EnemyLinesControl:Node
@@ -52,12 +57,11 @@ func _ready():
 		# Positioning
 		var position_line = PartyLinesControl.get_child(i)
 		position_line.visible = true
-		var position_marker = position_line.get_child(character.DefaultPosition)
+		var position_marker = position_line.get_child(character.DefaultPosition) 
 		var position_line_position = position_line.position
 		var position_marker_position = position_marker.position
-		character.position.x = (position_line_position.x + position_marker_position.x) + 3
+		character.position.x = (position_line_position.x + position_marker_position.x) - 1
 		character.position.z = i * -3
-
 		
 	# Set up arrays, UI, and positioning for enemies
 	for i in range(EnemyControlNode.get_child_count()):
@@ -82,7 +86,7 @@ func _ready():
 		var position_marker = position_line.get_child(character.DefaultPosition)
 		var position_line_position = position_line.position
 		var position_marker_position = position_marker.position
-		character.position.x = (position_line_position.x + position_marker_position.x) - 3
+		character.position.x = (position_line_position.x + position_marker_position.x) + 1
 		character.position.z = i * -3
 		
 		
@@ -112,6 +116,9 @@ func _ready():
 		var CurrentButton = EnemyUIContainer.get_child(i) as CharacterUI
 		CurrentButton.cursor_selected.connect(_on_character_button_pressed)
 		CurrentButton.cursor_focused.connect(_on_character_button_focused)
+	for i in range(RepositionMenuContainer.get_child_count()):
+		var CurrentButton = RepositionMenuContainer.get_child(i) as UIButton
+		CurrentButton.cursor_selected.connect(_on_reposition_button_pressed)
 	
 	set_active_character(TurnOrder[0])
 
@@ -137,13 +144,25 @@ func set_active_ability(ability:Ability):
 func end_turn():
 	# Send current character to the end of the turn order
 	await get_tree().create_timer(3.0).timeout
+	ActiveCharacter.HasRepositioned = false
 	TurnOrder.append(TurnOrder.pop_front())
 	set_active_character(TurnOrder[0])
 	
 func _on_ability_button_pressed():
 	var ButtonPressed = ActionMenuContainer.get_child(MenuCursor.cursor_index) as ActionMenuButton
 	set_active_ability(ButtonPressed.NextAbility)
-	if ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
+	print(ButtonPressed.NextAbility)
+	if ActiveAbility.AbilityName == "Reposition":
+		if ActiveCharacter.HasRepositioned:
+			var TextBox = TextBoxScene.instantiate()
+			add_child(TextBox)
+			TextBox.display_one_off_text(ActiveCharacter.BattlerName + " cannot reposition again this turn.")
+		else:
+			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_REPOSITION)
+			RepositionMenuControl.show()
+			MenuCursor.change_menu(RepositionMenuContainer)
+			RepositionMenuControl.add_child(MenuCursor)
+	elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
 		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY)
 		MenuCursor.change_menu(EnemyUIContainer)
 		EnemyUIControl.add_child(MenuCursor)
@@ -151,9 +170,53 @@ func _on_ability_button_pressed():
 func _on_character_button_pressed():
 	var ButtonPressed = EnemyUIContainer.get_child(MenuCursor.cursor_index) as CharacterUI
 	TargetCharacter = ButtonPressed.Character
-	ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter)
-	end_turn()
+	
+	# Checks if the enemy is out of range
+	if ActiveAbility.AbilityName == "Ranged Attack":
+		if (ActiveCharacter.CurrentPosition + TargetCharacter.CurrentPosition) >=2:
+			ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
+			end_turn()
+		else:
+			var TextBox = TextBoxScene.instantiate()
+			add_child(TextBox)
+			TextBox.display_one_off_text(TargetCharacter.BattlerName + " is too close to use a " + ActiveAbility.AbilityName + ".")
 	
 func _on_character_button_focused():
 	var character = Enemies[MenuCursor.cursor_index] as BattleCharacter
 	set_target_cursor_position(character)
+	
+func _on_reposition_button_pressed():
+	if MenuCursor.cursor_index == 0:
+		if ActiveCharacter.CurrentPosition <= 1:
+			ActiveCharacter.CurrentPosition += 1
+		# Don't let the character move further backward if too far
+		else:
+			var TextBox = TextBoxScene.instantiate()
+			add_child(TextBox)
+			TextBox.display_reposition_failed_message(ActiveCharacter, "backward")
+			return
+	else:
+		if ActiveCharacter.CurrentPosition >= 1:
+			ActiveCharacter.CurrentPosition -= 1
+		else:
+			var TextBox = TextBoxScene.instantiate()
+			add_child(TextBox)
+			TextBox.display_reposition_failed_message(ActiveCharacter, "forward")
+			return
+	
+	var position_line = PartyLinesControl.get_child(ActiveCharacter.get_index())
+	var position_marker = position_line.get_child(ActiveCharacter.CurrentPosition)
+	var position_line_position = position_line.position
+	var position_marker_position = position_marker.position
+	
+	if ActiveCharacter is PartyMember:
+		ActiveCharacter.position.x = (position_line_position.x + position_marker_position.x) - 1
+	else:
+		ActiveCharacter.position.x = (position_line_position.x + position_marker_position.x) + 1
+	
+	set_target_cursor_position(ActiveCharacter)
+		
+	ActiveCharacter.HasRepositioned = true
+	RepositionMenuControl.hide()
+	set_active_character(ActiveCharacter)
+	

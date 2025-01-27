@@ -5,5 +5,5 @@ extends BattleCharacter
 @export var MeleeAttack:Ability
 @export var RangedAttack:Ability
 
-func perform_turn(party:Array[PartyMember]):
+func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 	TurnEnded.emit()

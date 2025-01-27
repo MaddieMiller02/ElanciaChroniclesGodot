@@ -203,6 +203,17 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 [node name="RangedAttack" parent="DefaultAbilities" instance=ExtResource("8_3rrvi")]
 
 [node name="Reposition" parent="DefaultAbilities" instance=ExtResource("9_0vs8f")]
+Power = null
+Physical = null
+IgnoreDefense = null
+HitRate = null
+APCost = null
+Reflectable = null
+DamageMultiplier = null
+TargetType = null
+StatusEffects = null
+Element = null
+IsActive = null
 
 [node name="BattleMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_cisby")

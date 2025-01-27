@@ -17,5 +17,5 @@ extends Node
 
 var TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
 
-func perform_ability(User:BattleCharacter, Target:BattleCharacter):
+func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
 	print("Why did you perform a default ability?")

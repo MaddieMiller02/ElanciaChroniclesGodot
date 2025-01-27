@@ -44,4 +44,5 @@ custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 theme_override_font_sizes/font_size = 23
 text = "This is default text. It shouldn't be showing in the final game."
+horizontal_alignment = 1
 autowrap_mode = 2
