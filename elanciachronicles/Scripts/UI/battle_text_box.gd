@@ -26,6 +26,30 @@ func display_missed_message(AbilityUsed:Ability, User:BattleCharacter):
 	
 	queue_free()
 	
+func display_defend_message(User:BattleCharacter, RegainedAP:int):
+	text_label.text = User.BattlerName + " defended. Regained " + str(RegainedAP) + " AP."
+	
+	self.show()
+	
+	Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ANIMATING)
+	await get_tree().create_timer(3.0).timeout
+	
+	self.hide()
+	
+	queue_free()
+	
+func display_reposition_message(User:BattleCharacter, Direction:String):
+	text_label.text = User.BattlerName + " repositioned " + Direction + "."
+	
+	self.show()
+	
+	Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ANIMATING)
+	await get_tree().create_timer(3.0).timeout
+	
+	self.hide()
+	
+	queue_free()
+	
 func display_reposition_failed_message(User:BattleCharacter, Direction:String):
 	text_label.text = User.BattlerName + " can't move any farther " + Direction + "."
 	

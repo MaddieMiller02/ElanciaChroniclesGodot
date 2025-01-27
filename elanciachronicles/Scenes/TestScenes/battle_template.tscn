@@ -1,4 +1,4 @@
-[gd_scene load_steps=11 format=3 uid="uid://d3od1a50wjpjk"]
+[gd_scene load_steps=12 format=3 uid="uid://d3od1a50wjpjk"]
 
 [ext_resource type="Texture2D" uid="uid://pnho70oa50d6" path="res://Art/UI/ui_movement_blue.png" id="1_4h4gm"]
 [ext_resource type="Script" path="res://Scripts/BattleManagement/battle_manager.gd" id="1_iposc"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://n43vi87y3d5k" path="res://Scenes/BattleAreas/FirstBattle.tscn" id="6_vah62"]
 [ext_resource type="PackedScene" uid="uid://bkaff4lqkrgs2" path="res://Scenes/Abilities/Basic/RangedAttack.tscn" id="8_3rrvi"]
 [ext_resource type="PackedScene" uid="uid://cbxfie77qxd0t" path="res://Scenes/Abilities/Basic/Reposition.tscn" id="9_0vs8f"]
+[ext_resource type="PackedScene" uid="uid://2oavxmvjipxe" path="res://Scenes/Abilities/Basic/Defend.tscn" id="10_fxb1c"]
 
 [node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIContainer", "EnemyUIControl", "EnemyUIContainer", "ActionMenuContainer", "RepositionMenuControl", "RepositionMenuContainer", "RangedAttackButton", "RepositionButton", "PartyLinesControl", "EnemyLinesControl", "MenuCursor", "TargetCursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
@@ -184,6 +185,9 @@ NextAbility = NodePath("../../../../DefaultAbilities/RangedAttack")
 [node name="Control_Reposition" parent="BattleCanvas/Control_ActionMenu/GridContainer" index="3" node_paths=PackedStringArray("NextAbility")]
 NextAbility = NodePath("../../../../DefaultAbilities/Reposition")
 
+[node name="Control_Defend" parent="BattleCanvas/Control_ActionMenu/GridContainer" index="4" node_paths=PackedStringArray("NextAbility")]
+NextAbility = NodePath("../../../../DefaultAbilities/Defend")
+
 [node name="Control_Backward" parent="BattleCanvas/Control_RepositionMenu/GridContainer" index="0" node_paths=PackedStringArray("ImageScene")]
 ImageScene = NodePath("UI_Hexagon1")
 
@@ -203,6 +207,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 [node name="RangedAttack" parent="DefaultAbilities" instance=ExtResource("8_3rrvi")]
 
 [node name="Reposition" parent="DefaultAbilities" instance=ExtResource("9_0vs8f")]
+
+[node name="Defend" parent="DefaultAbilities" instance=ExtResource("10_fxb1c")]
 
 [node name="BattleMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_cisby")

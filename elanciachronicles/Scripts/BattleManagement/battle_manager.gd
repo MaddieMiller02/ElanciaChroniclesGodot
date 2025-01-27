@@ -123,6 +123,10 @@ func _ready():
 	set_active_character(TurnOrder[0])
 
 func set_active_character(character:BattleCharacter):
+	# Resets temporary stat buffs at the start of the next turn
+	if ActiveCharacter != null:
+		ActiveCharacter.reset_temp_stats()
+	
 	ActiveCharacter = character
 	character.add_child(TargetCursor)
 	set_target_cursor_position(ActiveCharacter)
@@ -132,7 +136,7 @@ func set_active_character(character:BattleCharacter):
 		MenuCursor.change_menu(ActionMenuContainer)
 	elif ActiveCharacter is Enemy:
 		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ENEMY_TURN)
-		ActiveCharacter.perform_turn(PartyMembers)
+		ActiveCharacter.perform_turn(PartyMembers, self)
 		
 	MenuCursor.clear_previous_menus()
 		
@@ -164,6 +168,9 @@ func _on_ability_button_pressed():
 			RepositionMenuControl.show()
 			MenuCursor.change_menu(RepositionMenuContainer)
 			RepositionMenuControl.add_child(MenuCursor)
+	elif ActiveAbility.AbilityName == "Defend":
+		ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
+		end_turn()
 	elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
 		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY)
 		MenuCursor.change_menu(EnemyUIContainer)

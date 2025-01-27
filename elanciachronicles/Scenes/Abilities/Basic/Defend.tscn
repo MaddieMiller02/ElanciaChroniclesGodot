@@ -1,0 +1,8 @@
+[gd_scene load_steps=2 format=3 uid="uid://2oavxmvjipxe"]
+
+[ext_resource type="Script" path="res://Scripts/Abilities/Basic/defend.gd" id="1_fr5js"]
+
+[node name="Defend" type="Node"]
+script = ExtResource("1_fr5js")
+AbilityName = "Defend"
+Description = "Brace yourself and take less damage until your next turn, while regaining some AP."

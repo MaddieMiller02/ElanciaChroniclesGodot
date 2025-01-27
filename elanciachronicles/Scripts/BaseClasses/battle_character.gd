@@ -20,6 +20,8 @@ const Ability = preload("res://Scripts/BaseClasses/ability.gd")
 
 @export var TempHP:int
 @export var TempAP:int
+@export var TempDefense:int
+@export var TempResistance:int
 @export var CurrentHP:int
 @export var CurrentAP:int
 @export var MaxHP:int
@@ -51,3 +53,8 @@ func use_ap(amount:int):
 	if CurrentAP < 0:
 		CurrentAP = 0
 	APChanged.emit()
+	
+func reset_temp_stats():
+	# Currently only accomadates one-turn stat buffs (like the ones granted by Defend)
+	TempDefense = 0
+	TempResistance = 0

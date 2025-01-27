@@ -1,9 +1,13 @@
-[gd_scene load_steps=2 format=3 uid="uid://cudxa1nlapdcx"]
+[gd_scene load_steps=4 format=3 uid="uid://cudxa1nlapdcx"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Enemies/sailor_battle.gd" id="1_t57b1"]
+[ext_resource type="PackedScene" uid="uid://cbxfie77qxd0t" path="res://Scenes/Abilities/Basic/Reposition.tscn" id="2_uac8w"]
+[ext_resource type="PackedScene" uid="uid://bkaff4lqkrgs2" path="res://Scenes/Abilities/Basic/RangedAttack.tscn" id="3_58tm8"]
 
-[node name="SailorBattle" type="Node3D"]
+[node name="SailorBattle" type="Node3D" node_paths=PackedStringArray("Reposition", "RangedAttack")]
 script = ExtResource("1_t57b1")
+Reposition = NodePath("Abilities/Reposition")
+RangedAttack = NodePath("Abilities/RangedAttack")
 BattlerName = "Sailor"
 Level = 1
 Strength = 8
@@ -24,3 +28,9 @@ Weaknesses = Array[int]([4])
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 size = Vector3(1, 1.7, 1)
+
+[node name="Abilities" type="Node" parent="."]
+
+[node name="Reposition" parent="Abilities" instance=ExtResource("2_uac8w")]
+
+[node name="RangedAttack" parent="Abilities" instance=ExtResource("3_58tm8")]
