@@ -134,6 +134,8 @@ func set_active_character(character:BattleCharacter):
 		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ENEMY_TURN)
 		ActiveCharacter.perform_turn(PartyMembers)
 		
+	MenuCursor.clear_previous_menus()
+		
 func set_target_cursor_position(character:BattleCharacter):
 	TargetCursor.position = Vector3(character.position.x, character.position.y + 3, character.position.z + 6)
 	TargetCursor.show()

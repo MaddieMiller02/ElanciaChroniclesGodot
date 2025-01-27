@@ -2,9 +2,8 @@
 
 [ext_resource type="Script" path="res://Scripts/Characters/Enemies/sailor_battle.gd" id="1_t57b1"]
 
-[node name="SailorBattle" type="Node3D" node_paths=PackedStringArray("RangedAttack")]
+[node name="SailorBattle" type="Node3D"]
 script = ExtResource("1_t57b1")
-RangedAttack = NodePath("")
 BattlerName = "Sailor"
 Level = 1
 Strength = 8
