@@ -1,6 +1,8 @@
 class_name UIButton
 extends Node
 
+signal cursor_focused
+signal cursor_unfocused
 signal cursor_selected
 
 @export var DefaultBackground:Texture2D
@@ -16,9 +18,11 @@ func cursor_select() -> void:
 	
 func button_focused():
 	ImageScene.texture = FocusedBackground
+	emit_signal("cursor_focused")
 	
 func button_unfocused():
 	ImageScene.texture = DefaultBackground
+	emit_signal("cursor_unfocused")
 
 func _on_game_state_updated():
 	pass

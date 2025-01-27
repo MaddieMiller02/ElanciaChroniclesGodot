@@ -1,9 +1,12 @@
-[gd_scene load_steps=2 format=3 uid="uid://cudxa1nlapdcx"]
+[gd_scene load_steps=3 format=3 uid="uid://cudxa1nlapdcx"]
 
-[ext_resource type="Script" path="res://Scripts/BaseClasses/enemy.gd" id="1_6ajke"]
+[ext_resource type="Script" path="res://Scripts/Characters/Enemies/sailor_battle.gd" id="1_t57b1"]
+[ext_resource type="PackedScene" uid="uid://bkaff4lqkrgs2" path="res://Scenes/Abilities/Basic/RangedAttack.tscn" id="2_kicka"]
 
-[node name="SailorBattle" type="Node3D"]
-script = ExtResource("1_6ajke")
+[node name="SailorBattle" type="Node3D" node_paths=PackedStringArray("RangedAttack")]
+script = ExtResource("1_t57b1")
+DroppedItems = null
+RangedAttack = NodePath("RangedAttack")
 BattlerName = "Sailor"
 Level = 1
 Strength = 8
@@ -12,15 +15,23 @@ Defense = 7
 Resistance = 3
 Speed = 5
 Charisma = 4
+EscapeSuccess = null
+TempHP = null
+TempAP = null
 CurrentHP = 15
 CurrentAP = 10
 MaxHP = 15
 MaxAP = 10
+Statuses = null
+StatusImmunities = null
 DefaultPosition = 2
 CurrentPosition = 2
 Resistances = Array[int]([3])
 Weaknesses = Array[int]([4])
+Experience = null
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
 size = Vector3(1, 1.7, 1)
+
+[node name="RangedAttack" parent="." instance=ExtResource("2_kicka")]

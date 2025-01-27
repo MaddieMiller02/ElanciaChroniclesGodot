@@ -98,6 +98,7 @@ func _ready():
 					TurnOrder.insert(j, new_character)
 				elif j >= TurnOrder.size() - 1:
 					TurnOrder.append(new_character)
+		BattleCharacters[i].TurnEnded.connect(end_turn)
 					
 	# Connects signals from all UI buttons
 	for i in range(ActionMenuContainer.get_child_count()):
@@ -106,9 +107,11 @@ func _ready():
 	for i in range(PartyUIContainer.get_child_count()):
 		var CurrentButton = PartyUIContainer.get_child(i) as CharacterUI
 		CurrentButton.cursor_selected.connect(_on_character_button_pressed)
+		CurrentButton.cursor_focused.connect(_on_character_button_focused)
 	for i in range(EnemyUIContainer.get_child_count()):
 		var CurrentButton = EnemyUIContainer.get_child(i) as CharacterUI
 		CurrentButton.cursor_selected.connect(_on_character_button_pressed)
+		CurrentButton.cursor_focused.connect(_on_character_button_focused)
 	
 	set_active_character(TurnOrder[0])
 
@@ -119,9 +122,10 @@ func set_active_character(character:BattleCharacter):
 	
 	if ActiveCharacter is PartyMember:
 		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_NORMAL)
+		MenuCursor.change_menu(ActionMenuContainer)
 	elif ActiveCharacter is Enemy:
-		# Activate enemy turn
-		pass
+		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ENEMY_TURN)
+		ActiveCharacter.perform_turn(PartyMembers)
 		
 func set_target_cursor_position(character:BattleCharacter):
 	TargetCursor.position = Vector3(character.position.x, character.position.y + 3, character.position.z + 6)
@@ -130,20 +134,26 @@ func set_target_cursor_position(character:BattleCharacter):
 func set_active_ability(ability:Ability):
 	ActiveAbility = ability
 	
-# TODO END OF TURN ACTIONS
-	# Destroy the CharacterCursor
-	# Put character at the end of TurnOrder
+func end_turn():
+	# Send current character to the end of the turn order
+	await get_tree().create_timer(3.0).timeout
+	TurnOrder.append(TurnOrder.pop_front())
+	set_active_character(TurnOrder[0])
 	
 func _on_ability_button_pressed():
 	var ButtonPressed = ActionMenuContainer.get_child(MenuCursor.cursor_index) as ActionMenuButton
 	set_active_ability(ButtonPressed.NextAbility)
 	if ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
 		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY)
-		MenuCursor.menu_parent = EnemyUIContainer
+		MenuCursor.change_menu(EnemyUIContainer)
 		EnemyUIControl.add_child(MenuCursor)
 		
 func _on_character_button_pressed():
 	var ButtonPressed = EnemyUIContainer.get_child(MenuCursor.cursor_index) as CharacterUI
 	TargetCharacter = ButtonPressed.Character
 	ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter)
+	end_turn()
 	
+func _on_character_button_focused():
+	var character = Enemies[MenuCursor.cursor_index] as BattleCharacter
+	set_target_cursor_position(character)

@@ -3,6 +3,7 @@ extends Node3D
 
 signal HPChanged
 signal APChanged
+signal TurnEnded
 
 const Ability = preload("res://Scripts/BaseClasses/ability.gd")
 

@@ -15,5 +15,7 @@ extends Node
 @export var Element:Enums.ELEMENT
 @export var IsActive:bool
 
+var TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
+
 func perform_ability(User:BattleCharacter, Target:BattleCharacter):
-	"Why did you perform a default ability?"
+	print("Why did you perform a default ability?")
