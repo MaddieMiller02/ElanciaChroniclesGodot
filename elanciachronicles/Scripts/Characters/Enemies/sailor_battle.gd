@@ -2,6 +2,7 @@ extends Enemy
 
 @export var Reposition:Ability
 @export var RangedAttack:Ability
+@export var Defend:Ability
 
 func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 	# Attack the closest enemy with a ranged attack
@@ -12,12 +13,25 @@ func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 			Target = character
 			
 	# Back up to perform ranged attack if too close
-	if (CurrentPosition + Target.CurrentPosition) <= 2 and not HasRepositioned:
-		print("I should be repositioning!")
+	if (CurrentPosition + Target.CurrentPosition) <= 1 and not HasRepositioned:
 		CurrentManager.MenuCursor.cursor_index = 1
 		Reposition.perform_ability(self, Target, CurrentManager)
 		CurrentManager.set_active_character(self)
 		return
 	
-	RangedAttack.perform_ability(self, Target, CurrentManager)
+	# Move closer if the target is on the backline
+	elif Target.CurrentPosition == 2 and CurrentPosition != 0 and not HasRepositioned:
+		CurrentManager.MenuCursor.cursor_index = 0
+		CurrentPosition -= 2
+		Reposition.perform_ability(self, Target, CurrentManager)
+		CurrentManager.set_active_character(self)
+		return
+	
+	# Defend if the enemy is still too close to attack
+	if (CurrentPosition + Target.CurrentPosition) < 1:
+		Defend.perform_ability(self, Target, CurrentManager)
+		
+	# Perform a ranged attack if in range
+	else:
+		RangedAttack.perform_ability(self, Target, CurrentManager)
 	super.perform_turn(party, CurrentManager)

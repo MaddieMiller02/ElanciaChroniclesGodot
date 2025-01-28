@@ -9,6 +9,6 @@ Description = "A basic ranged attack."
 Power = 5
 Physical = true
 HitRate = 90
-APCost = 2
+APCost = 3
 Reflectable = true
 Element = 1

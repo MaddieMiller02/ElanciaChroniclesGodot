@@ -54,6 +54,12 @@ func use_ap(amount:int):
 		CurrentAP = 0
 	APChanged.emit()
 	
+func regain_ap(amount:int):
+	CurrentAP += amount
+	if CurrentAP >= MaxAP:
+		CurrentAP = MaxAP
+	APChanged.emit()
+	
 func reset_temp_stats():
 	# Currently only accomadates one-turn stat buffs (like the ones granted by Defend)
 	TempDefense = 0

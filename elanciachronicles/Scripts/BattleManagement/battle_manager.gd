@@ -157,24 +157,28 @@ func end_turn():
 func _on_ability_button_pressed():
 	var ButtonPressed = ActionMenuContainer.get_child(MenuCursor.cursor_index) as ActionMenuButton
 	set_active_ability(ButtonPressed.NextAbility)
-	print(ButtonPressed.NextAbility)
-	if ActiveAbility.AbilityName == "Reposition":
-		if ActiveCharacter.HasRepositioned:
-			var TextBox = TextBoxScene.instantiate()
-			add_child(TextBox)
-			TextBox.display_one_off_text(ActiveCharacter.BattlerName + " cannot reposition again this turn.")
-		else:
-			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_REPOSITION)
-			RepositionMenuControl.show()
-			MenuCursor.change_menu(RepositionMenuContainer)
-			RepositionMenuControl.add_child(MenuCursor)
-	elif ActiveAbility.AbilityName == "Defend":
-		ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
-		end_turn()
-	elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
-		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY)
-		MenuCursor.change_menu(EnemyUIContainer)
-		EnemyUIControl.add_child(MenuCursor)
+	if ActiveAbility.APCost > ActiveCharacter.CurrentAP:
+		var TextBox = TextBoxScene.instantiate()
+		add_child(TextBox)
+		TextBox.display_one_off_text("Not enough AP!")
+	else:
+		if ActiveAbility.AbilityName == "Reposition":
+			if ActiveCharacter.HasRepositioned:
+				var TextBox = TextBoxScene.instantiate()
+				add_child(TextBox)
+				TextBox.display_one_off_text(ActiveCharacter.BattlerName + " cannot reposition again this turn.")
+			else:
+				Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_REPOSITION)
+				RepositionMenuControl.show()
+				MenuCursor.change_menu(RepositionMenuContainer)
+				RepositionMenuControl.add_child(MenuCursor)
+		elif ActiveAbility.AbilityName == "Defend":
+			ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
+			end_turn()
+		elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
+			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY)
+			MenuCursor.change_menu(EnemyUIContainer)
+			EnemyUIControl.add_child(MenuCursor)
 		
 func _on_character_button_pressed():
 	var ButtonPressed = EnemyUIContainer.get_child(MenuCursor.cursor_index) as CharacterUI
