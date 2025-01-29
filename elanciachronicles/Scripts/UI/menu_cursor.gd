@@ -50,14 +50,16 @@ func _process(delta):
 		if get_menu_item_at_index(previous_index) != null:
 			get_menu_item_at_index(previous_index).button_unfocused()
 		get_menu_item_at_index(cursor_index).button_focused()
-	else:
+	elif get_menu_item_at_index(cursor_index) != null:
 		get_menu_item_at_index(cursor_index).button_unfocused()
 
 func get_menu_item_at_index(index:int) -> UIButton:
 		if menu_parent == null:
+			print("Menu parent is null")
 			return null
 		
 		if index >= menu_parent.get_child_count() or index < 0:
+			print("Index is invalid")
 			return null
 			
 		return menu_parent.get_child(index) as UIButton
@@ -84,9 +86,11 @@ func set_cursor_from_index(index:int) -> void:
 	global_position = Vector2(position.x, position.y + size.y / 2.0) - (size / 2.0) - cursor_offset
 	
 func change_menu(new_menu:Container):
-	get_menu_item_at_index(cursor_index).button_unfocused()
+	if get_menu_item_at_index(cursor_index) != null:
+		get_menu_item_at_index(cursor_index).button_unfocused()
 	cursor_index = 0
-	menu_parent.hide()
+	if menu_parent.get_child(0) is not CharacterUI:
+		menu_parent.hide()
 	previous_menus.append(menu_parent)
 	menu_parent = new_menu
 	menu_parent.show()

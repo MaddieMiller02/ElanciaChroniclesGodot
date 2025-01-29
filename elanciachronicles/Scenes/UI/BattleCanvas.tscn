@@ -703,6 +703,116 @@ text = "This is a test description for the currently highlighted item. Items can
 vertical_alignment = 2
 autowrap_mode = 2
 
+[node name="Control_MeleeMenu" type="Control" parent="."]
+visible = false
+layout_mode = 3
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -40.0
+offset_top = -40.0
+grow_horizontal = 0
+grow_vertical = 0
+
+[node name="GridContainer" type="GridContainer" parent="Control_MeleeMenu"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = -761.285
+offset_top = -291.145
+offset_right = -411.285
+offset_bottom = -131.145
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/h_separation = 350
+theme_override_constants/v_separation = 80
+
+[node name="Control_Light" type="Control" parent="Control_MeleeMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
+layout_mode = 2
+script = ExtResource("2_c6mnl")
+DefaultBackground = ExtResource("5_r7qec")
+FocusedBackground = ExtResource("3_fncp4")
+ImageScene = NodePath("UI_Hexagon1")
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_MeleeMenu/GridContainer/Control_Light"]
+layout_mode = 0
+offset_right = 352.0
+offset_bottom = 81.0
+texture = ExtResource("5_r7qec")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_MeleeMenu/GridContainer/Control_Light"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 324.0
+offset_bottom = 64.0
+
+[node name="Label" type="Label" parent="Control_MeleeMenu/GridContainer/Control_Light/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Light"
+horizontal_alignment = 1
+
+[node name="Control_Medium" type="Control" parent="Control_MeleeMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
+layout_mode = 2
+script = ExtResource("2_c6mnl")
+DefaultBackground = ExtResource("5_r7qec")
+FocusedBackground = ExtResource("3_fncp4")
+ImageScene = NodePath("UI_Hexagon1")
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_MeleeMenu/GridContainer/Control_Medium"]
+layout_mode = 0
+offset_right = 352.0
+offset_bottom = 81.0
+texture = ExtResource("5_r7qec")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_MeleeMenu/GridContainer/Control_Medium"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 324.0
+offset_bottom = 64.0
+
+[node name="Label" type="Label" parent="Control_MeleeMenu/GridContainer/Control_Medium/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Medium"
+horizontal_alignment = 1
+
+[node name="Control_Heavy" type="Control" parent="Control_MeleeMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
+layout_mode = 2
+script = ExtResource("2_c6mnl")
+DefaultBackground = ExtResource("5_r7qec")
+FocusedBackground = ExtResource("3_fncp4")
+ImageScene = NodePath("UI_Hexagon1")
+
+[node name="UI_Hexagon1" type="TextureRect" parent="Control_MeleeMenu/GridContainer/Control_Heavy"]
+layout_mode = 0
+offset_right = 352.0
+offset_bottom = 81.0
+texture = ExtResource("5_r7qec")
+expand_mode = 1
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_MeleeMenu/GridContainer/Control_Heavy"]
+layout_mode = 0
+offset_left = 28.0
+offset_top = 16.0
+offset_right = 324.0
+offset_bottom = 64.0
+
+[node name="Label" type="Label" parent="Control_MeleeMenu/GridContainer/Control_Heavy/MarginContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 25
+text = "Heavy"
+horizontal_alignment = 1
+
 [node name="Control_RepositionMenu" type="Control" parent="."]
 visible = false
 layout_mode = 3

@@ -4,6 +4,7 @@ extends Node3D
 var PartyMemberUI = preload("res://Scenes/UI/PartyMemberUI.tscn")
 var EnemyUI = preload("res://Scenes/UI/EnemyUI.tscn")
 var TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
+var TargetCursorScene = preload("res://Scenes/UI/TargetCursor.tscn")
 
 @export var PartyControlNode:Node
 var PartyMembers:Array[PartyMember]
@@ -102,7 +103,8 @@ func _ready():
 					TurnOrder.insert(j, new_character)
 				elif j >= TurnOrder.size() - 1:
 					TurnOrder.append(new_character)
-		BattleCharacters[i].TurnEnded.connect(end_turn)
+		BattleCharacters[i].TurnEnded.connect(_on_end_turn)
+		BattleCharacters[i].HasDied.connect(_on_character_died)
 					
 	# Connects signals from all UI buttons
 	for i in range(ActionMenuContainer.get_child_count()):
@@ -128,7 +130,10 @@ func set_active_character(character:BattleCharacter):
 		ActiveCharacter.reset_temp_stats()
 	
 	ActiveCharacter = character
-	character.add_child(TargetCursor)
+	
+	if TargetCursor.get_parent().visible == false:
+		TargetCursor = TargetCursorScene.instantiate()
+	ActiveCharacter.add_child(TargetCursor)
 	set_target_cursor_position(ActiveCharacter)
 	
 	if ActiveCharacter is PartyMember:
@@ -147,12 +152,29 @@ func set_target_cursor_position(character:BattleCharacter):
 func set_active_ability(ability:Ability):
 	ActiveAbility = ability
 	
-func end_turn():
+func _on_end_turn():
 	# Send current character to the end of the turn order
 	await get_tree().create_timer(3.0).timeout
 	ActiveCharacter.HasRepositioned = false
 	TurnOrder.append(TurnOrder.pop_front())
 	set_active_character(TurnOrder[0])
+	
+func _on_character_died():
+	for i in range(BattleCharacters.size()):
+		if BattleCharacters[i].CurrentHP == 0:
+			var DeadCharacter = BattleCharacters[i]
+			var DeadCharacterIndex = TurnOrder.find(DeadCharacter)
+			TurnOrder.pop_at(DeadCharacterIndex)
+			BattleCharacters.pop_at(i)
+			
+			if DeadCharacter is PartyMember:
+				DeadCharacterIndex = PartyMembers.find(DeadCharacter)
+				PartyMembers.pop_at(DeadCharacterIndex)
+			#else:
+				#DeadCharacterIndex = Enemies.find(DeadCharacter)
+				#Enemies.pop_at(DeadCharacterIndex)
+			
+			return
 	
 func _on_ability_button_pressed():
 	var ButtonPressed = ActionMenuContainer.get_child(MenuCursor.cursor_index) as ActionMenuButton
@@ -174,7 +196,7 @@ func _on_ability_button_pressed():
 				RepositionMenuControl.add_child(MenuCursor)
 		elif ActiveAbility.AbilityName == "Defend":
 			ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
-			end_turn()
+			_on_end_turn()
 		elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
 			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY)
 			MenuCursor.change_menu(EnemyUIContainer)
@@ -184,15 +206,20 @@ func _on_character_button_pressed():
 	var ButtonPressed = EnemyUIContainer.get_child(MenuCursor.cursor_index) as CharacterUI
 	TargetCharacter = ButtonPressed.Character
 	
-	# Checks if the enemy is out of range
-	if ActiveAbility.AbilityName == "Ranged Attack":
-		if (ActiveCharacter.CurrentPosition + TargetCharacter.CurrentPosition) >=2:
-			ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
-			end_turn()
-		else:
-			var TextBox = TextBoxScene.instantiate()
-			add_child(TextBox)
-			TextBox.display_one_off_text(TargetCharacter.BattlerName + " is too close to use a " + ActiveAbility.AbilityName + ".")
+	# Checks if the enemy is out of range or dead, performs abillity otherwise
+	if not TargetCharacter.IsDead:
+		if ActiveAbility.AbilityName == "Ranged Attack":
+			if (ActiveCharacter.CurrentPosition + TargetCharacter.CurrentPosition) >=2:
+				ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
+				_on_end_turn()
+			else:
+				var TextBox = TextBoxScene.instantiate()
+				add_child(TextBox)
+				TextBox.display_one_off_text(TargetCharacter.BattlerName + " is too close to use a " + ActiveAbility.AbilityName + ".")
+	else:
+		var TextBox = TextBoxScene.instantiate()
+		add_child(TextBox)
+		TextBox.display_one_off_text(TargetCharacter.BattlerName + " is already dead!")
 	
 func _on_character_button_focused():
 	var character = Enemies[MenuCursor.cursor_index] as BattleCharacter

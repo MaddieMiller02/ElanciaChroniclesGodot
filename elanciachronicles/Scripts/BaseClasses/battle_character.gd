@@ -4,11 +4,14 @@ extends Node3D
 signal HPChanged
 signal APChanged
 signal TurnEnded
+signal HasDied
 
 const Ability = preload("res://Scripts/BaseClasses/ability.gd")
 
 @export var BattlerName:String
 @export var Level:int
+@export var IsDead:int = false
+@export var EmittedDeathSignal:bool = false
 
 @export var Strength:int #physical ability power
 @export var Magic:int #magical ability power
@@ -41,6 +44,14 @@ const Ability = preload("res://Scripts/BaseClasses/ability.gd")
 @export var Weaknesses:Array[Enums.ELEMENT]
 
 @export var Experience:int
+
+func _process(delta):
+	# Checks if the character has died
+	if CurrentHP <= 0 and not EmittedDeathSignal:
+		emit_signal("HasDied")
+		EmittedDeathSignal = true
+		IsDead = true
+		self.hide()
 
 func take_damage(damage:int):
 	CurrentHP -= damage

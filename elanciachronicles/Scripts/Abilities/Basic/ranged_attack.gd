@@ -2,7 +2,8 @@ extends Ability
 
 func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
 	# Calculations
-	var Damage = (User.Strength + Power) - (Target.Defense)
+	var DamageOffset = randi_range(-2, 2)
+	var Damage = ((User.Strength + Power) - (Target.Defense + User.TempDefense)) + DamageOffset
 	var HitChance = (HitRate + User.Speed) - Target.Speed
 	var HitRoll = randi_range(0, 100)
 	
