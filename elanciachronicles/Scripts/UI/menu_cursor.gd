@@ -112,7 +112,7 @@ func clear_previous_menus():
 	previous_menus.clear()
 	
 func _on_game_state_updated():
-	if Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_NORMAL or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY:
+	if Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_NORMAL or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_MELEE:
 		self.visible = true
 		active = true
 	else:

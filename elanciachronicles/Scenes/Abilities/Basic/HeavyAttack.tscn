@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://dkm8w7oi1bg7y"]
+
+[ext_resource type="Script" path="res://Scripts/BaseClasses/ability.gd" id="1_uymrc"]
+
+[node name="HeavyAttack" type="Node"]
+script = ExtResource("1_uymrc")
+AbilityName = "Heavy Melee Attack"
+Description = "A heavy melee attack, used as part of a combo."
+MaxRange = 1
+Power = 4
+Physical = true
+HitRate = 90
+APCost = 3

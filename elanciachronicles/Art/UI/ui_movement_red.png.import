@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://cybnd3p1ovf7j"
 path.s3tc="res://.godot/imported/ui_movement_red.png-a8e35b61097b9aa84fe45ddb07c637d4.s3tc.ctex"
+path.etc2="res://.godot/imported/ui_movement_red.png-a8e35b61097b9aa84fe45ddb07c637d4.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Art/UI/ui_movement_red.png"
-dest_files=["res://.godot/imported/ui_movement_red.png-a8e35b61097b9aa84fe45ddb07c637d4.s3tc.ctex"]
+dest_files=["res://.godot/imported/ui_movement_red.png-a8e35b61097b9aa84fe45ddb07c637d4.s3tc.ctex", "res://.godot/imported/ui_movement_red.png-a8e35b61097b9aa84fe45ddb07c637d4.etc2.ctex"]
 
 [params]
 

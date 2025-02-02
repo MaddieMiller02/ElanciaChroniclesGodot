@@ -4,15 +4,16 @@ importer="texture"
 type="CompressedTexture2D"
 uid="uid://blycj3v8gnkiy"
 path.s3tc="res://.godot/imported/DownArrowTemp.png-9b74bc726d669c251de22d07b4ff4a14.s3tc.ctex"
+path.etc2="res://.godot/imported/DownArrowTemp.png-9b74bc726d669c251de22d07b4ff4a14.etc2.ctex"
 metadata={
-"imported_formats": ["s3tc_bptc"],
+"imported_formats": ["s3tc_bptc", "etc2_astc"],
 "vram_texture": true
 }
 
 [deps]
 
 source_file="res://Art/UI/DownArrowTemp.png"
-dest_files=["res://.godot/imported/DownArrowTemp.png-9b74bc726d669c251de22d07b4ff4a14.s3tc.ctex"]
+dest_files=["res://.godot/imported/DownArrowTemp.png-9b74bc726d669c251de22d07b4ff4a14.s3tc.ctex", "res://.godot/imported/DownArrowTemp.png-9b74bc726d669c251de22d07b4ff4a14.etc2.ctex"]
 
 [params]
 

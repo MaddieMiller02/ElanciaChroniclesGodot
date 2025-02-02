@@ -1,0 +1,13 @@
+[gd_scene load_steps=2 format=3 uid="uid://c3luj5mvjwf4t"]
+
+[ext_resource type="Script" path="res://Scripts/BaseClasses/ability.gd" id="1_qbris"]
+
+[node name="MediumAttack" type="Node"]
+script = ExtResource("1_qbris")
+AbilityName = "Medium Melee Attack"
+Description = "A medium melee attack, used as part of a combo."
+MaxRange = 1
+Power = 3
+Physical = true
+HitRate = 90
+APCost = 2

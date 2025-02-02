@@ -1,9 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bkd7q3awnkgvt"]
 
 [ext_resource type="Script" path="res://Scripts/BaseClasses/party_member.gd" id="1_i4hi3"]
-
-[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_v4btr"]
-albedo_color = Color(0.290196, 0, 0.545098, 1)
+[ext_resource type="PackedScene" uid="uid://b81dx48h5u6hy" path="res://Art/3DModels/Characters/Verse/VerseModelImported.tscn" id="2_b1hwf"]
 
 [node name="VerseBattle" type="Node3D"]
 script = ExtResource("1_i4hi3")
@@ -26,7 +24,4 @@ CurrentPosition = 1
 Resistances = Array[int]([0, 3, 4])
 Weaknesses = Array[int]([1, 6, 8])
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
-material_override = SubResource("StandardMaterial3D_v4btr")
-size = Vector3(1, 1.7, 1)
+[node name="Doki Verse Model (Some Animations)" parent="." instance=ExtResource("2_b1hwf")]

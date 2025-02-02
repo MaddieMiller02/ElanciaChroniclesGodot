@@ -12,6 +12,7 @@ var PartyMembers:Array[PartyMember]
 var Enemies:Array[Enemy]
 var BattleCharacters:Array[BattleCharacter]
 var TurnOrder:Array[BattleCharacter]
+var AttackQueue :Array[Ability]
 
 var ActiveCharacter:BattleCharacter
 var ActiveAbility:Ability
@@ -24,6 +25,8 @@ var TargetCharacter:BattleCharacter
 @export var ActionMenuContainer:Container
 @export var RepositionMenuControl:Node
 @export var RepositionMenuContainer:Container
+@export var MeleeMenuContainer:Container
+@export var MeleeMenuControl:Node
 @export var RangedAttackButton:ActionMenuButton
 @export var RepositionButton:ActionMenuButton
 
@@ -121,6 +124,9 @@ func _ready():
 	for i in range(RepositionMenuContainer.get_child_count()):
 		var CurrentButton = RepositionMenuContainer.get_child(i) as UIButton
 		CurrentButton.cursor_selected.connect(_on_reposition_button_pressed)
+	for i in range(MeleeMenuContainer.get_child_count()):
+		var CurrentButton = MeleeMenuContainer.get_child(i) as ActionMenuButton
+		CurrentButton.cursor_selected.connect(_on_melee_type_button_pressed)
 	
 	set_active_character(TurnOrder[0])
 
@@ -155,6 +161,7 @@ func set_active_ability(ability:Ability):
 func _on_end_turn():
 	# Send current character to the end of the turn order
 	await get_tree().create_timer(3.0).timeout
+	AttackQueue.clear()
 	ActiveCharacter.HasRepositioned = false
 	TurnOrder.append(TurnOrder.pop_front())
 	set_active_character(TurnOrder[0])
@@ -179,25 +186,34 @@ func _on_character_died():
 func _on_ability_button_pressed():
 	var ButtonPressed = ActionMenuContainer.get_child(MenuCursor.cursor_index) as ActionMenuButton
 	set_active_ability(ButtonPressed.NextAbility)
+	
+	# If the cahracter does not have enough AP for an attack, do not let them proceed
 	if ActiveAbility.APCost > ActiveCharacter.CurrentAP:
 		var TextBox = TextBoxScene.instantiate()
 		add_child(TextBox)
 		TextBox.display_one_off_text("Not enough AP!")
 	else:
 		if ActiveAbility.AbilityName == "Reposition":
+			# Do not let the character reposition if they already have this turn
 			if ActiveCharacter.HasRepositioned:
 				var TextBox = TextBoxScene.instantiate()
 				add_child(TextBox)
 				TextBox.display_one_off_text(ActiveCharacter.BattlerName + " cannot reposition again this turn.")
+				return
+			# Otherwise, change to the reposition menu
 			else:
 				Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_REPOSITION)
 				RepositionMenuControl.show()
 				MenuCursor.change_menu(RepositionMenuContainer)
 				RepositionMenuControl.add_child(MenuCursor)
+				return
 		elif ActiveAbility.AbilityName == "Defend":
 			ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
 			_on_end_turn()
-		elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
+			return
+		
+		# Melee and Ranged attacks should have this target type, and go straight to the target selection menu
+		if ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
 			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY)
 			MenuCursor.change_menu(EnemyUIContainer)
 			EnemyUIControl.add_child(MenuCursor)
@@ -206,16 +222,27 @@ func _on_character_button_pressed():
 	var ButtonPressed = EnemyUIContainer.get_child(MenuCursor.cursor_index) as CharacterUI
 	TargetCharacter = ButtonPressed.Character
 	
-	# Checks if the enemy is out of range or dead, performs abillity otherwise
+	# Checks if the enemy is out of range or dead, performs ability otherwise
 	if not TargetCharacter.IsDead:
-		if ActiveAbility.AbilityName == "Ranged Attack":
-			if (ActiveCharacter.CurrentPosition + TargetCharacter.CurrentPosition) >=2:
-				ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
-				_on_end_turn()
-			else:
+		# Checks to ensure the enemy is not out of range, performs ability otherwise.
+		if ActiveAbility.in_range(ActiveCharacter, TargetCharacter):
+			if ActiveAbility.AbilityName == "Melee Attack":
+				Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_MELEE)
+				MeleeMenuControl.show()
+				MenuCursor.change_menu(MeleeMenuContainer)
+				MeleeMenuControl.add_child(MenuCursor)
 				var TextBox = TextBoxScene.instantiate()
 				add_child(TextBox)
-				TextBox.display_one_off_text(TargetCharacter.BattlerName + " is too close to use a " + ActiveAbility.AbilityName + ".")
+				TextBox.display_one_off_text("Choose three attacks.")
+				return
+			else:
+				ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
+				_on_end_turn()
+		else:
+			var TextBox = TextBoxScene.instantiate()
+			add_child(TextBox)
+			TextBox.display_one_off_text(TargetCharacter.BattlerName + " is out of range for a " + ActiveAbility.AbilityName + ".")
+			return
 	else:
 		var TextBox = TextBoxScene.instantiate()
 		add_child(TextBox)
@@ -260,3 +287,11 @@ func _on_reposition_button_pressed():
 	RepositionMenuControl.hide()
 	set_active_character(ActiveCharacter)
 	
+func _on_melee_type_button_pressed():
+	# If there are less than 3 attacks in the attack cue, append this attack to the queue
+	if AttackQueue.size() <= 3:
+		var CurrentButton = MenuCursor.get_menu_item_at_index(MenuCursor.cursor_index) as ActionMenuButton
+		AttackQueue.append(CurrentButton.NextAbility)
+	if AttackQueue.size() == 3:
+		ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
+		_on_end_turn()
