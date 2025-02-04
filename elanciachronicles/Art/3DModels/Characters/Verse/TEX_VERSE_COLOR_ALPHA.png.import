@@ -2,16 +2,16 @@
 
 importer="texture"
 type="CompressedTexture2D"
-uid="uid://dc5l4hwcab3ty"
-path="res://.godot/imported/TEX_VERSE_MASK.png-679f49c535e58aa88949a3cb3f0636da.ctex"
+uid="uid://dxnex00rbrcav"
+path="res://.godot/imported/TEX_VERSE_COLOR_ALPHA.png-b05bcb7429ed23292e905bcb08848f9f.ctex"
 metadata={
 "vram_texture": false
 }
 
 [deps]
 
-source_file="res://Art/3DModels/Characters/Verse/TEX_VERSE_MASK.png"
-dest_files=["res://.godot/imported/TEX_VERSE_MASK.png-679f49c535e58aa88949a3cb3f0636da.ctex"]
+source_file="res://Art/3DModels/Characters/Verse/TEX_VERSE_COLOR_ALPHA.png"
+dest_files=["res://.godot/imported/TEX_VERSE_COLOR_ALPHA.png-b05bcb7429ed23292e905bcb08848f9f.ctex"]
 
 [params]
 
@@ -21,7 +21,7 @@ compress/lossy_quality=0.7
 compress/hdr_compression=1
 compress/normal_map=0
 compress/channel_pack=0
-mipmaps/generate=false
+mipmaps/generate=true
 mipmaps/limit=-1
 roughness/mode=0
 roughness/src_normal=""
@@ -31,4 +31,4 @@ process/normal_map_invert_y=false
 process/hdr_as_srgb=false
 process/hdr_clamp_exposure=false
 process/size_limit=0
-detect_3d/compress_to=1
+detect_3d/compress_to=0

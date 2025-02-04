@@ -1,0 +1,20 @@
+[gd_scene load_steps=2 format=3 uid="uid://w8xvpw7pvhyw"]
+
+[ext_resource type="Script" path="res://Scripts/UI/special_button.gd" id="1_n8syf"]
+
+[node name="SpecialContainer" type="HBoxContainer" node_paths=PackedStringArray("NameLabel", "APCostLabel")]
+script = ExtResource("1_n8syf")
+NameLabel = NodePath("SpecialNameLabel")
+APCostLabel = NodePath("APCostLabel")
+
+[node name="SpecialNameLabel" type="Label" parent="."]
+custom_minimum_size = Vector2(153.795, 0)
+layout_mode = 2
+size_flags_horizontal = 0
+text = "Example"
+
+[node name="APCostLabel" type="Label" parent="."]
+layout_mode = 2
+size_flags_horizontal = 8
+text = "0 AP"
+horizontal_alignment = 2

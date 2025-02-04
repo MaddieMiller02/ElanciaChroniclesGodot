@@ -8,5 +8,5 @@ AbilityName = "Melee Attack"
 Description = "A single-hit melee attack. This should only be used as an enemy attack or a placeholder for the action menu button."
 MaxRange = 1
 Physical = true
-HitRate = 90
+HitRate = 95
 APCost = 3

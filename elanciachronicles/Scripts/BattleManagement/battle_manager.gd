@@ -1,10 +1,11 @@
 class_name BattleManager
 extends Node3D
 
-var PartyMemberUI = preload("res://Scenes/UI/PartyMemberUI.tscn")
-var EnemyUI = preload("res://Scenes/UI/EnemyUI.tscn")
-var TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
-var TargetCursorScene = preload("res://Scenes/UI/TargetCursor.tscn")
+const PartyMemberUI = preload("res://Scenes/UI/PartyMemberUI.tscn")
+const EnemyUI = preload("res://Scenes/UI/EnemyUI.tscn")
+const TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
+const TargetCursorScene = preload("res://Scenes/UI/TargetCursor.tscn")
+const SpecialContainerScene = preload("res://Scenes/UI/SpecialContainer.tscn")
 
 @export var PartyControlNode:Node
 var PartyMembers:Array[PartyMember]
@@ -23,11 +24,13 @@ var TargetCharacter:BattleCharacter
 @export var EnemyUIContainer:Container
 
 @export var ActionMenuContainer:Container
-@export var RepositionMenuControl:Node
-@export var RepositionMenuContainer:Container
 @export var MeleeMenuContainer:Container
 @export var MeleeMenuControl:Node
 @export var RangedAttackButton:ActionMenuButton
+@export var SpecialMenuContainer:Container
+@export var SpecialMenuControl: Node
+@export var RepositionMenuControl:Node
+@export var RepositionMenuContainer:Container
 @export var RepositionButton:ActionMenuButton
 
 @export var PartyLinesControl:Node
@@ -158,6 +161,17 @@ func set_target_cursor_position(character:BattleCharacter):
 func set_active_ability(ability:Ability):
 	ActiveAbility = ability
 	
+func _special_menu_setup():
+	# TODO: Destroy previous special menu
+	
+	# Create new special menu, with special buttons for each special in the Active Character's SpecialList
+	for i in range(ActiveCharacter.SpecialList.size()):
+		var NewSpecialButton = SpecialContainerScene.instantiate()
+		NewSpecialButton.setup(ActiveCharacter.SpecialList[i])
+		NewSpecialButton.connect("cursor_focused", _on_special_button_focused)
+		NewSpecialButton.connect("cursor_selected", _on_special_button_selected)
+		SpecialMenuContainer.add_child(NewSpecialButton)
+
 func _on_end_turn():
 	# Send current character to the end of the turn order
 	await get_tree().create_timer(3.0).timeout
@@ -211,6 +225,12 @@ func _on_ability_button_pressed():
 			ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
 			_on_end_turn()
 			return
+		elif ActiveAbility.AbilityName == "OpenSpecialMenu":
+			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_SPECIALS)
+			_special_menu_setup()
+			SpecialMenuControl.show()
+			MenuCursor.change_menu(SpecialMenuContainer)
+			SpecialMenuControl.add_child(MenuCursor)
 		
 		# Melee and Ranged attacks should have this target type, and go straight to the target selection menu
 		if ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
@@ -295,3 +315,11 @@ func _on_melee_type_button_pressed():
 	if AttackQueue.size() == 3:
 		ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
 		_on_end_turn()
+
+func _on_special_button_focused():
+	# TODO: Make this update the description with the currently selected special
+	pass
+	
+func _on_special_button_selected():
+	# TODO: Make this set the currently hovered ability as the Active Ability, and then if appropriate, swap to character targeting menu
+	pass

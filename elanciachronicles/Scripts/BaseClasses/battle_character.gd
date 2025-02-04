@@ -32,6 +32,7 @@ const Ability = preload("res://Scripts/BaseClasses/ability.gd")
 
 @export var HasRepositioned:bool = false
 
+@export var SpecialsNode:Node
 @export var SpecialList:Array[Ability]
 
 @export var Statuses:Array[Enums.STATUS]
@@ -44,6 +45,11 @@ const Ability = preload("res://Scripts/BaseClasses/ability.gd")
 @export var Weaknesses:Array[Enums.ELEMENT]
 
 @export var Experience:int
+
+func _ready() -> void:
+	# Appends every child of the "Specials" node to the SpecialList
+	for i in range(SpecialsNode.get_child_count()):
+		SpecialList.append(SpecialsNode.get_child(i))
 
 func _process(delta):
 	# Checks if the character has died
