@@ -3,7 +3,7 @@
 importer="scene"
 importer_version=1
 type="PackedScene"
-uid="uid://e7qcgoakfn46"
+uid="uid://bi0mpec10sl"
 path="res://.godot/imported/Doki Verse Model (Some Animations).blend-55ec9d157ae01d9b5aa75da969333e7c.scn"
 
 [deps]
@@ -31,37 +31,7 @@ animation/trimming=false
 animation/remove_immutable_tracks=true
 animation/import_rest_as_RESET=false
 import_script/path=""
-_subresources={
-"materials": {
-"CHARACTER MAT": {
-"use_external/enabled": true,
-"use_external/path": ""
-}
-},
-"nodes": {
-"PATH:Camera": {
-"import/skip_import": true
-},
-"PATH:EYE EXPRESSION GUIDE": {
-"import/skip_import": true
-},
-"PATH:EYE GUIDE": {
-"import/skip_import": true
-},
-"PATH:IK GUIDE": {
-"import/skip_import": true
-},
-"PATH:POLE GUIDE": {
-"import/skip_import": true
-},
-"PATH:ROOT GUIDE": {
-"import/skip_import": true
-},
-"PATH:SELECT GUIDE": {
-"import/skip_import": true
-}
-}
-}
+_subresources={}
 blender/nodes/visible=0
 blender/nodes/active_collection_only=false
 blender/nodes/punctual_lights=true

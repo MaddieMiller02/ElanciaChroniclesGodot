@@ -1,7 +1,7 @@
 [gd_scene load_steps=3 format=3 uid="uid://bkd7q3awnkgvt"]
 
 [ext_resource type="Script" path="res://Scripts/BaseClasses/party_member.gd" id="1_i4hi3"]
-[ext_resource type="PackedScene" uid="uid://b81dx48h5u6hy" path="res://Art/3DModels/Characters/Verse/VerseModelImported.tscn" id="2_b1hwf"]
+[ext_resource type="PackedScene" uid="uid://dmv86sr8841ku" path="res://Art/3DModels/Characters/Verse/VerseModelImported.tscn" id="2_b1hwf"]
 
 [node name="VerseBattle" type="Node3D"]
 script = ExtResource("1_i4hi3")
