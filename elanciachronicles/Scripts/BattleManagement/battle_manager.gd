@@ -225,12 +225,13 @@ func _on_ability_button_pressed():
 			ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
 			_on_end_turn()
 			return
-		elif ActiveAbility.AbilityName == "OpenSpecialMenu":
+		elif ActiveAbility.AbilityName == "Open Special Menu":
 			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_SPECIALS)
 			_special_menu_setup()
 			SpecialMenuControl.show()
 			MenuCursor.change_menu(SpecialMenuContainer)
 			SpecialMenuControl.add_child(MenuCursor)
+			return
 		
 		# Melee and Ranged attacks should have this target type, and go straight to the target selection menu
 		if ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:

@@ -17,11 +17,13 @@ func cursor_select() -> void:
 	emit_signal("cursor_selected")
 	
 func button_focused():
-	ImageScene.texture = FocusedBackground
+	if ImageScene != null:
+		ImageScene.texture = FocusedBackground
 	emit_signal("cursor_focused")
 	
 func button_unfocused():
-	ImageScene.texture = DefaultBackground
+	if ImageScene != null:
+		ImageScene.texture = DefaultBackground
 	emit_signal("cursor_unfocused")
 
 func _on_game_state_updated():

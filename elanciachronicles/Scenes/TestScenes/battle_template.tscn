@@ -1,4 +1,4 @@
-[gd_scene load_steps=16 format=3 uid="uid://d3od1a50wjpjk"]
+[gd_scene load_steps=17 format=3 uid="uid://d3od1a50wjpjk"]
 
 [ext_resource type="Texture2D" uid="uid://pnho70oa50d6" path="res://Art/UI/ui_movement_blue.png" id="1_4h4gm"]
 [ext_resource type="Script" path="res://Scripts/BattleManagement/battle_manager.gd" id="1_iposc"]
@@ -15,6 +15,7 @@
 [ext_resource type="PackedScene" uid="uid://2oavxmvjipxe" path="res://Scenes/Abilities/Basic/Defend.tscn" id="10_fxb1c"]
 [ext_resource type="PackedScene" uid="uid://c3luj5mvjwf4t" path="res://Scenes/Abilities/Basic/MediumAttack.tscn" id="10_in3c6"]
 [ext_resource type="PackedScene" uid="uid://dkm8w7oi1bg7y" path="res://Scenes/Abilities/Basic/HeavyAttack.tscn" id="11_eiv7w"]
+[ext_resource type="PackedScene" uid="uid://cdl7164ipiua8" path="res://Scenes/Abilities/Basic/OpenSpecialMenu.tscn" id="15_s8f3g"]
 
 [node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIContainer", "EnemyUIControl", "EnemyUIContainer", "ActionMenuContainer", "MeleeMenuContainer", "MeleeMenuControl", "RangedAttackButton", "SpecialMenuContainer", "SpecialMenuControl", "RepositionMenuControl", "RepositionMenuContainer", "RepositionButton", "PartyLinesControl", "EnemyLinesControl", "MenuCursor", "TargetCursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
@@ -193,6 +194,9 @@ NextAbility = NodePath("../../../../DefaultAbilities/MeleeAttack")
 [node name="Control_Ranged" parent="BattleCanvas/Control_ActionMenu/GridContainer" index="1" node_paths=PackedStringArray("NextAbility")]
 NextAbility = NodePath("../../../../DefaultAbilities/RangedAttack")
 
+[node name="Control_Specials" parent="BattleCanvas/Control_ActionMenu/GridContainer" index="2" node_paths=PackedStringArray("NextAbility")]
+NextAbility = NodePath("../../../../DefaultAbilities/OpenSpecialMenu")
+
 [node name="Control_Reposition" parent="BattleCanvas/Control_ActionMenu/GridContainer" index="3" node_paths=PackedStringArray("NextAbility")]
 NextAbility = NodePath("../../../../DefaultAbilities/Reposition")
 
@@ -222,7 +226,7 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
 [node name="FirstBattle" parent="." instance=ExtResource("6_vah62")]
 
-[node name="DefaultAbilities" type="Node3D" parent="."]
+[node name="DefaultAbilities" type="Node" parent="."]
 
 [node name="MeleeAttack" parent="DefaultAbilities" instance=ExtResource("8_5ypse")]
 
@@ -237,6 +241,8 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 [node name="Reposition" parent="DefaultAbilities" instance=ExtResource("9_0vs8f")]
 
 [node name="Defend" parent="DefaultAbilities" instance=ExtResource("10_fxb1c")]
+
+[node name="OpenSpecialMenu" parent="DefaultAbilities" instance=ExtResource("15_s8f3g")]
 
 [node name="BattleMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_cisby")

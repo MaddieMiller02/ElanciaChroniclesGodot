@@ -49,7 +49,8 @@ func _process(delta):
 					
 		if get_menu_item_at_index(previous_index) != null:
 			get_menu_item_at_index(previous_index).button_unfocused()
-		get_menu_item_at_index(cursor_index).button_focused()
+		if get_menu_item_at_index(cursor_index) != null:
+			get_menu_item_at_index(cursor_index).button_focused()
 	elif get_menu_item_at_index(cursor_index) != null:
 		get_menu_item_at_index(cursor_index).button_unfocused()
 
@@ -86,13 +87,24 @@ func set_cursor_from_index(index:int) -> void:
 	global_position = Vector2(position.x, position.y + size.y / 2.0) - (size / 2.0) - cursor_offset
 	
 func change_menu(new_menu:Container):
+	# Unfocus the current button
 	if get_menu_item_at_index(cursor_index) != null:
 		get_menu_item_at_index(cursor_index).button_unfocused()
+		
+	# Reset the cursor index
 	cursor_index = 0
-	if menu_parent.get_child(0) is not CharacterUI:
+	
+	print(menu_parent)
+	# Hide the previous menu if it is not a character UI display
+	if menu_parent.get_child_count() != 0 and menu_parent.get_child(0) is not CharacterUI:
 		menu_parent.hide()
+		
+	# Add the previous menu to the backtracking list
 	previous_menus.append(menu_parent)
+	
+	# Set the new menu and show it
 	menu_parent = new_menu
+	print(menu_parent)
 	menu_parent.show()
 	active = true
 
@@ -112,7 +124,7 @@ func clear_previous_menus():
 	previous_menus.clear()
 	
 func _on_game_state_updated():
-	if Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_NORMAL or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_MELEE:
+	if Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_NORMAL or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_MELEE or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_SPECIALS:
 		self.visible = true
 		active = true
 	else:
