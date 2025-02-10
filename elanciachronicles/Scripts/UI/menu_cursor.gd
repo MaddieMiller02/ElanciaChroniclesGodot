@@ -94,7 +94,6 @@ func change_menu(new_menu:Container):
 	# Reset the cursor index
 	cursor_index = 0
 	
-	print(menu_parent)
 	# Hide the previous menu if it is not a character UI display
 	if menu_parent.get_child_count() != 0 and menu_parent.get_child(0) is not CharacterUI:
 		menu_parent.hide()
