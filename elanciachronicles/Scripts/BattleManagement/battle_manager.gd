@@ -29,6 +29,7 @@ var TargetCharacter:BattleCharacter
 @export var RangedAttackButton:ActionMenuButton
 @export var SpecialMenuContainer:Container
 @export var SpecialMenuControl: Node
+@export var SpecialDescriptionBox: Label
 @export var RepositionMenuControl:Node
 @export var RepositionMenuContainer:Container
 @export var RepositionButton:ActionMenuButton
@@ -162,7 +163,9 @@ func set_active_ability(ability:Ability):
 	ActiveAbility = ability
 	
 func _special_menu_setup():
-	# TODO: Destroy previous special menu
+	# Clears all previous special containers and resets the special menu
+	for i in range(SpecialMenuContainer.get_child_count()):
+		SpecialMenuContainer.get_child(-1).queue_free()
 	
 	# Create new special menu, with special buttons for each special in the Active Character's SpecialList
 	for i in range(ActiveCharacter.SpecialList.size()):
@@ -318,9 +321,14 @@ func _on_melee_type_button_pressed():
 		_on_end_turn()
 
 func _on_special_button_focused():
-	# TODO: Make this update the description with the currently selected special
-	pass
+	var CurrentSpecialContainer = MenuCursor.get_menu_item_at_index(MenuCursor.cursor_index) as SpecialContainer
+	SpecialDescriptionBox.text = CurrentSpecialContainer.NextAbility.Description
 	
 func _on_special_button_selected():
-	# TODO: Make this set the currently hovered ability as the Active Ability, and then if appropriate, swap to character targeting menu
-	pass
+	ActiveAbility = (MenuCursor.get_menu_item_at_index(MenuCursor.cursor_index) as SpecialContainer).NextAbility
+	
+	# Open the single-enemy targeting menu if attack target type is single and enemy
+	if ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
+			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY)
+			MenuCursor.change_menu(EnemyUIContainer)
+			EnemyUIControl.add_child(MenuCursor)

@@ -668,4 +668,3 @@ offset_bottom = 1018.0
 grow_horizontal = 1
 grow_vertical = 1
 menu_parent = NodePath("../Control_ActionMenu/GridContainer")
-cursor_offset = Vector2(45, -15)

@@ -1,9 +1,9 @@
 [gd_scene load_steps=2 format=3 uid="uid://civxnd2mp88cq"]
 
-[ext_resource type="Script" path="res://Scripts/BaseClasses/ability.gd" id="1_nw3sd"]
+[ext_resource type="Script" path="res://Scripts/Abilities/VerseSpecials/hack_and_blast.gd" id="1_fn5rc"]
 
 [node name="Hack&Blast" type="Node"]
-script = ExtResource("1_nw3sd")
+script = ExtResource("1_fn5rc")
 AbilityName = "Hack & Blast"
 Description = "Verse performs a quick slash with the blade of her Man-Ender, then fires at close-range. Deals Fire damage."
 MaxRange = 2

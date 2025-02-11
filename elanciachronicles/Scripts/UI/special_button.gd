@@ -1,3 +1,4 @@
+class_name SpecialContainer
 extends UIButton
 
 @export var NextAbility:Ability

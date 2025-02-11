@@ -2,7 +2,7 @@ class_name MenuCursor
 extends TextureRect
 
 @export var menu_parent:Container
-@export var cursor_offset:Vector2
+@export var cursor_offset:Vector2 = Vector2(45, -15)
 
 var cursor_index:int = 0
 var previous_index:int = 0
@@ -51,6 +51,10 @@ func _process(delta):
 			get_menu_item_at_index(previous_index).button_unfocused()
 		if get_menu_item_at_index(cursor_index) != null:
 			get_menu_item_at_index(cursor_index).button_focused()
+			
+		# Set the cursor offset accordingly to match the type of button being selected
+		_set_cursor_offset()
+		
 	elif get_menu_item_at_index(cursor_index) != null:
 		get_menu_item_at_index(cursor_index).button_unfocused()
 
@@ -59,8 +63,9 @@ func get_menu_item_at_index(index:int) -> UIButton:
 			print("Menu parent is null")
 			return null
 		
+		# Prevents the cursor from moving to an index with no item
 		if index >= menu_parent.get_child_count() or index < 0:
-			print("Index is invalid")
+			print("Index invalid")
 			return null
 			
 		return menu_parent.get_child(index) as UIButton
@@ -122,6 +127,12 @@ func backtrack_menu():
 func clear_previous_menus():
 	previous_menus.clear()
 	
+func _set_cursor_offset():
+	if get_menu_item_at_index(cursor_index) is SpecialContainer:
+		cursor_offset = Vector2(-45, 15)
+	else:
+		cursor_offset = Vector2(45, -15)
+
 func _on_game_state_updated():
 	if Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_NORMAL or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_MELEE or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_SPECIALS:
 		self.visible = true
