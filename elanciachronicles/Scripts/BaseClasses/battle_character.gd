@@ -66,6 +66,12 @@ func take_damage(damage:int):
 		CurrentHP = 0
 	HPChanged.emit()
 	
+func heal(damage:int):
+	CurrentHP += damage
+	if CurrentHP > MaxHP:
+		CurrentHP = MaxHP
+	HPChanged.emit()
+	
 func use_ap(amount:int):
 	CurrentAP -= amount
 	if CurrentAP < 0:

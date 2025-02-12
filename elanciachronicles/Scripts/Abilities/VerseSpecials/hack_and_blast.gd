@@ -1,5 +1,4 @@
 extends Ability
-
 func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
 	# Calculations
 	var DamageOffset = randi_range(-2, 2)

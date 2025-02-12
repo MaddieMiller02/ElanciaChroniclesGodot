@@ -17,11 +17,12 @@
 [ext_resource type="PackedScene" uid="uid://dkm8w7oi1bg7y" path="res://Scenes/Abilities/Basic/HeavyAttack.tscn" id="11_eiv7w"]
 [ext_resource type="PackedScene" uid="uid://cdl7164ipiua8" path="res://Scenes/Abilities/Basic/OpenSpecialMenu.tscn" id="15_s8f3g"]
 
-[node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIContainer", "EnemyUIControl", "EnemyUIContainer", "ActionMenuContainer", "MeleeMenuContainer", "MeleeMenuControl", "RangedAttackButton", "SpecialMenuContainer", "SpecialMenuControl", "SpecialDescriptionBox", "RepositionMenuControl", "RepositionMenuContainer", "RepositionButton", "PartyLinesControl", "EnemyLinesControl", "MenuCursor", "TargetCursor")]
+[node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIControl", "PartyUIContainer", "EnemyUIControl", "EnemyUIContainer", "ActionMenuContainer", "MeleeMenuContainer", "MeleeMenuControl", "RangedAttackButton", "SpecialMenuContainer", "SpecialMenuControl", "SpecialDescriptionBox", "RepositionMenuControl", "RepositionMenuContainer", "RepositionButton", "PartyLinesControl", "EnemyLinesControl", "MenuCursor", "TargetCursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 script = ExtResource("1_iposc")
 PartyControlNode = NodePath("CurrentParty")
 EnemyControlNode = NodePath("FirstBattle/Enemies")
+PartyUIControl = NodePath("BattleCanvas/Control_PartyUI")
 PartyUIContainer = NodePath("BattleCanvas/Control_PartyUI/GridContainer")
 EnemyUIControl = NodePath("BattleCanvas/Control_EnemyUI")
 EnemyUIContainer = NodePath("BattleCanvas/Control_EnemyUI/GridContainer")
@@ -224,6 +225,9 @@ visible = false
 
 [node name="CurrentParty" parent="." instance=ExtResource("5_isfwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="XanBattle" parent="CurrentParty" index="1"]
+CurrentHP = 20
 
 [node name="FirstBattle" parent="." instance=ExtResource("6_vah62")]
 

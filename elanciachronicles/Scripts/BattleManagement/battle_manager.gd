@@ -19,6 +19,7 @@ var ActiveCharacter:BattleCharacter
 var ActiveAbility:Ability
 var TargetCharacter:BattleCharacter
 
+@export var PartyUIControl:Node
 @export var PartyUIContainer:Container
 @export var EnemyUIControl:Node
 @export var EnemyUIContainer:Container
@@ -241,9 +242,15 @@ func _on_ability_button_pressed():
 			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY)
 			MenuCursor.change_menu(EnemyUIContainer)
 			EnemyUIControl.add_child(MenuCursor)
+			
+		# For moves that target party members (such as healing moves like First Aid)
+		elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE_ALLY:
+			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_PARTY)
+			MenuCursor.change_menu(PartyUIContainer)
+			PartyUIControl.add_child(MenuCursor)
 		
 func _on_character_button_pressed():
-	var ButtonPressed = EnemyUIContainer.get_child(MenuCursor.cursor_index) as CharacterUI
+	var ButtonPressed = MenuCursor.get_menu_item_at_index(MenuCursor.cursor_index) as CharacterUI
 	TargetCharacter = ButtonPressed.Character
 	
 	# Checks if the enemy is out of range or dead, performs ability otherwise
@@ -259,6 +266,14 @@ func _on_character_button_pressed():
 				add_child(TextBox)
 				TextBox.display_one_off_text("Choose three attacks.")
 				return
+			
+			# Checks to see if this is a healing move, and stops the player from using it if the specified ally already has full health
+			elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE_ALLY:
+				if TargetCharacter.CurrentHP == TargetCharacter.MaxHP:
+					var TextBox = TextBoxScene.instantiate()
+					add_child(TextBox)
+					TextBox.display_one_off_text(TargetCharacter.BattlerName + " already has full health!")
+					return
 			else:
 				ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
 				_on_end_turn()
@@ -270,7 +285,7 @@ func _on_character_button_pressed():
 	else:
 		var TextBox = TextBoxScene.instantiate()
 		add_child(TextBox)
-		TextBox.display_one_off_text(TargetCharacter.BattlerName + " is already dead!")
+		TextBox.display_one_off_text(TargetCharacter.BattlerName + " is knocked out!")
 	
 func _on_character_button_focused():
 	var character = Enemies[MenuCursor.cursor_index] as BattleCharacter

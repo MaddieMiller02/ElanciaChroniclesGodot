@@ -1,0 +1,15 @@
+[gd_scene load_steps=2 format=3 uid="uid://kg0gj144twjd"]
+
+[ext_resource type="Script" path="res://Scripts/Abilities/VerseSpecials/first_aid.gd" id="1_itykg"]
+
+[node name="First Aid" type="Node"]
+script = ExtResource("1_itykg")
+AbilityName = "First Aid"
+Description = "Verse tends to the target's wounds while singing a song Lyrikos taught her. Can be used on self."
+MaxRange = 6
+Power = 10
+IgnoreDefense = true
+HitRate = 100
+APCost = 5
+TargetType = 3
+Element = 3
