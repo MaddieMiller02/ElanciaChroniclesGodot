@@ -6,9 +6,9 @@
 script = ExtResource("1_fn5rc")
 AbilityName = "Hack & Blast"
 Description = "Verse performs a quick slash with the blade of her Man-Ender, then fires at close-range. Deals Fire damage."
-MaxRange = 2
-Power = 7
+MaxRange = 1
+Power = 10
 Physical = true
-HitRate = 95
+HitRate = 98
 APCost = 6
 Element = 4
