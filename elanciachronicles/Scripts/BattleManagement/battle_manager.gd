@@ -156,8 +156,8 @@ func set_active_character(character:BattleCharacter):
 		
 	MenuCursor.clear_previous_menus()
 		
-func set_target_cursor_position(character:BattleCharacter):
-	TargetCursor.position = Vector3(character.position.x, character.position.y + 3, character.position.z + 6)
+func set_target_cursor_position(Character:BattleCharacter):
+	TargetCursor.position = Vector3(Character.position.x, Character.position.y + 3, Character.position.z + 6)
 	TargetCursor.show()
 
 func set_active_ability(ability:Ability):
@@ -165,8 +165,8 @@ func set_active_ability(ability:Ability):
 	
 func _special_menu_setup():
 	# Clears all previous special containers and resets the special menu
-	for i in range(SpecialMenuContainer.get_child_count()):
-		SpecialMenuContainer.get_child(-1).queue_free()
+	for Special in SpecialMenuContainer.get_children():
+		Special.queue_free()
 	
 	# Create new special menu, with special buttons for each special in the Active Character's SpecialList
 	for i in range(ActiveCharacter.SpecialList.size()):
@@ -242,12 +242,6 @@ func _on_ability_button_pressed():
 			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY)
 			MenuCursor.change_menu(EnemyUIContainer)
 			EnemyUIControl.add_child(MenuCursor)
-			
-		# For moves that target party members (such as healing moves like First Aid)
-		elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE_ALLY:
-			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_PARTY)
-			MenuCursor.change_menu(PartyUIContainer)
-			PartyUIControl.add_child(MenuCursor)
 		
 func _on_character_button_pressed():
 	var ButtonPressed = MenuCursor.get_menu_item_at_index(MenuCursor.cursor_index) as CharacterUI
@@ -274,9 +268,9 @@ func _on_character_button_pressed():
 					add_child(TextBox)
 					TextBox.display_one_off_text(TargetCharacter.BattlerName + " already has full health!")
 					return
-			else:
-				ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
-				_on_end_turn()
+				else:
+					ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
+					_on_end_turn()
 		else:
 			var TextBox = TextBoxScene.instantiate()
 			add_child(TextBox)
@@ -288,8 +282,12 @@ func _on_character_button_pressed():
 		TextBox.display_one_off_text(TargetCharacter.BattlerName + " is knocked out!")
 	
 func _on_character_button_focused():
-	var character = Enemies[MenuCursor.cursor_index] as BattleCharacter
-	set_target_cursor_position(character)
+	var Character
+	if ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE_ALLY:
+		Character = PartyMembers[MenuCursor.cursor_index] as BattleCharacter
+	else:
+		Character = Enemies[MenuCursor.cursor_index] as BattleCharacter
+	set_target_cursor_position(Character)
 	
 func _on_reposition_button_pressed():
 	if MenuCursor.cursor_index == 0:
@@ -344,6 +342,12 @@ func _on_special_button_selected():
 	
 	# Open the single-enemy targeting menu if attack target type is single and enemy
 	if ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
-			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY)
-			MenuCursor.change_menu(EnemyUIContainer)
-			EnemyUIControl.add_child(MenuCursor)
+		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY)
+		MenuCursor.change_menu(EnemyUIContainer)
+		EnemyUIControl.add_child(MenuCursor)
+			
+	# For moves that target party members (such as healing moves like First Aid)
+	elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE_ALLY:
+		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_PARTY)
+		MenuCursor.change_menu(PartyUIContainer)
+		PartyUIControl.add_child(MenuCursor)
