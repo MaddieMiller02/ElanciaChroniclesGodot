@@ -118,11 +118,12 @@ func backtrack_menu():
 		get_menu_item_at_index(cursor_index).button_unfocused()
 		cursor_index = 0
 		if menu_parent.get_child(0) is not CharacterUI:
-			menu_parent.hide()
-		menu_parent = previous_menus.pop_front()
-		menu_parent.show()
+			menu_parent.visible = false
+		menu_parent = previous_menus.pop_back()
+		menu_parent.visible = true
 		active = true
-		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_NORMAL)
+		if menu_parent is BattleMenu:
+			Globals.UpdateGameState(menu_parent.VisibleState)
 
 func clear_previous_menus():
 	previous_menus.clear()
