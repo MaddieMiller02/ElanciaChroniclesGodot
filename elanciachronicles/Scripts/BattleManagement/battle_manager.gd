@@ -271,6 +271,10 @@ func _on_character_button_pressed():
 				else:
 					ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
 					_on_end_turn()
+					
+			elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
+				ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
+				_on_end_turn()
 		else:
 			var TextBox = TextBoxScene.instantiate()
 			add_child(TextBox)

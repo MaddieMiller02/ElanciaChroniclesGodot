@@ -13,6 +13,15 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	print("User Starting AP: " + str(User.CurrentAP))
 	print("Enemy Starting HP: " + str(Target.CurrentHP))
 	
+	# Moves Xan to the frontline
+	User.CurrentPosition = 0
+	var position_line = CurrentManager.PartyLinesControl.get_child(CurrentManager.ActiveCharacter.get_index())
+	var position_marker = position_line.get_child(CurrentManager.ActiveCharacter.CurrentPosition)
+	var position_line_position = position_line.position
+	var position_marker_position = position_marker.position
+	CurrentManager.ActiveCharacter.position.x = (position_line_position.x + position_marker_position.x) - 1
+	CurrentManager.set_target_cursor_position(CurrentManager.ActiveCharacter)
+	
 	# Perform calculated outcome and dispay text boxes
 	var TextBox = TextBoxScene.instantiate()
 	self.add_child(TextBox)

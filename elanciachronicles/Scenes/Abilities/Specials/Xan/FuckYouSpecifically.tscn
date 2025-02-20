@@ -1,0 +1,14 @@
+[gd_scene load_steps=2 format=3 uid="uid://cgiub2usnygxb"]
+
+[ext_resource type="Script" path="res://Scripts/Abilities/XanSpecials/fuck_you_specifically.gd" id="1_2dh3y"]
+
+[node name="FuckYouSpecifically" type="Node"]
+script = ExtResource("1_2dh3y")
+AbilityName = "Fuck You Specifically"
+Description = "Xan rushes to the frontline and thrusts his sword into a specific enemy. This attack hits an enemy regardless of how far away they are."
+MaxRange = 8
+Power = 7
+Physical = true
+HitRate = 95
+APCost = 5
+Element = 1
