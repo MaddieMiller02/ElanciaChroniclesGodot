@@ -1,4 +1,4 @@
-[gd_scene load_steps=17 format=3 uid="uid://d3od1a50wjpjk"]
+[gd_scene load_steps=18 format=3 uid="uid://d3od1a50wjpjk"]
 
 [ext_resource type="Texture2D" uid="uid://pnho70oa50d6" path="res://Art/UI/ui_movement_blue.png" id="1_4h4gm"]
 [ext_resource type="Script" path="res://Scripts/BattleManagement/battle_manager.gd" id="1_iposc"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://n43vi87y3d5k" path="res://Scenes/BattleAreas/FirstBattle.tscn" id="6_vah62"]
 [ext_resource type="PackedScene" uid="uid://bkaff4lqkrgs2" path="res://Scenes/Abilities/Basic/RangedAttack.tscn" id="8_3rrvi"]
 [ext_resource type="PackedScene" uid="uid://bsyja3aiguuui" path="res://Scenes/Abilities/Basic/MeleeAttack.tscn" id="8_5ypse"]
+[ext_resource type="PackedScene" uid="uid://cudxa1nlapdcx" path="res://Scenes/Characters/Battles/Enemies/SailorBattle.tscn" id="8_t4j1w"]
 [ext_resource type="PackedScene" uid="uid://cbxfie77qxd0t" path="res://Scenes/Abilities/Basic/Reposition.tscn" id="9_0vs8f"]
 [ext_resource type="PackedScene" uid="uid://cx6qd40y4cbtl" path="res://Scenes/Abilities/Basic/LightAttack.tscn" id="9_jvtn3"]
 [ext_resource type="PackedScene" uid="uid://2oavxmvjipxe" path="res://Scenes/Abilities/Basic/Defend.tscn" id="10_fxb1c"]
@@ -228,6 +229,15 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
 [node name="FirstBattle" parent="." instance=ExtResource("6_vah62")]
 
+[node name="SailorBattle" parent="FirstBattle/Enemies" index="0"]
+CurrentPosition = 0
+
+[node name="SailorBattle2" parent="FirstBattle/Enemies" index="1"]
+CurrentPosition = 0
+
+[node name="SailorBattle3" parent="FirstBattle/Enemies" index="2" instance=ExtResource("8_t4j1w")]
+CurrentPosition = 0
+
 [node name="DefaultAbilities" type="Node" parent="."]
 
 [node name="MeleeAttack" parent="DefaultAbilities" instance=ExtResource("8_5ypse")]
@@ -248,7 +258,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
 [node name="BattleMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_cisby")
-volume_db = -80.0
 autoplay = true
 parameters/looping = true
 

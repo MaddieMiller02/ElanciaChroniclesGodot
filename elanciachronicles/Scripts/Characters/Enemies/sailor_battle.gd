@@ -15,8 +15,11 @@ func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 					Target = character
 					
 			if not HasRepositioned:
+				
+				print("Current distance to target: " + str(Target.CurrentPosition + CurrentPosition))
 				# Back up to perform ranged attack if too close
 				if not RangedAttack.in_range(self, Target):
+					print("Repositioning backward, enemy is too close")
 					CurrentManager.MenuCursor.cursor_index = 1
 					Reposition.perform_ability(self, Target, CurrentManager)
 					
@@ -24,10 +27,10 @@ func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 					CurrentManager.set_active_character(self)
 					return
 				
-				# Move closer if the target is on the backline
-				elif Target.CurrentPosition == 2 and CurrentPosition != 0:
+				# Move closer if the target is on the backline or midline, as long as this wouldn't put them out of attacking range
+				elif (Target.CurrentPosition + CurrentPosition) > 2 and CurrentPosition != 0:
+					print("Repositioning forward, enemy is too far")
 					CurrentManager.MenuCursor.cursor_index = 0
-					CurrentPosition -= 2
 					Reposition.perform_ability(self, Target, CurrentManager)
 					
 					# Let the enemy act again
@@ -46,5 +49,7 @@ func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 		else:
 			Defend.perform_ability(self, self, CurrentManager)
 			super.perform_turn(party, CurrentManager)
+			
+		HasRepositioned = false
 	else:
 		super.perform_turn(party, CurrentManager)
