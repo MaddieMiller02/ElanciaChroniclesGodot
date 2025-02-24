@@ -109,10 +109,13 @@ func _ready():
 				var old_character = TurnOrder[j]
 				if new_character.Speed > old_character.Speed:
 					TurnOrder.insert(j, new_character)
+					break
 				elif j >= TurnOrder.size() - 1:
 					TurnOrder.append(new_character)
+					break
 		BattleCharacters[i].TurnEnded.connect(_on_end_turn)
 		BattleCharacters[i].HasDied.connect(_on_character_died)
+		print(TurnOrder)
 					
 	# Connects signals from all UI buttons
 	for i in range(ActionMenuContainer.get_child_count()):
@@ -183,6 +186,7 @@ func _on_end_turn():
 	ActiveCharacter.HasRepositioned = false
 	TurnOrder.append(TurnOrder.pop_front())
 	set_active_character(TurnOrder[0])
+	print(TurnOrder)
 	
 func _on_character_died():
 	for i in range(BattleCharacters.size()):

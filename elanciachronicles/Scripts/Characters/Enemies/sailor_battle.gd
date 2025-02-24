@@ -50,6 +50,5 @@ func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 			Defend.perform_ability(self, self, CurrentManager)
 			super.perform_turn(party, CurrentManager)
 			
-		HasRepositioned = false
 	else:
 		super.perform_turn(party, CurrentManager)
