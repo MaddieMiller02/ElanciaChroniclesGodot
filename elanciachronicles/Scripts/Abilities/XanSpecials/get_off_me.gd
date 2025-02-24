@@ -21,7 +21,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			var position_marker = position_line.get_child(Target.CurrentPosition)
 			var position_line_position = position_line.position
 			var position_marker_position = position_marker.position
-			Target.position.x = (position_line_position.x + position_marker_position.x) - 1
+			Target.position.x = (position_line_position.x + position_marker_position.x) + 1
 			CurrentManager.set_target_cursor_position(Target)
 		
 			# Perform calculated outcome and dispay text boxes

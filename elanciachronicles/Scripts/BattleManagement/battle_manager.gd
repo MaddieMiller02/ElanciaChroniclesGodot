@@ -115,7 +115,6 @@ func _ready():
 					break
 		BattleCharacters[i].TurnEnded.connect(_on_end_turn)
 		BattleCharacters[i].HasDied.connect(_on_character_died)
-		print(TurnOrder)
 					
 	# Connects signals from all UI buttons
 	for i in range(ActionMenuContainer.get_child_count()):
@@ -186,7 +185,6 @@ func _on_end_turn():
 	ActiveCharacter.HasRepositioned = false
 	TurnOrder.append(TurnOrder.pop_front())
 	set_active_character(TurnOrder[0])
-	print(TurnOrder)
 	
 func _on_character_died():
 	for i in range(BattleCharacters.size()):
