@@ -14,6 +14,17 @@ func display_damage_message(AbilityUsed:Ability, User:BattleCharacter, Target:Ba
 	
 	queue_free()
 	
+func display_weak_damage_message(AbilityUsed:Ability, User:BattleCharacter, Target:BattleCharacter, Damage:int):
+	text_label.text = Target.BattlerName + " is weak to " + AbilityUsed.AbilityName + "! " + Target.BattlerName + " took " + str(Damage) + " damage."
+	self.show()
+	
+	Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ANIMATING)
+	await get_tree().create_timer(3.0).timeout
+	
+	self.hide()
+	
+	queue_free()
+	
 func display_heal_message(AbilityUsed:Ability, User:BattleCharacter, Target:BattleCharacter, Amount:int):
 	text_label.text = User.BattlerName + " used " + AbilityUsed.AbilityName + ". " + Target.BattlerName + " recovered " + str(Amount) + " health."
 	self.show()

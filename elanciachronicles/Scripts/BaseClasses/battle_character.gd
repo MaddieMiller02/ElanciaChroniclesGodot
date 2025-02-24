@@ -72,6 +72,11 @@ func heal(damage:int):
 		CurrentHP = MaxHP
 	HPChanged.emit()
 	
+func weakness_check(Attack:Ability) -> bool:
+	if Attack.Element in Weaknesses:
+		return true
+	return false
+
 func use_ap(amount:int):
 	CurrentAP -= amount
 	if CurrentAP < 0:

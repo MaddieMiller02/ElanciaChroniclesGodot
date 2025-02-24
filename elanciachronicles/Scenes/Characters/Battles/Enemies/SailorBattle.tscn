@@ -25,7 +25,7 @@ MaxAP = 10
 DefaultPosition = 1
 CurrentPosition = 1
 Resistances = Array[int]([3])
-Weaknesses = Array[int]([4])
+Weaknesses = Array[int]([4, 2])
 
 [node name="CSGBox3D" type="CSGBox3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)

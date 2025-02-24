@@ -6,7 +6,6 @@
 script = ExtResource("1_u35tj")
 AbilityName = "Melee Attack"
 Description = "A single-hit melee attack. This should only be used as an enemy attack or a placeholder for the action menu button."
-MaxRange = 1
 Physical = true
 HitRate = 95
 APCost = 3
