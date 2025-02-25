@@ -1,9 +1,10 @@
-[gd_scene load_steps=37 format=4 uid="uid://bkd7q3awnkgvt"]
+[gd_scene load_steps=38 format=4 uid="uid://bkd7q3awnkgvt"]
 
 [ext_resource type="Script" path="res://Scripts/BaseClasses/party_member.gd" id="1_i4hi3"]
 [ext_resource type="Texture2D" uid="uid://dxnex00rbrcav" path="res://Art/3DModels/Characters/Verse/TEX_VERSE_COLOR_ALPHA.png" id="2_t8l05"]
 [ext_resource type="PackedScene" uid="uid://civxnd2mp88cq" path="res://Scenes/Abilities/Specials/Verse/Hack&Blast.tscn" id="3_42ej7"]
 [ext_resource type="PackedScene" uid="uid://kg0gj144twjd" path="res://Scenes/Abilities/Specials/Verse/FirstAid.tscn" id="4_60hat"]
+[ext_resource type="Texture2D" uid="uid://b73pcv14byl5o" path="res://Art/UI/CharacterHexIcons/hex_icon_verse.png" id="5_meskr"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ck3xr"]
 resource_name = "CHARACTER MAT"
@@ -21388,6 +21389,7 @@ InParty = true
 IsPartyLeader = true
 BattlerName = "Verse"
 Level = 1
+UIHexIcon = ExtResource("5_meskr")
 Strength = 7
 Magic = 7
 Defense = 5

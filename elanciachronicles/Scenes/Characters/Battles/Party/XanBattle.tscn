@@ -1,8 +1,9 @@
-[gd_scene load_steps=5 format=3 uid="uid://cllhj43hhbl4q"]
+[gd_scene load_steps=6 format=3 uid="uid://cllhj43hhbl4q"]
 
 [ext_resource type="Script" path="res://Scripts/BaseClasses/party_member.gd" id="1_lknl8"]
 [ext_resource type="PackedScene" uid="uid://cgiub2usnygxb" path="res://Scenes/Abilities/Specials/Xan/FuckYouSpecifically.tscn" id="2_x01tx"]
 [ext_resource type="PackedScene" uid="uid://t44qtvs781li" path="res://Scenes/Abilities/Specials/Xan/GetOffMe.tscn" id="3_xo8x6"]
+[ext_resource type="Texture2D" uid="uid://8ylo0t1orhel" path="res://Art/UI/CharacterHexIcons/hex_icon_xan.png" id="4_hydrs"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_3ap1c"]
 albedo_color = Color(0.189666, 0.37646, 0.184867, 1)
@@ -12,6 +13,7 @@ script = ExtResource("1_lknl8")
 InParty = true
 BattlerName = "Xan"
 Level = 1
+UIHexIcon = ExtResource("4_hydrs")
 Strength = 9
 Magic = 4
 Defense = 6

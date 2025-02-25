@@ -23,6 +23,7 @@ var TargetCharacter:BattleCharacter
 @export var PartyUIContainer:Container
 @export var EnemyUIControl:Node
 @export var EnemyUIContainer:Container
+@export var TurnOrderUIContainer:Container
 
 @export var ActionMenuContainer:Container
 @export var MeleeMenuContainer:Container
@@ -116,6 +117,12 @@ func _ready():
 		BattleCharacters[i].TurnEnded.connect(_on_end_turn)
 		BattleCharacters[i].HasDied.connect(_on_character_died)
 					
+	# Sets up the Turn Order UI
+	for i in range(TurnOrder.size()):
+		var NewHex = TextureRect.new()
+		NewHex.texture = TurnOrder[i].UIHexIcon
+		TurnOrderUIContainer.add_child(NewHex)
+	
 	# Connects signals from all UI buttons
 	for i in range(ActionMenuContainer.get_child_count()):
 		var CurrentButton = ActionMenuContainer.get_child(i) as ActionMenuButton
@@ -185,6 +192,9 @@ func _on_end_turn():
 	ActiveCharacter.HasRepositioned = false
 	TurnOrder.append(TurnOrder.pop_front())
 	set_active_character(TurnOrder[0])
+	
+	TurnOrderUIContainer.move_child(TurnOrderUIContainer.get_child(0), -1)
+	
 	
 func _on_character_died():
 	for i in range(BattleCharacters.size()):

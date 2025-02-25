@@ -668,6 +668,21 @@ theme_override_font_sizes/font_size = 25
 text = "Forward"
 horizontal_alignment = 1
 
+[node name="Control_TurnOrderUI" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 0
+offset_right = 40.0
+offset_bottom = 40.0
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control_TurnOrderUI"]
+layout_mode = 0
+offset_left = 75.0
+offset_top = 75.0
+offset_right = 2575.0
+offset_bottom = 775.0
+scale = Vector2(0.12, 0.12)
+theme_override_constants/separation = 200
+
 [node name="MenuCursor" parent="." node_paths=PackedStringArray("menu_parent") instance=ExtResource("7_4qu8s")]
 anchors_preset = 0
 anchor_right = 0.0

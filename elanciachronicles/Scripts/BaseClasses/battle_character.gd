@@ -13,6 +13,8 @@ const Ability = preload("res://Scripts/BaseClasses/ability.gd")
 @export var IsDead:int = false
 @export var EmittedDeathSignal:bool = false
 
+@export var UIHexIcon:Texture2D
+
 @export var Strength:int #physical ability power
 @export var Magic:int #magical ability power
 @export var Defense:int #physical damage reduction

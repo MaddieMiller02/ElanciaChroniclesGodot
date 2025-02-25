@@ -1,9 +1,10 @@
-[gd_scene load_steps=5 format=3 uid="uid://cudxa1nlapdcx"]
+[gd_scene load_steps=6 format=3 uid="uid://cudxa1nlapdcx"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Enemies/sailor_battle.gd" id="1_t57b1"]
 [ext_resource type="PackedScene" uid="uid://cbxfie77qxd0t" path="res://Scenes/Abilities/Basic/Reposition.tscn" id="2_uac8w"]
 [ext_resource type="PackedScene" uid="uid://bkaff4lqkrgs2" path="res://Scenes/Abilities/Basic/RangedAttack.tscn" id="3_58tm8"]
 [ext_resource type="PackedScene" uid="uid://2oavxmvjipxe" path="res://Scenes/Abilities/Basic/Defend.tscn" id="4_57ylf"]
+[ext_resource type="Texture2D" uid="uid://tjye7cra4wxk" path="res://Art/UI/CharacterHexIcons/hex_icon_sailor.png" id="5_sx81h"]
 
 [node name="SailorBattle" type="Node3D" node_paths=PackedStringArray("Reposition", "RangedAttack", "Defend")]
 script = ExtResource("1_t57b1")
@@ -12,6 +13,7 @@ RangedAttack = NodePath("Abilities/RangedAttack")
 Defend = NodePath("Abilities/Defend")
 BattlerName = "Sailor"
 Level = 1
+UIHexIcon = ExtResource("5_sx81h")
 Strength = 6
 Magic = 6
 Defense = 7
