@@ -5,6 +5,7 @@ signal HPChanged
 signal APChanged
 signal TurnEnded
 signal HasDied
+signal WeaknessHitSignal
 
 const Ability = preload("res://Scripts/BaseClasses/ability.gd")
 
@@ -14,6 +15,8 @@ const Ability = preload("res://Scripts/BaseClasses/ability.gd")
 @export var EmittedDeathSignal:bool = false
 
 @export var UIHexIcon:Texture2D
+
+@export var WeaknessHit:bool = false
 
 @export var Strength:int #physical ability power
 @export var Magic:int #magical ability power
@@ -62,6 +65,9 @@ func _process(delta):
 		IsDead = true
 		self.hide()
 
+func turn_started():
+	WeaknessHit = false
+
 func take_damage(damage:int):
 	CurrentHP -= damage
 	if CurrentHP < 0:
@@ -76,6 +82,8 @@ func heal(damage:int):
 	
 func weakness_check(Attack:Ability) -> bool:
 	if Attack.Element in Weaknesses:
+		WeaknessHit = true
+		WeaknessHitSignal.emit()
 		return true
 	return false
 

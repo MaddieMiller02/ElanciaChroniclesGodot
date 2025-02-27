@@ -12,6 +12,9 @@ var PartyMembers:Array[PartyMember]
 @export var EnemyControlNode:Node
 var Enemies:Array[Enemy]
 var BattleCharacters:Array[BattleCharacter]
+
+var FollowUpInitiator:BattleCharacter
+var FollowUpPrompt:bool = false
 var TurnOrder:Array[BattleCharacter]
 var AttackQueue :Array[Ability]
 
@@ -35,6 +38,7 @@ var TargetCharacter:BattleCharacter
 @export var RepositionMenuControl:Node
 @export var RepositionMenuContainer:Container
 @export var RepositionButton:ActionMenuButton
+@export var FollowUpMenuContainer:Container
 
 @export var PartyLinesControl:Node
 @export var EnemyLinesControl:Node
@@ -116,6 +120,7 @@ func _ready():
 					break
 		BattleCharacters[i].TurnEnded.connect(_on_end_turn)
 		BattleCharacters[i].HasDied.connect(_on_character_died)
+		BattleCharacters[i].WeaknessHitSignal.connect(_on_weakness_hit)
 					
 	# Sets up the Turn Order UI
 	for i in range(TurnOrder.size()):
@@ -141,6 +146,9 @@ func _ready():
 	for i in range(MeleeMenuContainer.get_child_count()):
 		var CurrentButton = MeleeMenuContainer.get_child(i) as ActionMenuButton
 		CurrentButton.cursor_selected.connect(_on_melee_type_button_pressed)
+	for i in range(FollowUpMenuContainer.get_child_count()):
+		var CurrentButton = FollowUpMenuContainer.get_child(i) as ActionMenuButton
+		CurrentButton.cursor_selected.connect(_on_follow_up_button_pressed)
 	
 	set_active_character(TurnOrder[0])
 
@@ -150,6 +158,7 @@ func set_active_character(character:BattleCharacter):
 		ActiveCharacter.reset_temp_stats()
 	
 	ActiveCharacter = character
+	ActiveCharacter.turn_started()
 	
 	if TargetCursor.get_parent().visible == false:
 		TargetCursor = TargetCursorScene.instantiate()
@@ -186,16 +195,18 @@ func _special_menu_setup():
 		SpecialMenuContainer.add_child(NewSpecialButton)
 
 func _on_end_turn():
-	# Send current character to the end of the turn order
-	await get_tree().create_timer(3.0).timeout
-	AttackQueue.clear()
-	ActiveCharacter.HasRepositioned = false
-	TurnOrder.append(TurnOrder.pop_front())
-	set_active_character(TurnOrder[0])
-	
-	TurnOrderUIContainer.move_child(TurnOrderUIContainer.get_child(0), -1)
-	
-	
+	if FollowUpPrompt == true and ActiveCharacter is PartyMember:
+		print("Follow up menu displayed")
+	else:
+		# Send current character to the end of the turn order
+		await get_tree().create_timer(3.0).timeout
+		AttackQueue.clear()
+		ActiveCharacter.HasRepositioned = false
+		TurnOrder.append(TurnOrder.pop_front())
+		set_active_character(TurnOrder[0])
+		
+		TurnOrderUIContainer.move_child(TurnOrderUIContainer.get_child(0), -1)
+		
 func _on_character_died():
 	for i in range(BattleCharacters.size()):
 		if BattleCharacters[i].CurrentHP == 0:
@@ -367,3 +378,10 @@ func _on_special_button_selected():
 		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_PARTY)
 		MenuCursor.change_menu(PartyUIContainer)
 		PartyUIControl.add_child(MenuCursor)
+
+func _on_weakness_hit():
+	if ActiveCharacter is PartyMember:
+		FollowUpPrompt = true
+
+func _on_follow_up_button_pressed():
+	pass
