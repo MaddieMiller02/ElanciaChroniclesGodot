@@ -38,6 +38,7 @@ var TargetCharacter:BattleCharacter
 @export var RepositionMenuControl:Node
 @export var RepositionMenuContainer:Container
 @export var RepositionButton:ActionMenuButton
+@export var FollowUpMenuControl:Node
 @export var FollowUpMenuContainer:Container
 
 @export var PartyLinesControl:Node
@@ -147,7 +148,7 @@ func _ready():
 		var CurrentButton = MeleeMenuContainer.get_child(i) as ActionMenuButton
 		CurrentButton.cursor_selected.connect(_on_melee_type_button_pressed)
 	for i in range(FollowUpMenuContainer.get_child_count()):
-		var CurrentButton = FollowUpMenuContainer.get_child(i) as ActionMenuButton
+		var CurrentButton = FollowUpMenuContainer.get_child(i) as UIButton
 		CurrentButton.cursor_selected.connect(_on_follow_up_button_pressed)
 	
 	set_active_character(TurnOrder[0])
@@ -156,6 +157,7 @@ func set_active_character(character:BattleCharacter):
 	# Resets temporary stat buffs at the start of the next turn
 	if ActiveCharacter != null:
 		ActiveCharacter.reset_temp_stats()
+	FollowUpPrompt = false
 	
 	ActiveCharacter = character
 	ActiveCharacter.turn_started()
@@ -196,16 +198,28 @@ func _special_menu_setup():
 
 func _on_end_turn():
 	if FollowUpPrompt == true and ActiveCharacter is PartyMember:
-		print("Follow up menu displayed")
+		await get_tree().create_timer(3.0).timeout
+		
+		var TextBox = TextBoxScene.instantiate()
+		add_child(TextBox)
+		TextBox.display_one_off_text("Would you like to pass your turn and perform a follow up?")
+		
+		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_FOLLOW_UP)
+		MenuCursor.change_menu(FollowUpMenuContainer)
+		MenuCursor.previous_menus.clear()
+		FollowUpMenuControl.add_child(MenuCursor)
 	else:
 		# Send current character to the end of the turn order
-		await get_tree().create_timer(3.0).timeout
-		AttackQueue.clear()
-		ActiveCharacter.HasRepositioned = false
+		if Globals.CurrentGameState != Enums.GAME_STATE.BATTLE_MENU_FOLLOW_UP:
+			await get_tree().create_timer(3.0).timeout
 		TurnOrder.append(TurnOrder.pop_front())
+		
+		# Begin the new character's turn
+		TurnOrderUIContainer.move_child(TurnOrderUIContainer.get_child(0), -1)
 		set_active_character(TurnOrder[0])
 		
-		TurnOrderUIContainer.move_child(TurnOrderUIContainer.get_child(0), -1)
+	AttackQueue.clear()
+	ActiveCharacter.HasRepositioned = false
 		
 func _on_character_died():
 	for i in range(BattleCharacters.size()):
@@ -272,49 +286,76 @@ func _on_character_button_pressed():
 	
 	# Checks if the enemy is out of range or dead, performs ability otherwise
 	if not TargetCharacter.IsDead:
-		# Checks to ensure the enemy is not out of range, performs ability otherwise.
-		if ActiveAbility.in_range(ActiveCharacter, TargetCharacter):
-			if ActiveAbility.AbilityName == "Melee Attack":
-				Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_MELEE)
-				MeleeMenuControl.show()
-				MenuCursor.change_menu(MeleeMenuContainer)
-				MeleeMenuControl.add_child(MenuCursor)
-				var TextBox = TextBoxScene.instantiate()
-				add_child(TextBox)
-				TextBox.display_one_off_text("Choose three attacks.")
-				return
+		# If the character is trying to pass a turn, perform this action instead of anything else
+		if FollowUpPrompt == true:
 			
-			# Checks to see if this is a healing move, and stops the player from using it if the specified ally already has full health
-			elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE_ALLY:
-				if TargetCharacter.CurrentHP == TargetCharacter.MaxHP:
+			#TODO: PREVENT MISSED ATTACKS FROM TRIGGERING FOLLOW-UPS
+			
+			#TODO: Check if trying to pass to the same character, and prevent if so
+			#TODO: Check if this character has already been passed to recently, and prevent if so
+			
+			# Send the current character to the end of the turn order
+			TurnOrder.append(TurnOrder.pop_front())
+			TurnOrderUIContainer.move_child(TurnOrderUIContainer.get_child(0), -1)
+			
+			# Find the new character's index, then put them at the front
+			var CharacterIndex = TurnOrder.find(TargetCharacter)
+			TurnOrder.insert(0, TurnOrder.pop_at(CharacterIndex))
+			TurnOrderUIContainer.move_child(TurnOrderUIContainer.get_child(CharacterIndex), 0)
+			
+			#TODO: Implement a Follow Up Level variable, and a Follow Up Boost function unique to each BattleCharacter that boosts different stats based on the level
+			
+			# Begin the next turn
+			set_active_character(TurnOrder[0])
+			
+		else:
+			# Checks to ensure the enemy is not out of range, performs ability otherwise.
+			if ActiveAbility.in_range(ActiveCharacter, TargetCharacter):
+				if ActiveAbility.AbilityName == "Melee Attack":
+					Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_MELEE)
+					MeleeMenuControl.show()
+					MenuCursor.change_menu(MeleeMenuContainer)
+					MeleeMenuControl.add_child(MenuCursor)
 					var TextBox = TextBoxScene.instantiate()
 					add_child(TextBox)
-					TextBox.display_one_off_text(TargetCharacter.BattlerName + " already has full health!")
+					TextBox.display_one_off_text("Choose three attacks.")
 					return
-				else:
+				
+				# Checks to see if this is a healing move, and stops the player from using it if the specified ally already has full health
+				elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE_ALLY:
+					if TargetCharacter.CurrentHP == TargetCharacter.MaxHP:
+						var TextBox = TextBoxScene.instantiate()
+						add_child(TextBox)
+						TextBox.display_one_off_text(TargetCharacter.BattlerName + " already has full health!")
+						return
+					else:
+						ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
+						_on_end_turn()
+						
+				elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
 					ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
 					_on_end_turn()
-					
-			elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
-				ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
-				_on_end_turn()
-		else:
-			var TextBox = TextBoxScene.instantiate()
-			add_child(TextBox)
-			TextBox.display_one_off_text(TargetCharacter.BattlerName + " is out of range for a " + ActiveAbility.AbilityName + ".")
-			return
+			else:
+				var TextBox = TextBoxScene.instantiate()
+				add_child(TextBox)
+				TextBox.display_one_off_text(TargetCharacter.BattlerName + " is out of range for a " + ActiveAbility.AbilityName + ".")
+				return
 	else:
 		var TextBox = TextBoxScene.instantiate()
 		add_child(TextBox)
 		TextBox.display_one_off_text(TargetCharacter.BattlerName + " is knocked out!")
 	
 func _on_character_button_focused():
+	# Determine whether the target is an enemy or a party member, and set the cursor accordingly
 	var Character
-	if ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE_ALLY:
-		Character = PartyMembers[MenuCursor.cursor_index] as BattleCharacter
-	else:
+	if ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE_ALLY or FollowUpPrompt == true:
+		if MenuCursor.cursor_index < PartyMembers.size():
+			Character = PartyMembers[MenuCursor.cursor_index] as BattleCharacter
+	elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
 		Character = Enemies[MenuCursor.cursor_index] as BattleCharacter
-	set_target_cursor_position(Character)
+		
+	if Character != null:
+		set_target_cursor_position(Character)
 	
 func _on_reposition_button_pressed():
 	if MenuCursor.cursor_index == 0:
@@ -384,4 +425,15 @@ func _on_weakness_hit():
 		FollowUpPrompt = true
 
 func _on_follow_up_button_pressed():
-	pass
+	# If the player selects no, end turn as normal
+	if MenuCursor.cursor_index == 0:
+		FollowUpPrompt = false
+		_on_end_turn()
+		
+	# Otherwise, prompt the player to select who they're passing their turn to.
+	else:
+		MenuCursor.cursor_index = 0
+		MenuCursor.change_menu(PartyUIContainer)
+		PartyUIControl.add_child(MenuCursor)
+		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_PARTY)
+		

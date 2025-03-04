@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dkm8w7oi1bg7y" path="res://Scenes/Abilities/Basic/HeavyAttack.tscn" id="11_eiv7w"]
 [ext_resource type="PackedScene" uid="uid://cdl7164ipiua8" path="res://Scenes/Abilities/Basic/OpenSpecialMenu.tscn" id="15_s8f3g"]
 
-[node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIControl", "PartyUIContainer", "EnemyUIControl", "EnemyUIContainer", "TurnOrderUIContainer", "ActionMenuContainer", "MeleeMenuContainer", "MeleeMenuControl", "RangedAttackButton", "SpecialMenuContainer", "SpecialMenuControl", "SpecialDescriptionBox", "RepositionMenuControl", "RepositionMenuContainer", "RepositionButton", "FollowUpMenuContainer", "PartyLinesControl", "EnemyLinesControl", "MenuCursor", "TargetCursor")]
+[node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIControl", "PartyUIContainer", "EnemyUIControl", "EnemyUIContainer", "TurnOrderUIContainer", "ActionMenuContainer", "MeleeMenuContainer", "MeleeMenuControl", "RangedAttackButton", "SpecialMenuContainer", "SpecialMenuControl", "SpecialDescriptionBox", "RepositionMenuControl", "RepositionMenuContainer", "RepositionButton", "FollowUpMenuControl", "FollowUpMenuContainer", "PartyLinesControl", "EnemyLinesControl", "MenuCursor", "TargetCursor")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 script = ExtResource("1_iposc")
 PartyControlNode = NodePath("CurrentParty")
@@ -38,6 +38,7 @@ SpecialDescriptionBox = NodePath("BattleCanvas/Control_SpecialsMenu/MarginContai
 RepositionMenuControl = NodePath("BattleCanvas/Control_RepositionMenu")
 RepositionMenuContainer = NodePath("BattleCanvas/Control_RepositionMenu/GridContainer")
 RepositionButton = NodePath("BattleCanvas/Control_ActionMenu/GridContainer/Control_Reposition")
+FollowUpMenuControl = NodePath("BattleCanvas/Control_FollowUpMenu")
 FollowUpMenuContainer = NodePath("BattleCanvas/Control_FollowUpMenu/GridContainer")
 PartyLinesControl = NodePath("Control_PartyLines")
 EnemyLinesControl = NodePath("Control_EnemyLines")

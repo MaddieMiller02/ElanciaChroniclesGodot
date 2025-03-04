@@ -135,7 +135,7 @@ func _set_cursor_offset():
 		cursor_offset = Vector2(45, -15)
 
 func _on_game_state_updated():
-	if Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_NORMAL or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_MELEE or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_SPECIALS:
+	if Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_NORMAL or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_SELECTING_TARGET_PARTY or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_MELEE or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_SPECIALS or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_FOLLOW_UP:
 		self.visible = true
 		active = true
 	else:
