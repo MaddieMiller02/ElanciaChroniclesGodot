@@ -232,6 +232,10 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
 [node name="FirstBattle" parent="." instance=ExtResource("6_vah62")]
 
+[node name="SailorBattle" parent="FirstBattle/Enemies" index="0"]
+DefaultPosition = 0
+CurrentPosition = 0
+
 [node name="SailorBattle2" parent="FirstBattle/Enemies" index="1"]
 Speed = 9
 DefaultPosition = 2
@@ -239,8 +243,6 @@ CurrentPosition = 2
 
 [node name="SailorBattle3" parent="FirstBattle/Enemies" index="2" instance=ExtResource("8_t4j1w")]
 Speed = 7
-DefaultPosition = 0
-CurrentPosition = 0
 
 [node name="DefaultAbilities" type="Node" parent="."]
 

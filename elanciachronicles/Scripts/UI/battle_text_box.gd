@@ -49,7 +49,7 @@ func display_missed_message(AbilityUsed:Ability, User:BattleCharacter):
 	queue_free()
 	
 func display_defend_message(User:BattleCharacter, RegainedAP:int):
-	text_label.text = User.BattlerName + " defended. Regained " + str(RegainedAP) + " AP."
+	text_label.text = User.BattlerName + " defended. Regained " + str(RegainedAP) + " Action Points."
 	
 	self.show()
 	

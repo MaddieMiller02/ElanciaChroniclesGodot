@@ -28,14 +28,19 @@ const Ability = preload("res://Scripts/BaseClasses/ability.gd")
 
 @export var TempHP:int
 @export var TempAP:int
+@export var TempStrength:int
+@export var TempMagic:int
 @export var TempDefense:int
 @export var TempResistance:int
+@export var TempSpeed:int
+@export var TempCharisma:int
 @export var CurrentHP:int
 @export var CurrentAP:int
 @export var MaxHP:int
 @export var MaxAP:int
 
 @export var HasRepositioned:bool = false
+@export var HasFollowedUp:bool = false
 
 @export var SpecialsNode:Node
 @export var SpecialList:Array[Ability]
@@ -101,5 +106,37 @@ func regain_ap(amount:int):
 	
 func reset_temp_stats():
 	# Currently only accomadates one-turn stat buffs (like the ones granted by Defend)
+	TempStrength = 0
+	TempMagic = 0
 	TempDefense = 0
 	TempResistance = 0
+	TempSpeed = 0
+	TempCharisma = 0
+
+func follow_up_boost(PowerLevel:int):
+	# TODO: REWORK ALL STATS INTO TUPLES WITH A NAME AND A VALUE. THESE IF STATEMENTS ARE A TEMPORARY FIX
+	if BattlerName == "Verse":
+		TempSpeed += (PowerLevel * 2)
+		TempMagic += (PowerLevel * 2)
+	if BattlerName == "Xan":
+		TempStrength += (PowerLevel * 2)
+		TempDefense += (PowerLevel * 2)
+
+# These Getters return the "active" value of each stat, those being the default value plus the temp value
+func get_strength() -> int:
+	return Strength + TempStrength
+
+func get_magic() -> int:
+	return Magic + TempMagic
+	
+func get_defense() -> int:
+	return Defense + TempDefense
+
+func get_resistance() -> int:
+	return Resistance + TempResistance
+
+func get_speed() -> int:
+	return Speed + TempSpeed
+	
+func get_charisma() -> int:
+	return Charisma + TempCharisma

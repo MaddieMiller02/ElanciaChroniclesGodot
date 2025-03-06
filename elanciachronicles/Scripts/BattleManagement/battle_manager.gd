@@ -15,6 +15,7 @@ var BattleCharacters:Array[BattleCharacter]
 
 var FollowUpInitiator:BattleCharacter
 var FollowUpPrompt:bool = false
+var FollowUpLevel:int = 0
 var TurnOrder:Array[BattleCharacter]
 var AttackQueue :Array[Ability]
 
@@ -122,6 +123,7 @@ func _ready():
 		BattleCharacters[i].TurnEnded.connect(_on_end_turn)
 		BattleCharacters[i].HasDied.connect(_on_character_died)
 		BattleCharacters[i].WeaknessHitSignal.connect(_on_weakness_hit)
+		
 					
 	# Sets up the Turn Order UI
 	for i in range(TurnOrder.size()):
@@ -155,12 +157,61 @@ func _ready():
 
 func set_active_character(character:BattleCharacter):
 	# Resets temporary stat buffs at the start of the next turn
-	if ActiveCharacter != null:
-		ActiveCharacter.reset_temp_stats()
 	FollowUpPrompt = false
 	
+	# Set the new active character
 	ActiveCharacter = character
 	ActiveCharacter.turn_started()
+	
+	# If this character started a follow up chain in the previous round, reset the turn order
+	if ActiveCharacter == FollowUpInitiator:
+		FollowUpInitiator = null;
+		
+		# Reset the turn order, Follow Up Level, and all characters' HasFollowedUp markers and temp stats
+		TurnOrder.clear()
+		TurnOrder.append(ActiveCharacter)
+		FollowUpLevel = 0
+		for i in range(BattleCharacters.size()):
+			BattleCharacters[i].HasFollowedUp = false
+			BattleCharacters[i].reset_temp_stats()
+		
+		var SlowerCharacters:Array[BattleCharacter]
+		var FasterCharacters:Array[BattleCharacter]
+		
+		# Determine the speed order based on the current active character, with slower characters going immediately after, and faster characters going after them.
+		for i in range(BattleCharacters.size()):
+			var Character = BattleCharacters[i]
+			
+			# Sort chararacters into sepearate arrays of "faster" and "slower" characters
+			if Character != ActiveCharacter:
+				if Character.get_speed() <= ActiveCharacter.get_speed():
+					SlowerCharacters.append(Character)
+				else:
+					FasterCharacters.append(Character)
+				
+		# Sort these lists based on speed, in decreasing order
+		for i in range(SlowerCharacters.size()):
+			for j in range(i, SlowerCharacters.size()):
+				if SlowerCharacters[i].get_speed() < SlowerCharacters[j].get_speed():
+					SlowerCharacters.insert(j, SlowerCharacters.pop_at(i))
+					
+		for i in range(FasterCharacters.size()):
+			for j in range(i, FasterCharacters.size()):
+				if FasterCharacters[i].get_speed() < FasterCharacters[j].get_speed():
+					FasterCharacters.insert(j, FasterCharacters.pop_at(i))
+					
+		# Append everything from the SlowerCharacters list to the Turn Order, then do the same for the Faster Characters
+		for i in range(SlowerCharacters.size()):
+			TurnOrder.append(SlowerCharacters[i])
+		for i in range(FasterCharacters.size()):
+			TurnOrder.append(FasterCharacters[i])
+					
+		# Reset the UI
+		build_turn_order_ui()
+	
+		var TextBox = TextBoxScene.instantiate()
+		add_child(TextBox)
+		TextBox.display_one_off_text("Turn order reset!")
 	
 	if TargetCursor.get_parent().visible == false:
 		TargetCursor = TargetCursorScene.instantiate()
@@ -183,6 +234,14 @@ func set_target_cursor_position(Character:BattleCharacter):
 func set_active_ability(ability:Ability):
 	ActiveAbility = ability
 	
+func build_turn_order_ui():
+	for i in range(TurnOrderUIContainer.get_child_count()):
+		TurnOrderUIContainer.get_child(i).queue_free()
+	for i in range(TurnOrder.size()):
+		var NewHex = TextureRect.new()
+		NewHex.texture = TurnOrder[i].UIHexIcon
+		TurnOrderUIContainer.add_child(NewHex)
+
 func _special_menu_setup():
 	# Clears all previous special containers and resets the special menu
 	for Special in SpecialMenuContainer.get_children():
@@ -226,8 +285,13 @@ func _on_character_died():
 		if BattleCharacters[i].CurrentHP == 0:
 			var DeadCharacter = BattleCharacters[i]
 			var DeadCharacterIndex = TurnOrder.find(DeadCharacter)
+			
+			#TODO: REMOVE THIS CHARACTER FROM THE CHARACTER UI
+			#TODO: REMOVE THIS CHARACTER'S ROW FROM VIEW
+			
 			TurnOrder.pop_at(DeadCharacterIndex)
 			BattleCharacters.pop_at(i)
+			build_turn_order_ui()
 			
 			if DeadCharacter is PartyMember:
 				DeadCharacterIndex = PartyMembers.find(DeadCharacter)
@@ -289,10 +353,23 @@ func _on_character_button_pressed():
 		# If the character is trying to pass a turn, perform this action instead of anything else
 		if FollowUpPrompt == true:
 			
-			#TODO: PREVENT MISSED ATTACKS FROM TRIGGERING FOLLOW-UPS
+			# Prevent the player from passing to the same character
+			if TargetCharacter == ActiveCharacter:
+				var TextBox = TextBoxScene.instantiate()
+				add_child(TextBox)
+				TextBox.display_one_off_text("You can't pass your turn to yourself!")
+				return
+				
+			# Check if the character has already performed a Follow Up this round, and prevent them from passing if so
+			if TargetCharacter.HasFollowedUp:
+				var TextBox = TextBoxScene.instantiate()
+				add_child(TextBox)
+				TextBox.display_one_off_text("This character cannot follow up again until the turn order resets.")
+				return
 			
-			#TODO: Check if trying to pass to the same character, and prevent if so
-			#TODO: Check if this character has already been passed to recently, and prevent if so
+			# If this is the first character to initiate a follow up this round, store them for reseting the turn order later
+			if FollowUpInitiator == null:
+				FollowUpInitiator = ActiveCharacter
 			
 			# Send the current character to the end of the turn order
 			TurnOrder.append(TurnOrder.pop_front())
@@ -303,7 +380,12 @@ func _on_character_button_pressed():
 			TurnOrder.insert(0, TurnOrder.pop_at(CharacterIndex))
 			TurnOrderUIContainer.move_child(TurnOrderUIContainer.get_child(CharacterIndex), 0)
 			
-			#TODO: Implement a Follow Up Level variable, and a Follow Up Boost function unique to each BattleCharacter that boosts different stats based on the level
+			# Mark that this character has Followed Up so they cannot do so again until the next round.
+			ActiveCharacter.HasFollowedUp = true
+			
+			# Increases the Follow Up Level, and boosts the next character's stats accordingly
+			FollowUpLevel += 1
+			TargetCharacter.follow_up_boost(FollowUpLevel)
 			
 			# Begin the next turn
 			set_active_character(TurnOrder[0])

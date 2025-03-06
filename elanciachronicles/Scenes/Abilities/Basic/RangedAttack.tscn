@@ -6,7 +6,7 @@
 script = ExtResource("1_f0rik")
 AbilityName = "Ranged Attack"
 Description = "A basic ranged attack."
-MinRange = 2
+MinRange = 1
 MaxRange = 3
 Power = 4
 Physical = true

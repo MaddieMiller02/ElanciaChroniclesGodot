@@ -11,9 +11,6 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	Damage -= (Target.Defense + Target.TempDefense)
 	Damage += DamageOffset
 	var IsWeak:bool = false
-	if Target.weakness_check(self) == true:
-		Damage *= 1.5
-		IsWeak = true
 	
 	var HitChance = (HitRate + User.Speed) - Target.Speed
 	var HitRoll = randi_range(0, 100)
@@ -28,6 +25,11 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	var TextBox = TextBoxScene.instantiate()
 	self.add_child(TextBox)
 	if HitRoll < HitChance:
+		# Multiply the damage and trigger follow-up option if weakness hit
+		if Target.weakness_check(self) == true:
+			Damage *= 1.5
+			IsWeak = true
+		
 		Target.take_damage(Damage)
 		if IsWeak:
 			TextBox.display_weak_damage_message(self, User, Target, Damage)
