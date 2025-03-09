@@ -1,8 +1,8 @@
 extends Ability
 
 func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
-	User.TempDefense = User.Defense / 2
-	User.TempResistance = User.Resistance / 2
+	User.TempDefense += User.Defense / 2
+	User.TempResistance += User.Resistance / 2
 	
 	# AP restoration
 	var StartingAP:int = User.CurrentAP

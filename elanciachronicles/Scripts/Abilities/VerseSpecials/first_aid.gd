@@ -2,7 +2,7 @@ extends Ability
 
 func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
 	# Calculations
-	var HealAmount = User.Magic + Power
+	var HealAmount = User.get_magic() + Power
 	
 	print("Calculated Heal Amount: " + str(HealAmount))
 	print("Target Starting HP: " + str(Target.CurrentHP))

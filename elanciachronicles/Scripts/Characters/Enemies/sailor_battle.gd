@@ -1,24 +1,24 @@
 extends Enemy
 
 @export var Reposition:Ability
+@export var MeleeAttack:Ability
+@export var LightAttack:Ability
+@export var MediumAttack:Ability
+@export var HeavyAttack:Ability
 @export var RangedAttack:Ability
 @export var Defend:Ability
 
 func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 	if not IsDead:
 		if CurrentAP >= RangedAttack.APCost:
-			# Set the closest enemy as target
-			var Target:PartyMember = party[0]
-			for i in range(party.size()):
-				var character = party[i]
-				if character.CurrentPosition < Target.CurrentPosition and not Target.IsDead:
-					Target = character
+			# Set a random enemy as target
+			var Target:PartyMember = CurrentManager.PartyMembers[randi_range(0, (CurrentManager.PartyMembers.size() - 1))]
 					
 			if not HasRepositioned:
 				
 				print("Current distance to target: " + str(Target.CurrentPosition + CurrentPosition))
 				# Back up to perform ranged attack if too close
-				if not RangedAttack.in_range(self, Target):
+				if Target.CurrentPosition == 0 and CurrentPosition != 2:
 					print("Repositioning backward, enemy is too close")
 					CurrentManager.MenuCursor.cursor_index = 1
 					Reposition.perform_ability(self, Target, CurrentManager)
@@ -28,7 +28,7 @@ func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 					return
 				
 				# Move closer if the target is on the backline or midline, as long as this wouldn't put them out of attacking range
-				elif (Target.CurrentPosition + CurrentPosition) > 2 and CurrentPosition != 0:
+				elif Target.CurrentPosition >= 1 and CurrentPosition != 0:
 					print("Repositioning forward, enemy is too far")
 					CurrentManager.MenuCursor.cursor_index = 0
 					Reposition.perform_ability(self, Target, CurrentManager)
@@ -40,6 +40,11 @@ func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 			# Perform a ranged attack if in range and has enough AP, defend otherwise
 			if RangedAttack.in_range(self, Target):
 				RangedAttack.perform_ability(self, Target, CurrentManager)
+			elif MeleeAttack.in_range(self, Target):
+				CurrentManager.AttackQueue.append(LightAttack)
+				CurrentManager.AttackQueue.append(MediumAttack)
+				CurrentManager.AttackQueue.append(HeavyAttack)
+				MeleeAttack.perform_ability(self, Target, CurrentManager)
 			else:
 				Defend.perform_ability(self, self, CurrentManager)
 				

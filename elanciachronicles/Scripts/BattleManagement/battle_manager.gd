@@ -163,6 +163,10 @@ func set_active_character(character:BattleCharacter):
 	ActiveCharacter = character
 	ActiveCharacter.turn_started()
 	
+	if ActiveCharacter.HasFollowedUp == false:
+		ActiveCharacter.reset_temp_stats()
+		print(ActiveCharacter.BattlerName + "'s temporary stats reset!")
+	
 	# If this character started a follow up chain in the previous round, reset the turn order
 	if ActiveCharacter == FollowUpInitiator:
 		FollowUpInitiator = null;
@@ -171,9 +175,6 @@ func set_active_character(character:BattleCharacter):
 		TurnOrder.clear()
 		TurnOrder.append(ActiveCharacter)
 		FollowUpLevel = 0
-		for i in range(BattleCharacters.size()):
-			BattleCharacters[i].HasFollowedUp = false
-			BattleCharacters[i].reset_temp_stats()
 		
 		var SlowerCharacters:Array[BattleCharacter]
 		var FasterCharacters:Array[BattleCharacter]
@@ -181,6 +182,7 @@ func set_active_character(character:BattleCharacter):
 		# Determine the speed order based on the current active character, with slower characters going immediately after, and faster characters going after them.
 		for i in range(BattleCharacters.size()):
 			var Character = BattleCharacters[i]
+			Character.HasFollowedUp = false
 			
 			# Sort chararacters into sepearate arrays of "faster" and "slower" characters
 			if Character != ActiveCharacter:
@@ -306,6 +308,12 @@ func _on_ability_button_pressed():
 	var ButtonPressed = ActionMenuContainer.get_child(MenuCursor.cursor_index) as ActionMenuButton
 	set_active_ability(ButtonPressed.NextAbility)
 	
+	if ActiveAbility == null:
+		var TextBox = TextBoxScene.instantiate()
+		add_child(TextBox)
+		TextBox.display_one_off_text("You don't have any items right now!")
+		return
+	
 	# If the cahracter does not have enough AP for an attack, do not let them proceed
 	if ActiveAbility.APCost > ActiveCharacter.CurrentAP:
 		var TextBox = TextBoxScene.instantiate()
@@ -382,6 +390,7 @@ func _on_character_button_pressed():
 			
 			# Mark that this character has Followed Up so they cannot do so again until the next round.
 			ActiveCharacter.HasFollowedUp = true
+			TargetCharacter.HasFollowedUp = true
 			
 			# Increases the Follow Up Level, and boosts the next character's stats accordingly
 			FollowUpLevel += 1

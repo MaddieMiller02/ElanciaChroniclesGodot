@@ -3,10 +3,14 @@ extends Ability
 func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
 	# Calculations
 	var DamageOffset = randi_range(-2, 2)
-	var Damage = ((User.Strength + Power) - (Target.Defense + User.TempDefense)) + DamageOffset
+	var Damage = ((User.get_strength() + Power) - Target.get_defense()) + DamageOffset
 	var IsWeak:bool = false
-	var HitChance = (HitRate + User.Speed) - Target.Speed
+	var HitChance = (HitRate + User.get_speed()) - Target.get_speed()
 	var HitRoll = randi_range(0, 100)
+	
+	# Resets damage to 0 if it's belwo 0
+	if Damage < 0:
+		Damage = 0
 	
 	print("Calculated Damage: " + str(Damage))
 	print("Calculated Hit Chance: " + str(HitChance))

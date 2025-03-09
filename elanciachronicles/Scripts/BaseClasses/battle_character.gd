@@ -8,6 +8,7 @@ signal HasDied
 signal WeaknessHitSignal
 
 const Ability = preload("res://Scripts/BaseClasses/ability.gd")
+const TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
 
 @export var BattlerName:String
 @export var Level:int
@@ -118,9 +119,15 @@ func follow_up_boost(PowerLevel:int):
 	if BattlerName == "Verse":
 		TempSpeed += (PowerLevel * 2)
 		TempMagic += (PowerLevel * 2)
+		var TextBox = TextBoxScene.instantiate()
+		add_child(TextBox)
+		TextBox.display_one_off_text("Turn passed! Verse's Speed and Magic temporarily powered up!")
 	if BattlerName == "Xan":
 		TempStrength += (PowerLevel * 2)
 		TempDefense += (PowerLevel * 2)
+		var TextBox = TextBoxScene.instantiate()
+		add_child(TextBox)
+		TextBox.display_one_off_text("Turn passed! Xan's Strength and Defense temporarily powered up!")
 
 # These Getters return the "active" value of each stat, those being the default value plus the temp value
 func get_strength() -> int:

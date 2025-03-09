@@ -4,15 +4,19 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	# Calculations
 	var Damage = 0
 	for i in range(CurrentManager.AttackQueue.size()):
-		Damage += (User.Strength / CurrentManager.AttackQueue.size()) + CurrentManager.AttackQueue[i].Power
+		Damage += (User.get_strength() / CurrentManager.AttackQueue.size()) + CurrentManager.AttackQueue[i].Power
 		User.use_ap(CurrentManager.AttackQueue[i].APCost)
 	
 	var DamageOffset = randi_range(-2, 2)
-	Damage -= (Target.Defense + Target.TempDefense)
+	Damage -= Target.get_defense()
 	Damage += DamageOffset
 	var IsWeak:bool = false
 	
-	var HitChance = (HitRate + User.Speed) - Target.Speed
+	# Resets damage to 0 if it's belwo 0
+	if Damage < 0:
+		Damage = 0
+	
+	var HitChance = (HitRate + User.get_speed()) - Target.get_speed()
 	var HitRoll = randi_range(0, 100)
 	
 	print("Calculated Damage: " + str(Damage))
