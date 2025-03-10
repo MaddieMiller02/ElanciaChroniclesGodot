@@ -5,7 +5,7 @@
 [ext_resource type="Theme" uid="uid://qxrxrm4x1ftn" path="res://Themes/default_theme.tres" id="3_3io2f"]
 [ext_resource type="Texture2D" uid="uid://c62kcexfhw3dw" path="res://Art/UI/ui_hexagon_purple.png" id="3_kebgn"]
 
-[node name="Control_CharacterUI" type="Control" node_paths=PackedStringArray("NameLabel", "HPBar", "APBar", "ImageScene")]
+[node name="Control_CharacterUI" type="Control" node_paths=PackedStringArray("NameLabel", "HPLabel", "APLabel", "HPBar", "APBar", "ImageScene")]
 layout_mode = 3
 anchors_preset = 0
 offset_left = 8.0
@@ -13,6 +13,8 @@ offset_right = 48.0
 offset_bottom = 40.0
 script = ExtResource("1_miaxt")
 NameLabel = NodePath("MarginContainer/HBoxContainer/NameLabel")
+HPLabel = NodePath("MarginContainer/HBoxContainer/HPContainer/HPBar/Label")
+APLabel = NodePath("MarginContainer/HBoxContainer/APContainer/APBar/Label")
 HPBar = NodePath("MarginContainer/HBoxContainer/HPContainer/HPBar")
 APBar = NodePath("MarginContainer/HBoxContainer/APContainer/APBar")
 DefaultBackground = ExtResource("2_phi4g")
@@ -61,10 +63,18 @@ theme_override_font_sizes/font_size = 10
 text = "HP"
 
 [node name="HPBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/HPContainer"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
 size_flags_vertical = 4
 value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/HPContainer/HPBar"]
+offset_right = 99.0
+offset_bottom = 25.0
+text = "0/0"
+horizontal_alignment = 1
+vertical_alignment = 1
 
 [node name="APContainer" type="HBoxContainer" parent="MarginContainer/HBoxContainer"]
 layout_mode = 2
@@ -77,7 +87,15 @@ theme_override_font_sizes/font_size = 10
 text = "AP"
 
 [node name="APBar" type="ProgressBar" parent="MarginContainer/HBoxContainer/APContainer"]
-custom_minimum_size = Vector2(100, 0)
+custom_minimum_size = Vector2(100, 25)
 layout_mode = 2
 size_flags_vertical = 4
 value = 100.0
+show_percentage = false
+
+[node name="Label" type="Label" parent="MarginContainer/HBoxContainer/APContainer/APBar"]
+offset_right = 99.0
+offset_bottom = 25.0
+text = "0/0"
+horizontal_alignment = 1
+vertical_alignment = 1
