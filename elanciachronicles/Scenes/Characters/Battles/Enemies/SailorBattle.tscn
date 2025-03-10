@@ -1,14 +1,20 @@
-[gd_scene load_steps=10 format=3 uid="uid://cudxa1nlapdcx"]
+[gd_scene load_steps=13 format=3 uid="uid://cudxa1nlapdcx"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Enemies/sailor_battle.gd" id="1_t57b1"]
 [ext_resource type="PackedScene" uid="uid://cbxfie77qxd0t" path="res://Scenes/Abilities/Basic/Reposition.tscn" id="2_uac8w"]
+[ext_resource type="ArrayMesh" uid="uid://dqhfmmk5ysbtv" path="res://Art/3DModels/Characters/Enemies/Sailor/pirate.obj" id="3_2gov7"]
 [ext_resource type="PackedScene" uid="uid://bkaff4lqkrgs2" path="res://Scenes/Abilities/Basic/RangedAttack.tscn" id="3_58tm8"]
 [ext_resource type="PackedScene" uid="uid://2oavxmvjipxe" path="res://Scenes/Abilities/Basic/Defend.tscn" id="4_57ylf"]
+[ext_resource type="Texture2D" uid="uid://v1qs8iddk852" path="res://Art/3DModels/Characters/Enemies/Sailor/Pirate.png" id="4_fb8ax"]
 [ext_resource type="Texture2D" uid="uid://tjye7cra4wxk" path="res://Art/UI/CharacterHexIcons/hex_icon_sailor.png" id="5_sx81h"]
 [ext_resource type="PackedScene" uid="uid://bsyja3aiguuui" path="res://Scenes/Abilities/Basic/MeleeAttack.tscn" id="6_jqwro"]
 [ext_resource type="PackedScene" uid="uid://cx6qd40y4cbtl" path="res://Scenes/Abilities/Basic/LightAttack.tscn" id="7_pngmd"]
 [ext_resource type="PackedScene" uid="uid://c3luj5mvjwf4t" path="res://Scenes/Abilities/Basic/MediumAttack.tscn" id="8_oa335"]
 [ext_resource type="PackedScene" uid="uid://dkm8w7oi1bg7y" path="res://Scenes/Abilities/Basic/HeavyAttack.tscn" id="9_f40gw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_05i1l"]
+shading_mode = 0
+albedo_texture = ExtResource("4_fb8ax")
 
 [node name="SailorBattle" type="Node3D" node_paths=PackedStringArray("Reposition", "MeleeAttack", "LightAttack", "MediumAttack", "HeavyAttack", "RangedAttack", "Defend")]
 script = ExtResource("1_t57b1")
@@ -37,9 +43,10 @@ CurrentPosition = 1
 Resistances = Array[int]([3])
 Weaknesses = Array[int]([4, 2])
 
-[node name="CSGBox3D" type="CSGBox3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.85, 0)
-size = Vector3(1, 1.7, 1)
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 0, 0, 0)
+mesh = ExtResource("3_2gov7")
+surface_material_override/0 = SubResource("StandardMaterial3D_05i1l")
 
 [node name="Abilities" type="Node" parent="."]
 

@@ -1,0 +1,22 @@
+[remap]
+
+importer="wavefront_obj"
+importer_version=1
+type="Mesh"
+uid="uid://dqhfmmk5ysbtv"
+path="res://.godot/imported/pirate.obj-bcbc3ca3b86665625c4925bc18321147.mesh"
+
+[deps]
+
+files=["res://.godot/imported/pirate.obj-bcbc3ca3b86665625c4925bc18321147.mesh"]
+
+source_file="res://Art/3DModels/Characters/Enemies/Sailor/pirate.obj"
+dest_files=["res://.godot/imported/pirate.obj-bcbc3ca3b86665625c4925bc18321147.mesh", "res://.godot/imported/pirate.obj-bcbc3ca3b86665625c4925bc18321147.mesh"]
+
+[params]
+
+generate_tangents=true
+scale_mesh=Vector3(1, 1, 1)
+offset_mesh=Vector3(0, 0, 0)
+optimize_mesh=true
+force_disable_mesh_compression=false

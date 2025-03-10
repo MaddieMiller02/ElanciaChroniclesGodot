@@ -21407,6 +21407,7 @@ Resistances = Array[int]([0, 3, 4])
 Weaknesses = Array[int]([1, 6, 8])
 
 [node name="Doki Verse Model (All Animations)" type="Node3D" parent="."]
+transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 0, 0, 0)
 
 [node name="VERSE ARMATURE" type="Node3D" parent="Doki Verse Model (All Animations)"]
 transform = Transform3D(100, -1.58521e-21, -7.06809e-18, 7.06809e-18, 0.0317991, 100, 6.62068e-22, -100, 0.0317991, 0, 0, 0)
