@@ -57,6 +57,10 @@ const TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
 
 @export var Experience:int
 
+#Animations
+@export var Animator:AnimationPlayer
+@export var RangedAnimation:Animation
+
 func _ready() -> void:
 	# Appends every child of the "Specials" node to the SpecialList
 	if SpecialsNode != null:

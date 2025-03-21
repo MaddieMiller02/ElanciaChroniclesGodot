@@ -32,6 +32,9 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			TextBox.display_weak_damage_message(self, User, Target, Damage)
 		else:
 			TextBox.display_damage_message(self, User, Target, Damage)
+			
+		# Play ranged attack animation
+			
 	else:
 		TextBox.display_missed_message(self, User)
 	User.use_ap(APCost)
