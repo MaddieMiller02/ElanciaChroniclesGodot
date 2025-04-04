@@ -83,6 +83,12 @@ func take_damage(damage:int):
 		CurrentHP = 0
 	HPChanged.emit()
 	
+	# Animate character taking damage
+	if Animator != null:
+		Animator.set("parameters/conditions/Damaged", true)
+		await get_tree().create_timer(1.0).timeout
+		Animator.set("parameters/conditions/Damaged", false)	
+	
 func heal(damage:int):
 	CurrentHP += damage
 	if CurrentHP > MaxHP:

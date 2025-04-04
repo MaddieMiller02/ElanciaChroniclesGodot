@@ -33,12 +33,6 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		else:
 			TextBox.display_damage_message(self, User, Target, Damage)
 			
-		# Animate target taking damage
-		if Target.Animator != null:
-			Target.Animator.set("parameters/conditions/Damaged", true)
-			await get_tree().create_timer(1.0).timeout
-			Target.Animator.set("parameters/conditions/Damaged", false)
-			
 	else:
 		TextBox.display_missed_message(self, User)
 	User.use_ap(APCost)
