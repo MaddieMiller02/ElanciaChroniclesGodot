@@ -33,7 +33,11 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		else:
 			TextBox.display_damage_message(self, User, Target, Damage)
 			
-		# Play ranged attack animation
+		# Animate target taking damage
+		if Target.Animator != null:
+			Target.Animator.set("parameters/conditions/Damaged", true)
+			await get_tree().create_timer(1.0).timeout
+			Target.Animator.set("parameters/conditions/Damaged", false)
 			
 	else:
 		TextBox.display_missed_message(self, User)
@@ -41,3 +45,24 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	
 	print("User Ending AP: " + str(User.CurrentAP))
 	print("Enemy Ending HP: " + str(Target.CurrentHP))
+	
+	# Animate attack
+	if User.Animator != null:
+			User.look_at(Target.position)
+			User.rotate_y(deg_to_rad(90))
+			
+			User.Animator.set("parameters/conditions/RangedAttack", true)
+			await get_tree().create_timer(1.0).timeout
+			User.Animator.set("parameters/conditions/RangedAttack", false)
+			
+			# Trigger damage or dodge animation for enemy character
+			
+			# Hold until the animation is completed
+			if User.Animator != null:
+				print("Waiting for animation to finish")
+				await get_tree().create_timer(3).timeout
+				print("Animation finished")
+			
+			User.rotation = Vector3.ZERO
+			
+			emit_signal("AbilityFinished")

@@ -156,6 +156,9 @@ func _ready():
 	set_active_character(TurnOrder[0])
 
 func set_active_character(character:BattleCharacter):
+	#if ActiveAbility != null:
+		#await ActiveAbility.AbilityFinished
+	
 	# Resets temporary stat buffs at the start of the next turn
 	FollowUpPrompt = false
 	
@@ -271,7 +274,7 @@ func _on_end_turn():
 		FollowUpMenuControl.add_child(MenuCursor)
 	else:
 		# Send current character to the end of the turn order
-		if Globals.CurrentGameState != Enums.GAME_STATE.BATTLE_MENU_FOLLOW_UP:
+		if ActiveCharacter.Animator == null:
 			await get_tree().create_timer(3.0).timeout
 		TurnOrder.append(TurnOrder.pop_front())
 		
@@ -335,7 +338,7 @@ func _on_ability_button_pressed():
 				RepositionMenuControl.add_child(MenuCursor)
 				return
 		elif ActiveAbility.AbilityName == "Defend":
-			ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
+			await ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
 			_on_end_turn()
 			return
 		elif ActiveAbility.AbilityName == "Open Special Menu":
@@ -420,11 +423,11 @@ func _on_character_button_pressed():
 						TextBox.display_one_off_text(TargetCharacter.BattlerName + " already has full health!")
 						return
 					else:
-						ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
+						await ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
 						_on_end_turn()
 						
 				elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
-					ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
+					await ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
 					_on_end_turn()
 			else:
 				var TextBox = TextBoxScene.instantiate()
@@ -489,7 +492,7 @@ func _on_melee_type_button_pressed():
 		var CurrentButton = MenuCursor.get_menu_item_at_index(MenuCursor.cursor_index) as ActionMenuButton
 		AttackQueue.append(CurrentButton.NextAbility)
 	if AttackQueue.size() == 3:
-		ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
+		await ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
 		_on_end_turn()
 
 func _on_special_button_focused():

@@ -1,6 +1,8 @@
 class_name Ability
 extends Node
 
+signal AbilityFinished
+
 @export var AbilityName:String
 @export var Description:String
 @export var MinRange:int

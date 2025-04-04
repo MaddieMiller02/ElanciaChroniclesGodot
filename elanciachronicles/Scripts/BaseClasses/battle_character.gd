@@ -58,8 +58,7 @@ const TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
 @export var Experience:int
 
 #Animations
-@export var Animator:AnimationPlayer
-@export var RangedAnimation:Animation
+@export var Animator:AnimationTree
 
 func _ready() -> void:
 	# Appends every child of the "Specials" node to the SpecialList
@@ -132,6 +131,7 @@ func follow_up_boost(PowerLevel:int):
 		var TextBox = TextBoxScene.instantiate()
 		add_child(TextBox)
 		TextBox.display_one_off_text("Turn passed! Xan's Strength and Defense temporarily powered up!")
+		
 
 # These Getters return the "active" value of each stat, those being the default value plus the temp value
 func get_strength() -> int:

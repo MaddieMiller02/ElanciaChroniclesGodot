@@ -15,3 +15,5 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	User.use_ap(APCost)
 	
 	print("Target Ending HP: " + str(Target.CurrentHP))
+	
+	emit_signal("AbilityFinished")

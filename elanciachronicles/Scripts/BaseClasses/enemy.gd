@@ -5,4 +5,3 @@ extends BattleCharacter
 
 func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 	TurnEnded.emit()
-	

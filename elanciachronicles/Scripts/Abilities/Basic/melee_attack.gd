@@ -39,8 +39,17 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			TextBox.display_weak_damage_message(self, User, Target, Damage)
 		else:
 			TextBox.display_damage_message(self, User, Target, Damage)
+		
+		# Animate target taking damage
+		if Target.Animator != null:
+			Target.Animator.set("parameters/conditions/Damaged", true)
+			await get_tree().create_timer(1.0).timeout
+			Target.Animator.set("parameters/conditions/Damaged", false)	
+			
 	else:
 		TextBox.display_missed_message(self, User)
 	
 	print("User Ending AP: " + str(User.CurrentAP))
 	print("Enemy Ending HP: " + str(Target.CurrentHP))
+	
+	emit_signal("AbilityFinished")

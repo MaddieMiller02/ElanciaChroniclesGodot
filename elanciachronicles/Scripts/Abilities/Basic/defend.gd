@@ -16,3 +16,5 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	var TextBox = TextBoxScene.instantiate() as BattleTextBox
 	add_child(TextBox)
 	TextBox.display_defend_message(User, User.CurrentAP - StartingAP)
+	
+	emit_signal("AbilityFinished")

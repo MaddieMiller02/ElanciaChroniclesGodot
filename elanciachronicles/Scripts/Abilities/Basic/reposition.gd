@@ -54,3 +54,5 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		
 	CurrentManager.ActiveCharacter.HasRepositioned = true
 	CurrentManager.RepositionMenuControl.hide()
+	emit_signal("AbilityFinished")
+	print("Ability Finished signal emitted!")
