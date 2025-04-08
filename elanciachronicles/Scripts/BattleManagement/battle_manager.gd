@@ -269,7 +269,6 @@ func _special_menu_setup():
 
 func _on_end_turn():
 	if FollowUpPrompt == true and ActiveCharacter is PartyMember:
-		await get_tree().create_timer(3.0).timeout
 		
 		var TextBox = TextBoxScene.instantiate()
 		add_child(TextBox)

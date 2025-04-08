@@ -46,12 +46,8 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	print("User Ending AP: " + str(User.CurrentAP))
 	print("Enemy Ending HP: " + str(Target.CurrentHP))
 	
-	# Move in front of the target
-	var OriginalPosition = User.position
-	if User is PartyMember:
-		User.set_destination(Vector3(Target.position.x - 1.5, Target.position.y, Target.position.z))
-	else:
-		User.set_destination(Vector3(Target.position.x + 1.5, Target.position.y, Target.position.z))
+	OriginalPosition = User.position
+	move_to_target(User, Target)
 	await User.DestinationReachedSignal
 	
 	# Play each attack animation sequentially
@@ -84,9 +80,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		# If this is the last animation, return to the root animation tree. 
 		User.Animator.set("parameters/conditions/Melee Attack", false)
 		
-	# Move back to original position
-	print(OriginalPosition)
-	User.set_destination(OriginalPosition)
+	move_to_start(User, Target)
 	await User.DestinationReachedSignal
 	await get_tree().create_timer(0.5).timeout
 	

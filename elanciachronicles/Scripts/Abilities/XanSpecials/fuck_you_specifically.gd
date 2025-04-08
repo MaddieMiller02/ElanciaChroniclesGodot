@@ -1,6 +1,8 @@
 extends Ability
 
 func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
+	OriginalPosition = User.position
+	
 	# Calculations
 	var DamageOffset = randi_range(-2, 2)
 	var Damage = ((User.get_strength() + Power) - Target.get_defense()) + DamageOffset
@@ -24,7 +26,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	var position_marker = position_line.get_child(CurrentManager.ActiveCharacter.CurrentPosition)
 	var position_line_position = position_line.position
 	var position_marker_position = position_marker.position
-	CurrentManager.ActiveCharacter.position.x = (position_line_position.x + position_marker_position.x) - 1
+	OriginalPosition.x = (position_line_position.x + position_marker_position.x) - 1
 	CurrentManager.set_target_cursor_position(CurrentManager.ActiveCharacter)
 	
 	# Perform calculated outcome and dispay text boxes
@@ -47,5 +49,21 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	
 	print("User Ending AP: " + str(User.CurrentAP))
 	print("Enemy Ending HP: " + str(Target.CurrentHP))
+	
+	# Animate the attack
+	move_to_target(User, Target)
+	await User.DestinationReachedSignal
+	
+	if User.Animator != null:
+		User.Animator.set("parameters/conditions/Melee Attack", true)
+		User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", true)
+		await get_tree().create_timer(0.1).timeout
+		User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", false)
+		User.Animator.set("parameters/conditions/Melee Attack", false)
+		await User.Animator.animation_finished
+		
+	move_to_start(User, Target)
+	await User.DestinationReachedSignal
+	await get_tree().create_timer(0.5).timeout
 	
 	emit_signal("AbilityFinished")

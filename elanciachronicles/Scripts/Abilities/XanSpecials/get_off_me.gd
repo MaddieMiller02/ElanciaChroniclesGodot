@@ -1,6 +1,7 @@
 extends Ability
 
 func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
+	var SelectedTarget = Target
 	for i in range(CurrentManager.Enemies.size()):
 		Target = CurrentManager.Enemies[i]
 		if Target.CurrentPosition == 0:
@@ -51,5 +52,23 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	User.use_ap(APCost)
 	
 	print("User Ending AP: " + str(User.CurrentAP))
+	
+	# Animate the attack
+	Target = SelectedTarget
+	OriginalPosition = User.position
+	move_to_target(User, Target)
+	await User.DestinationReachedSignal
+	
+	if User.Animator != null:
+		User.Animator.set("parameters/conditions/Melee Attack", true)
+		User.Animator.set("parameters/Melee Attack Machine/conditions/Medium Attack", true)
+		await get_tree().create_timer(0.1).timeout
+		User.Animator.set("parameters/Melee Attack Machine/conditions/Medium Attack", false)
+		User.Animator.set("parameters/conditions/Melee Attack", false)
+		await User.Animator.animation_finished
+		
+	move_to_start(User, Target)
+	await User.DestinationReachedSignal
+	await get_tree().create_timer(0.5).timeout
 	
 	emit_signal("AbilityFinished")

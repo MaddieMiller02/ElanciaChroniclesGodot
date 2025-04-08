@@ -18,6 +18,7 @@ signal AbilityFinished
 @export var StatusEffects:Array[Enums.STATUS]
 @export var Element:Enums.ELEMENT
 @export var IsActive:bool
+@export var OriginalPosition:Vector3
 
 var TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
 
@@ -30,3 +31,15 @@ func in_range(User:BattleCharacter, Target:BattleCharacter) -> bool:
 		return true
 	else:
 		return false
+		
+func move_to_target(User:BattleCharacter, Target:BattleCharacter):
+	# Move in front of the target
+	if User is PartyMember:
+		User.set_destination(Vector3(Target.position.x - 1.5, Target.position.y, Target.position.z))
+	else:
+		User.set_destination(Vector3(Target.position.x + 1.5, Target.position.y, Target.position.z))
+	
+func move_to_start(User:BattleCharacter, Target:BattleCharacter):
+	# Move back to original position
+	print(OriginalPosition)
+	User.set_destination(OriginalPosition)

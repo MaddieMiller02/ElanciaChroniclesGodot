@@ -40,4 +40,21 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	print("User Ending AP: " + str(User.CurrentAP))
 	print("Enemy Ending HP: " + str(Target.CurrentHP))
 	
+	# Animate attack
+	
+	OriginalPosition = User.position
+	move_to_target(User, Target)
+	await User.DestinationReachedSignal
+	
+	if User.Animator != null:
+		User.Animator.set("parameters/conditions/Hack and Blast", true)
+		await get_tree().create_timer(0.1).timeout
+		User.Animator.set("parameters/conditions/Hack and Blast", false)
+		await User.Animator.animation_finished
+		await User.Animator.animation_finished
+		#await get_tree().create_timer(4.967).timeout
+	
+	move_to_start(User, Target)
+	await User.DestinationReachedSignal
+	
 	emit_signal("AbilityFinished")
