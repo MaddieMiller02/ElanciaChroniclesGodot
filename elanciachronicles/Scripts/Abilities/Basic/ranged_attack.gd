@@ -8,7 +8,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	var HitChance = (HitRate + User.get_speed()) - Target.get_speed()
 	var HitRoll = randi_range(0, 100)
 	
-	# Resets damage to 0 if it's belwo 0
+	# Resets damage to 0 if it's below 0
 	if Damage < 0:
 		Damage = 0
 	
