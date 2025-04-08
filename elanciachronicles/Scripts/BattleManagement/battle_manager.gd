@@ -223,6 +223,13 @@ func set_active_character(character:BattleCharacter):
 	ActiveCharacter.add_child(TargetCursor)
 	set_target_cursor_position(ActiveCharacter)
 	
+	# Deactivate defend animation
+	if ActiveCharacter.Animator != null and ActiveCharacter.IsDefending:
+		ActiveCharacter.Animator.set("parameters/conditions/Defend", true)
+		await get_tree().create_timer(0.1).timeout
+		ActiveCharacter.Animator.set("parameters/conditions/Defend", false)
+	ActiveCharacter.IsDefending = false
+	
 	if ActiveCharacter is PartyMember:
 		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_NORMAL)
 		MenuCursor.change_menu(ActionMenuContainer)

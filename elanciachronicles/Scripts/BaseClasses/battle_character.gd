@@ -18,6 +18,7 @@ const TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
 @export var UIHexIcon:Texture2D
 
 @export var WeaknessHit:bool = false
+@export var IsDefending:bool = false
 
 @export var Strength:int #physical ability power
 @export var Magic:int #magical ability power

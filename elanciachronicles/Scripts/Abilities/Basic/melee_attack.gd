@@ -58,21 +58,23 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			if CurrentManager.AttackQueue[i].AbilityName == "Light Melee Attack":
 				print("Light attack animation queued")
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Light Attack", true)
-				#await get_tree().create_timer(0.9).timeout
-				await User.Animator.animation_finished
+				await get_tree().create_timer(0.1).timeout
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Light Attack", false)
 			elif CurrentManager.AttackQueue[i].AbilityName == "Medium Melee Attack":
 				print("Medium attack animation queued")
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Medium Attack", true)
-				await User.Animator.animation_finished
+				await get_tree().create_timer(0.1).timeout
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Medium Attack", false)
 			elif CurrentManager.AttackQueue[i].AbilityName == "Heavy Melee Attack":
 				print("Heavy attack animation queued")
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", true)
-				await User.Animator.animation_finished
+				await get_tree().create_timer(0.1).timeout
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", false)
+				
+			await User.Animator.animation_finished
 				
 		# If this is the last animation, return to the root animation tree. 
 		User.Animator.set("parameters/conditions/Melee Attack", false)
+		await get_tree().create_timer(0.5).timeout
 	
 	emit_signal("AbilityFinished")
