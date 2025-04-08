@@ -6,6 +6,7 @@ signal APChanged
 signal TurnEnded
 signal HasDied
 signal WeaknessHitSignal
+signal DestinationReachedSignal
 
 const Ability = preload("res://Scripts/BaseClasses/ability.gd")
 const TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
@@ -60,6 +61,8 @@ const TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
 
 #Animations
 @export var Animator:AnimationTree
+var Destination:Vector3
+var DestinationReached:bool = true
 
 func _ready() -> void:
 	# Appends every child of the "Specials" node to the SpecialList
@@ -74,6 +77,18 @@ func _process(delta):
 		EmittedDeathSignal = true
 		IsDead = true
 		self.hide()
+		
+	# Move to destination and animate if applicable
+	if not DestinationReached:
+		look_at(global_position + position.direction_to(Destination), Vector3.UP)
+		rotate_y(deg_to_rad(90))
+		position += position.direction_to(Destination) * 10 * delta
+		if position.distance_to(Destination) < 0.3:
+			print("Destination reached!")
+			position = Destination
+			rotation = Vector3.ZERO
+			DestinationReached = true
+			DestinationReachedSignal.emit()
 
 func turn_started():
 	WeaknessHit = false
@@ -140,6 +155,11 @@ func follow_up_boost(PowerLevel:int):
 		TextBox.display_one_off_text("Turn passed! Xan's Strength and Defense temporarily powered up!")
 		
 
+# Set destination and trigger movement in _process
+func set_destination(NewDestination:Vector3):
+	DestinationReached = false
+	Destination = NewDestination
+
 # These Getters return the "active" value of each stat, those being the default value plus the temp value
 func get_strength() -> int:
 	return Strength + TempStrength
@@ -158,3 +178,6 @@ func get_speed() -> int:
 	
 func get_charisma() -> int:
 	return Charisma + TempCharisma
+
+func get_destination_reached() -> bool:
+	return DestinationReached
