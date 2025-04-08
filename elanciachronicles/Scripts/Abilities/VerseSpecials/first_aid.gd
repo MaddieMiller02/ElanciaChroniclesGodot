@@ -16,4 +16,10 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	
 	print("Target Ending HP: " + str(Target.CurrentHP))
 	
+	if User.Animator != null:
+		User.Animator.set("parameters/conditions/Item", true)
+		await get_tree().create_timer(2.67).timeout
+		User.Animator.set("parameters/conditions/Item", false)
+		await get_tree().create_timer(0.5).timeout
+	
 	emit_signal("AbilityFinished")
