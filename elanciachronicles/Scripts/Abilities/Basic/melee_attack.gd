@@ -75,10 +75,18 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 				await get_tree().create_timer(0.1).timeout
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", false)
 				
+			# Set the camera angle
+			if i == 0:
+				User.DefaultCamera.make_current()
+			elif i == 1:
+				User.ImpactCamera1.make_current()
+			elif i == 2:
+				User.ImpactCamera2.make_current()
 			await User.Animator.animation_finished
 				
-		# If this is the last animation, return to the root animation tree. 
+		# If this is the last animation, return to the root animation tree, and reset the camera 
 		User.Animator.set("parameters/conditions/Melee Attack", false)
+		CurrentManager.PlayerTurnCamera.make_current()
 		
 	move_to_start(User, Target)
 	await User.DestinationReachedSignal

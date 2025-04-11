@@ -41,6 +41,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	print("Enemy Ending HP: " + str(Target.CurrentHP))
 	
 	# Animate attack
+	User.DefaultCamera.make_current()
 	
 	OriginalPosition = User.position
 	move_to_target(User, Target)
@@ -51,9 +52,11 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		await get_tree().create_timer(0.1).timeout
 		User.Animator.set("parameters/conditions/Hack and Blast", false)
 		await User.Animator.animation_finished
+		User.ImpactCamera2.make_current()
 		await User.Animator.animation_finished
 		#await get_tree().create_timer(4.967).timeout
 	
+	CurrentManager.PlayerTurnCamera.make_current()
 	move_to_start(User, Target)
 	await User.DestinationReachedSignal
 	

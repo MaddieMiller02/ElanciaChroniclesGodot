@@ -51,10 +51,12 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	print("Enemy Ending HP: " + str(Target.CurrentHP))
 	
 	# Animate the attack
+	User.DefaultCamera.make_current()
 	move_to_target(User, Target)
 	await User.DestinationReachedSignal
 	
 	if User.Animator != null:
+		User.ImpactCamera1.make_current()
 		User.Animator.set("parameters/conditions/Melee Attack", true)
 		User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", true)
 		await get_tree().create_timer(0.1).timeout
@@ -62,6 +64,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		User.Animator.set("parameters/conditions/Melee Attack", false)
 		await User.Animator.animation_finished
 		
+	CurrentManager.PlayerTurnCamera.make_current()
 	move_to_start(User, Target)
 	await User.DestinationReachedSignal
 	await get_tree().create_timer(0.5).timeout

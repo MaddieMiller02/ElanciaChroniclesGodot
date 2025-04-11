@@ -60,12 +60,15 @@ const TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
 @export var Experience:int
 
 #Animations
+@export var CharacterModel:Node3D
 @export var Animator:AnimationTree
 var Destination:Vector3
 var DestinationReached:bool = true
 
 # Camera points
 @export var DefaultCamera:Camera3D
+@export var ImpactCamera1:Camera3D
+@export var ImpactCamera2:Camera3D
 
 func _ready() -> void:
 	# Appends every child of the "Specials" node to the SpecialList
@@ -84,13 +87,13 @@ func _process(delta):
 		
 	# Move to destination and animate if applicable
 	if not DestinationReached:
-		look_at(global_position + position.direction_to(Destination), Vector3.UP)
-		rotate_y(deg_to_rad(90))
+		CharacterModel.look_at(global_position + position.direction_to(Destination), Vector3.UP)
+		CharacterModel.rotate_y(deg_to_rad(180))
 		position += position.direction_to(Destination) * 10 * delta
 		if position.distance_to(Destination) < 0.3:
 			print("Destination reached!")
 			position = Destination
-			rotation = Vector3.ZERO
+			CharacterModel.rotation = Vector3.ZERO
 			DestinationReached = true
 			DestinationReachedSignal.emit()
 

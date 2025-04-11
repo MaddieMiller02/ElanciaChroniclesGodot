@@ -46,17 +46,25 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			User.rotate_y(deg_to_rad(90))
 			
 			User.Animator.set("parameters/conditions/RangedAttack", true)
+			User.DefaultCamera.make_current()
 			await get_tree().create_timer(1.0).timeout
 			User.Animator.set("parameters/conditions/RangedAttack", false)
 			
 			# Trigger damage or dodge animation for enemy character
 			
 			# Hold until the animation is completed
-			if User.Animator != null:
-				print("Waiting for animation to finish")
-				await get_tree().create_timer(3).timeout
-				print("Animation finished")
+			print("Waiting for animation to finish")
+			await get_tree().create_timer(2).timeout
+			print("Animation finished")
 			
-			User.rotation = Vector3.ZERO
+	# Hold camera for target's damage animation
+	if Target.Animator != null:
+		print("Making target's camera current!")
+		Target.DefaultCamera.make_current()
+		await get_tree().create_timer(2).timeout
+				
+	CurrentManager.PlayerTurnCamera.make_current()
 			
-			emit_signal("AbilityFinished")
+	User.rotation = Vector3.ZERO
+			
+	emit_signal("AbilityFinished")

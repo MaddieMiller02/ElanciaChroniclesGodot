@@ -244,7 +244,6 @@ func set_active_character(character:BattleCharacter):
 	
 	# Set the camera position to the default
 	PlayerTurnCamera.make_current()
-	Enemies[2].DefaultCamera.make_current()
 		
 func set_target_cursor_position(Character:BattleCharacter):
 	TargetCursor.position = Vector3(Character.position.x, Character.position.y + 3, Character.position.z + 6)

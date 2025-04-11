@@ -2,6 +2,7 @@ extends Ability
 
 func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
 	var SelectedTarget = Target
+	var EnemiesToMove:Array[BattleCharacter]
 	for i in range(CurrentManager.Enemies.size()):
 		Target = CurrentManager.Enemies[i]
 		if Target.CurrentPosition == 0:
@@ -25,14 +26,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			var TextBox = TextBoxScene.instantiate()
 			self.add_child(TextBox)
 			if HitRoll < HitChance:
-				#Reposition enemy backwaard
-				Target.CurrentPosition += 1
-				var position_line = CurrentManager.EnemyLinesControl.get_child(Target.get_index())
-				var position_marker = position_line.get_child(Target.CurrentPosition)
-				var position_line_position = position_line.position
-				var position_marker_position = position_marker.position
-				Target.position.x = (position_line_position.x + position_marker_position.x) + 1
-				CurrentManager.set_target_cursor_position(Target)
+				EnemiesToMove.append(Target)
 				
 				# Multiply the damage and trigger follow-up option if weakness hit
 				if Target.weakness_check(self) == true:
@@ -54,6 +48,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	print("User Ending AP: " + str(User.CurrentAP))
 	
 	# Animate the attack
+	User.DefaultCamera.make_current()
 	Target = SelectedTarget
 	OriginalPosition = User.position
 	move_to_target(User, Target)
@@ -61,12 +56,23 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	
 	if User.Animator != null:
 		User.Animator.set("parameters/conditions/Melee Attack", true)
+		User.ImpactCamera2.make_current()
 		User.Animator.set("parameters/Melee Attack Machine/conditions/Medium Attack", true)
-		await get_tree().create_timer(0.1).timeout
+		await get_tree().create_timer(1).timeout#Reposition enemy backwaard
+		for i in range(EnemiesToMove.size()):
+				Target = EnemiesToMove[i]
+				Target.CurrentPosition += 1
+				var position_line = CurrentManager.EnemyLinesControl.get_child(Target.get_index())
+				var position_marker = position_line.get_child(Target.CurrentPosition)
+				var position_line_position = position_line.position
+				var position_marker_position = position_marker.position
+				Target.position.x = (position_line_position.x + position_marker_position.x) + 1
+				CurrentManager.set_target_cursor_position(Target)
 		User.Animator.set("parameters/Melee Attack Machine/conditions/Medium Attack", false)
 		User.Animator.set("parameters/conditions/Melee Attack", false)
 		await User.Animator.animation_finished
 		
+	CurrentManager.PlayerTurnCamera.make_current()
 	move_to_start(User, Target)
 	await User.DestinationReachedSignal
 	await get_tree().create_timer(0.5).timeout
