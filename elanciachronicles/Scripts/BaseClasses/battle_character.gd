@@ -64,11 +64,15 @@ const TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
 var Destination:Vector3
 var DestinationReached:bool = true
 
+# Camera points
+@export var DefaultCamera:Camera3D
+
 func _ready() -> void:
 	# Appends every child of the "Specials" node to the SpecialList
 	if SpecialsNode != null:
 		for i in range(SpecialsNode.get_child_count()):
 			SpecialList.append(SpecialsNode.get_child(i))
+			
 
 func _process(delta):
 	# Checks if the character has died

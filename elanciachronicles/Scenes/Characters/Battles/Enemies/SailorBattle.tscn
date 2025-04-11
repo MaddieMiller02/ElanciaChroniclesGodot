@@ -16,7 +16,7 @@
 shading_mode = 0
 albedo_texture = ExtResource("4_fb8ax")
 
-[node name="SailorBattle" type="Node3D" node_paths=PackedStringArray("Reposition", "MeleeAttack", "LightAttack", "MediumAttack", "HeavyAttack", "RangedAttack", "Defend")]
+[node name="SailorBattle" type="Node3D" node_paths=PackedStringArray("Reposition", "MeleeAttack", "LightAttack", "MediumAttack", "HeavyAttack", "RangedAttack", "Defend", "DefaultCamera")]
 script = ExtResource("1_t57b1")
 Reposition = NodePath("Abilities/Reposition")
 MeleeAttack = NodePath("Abilities/MeleeAttack")
@@ -42,6 +42,7 @@ DefaultPosition = 1
 CurrentPosition = 1
 Resistances = Array[int]([3])
 Weaknesses = Array[int]([4, 2])
+DefaultCamera = NodePath("DefaultCamera")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 0, 0, 0)
@@ -63,3 +64,6 @@ surface_material_override/0 = SubResource("StandardMaterial3D_05i1l")
 [node name="MediumAttack" parent="Abilities" instance=ExtResource("8_oa335")]
 
 [node name="HeavyAttack" parent="Abilities" instance=ExtResource("9_f40gw")]
+
+[node name="DefaultCamera" type="Camera3D" parent="."]
+transform = Transform3D(0.471405, 0, -0.471405, 0, 0.666667, 0, 0.471405, 0, 0.471405, -2.13132, 0.998209, 2.46953)

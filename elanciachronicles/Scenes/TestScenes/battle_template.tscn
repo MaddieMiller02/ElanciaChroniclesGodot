@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dkm8w7oi1bg7y" path="res://Scenes/Abilities/Basic/HeavyAttack.tscn" id="11_eiv7w"]
 [ext_resource type="PackedScene" uid="uid://cdl7164ipiua8" path="res://Scenes/Abilities/Basic/OpenSpecialMenu.tscn" id="15_s8f3g"]
 
-[node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIControl", "PartyUIContainer", "EnemyUIControl", "EnemyUIContainer", "TurnOrderUIContainer", "ActionMenuContainer", "MeleeMenuContainer", "MeleeMenuControl", "RangedAttackButton", "SpecialMenuContainer", "SpecialMenuControl", "SpecialDescriptionBox", "RepositionMenuControl", "RepositionMenuContainer", "RepositionButton", "FollowUpMenuControl", "FollowUpMenuContainer", "PartyLinesControl", "EnemyLinesControl", "MenuCursor", "TargetCursor")]
+[node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIControl", "PartyUIContainer", "EnemyUIControl", "EnemyUIContainer", "TurnOrderUIContainer", "ActionMenuContainer", "MeleeMenuContainer", "MeleeMenuControl", "RangedAttackButton", "SpecialMenuContainer", "SpecialMenuControl", "SpecialDescriptionBox", "RepositionMenuControl", "RepositionMenuContainer", "RepositionButton", "FollowUpMenuControl", "FollowUpMenuContainer", "PartyLinesControl", "EnemyLinesControl", "MenuCursor", "TargetCursor", "PlayerTurnCamera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 script = ExtResource("1_iposc")
 PartyControlNode = NodePath("CurrentParty")
@@ -44,6 +44,10 @@ PartyLinesControl = NodePath("Control_PartyLines")
 EnemyLinesControl = NodePath("Control_EnemyLines")
 MenuCursor = NodePath("BattleCanvas/MenuCursor")
 TargetCursor = NodePath("TargetCursor")
+PlayerTurnCamera = NodePath("PlayerTurnCamera")
+
+[node name="PlayerTurnCamera" type="Camera3D" parent="."]
+transform = Transform3D(-0.625828, 0.201869, -0.753384, -3.45828e-08, 0.965926, 0.258819, 0.779961, 0.161976, -0.604504, -12.2201, 3.37162, -2.89031)
 
 [node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
 transform = Transform3D(-0.870311, -0.426521, 0.24625, 0.470738, -0.57341, 0.670527, -0.144791, 0.699486, 0.699825, -16.2304, 4.4172, 10.636)
@@ -185,12 +189,6 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
 
 [node name="BacklinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine5"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
-
-[node name="Camera_DefaultPosition" type="Node3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 0.965926, 0.258819, 0, -0.258819, 0.965926, 0, 4.5, 14.5)
-
-[node name="Camera3D" type="Camera3D" parent="Camera_DefaultPosition"]
-transform = Transform3D(1, 0, 0, 0, 1, 2.98023e-08, 0, -2.98023e-08, 1, 0, 0, 0)
 
 [node name="BattleCanvas" parent="." instance=ExtResource("3_vmr8g")]
 
