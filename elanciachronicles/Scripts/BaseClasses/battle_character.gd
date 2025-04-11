@@ -76,7 +76,7 @@ func _process(delta):
 		emit_signal("HasDied")
 		EmittedDeathSignal = true
 		IsDead = true
-		self.hide()
+		#self.hide()
 		
 	# Move to destination and animate if applicable
 	if not DestinationReached:
@@ -181,3 +181,6 @@ func get_charisma() -> int:
 
 func get_destination_reached() -> bool:
 	return DestinationReached
+	
+func get_is_dead() -> bool:
+	return IsDead
