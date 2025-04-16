@@ -46,9 +46,11 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			User.rotate_y(deg_to_rad(90))
 			
 			User.Animator.set("parameters/conditions/RangedAttack", true)
+			User.ranged_sound()
 			User.DefaultCamera.make_current()
 			await get_tree().create_timer(1.0).timeout
 			User.Animator.set("parameters/conditions/RangedAttack", false)
+			await get_tree().create_timer(0.3447).timeout
 			
 			# Trigger damage or dodge animation for enemy character
 			

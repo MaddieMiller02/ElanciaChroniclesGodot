@@ -70,6 +70,14 @@ var DestinationReached:bool = true
 @export var ImpactCamera1:Camera3D
 @export var ImpactCamera2:Camera3D
 
+# Sound Effects
+@export var MeleeSFX:AudioStreamPlayer3D
+@export var LightSoundDelay:float
+@export var MediumSoundDelay:float
+@export var HeavySoundDelay:float
+@export var RangedSFX:AudioStreamPlayer3D
+@export var RangedSoundDelay:float
+
 func _ready() -> void:
 	# Appends every child of the "Specials" node to the SpecialList
 	if SpecialsNode != null:
@@ -166,6 +174,23 @@ func follow_up_boost(PowerLevel:int):
 func set_destination(NewDestination:Vector3):
 	DestinationReached = false
 	Destination = NewDestination
+	
+# Waits the alloted delay, then plays the corresponding sound
+func light_melee_sound():
+	await get_tree().create_timer(LightSoundDelay).timeout
+	MeleeSFX.play()
+	
+func medium_melee_sound():
+	await get_tree().create_timer(MediumSoundDelay).timeout
+	MeleeSFX.play()
+	
+func heavy_melee_sound():
+	await get_tree().create_timer(HeavySoundDelay).timeout
+	MeleeSFX.play()
+	
+func ranged_sound():
+	await get_tree().create_timer(RangedSoundDelay).timeout
+	RangedSFX.play()
 
 # These Getters return the "active" value of each stat, those being the default value plus the temp value
 func get_strength() -> int:

@@ -282,7 +282,7 @@ Speed = 7
 
 [node name="BattleMusic" type="AudioStreamPlayer" parent="."]
 stream = ExtResource("4_cisby")
-volume_db = -16.177
+volume_db = -6.0
 autoplay = true
 parameters/looping = true
 

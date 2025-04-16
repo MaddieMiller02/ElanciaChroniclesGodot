@@ -49,10 +49,12 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	
 	if User.Animator != null:
 		User.Animator.set("parameters/conditions/Hack and Blast", true)
+		User.light_melee_sound()
 		await get_tree().create_timer(0.1).timeout
 		User.Animator.set("parameters/conditions/Hack and Blast", false)
 		await User.Animator.animation_finished
 		User.ImpactCamera2.make_current()
+		User.ranged_sound()
 		await User.Animator.animation_finished
 		#await get_tree().create_timer(4.967).timeout
 	

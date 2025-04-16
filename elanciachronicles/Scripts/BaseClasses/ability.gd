@@ -19,6 +19,7 @@ signal AbilityFinished
 @export var Element:Enums.ELEMENT
 @export var IsActive:bool
 @export var OriginalPosition:Vector3
+@export var SoundEffect1:AudioStreamPlayer3D
 
 var TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
 

@@ -59,6 +59,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		User.ImpactCamera1.make_current()
 		User.Animator.set("parameters/conditions/Melee Attack", true)
 		User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", true)
+		User.heavy_melee_sound()
 		await get_tree().create_timer(0.1).timeout
 		User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", false)
 		User.Animator.set("parameters/conditions/Melee Attack", false)

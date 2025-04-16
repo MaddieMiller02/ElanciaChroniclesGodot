@@ -57,6 +57,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	if User.Animator != null:
 		User.Animator.set("parameters/conditions/Melee Attack", true)
 		User.ImpactCamera2.make_current()
+		User.medium_melee_sound()
 		User.Animator.set("parameters/Melee Attack Machine/conditions/Medium Attack", true)
 		await get_tree().create_timer(1).timeout#Reposition enemy backwaard
 		for i in range(EnemiesToMove.size()):

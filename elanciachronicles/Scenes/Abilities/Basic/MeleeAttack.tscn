@@ -1,8 +1,9 @@
-[gd_scene load_steps=2 format=3 uid="uid://bsyja3aiguuui"]
+[gd_scene load_steps=3 format=3 uid="uid://bsyja3aiguuui"]
 
 [ext_resource type="Script" path="res://Scripts/Abilities/Basic/melee_attack.gd" id="1_u35tj"]
+[ext_resource type="AudioStream" uid="uid://dkvcl6cjho1tf" path="res://Audio/SFX/Noise_Punch_006.wav" id="2_0njbv"]
 
-[node name="MeleeAttack" type="Node"]
+[node name="MeleeAttack" type="Node" node_paths=PackedStringArray("SoundEffect1")]
 script = ExtResource("1_u35tj")
 AbilityName = "Melee Attack"
 Description = "A single-hit melee attack. This should only be used as an enemy attack or a placeholder for the action menu button."
@@ -10,3 +11,7 @@ MaxRange = 1
 Physical = true
 HitRate = 95
 APCost = 3
+SoundEffect1 = NodePath("AudioStreamPlayer3D")
+
+[node name="AudioStreamPlayer3D" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("2_0njbv")
