@@ -1,5 +1,7 @@
 extends Ability
 
+var Missed:bool = false
+
 func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
 	# Calculations
 	var DamageOffset = randi_range(-2, 2)
@@ -35,6 +37,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			
 	else:
 		TextBox.display_missed_message(self, User)
+		Missed = true
 	User.use_ap(APCost)
 	
 	print("User Ending AP: " + str(User.CurrentAP))
@@ -56,6 +59,9 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			
 			# Hold until the animation is completed
 			print("Waiting for animation to finish")
+			if Missed:
+				Target.dodge_sound()
+				await get_tree().create_timer(0.25).timeout
 			await get_tree().create_timer(2).timeout
 			print("Animation finished")
 			

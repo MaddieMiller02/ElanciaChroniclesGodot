@@ -79,6 +79,7 @@ var DestinationReached:bool = true
 @export var RangedSoundDelay:float
 @export var RunSFX:AudioStreamPlayer3D
 @export var StepDelay:bool
+@export var DodgeSFX:AudioStreamPlayer3D
 
 func _ready() -> void:
 	# Appends every child of the "Specials" node to the SpecialList
@@ -201,6 +202,9 @@ func run_sound_with_delay():
 	RunSFX.play()
 	await get_tree().create_timer(0.3333).timeout
 	StepDelay = false
+	
+func dodge_sound():
+	DodgeSFX.play()
 
 # These Getters return the "active" value of each stat, those being the default value plus the temp value
 func get_strength() -> int:

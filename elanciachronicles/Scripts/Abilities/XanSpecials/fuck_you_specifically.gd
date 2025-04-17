@@ -1,5 +1,7 @@
 extends Ability
 
+var Missed:bool = false
+
 func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
 	OriginalPosition = User.position
 	
@@ -45,6 +47,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			TextBox.display_damage_message(self, User, Target, Damage)
 	else:
 		TextBox.display_missed_message(self, User)
+		Missed = true
 	User.use_ap(APCost)
 	
 	print("User Ending AP: " + str(User.CurrentAP))
@@ -59,7 +62,10 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		User.ImpactCamera1.make_current()
 		User.Animator.set("parameters/conditions/Melee Attack", true)
 		User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", true)
-		User.heavy_melee_sound()
+		if Missed:
+			Target.dodge_sound()
+		else:
+			User.heavy_melee_sound()
 		await get_tree().create_timer(0.1).timeout
 		User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", false)
 		User.Animator.set("parameters/conditions/Melee Attack", false)

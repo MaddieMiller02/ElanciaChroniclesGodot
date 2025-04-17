@@ -1,5 +1,7 @@
 extends Ability
 
+var Missed:bool = false
+
 func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
 	# Calculations
 	var Damage = 0
@@ -42,6 +44,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			
 	else:
 		TextBox.display_missed_message(self, User)
+		Missed = true
 	
 	print("User Ending AP: " + str(User.CurrentAP))
 	print("Enemy Ending HP: " + str(Target.CurrentHP))
@@ -69,19 +72,28 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			
 			if CurrentManager.AttackQueue[i].AbilityName == "Light Melee Attack":
 				print("Light attack animation queued")
-				User.light_melee_sound()
+				if Missed:
+					Target.dodge_sound()
+				else:
+					User.light_melee_sound()
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Light Attack", true)
 				await get_tree().create_timer(0.3).timeout
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Light Attack", false)
 			elif CurrentManager.AttackQueue[i].AbilityName == "Medium Melee Attack":
 				print("Medium attack animation queued")
-				User.medium_melee_sound()
+				if Missed:
+					Target.dodge_sound()
+				else:
+					User.medium_melee_sound()
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Medium Attack", true)
 				await get_tree().create_timer(0.3).timeout
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Medium Attack", false)
 			elif CurrentManager.AttackQueue[i].AbilityName == "Heavy Melee Attack":
 				print("Heavy attack animation queued")
-				User.heavy_melee_sound()
+				if Missed:
+					Target.dodge_sound()
+				else:
+					User.heavy_melee_sound()
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", true)
 				await get_tree().create_timer(0.4).timeout
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", false)

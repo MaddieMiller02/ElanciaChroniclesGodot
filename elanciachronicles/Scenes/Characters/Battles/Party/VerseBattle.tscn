@@ -1,4 +1,4 @@
-[gd_scene load_steps=75 format=4 uid="uid://bkd7q3awnkgvt"]
+[gd_scene load_steps=76 format=4 uid="uid://bkd7q3awnkgvt"]
 
 [ext_resource type="Script" path="res://Scripts/BaseClasses/party_member.gd" id="1_i4hi3"]
 [ext_resource type="Texture2D" uid="uid://dxnex00rbrcav" path="res://Art/3DModels/Characters/Verse/TEX_VERSE_COLOR_ALPHA.png" id="2_t8l05"]
@@ -8,6 +8,7 @@
 [ext_resource type="AudioStream" uid="uid://dkvcl6cjho1tf" path="res://Audio/SFX/Noise_Punch_006.wav" id="6_ikagl"]
 [ext_resource type="AudioStream" uid="uid://b5y6d8aacl1a0" path="res://Audio/SFX/Bluezone_BC0296_steampunk_weapon_flare_shot_explosion_003.wav" id="6_qdqrr"]
 [ext_resource type="AudioStream" uid="uid://b76lfqomtpnfh" path="res://Audio/SFX/st3-footstep-sfx-323056.mp3" id="8_xkabf"]
+[ext_resource type="AudioStream" uid="uid://rmdi7bvxlmmu" path="res://Audio/SFX/whoosh-motion-243505.mp3" id="9_qk07d"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_ou310"]
 resource_name = "CHARACTER MAT"
@@ -12249,7 +12250,7 @@ states/Start/position = Vector2(-197, 95)
 transitions = ["IDLE ANIM", "SHOOT MID ANIM", SubResource("AnimationNodeStateMachineTransition_it6yb"), "SHOOT MID ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_mrrgt"), "IDLE ANIM", "DAMAGE ANIM", SubResource("AnimationNodeStateMachineTransition_461ua"), "DAMAGE ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_gyr46"), "IDLE ANIM", "Melee Attack Machine", SubResource("AnimationNodeStateMachineTransition_v5h1s"), "Melee Attack Machine", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_qybf8"), "Start", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_0fm0y"), "IDLE ANIM", "DEFEND ANIM", SubResource("AnimationNodeStateMachineTransition_mstmo"), "DEFEND ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_of5fn"), "IDLE ANIM", "ITEM ANIM", SubResource("AnimationNodeStateMachineTransition_3bqaw"), "ITEM ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_16k13"), "IDLE ANIM", "RUN ANIM (72-144)", SubResource("AnimationNodeStateMachineTransition_2t0oj"), "RUN ANIM (72-144)", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_nia5g"), "IDLE ANIM", "Hack and Blast Machine", SubResource("AnimationNodeStateMachineTransition_6ur4p"), "Hack and Blast Machine", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_sthsm"), "IDLE ANIM", "DEATH ANIM", SubResource("AnimationNodeStateMachineTransition_onlvd")]
 graph_offset = Vector2(-175.592, -36.8074)
 
-[node name="VerseBattle" type="Node3D" node_paths=PackedStringArray("SpecialsNode", "CharacterModel", "Animator", "DefaultCamera", "ImpactCamera1", "ImpactCamera2", "MeleeSFX", "RangedSFX", "RunSFX")]
+[node name="VerseBattle" type="Node3D" node_paths=PackedStringArray("SpecialsNode", "CharacterModel", "Animator", "DefaultCamera", "ImpactCamera1", "ImpactCamera2", "MeleeSFX", "RangedSFX", "RunSFX", "DodgeSFX")]
 script = ExtResource("1_i4hi3")
 InParty = true
 IsPartyLeader = true
@@ -12283,6 +12284,7 @@ HeavySoundDelay = 0.333
 RangedSFX = NodePath("RangedSFX")
 RangedSoundDelay = 1.367
 RunSFX = NodePath("RunSFX")
+DodgeSFX = NodePath("DodgeSFX")
 
 [node name="Doki Verse Model (All Animations)" type="Node3D" parent="."]
 transform = Transform3D(-6.55671e-08, 0, 1.5, 0, 1.5, 0, -1.5, 0, -6.55671e-08, 0, 0, 0)
@@ -12858,3 +12860,6 @@ stream = ExtResource("6_qdqrr")
 
 [node name="RunSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("8_xkabf")
+
+[node name="DodgeSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("9_qk07d")

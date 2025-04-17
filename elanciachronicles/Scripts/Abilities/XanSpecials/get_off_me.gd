@@ -1,5 +1,7 @@
 extends Ability
 
+var Missed:bool = false
+
 func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
 	var SelectedTarget = Target
 	var EnemiesToMove:Array[BattleCharacter]
@@ -40,6 +42,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 					TextBox.display_damage_message(self, User, Target, Damage)
 			else:
 				TextBox.display_missed_message(self, User)
+				Missed = true
 				
 			print("Enemy Ending HP: " + str(Target.CurrentHP))
 			
@@ -57,7 +60,10 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	if User.Animator != null:
 		User.Animator.set("parameters/conditions/Melee Attack", true)
 		User.ImpactCamera2.make_current()
-		User.medium_melee_sound()
+		if Missed:
+			Target.dodge_sound()
+		else:
+			User.medium_melee_sound()
 		User.Animator.set("parameters/Melee Attack Machine/conditions/Medium Attack", true)
 		await get_tree().create_timer(1).timeout#Reposition enemy backwaard
 		for i in range(EnemiesToMove.size()):

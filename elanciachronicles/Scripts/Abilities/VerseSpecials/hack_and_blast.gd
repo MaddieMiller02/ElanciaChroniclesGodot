@@ -1,5 +1,7 @@
 extends Ability
 
+var Missed:bool = false
+
 func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
 	# Calculations
 	var DamageOffset = randi_range(-2, 2)
@@ -35,6 +37,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			TextBox.display_damage_message(self, User, Target, Damage)
 	else:
 		TextBox.display_missed_message(self, User)
+		Missed = true
 	User.use_ap(APCost)
 	
 	print("User Ending AP: " + str(User.CurrentAP))
@@ -49,12 +52,18 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	
 	if User.Animator != null:
 		User.Animator.set("parameters/conditions/Hack and Blast", true)
-		User.light_melee_sound()
+		if Missed:
+			Target.dodge_sound()
+		else:
+			User.light_melee_sound()
 		await get_tree().create_timer(0.1).timeout
 		User.Animator.set("parameters/conditions/Hack and Blast", false)
 		await User.Animator.animation_finished
 		User.ImpactCamera2.make_current()
 		User.ranged_sound()
+		await get_tree().create_timer(0.25).timeout
+		if Missed:
+			Target.dodge_sound()
 		await User.Animator.animation_finished
 		#await get_tree().create_timer(4.967).timeout
 	
