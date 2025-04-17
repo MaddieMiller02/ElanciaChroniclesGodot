@@ -77,6 +77,8 @@ var DestinationReached:bool = true
 @export var HeavySoundDelay:float
 @export var RangedSFX:AudioStreamPlayer3D
 @export var RangedSoundDelay:float
+@export var RunSFX:AudioStreamPlayer3D
+@export var StepDelay:bool
 
 func _ready() -> void:
 	# Appends every child of the "Specials" node to the SpecialList
@@ -97,6 +99,8 @@ func _process(delta):
 	if not DestinationReached:
 		CharacterModel.look_at(global_position + position.direction_to(Destination), Vector3.UP)
 		CharacterModel.rotate_y(deg_to_rad(180))
+		if not StepDelay:
+			run_sound_with_delay()
 		position += position.direction_to(Destination) * 10 * delta
 		if position.distance_to(Destination) < 0.3:
 			print("Destination reached!")
@@ -191,6 +195,12 @@ func heavy_melee_sound():
 func ranged_sound():
 	await get_tree().create_timer(RangedSoundDelay).timeout
 	RangedSFX.play()
+
+func run_sound_with_delay():
+	StepDelay = true
+	RunSFX.play()
+	await get_tree().create_timer(0.3333).timeout
+	StepDelay = false
 
 # These Getters return the "active" value of each stat, those being the default value plus the temp value
 func get_strength() -> int:

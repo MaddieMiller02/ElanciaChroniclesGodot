@@ -1,9 +1,12 @@
-[gd_scene load_steps=3 format=3 uid="uid://brslib2v2l2h8"]
+[gd_scene load_steps=6 format=3 uid="uid://brslib2v2l2h8"]
 
 [ext_resource type="Texture2D" uid="uid://cpoje8d3un43w" path="res://Art/TestCursor.png" id="1_bhrxa"]
 [ext_resource type="Script" path="res://Scripts/UI/menu_cursor.gd" id="2_fnm23"]
+[ext_resource type="AudioStream" uid="uid://dof0nigdb0fc4" path="res://Audio/SFX/UI Move.wav" id="3_rwu3p"]
+[ext_resource type="AudioStream" uid="uid://dlrdwieodmiw0" path="res://Audio/SFX/UI Confirm.wav" id="4_qdgqh"]
+[ext_resource type="AudioStream" uid="uid://dnxik6hn1r045" path="res://Audio/SFX/UI Cancel.wav" id="5_hctxf"]
 
-[node name="MenuCursor" type="TextureRect"]
+[node name="MenuCursor" type="TextureRect" node_paths=PackedStringArray("MoveSFX", "ConfirmSFX", "CancelSFX")]
 anchors_preset = 15
 anchor_right = 1.0
 anchor_bottom = 1.0
@@ -14,3 +17,18 @@ grow_vertical = 2
 texture = ExtResource("1_bhrxa")
 stretch_mode = 4
 script = ExtResource("2_fnm23")
+MoveSFX = NodePath("Move")
+ConfirmSFX = NodePath("Confirm")
+CancelSFX = NodePath("Cancel")
+
+[node name="Move" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("3_rwu3p")
+volume_db = 15.0
+
+[node name="Confirm" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("4_qdgqh")
+volume_db = 15.0
+
+[node name="Cancel" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("5_hctxf")
+volume_db = 15.0

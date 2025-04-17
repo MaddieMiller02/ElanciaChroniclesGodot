@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://cudxa1nlapdcx"]
+[gd_scene load_steps=14 format=3 uid="uid://cudxa1nlapdcx"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Enemies/sailor_battle.gd" id="1_t57b1"]
 [ext_resource type="PackedScene" uid="uid://cbxfie77qxd0t" path="res://Scenes/Abilities/Basic/Reposition.tscn" id="2_uac8w"]
@@ -11,12 +11,13 @@
 [ext_resource type="PackedScene" uid="uid://cx6qd40y4cbtl" path="res://Scenes/Abilities/Basic/LightAttack.tscn" id="7_pngmd"]
 [ext_resource type="PackedScene" uid="uid://c3luj5mvjwf4t" path="res://Scenes/Abilities/Basic/MediumAttack.tscn" id="8_oa335"]
 [ext_resource type="PackedScene" uid="uid://dkm8w7oi1bg7y" path="res://Scenes/Abilities/Basic/HeavyAttack.tscn" id="9_f40gw"]
+[ext_resource type="AudioStream" uid="uid://b76lfqomtpnfh" path="res://Audio/SFX/st3-footstep-sfx-323056.mp3" id="12_xknwi"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_05i1l"]
 shading_mode = 0
 albedo_texture = ExtResource("4_fb8ax")
 
-[node name="SailorBattle" type="Node3D" node_paths=PackedStringArray("Reposition", "MeleeAttack", "LightAttack", "MediumAttack", "HeavyAttack", "RangedAttack", "Defend", "CharacterModel", "DefaultCamera", "ImpactCamera1", "ImpactCamera2")]
+[node name="SailorBattle" type="Node3D" node_paths=PackedStringArray("Reposition", "MeleeAttack", "LightAttack", "MediumAttack", "HeavyAttack", "RangedAttack", "Defend", "CharacterModel", "DefaultCamera", "ImpactCamera1", "ImpactCamera2", "RunSFX")]
 script = ExtResource("1_t57b1")
 Reposition = NodePath("Abilities/Reposition")
 MeleeAttack = NodePath("Abilities/MeleeAttack")
@@ -46,6 +47,7 @@ CharacterModel = NodePath("MeshInstance3D")
 DefaultCamera = NodePath("DefaultCamera")
 ImpactCamera1 = NodePath("ImpactCamera1")
 ImpactCamera2 = NodePath("ImpactCamera2")
+RunSFX = NodePath("RunSFX")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 0, 0, 0)
@@ -76,3 +78,6 @@ transform = Transform3D(0.535905, -0.11594, 0.379221, 0, 0.637537, 0.194914, -0.
 
 [node name="ImpactCamera2" type="Camera3D" parent="."]
 transform = Transform3D(-0.396548, -0.124195, -0.521315, 0, 0.648517, -0.154499, 0.535905, -0.0918993, -0.385753, -1.71095, 0.266315, -1.29871)
+
+[node name="RunSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("12_xknwi")

@@ -11,6 +11,10 @@ var active:bool = false
 var previous_menus:Array[Container]
 var previous_game_states:Enums.GAME_STATE
 
+@export var MoveSFX:AudioStreamPlayer3D
+@export var ConfirmSFX:AudioStreamPlayer3D
+@export var CancelSFX:AudioStreamPlayer3D
+
 func _ready():
 	Globals.GameStateUpdated.connect(_on_game_state_updated)
 
@@ -35,6 +39,9 @@ func _process(delta):
 			set_cursor_from_index(cursor_index + input.x)
 		elif menu_parent is GridContainer:
 			set_cursor_from_index(cursor_index + input.x + input.y * menu_parent.columns)
+			
+		if input != Vector2.ZERO:
+			MoveSFX.play()
 
 		# Triggers object selection on current object
 		if Input.is_action_just_pressed("ui_select"):
@@ -42,6 +49,7 @@ func _process(delta):
 			if current_menu_item != null:
 				if current_menu_item.has_method("cursor_select"):
 					current_menu_item.cursor_select()
+					ConfirmSFX.play()
 					
 		# Backtracks to the previous menu if player presses cancel button
 		if Input.is_action_just_pressed("ui_cancel"):
@@ -122,6 +130,7 @@ func backtrack_menu():
 		menu_parent = previous_menus.pop_back()
 		menu_parent.visible = true
 		active = true
+		CancelSFX.play()
 		if menu_parent is BattleMenu:
 			Globals.UpdateGameState(menu_parent.VisibleState)
 
