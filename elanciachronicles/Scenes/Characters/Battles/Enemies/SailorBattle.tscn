@@ -1,4 +1,4 @@
-[gd_scene load_steps=15 format=3 uid="uid://cudxa1nlapdcx"]
+[gd_scene load_steps=16 format=3 uid="uid://cudxa1nlapdcx"]
 
 [ext_resource type="Script" path="res://Scripts/Characters/Enemies/sailor_battle.gd" id="1_t57b1"]
 [ext_resource type="PackedScene" uid="uid://cbxfie77qxd0t" path="res://Scenes/Abilities/Basic/Reposition.tscn" id="2_uac8w"]
@@ -13,12 +13,13 @@
 [ext_resource type="PackedScene" uid="uid://dkm8w7oi1bg7y" path="res://Scenes/Abilities/Basic/HeavyAttack.tscn" id="9_f40gw"]
 [ext_resource type="AudioStream" uid="uid://b76lfqomtpnfh" path="res://Audio/SFX/st3-footstep-sfx-323056.mp3" id="12_xknwi"]
 [ext_resource type="AudioStream" uid="uid://rmdi7bvxlmmu" path="res://Audio/SFX/whoosh-motion-243505.mp3" id="13_j4bag"]
+[ext_resource type="AudioStream" uid="uid://5021labheueh" path="res://Audio/SFX/Bluezone_BC0284_soundwave_robot_transformation_texture_036.wav" id="14_7c8md"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_05i1l"]
 shading_mode = 0
 albedo_texture = ExtResource("4_fb8ax")
 
-[node name="SailorBattle" type="Node3D" node_paths=PackedStringArray("Reposition", "MeleeAttack", "LightAttack", "MediumAttack", "HeavyAttack", "RangedAttack", "Defend", "CharacterModel", "DefaultCamera", "ImpactCamera1", "ImpactCamera2", "RunSFX", "DodgeSFX")]
+[node name="SailorBattle" type="Node3D" node_paths=PackedStringArray("Reposition", "MeleeAttack", "LightAttack", "MediumAttack", "HeavyAttack", "RangedAttack", "Defend", "CharacterModel", "DefaultCamera", "ImpactCamera1", "ImpactCamera2", "RunSFX", "DodgeSFX", "DeathSFX")]
 script = ExtResource("1_t57b1")
 Reposition = NodePath("Abilities/Reposition")
 MeleeAttack = NodePath("Abilities/MeleeAttack")
@@ -50,6 +51,7 @@ ImpactCamera1 = NodePath("ImpactCamera1")
 ImpactCamera2 = NodePath("ImpactCamera2")
 RunSFX = NodePath("RunSFX")
 DodgeSFX = NodePath("DodgeSFX")
+DeathSFX = NodePath("DeathSFX")
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(-6.55671e-08, 0, -1.5, 0, 1.5, 0, 1.5, 0, -6.55671e-08, 0, 0, 0)
@@ -86,3 +88,6 @@ stream = ExtResource("12_xknwi")
 
 [node name="DodgeSFX" type="AudioStreamPlayer3D" parent="."]
 stream = ExtResource("13_j4bag")
+
+[node name="DeathSFX" type="AudioStreamPlayer3D" parent="."]
+stream = ExtResource("14_7c8md")

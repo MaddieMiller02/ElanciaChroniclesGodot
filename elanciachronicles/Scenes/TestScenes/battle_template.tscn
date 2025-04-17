@@ -248,9 +248,13 @@ visible = false
 [node name="CurrentParty" parent="." instance=ExtResource("5_isfwl")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
+[node name="XanBattle" parent="CurrentParty" index="1"]
+CurrentHP = 1
+
 [node name="FirstBattle" parent="." instance=ExtResource("6_vah62")]
 
 [node name="SailorBattle" parent="FirstBattle/Enemies" index="0"]
+CurrentHP = 1
 DefaultPosition = 0
 CurrentPosition = 0
 

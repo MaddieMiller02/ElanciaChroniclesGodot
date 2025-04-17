@@ -82,6 +82,7 @@ var DestinationReached:bool = true
 @export var DodgeSFX:AudioStreamPlayer3D
 @export var HealSFX:AudioStreamPlayer3D
 @export var HealSoundDelay:float
+@export var DeathSFX:AudioStreamPlayer3D
 
 func _ready() -> void:
 	# Appends every child of the "Specials" node to the SpecialList
@@ -96,7 +97,12 @@ func _process(delta):
 		emit_signal("HasDied")
 		EmittedDeathSignal = true
 		IsDead = true
-		#self.hide()
+		if DeathSFX != null:
+			DeathSFX.play()
+		if Animator != null:
+			await Animator.animation_finished
+		if self is Enemy:
+			self.hide()
 		
 	# Move to destination and animate if applicable
 	if not DestinationReached:
