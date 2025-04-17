@@ -80,6 +80,8 @@ var DestinationReached:bool = true
 @export var RunSFX:AudioStreamPlayer3D
 @export var StepDelay:bool
 @export var DodgeSFX:AudioStreamPlayer3D
+@export var HealSFX:AudioStreamPlayer3D
+@export var HealSoundDelay:float
 
 func _ready() -> void:
 	# Appends every child of the "Specials" node to the SpecialList
@@ -205,6 +207,10 @@ func run_sound_with_delay():
 	
 func dodge_sound():
 	DodgeSFX.play()
+	
+func heal_sound():
+	await get_tree().create_timer(HealSoundDelay).timeout
+	HealSFX.play()
 
 # These Getters return the "active" value of each stat, those being the default value plus the temp value
 func get_strength() -> int:
