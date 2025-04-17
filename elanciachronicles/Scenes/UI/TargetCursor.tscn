@@ -1,7 +1,95 @@
-[gd_scene load_steps=2 format=3 uid="uid://duvkajc20mui7"]
+[gd_scene load_steps=9 format=4 uid="uid://duvkajc20mui7"]
 
-[ext_resource type="Texture2D" uid="uid://blycj3v8gnkiy" path="res://Art/UI/DownArrowTemp.png" id="1_jhruh"]
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_pltgb"]
+resource_name = "Material.001"
+transparency = 4
+cull_mode = 2
+albedo_color = Color(0.906868, 0.82467, 0.188931, 0.75)
+roughness = 0.5
 
-[node name="TargetCursor" type="Sprite3D"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
-texture = ExtResource("1_jhruh")
+[sub_resource type="ArrayMesh" id="ArrayMesh_u0se8"]
+_surfaces = [{
+"aabb": AABB(-1.49478, -4.46991, -1.49478, 2.98956, 5.46991, 2.98956),
+"format": 34896613377,
+"index_count": 90,
+"index_data": PackedByteArray("CAADAAEACAAJAAMACQAHAAMACQAKAAcACgAFAAcACgALAAUACwABAAUACwAIAAEAEAAEAA4ABwABAAMABwAFAAEADwALAAQACwAAAAgACwAPAAAADgAKAAYACgAEAAsACgAOAAQADQAJAAIACQAGAAoACQANAAYADAAIAAAACAACAAkACAAMAAIADAAAABAAAgAMABAADQAQAAYAAAAPABAABAAQAA8AEAAOAAYAEAANAAIA"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 17,
+"vertex_data": PackedByteArray("AACQmv//AABeKv//oNUAAAAAkJoAAAAAXir//14qAAD//5Ca//8AAKDV//+g1QAA//+QmgAAAACg1f//XioAAF4qDaOg1QAAXioNo14qAACg1Q2jXioAAKDVDaOg1QAAAACQmv9/AAD/f5CaAAAAAP//kJr/fwAA/3+Qmv//AAD/fwAA/38AAA==")
+}]
+blend_shape_mode = 0
+
+[sub_resource type="ArrayMesh" id="ArrayMesh_o3lsx"]
+resource_name = "3D Arrow_Cube_001"
+_surfaces = [{
+"aabb": AABB(-1.49478, -4.46991, -1.49478, 2.98956, 5.46991, 2.98956),
+"attribute_data": PackedByteArray("/18AAP8f/z//X////x//P/+fAAD/3/8//5////9f/7//H/9//1//v/8f/3//n/+//9//f/+f/7//X/8//1//P/9f/z//X/8//5//P/+f/z//n/8//1//f/9f/3//X/9//1//f/+f/3//n/9//5//f/9/AAD/fwAA/3////9/////f/+//3//v/9//7//f/+//3//f/9//3//f/9//3//f/9//z//f/8//3//P/9//z//X//f/x//X/9f/5//P/9//1//X/9f/1//X/8f/z//P/8//1//P/9f/z//X/8//18="),
+"format": 34896613399,
+"index_count": 90,
+"index_data": PackedByteArray("HwANAAYAHwAjAA0AIAAZAAsAIAAkABkAJwAUABsAJwArABQAKAAEABIAKAAcAAQANgARADEAGgAFAAwAGgATAAUAMgApAA4AKQAAAB0AKQAyAAAAMAAmABcAJgAQACoAJgAwABAALgAhAAcAIQAVACUAIQAuABUALAAeAAIAHgAJACIAHgAsAAkALQADADcACgAtADcALwA1ABYAAQAzADQADwA0ADMANgAxABgANQAvAAgA"),
+"material": SubResource("StandardMaterial3D_pltgb"),
+"name": "Material.001",
+"primitive": 3,
+"uv_scale": Vector4(0, 0, 0, 0),
+"vertex_count": 56,
+"vertex_data": PackedByteArray("AACQmv//58EAAJCa//9QkQAAkJr//1/LAACQmv//JcxeKv//oNX/v14q//+g1f//Xir//6DVVNUAAJCaAADp0gAAkJoAAK7uAACQmgAAD8AAAJCaAAAlzF4q//9eKv//Xir//14q//9eKv//XipU1f//kJr///fk//+Qmv//UJH//5Ca//+86f//kJr//yXMoNX//6DV/7+g1f//oNX//6DV//+g1VTV//+QmgAAaeb//5CaAACu7v//kJoAAHH0//+QmgAAJcyg1f//Xir//6DV//9eKv//oNX//14qVNVeKg2joNX/v14qDaOg1Zi6XioNo6DVlsleKg2joNVU1V4qDaNeKv//XioNo14qBtReKg2jXiqfwV4qDaNeKlTVoNUNo14q//+g1Q2jXipM7aDVDaNeKjj3oNUNo14qVNWg1Q2joNX/v6DVDaOg1dPhoNUNo6DVAeGg1Q2joNVU1QAAkJr/f1/LAACQmv9/Jcz/f5CaAADp0v9/kJoAAK7u//+Qmv9/cfT//5Ca/38lzP9/kJr///fk/3+Qmv//UJH/fwAA/39Qkf9/AAD/f67u/38AAP9/Jcz/fwAA/38lzPDfCzIAAP9//fCSSRtIDaT//////3//v1TVVNXEye2fAAD/f+jXSKQbSA2k/7//v/9//79U1VTVUNNWEwAA/3/cvpoCDSTkN///////f/+/qiqqKgyjubYAAP9/hZw9rg0k5Df/v/+//3//v6oqqir/////AeVcPgP07k1U1VTV/7//v73FTKIgxaKqVNVU1f+//7/9mQ68VprAr6oqqir/////N9SIFT3CmAyqKqoq/fCSSRtIDaTEye2fAAD/f4WcPa4NJOQ3UNNWEwAA/38AAP9/AAD/fw0k5DcbSA2k")
+}]
+blend_shape_mode = 0
+shadow_mesh = SubResource("ArrayMesh_u0se8")
+
+[sub_resource type="Animation" id="Animation_xov8i"]
+resource_name = "CubeAction"
+length = 4.0
+loop_mode = 1
+tracks/0/type = "position_3d"
+tracks/0/imported = true
+tracks/0/enabled = true
+tracks/0/path = NodePath("Cube")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = PackedFloat32Array(0, 1, 0, 4.47192, 0, 0.0333333, 1, 0, 4.47192, 0, 0.0666667, 1, 0, 4.47522, 0, 0.1, 1, 0, 4.48377, 0, 0.133333, 1, 0, 4.49834, 0, 0.166667, 1, 0, 4.51852, 0, 0.2, 1, 0, 4.54541, 0, 0.233333, 1, 0, 4.57675, 0, 0.266667, 1, 0, 4.61212, 0, 0.3, 1, 0, 4.65114, 0, 0.333333, 1, 0, 4.69342, 0, 0.366667, 1, 0, 4.73925, 0, 0.4, 1, 0, 4.78715, 0, 0.433333, 1, 0, 4.83673, 0, 0.466667, 1, 0, 4.88759, 0, 0.566667, 1, 0, 5.04332, 0, 0.6, 1, 0, 5.09447, 0, 0.633333, 1, 0, 5.14454, 0, 0.666667, 1, 0, 5.19313, 0, 0.7, 1, 0, 5.23896, 0, 0.733333, 1, 0, 5.28213, 0, 0.766667, 1, 0, 5.32224, 0, 0.8, 1, 0, 5.35889, 0, 0.833333, 1, 0, 5.3917, 0, 0.866667, 1, 0, 5.4186, 0, 0.9, 1, 0, 5.44046, 0, 0.933333, 1, 0, 5.4569, 0, 0.966667, 1, 0, 5.46751, 0, 1, 1, 0, 5.47192, 0, 1.03333, 1, 0, 5.46787, 0, 1.06667, 1, 0, 5.45809, 0, 1.1, 1, 0, 5.44293, 0, 1.13333, 1, 0, 5.42273, 0, 1.16667, 1, 0, 5.39785, 0, 1.2, 1, 0, 5.36741, 0, 1.23333, 1, 0, 5.33332, 0, 1.26667, 1, 0, 5.29594, 0, 1.3, 1, 0, 5.2556, 0, 1.33333, 1, 0, 5.21266, 0, 1.36667, 1, 0, 5.16694, 0, 1.4, 1, 0, 5.11966, 0, 1.43333, 1, 0, 5.07117, 0, 1.46667, 1, 0, 5.0218, 0, 1.53333, 1, 0, 4.92204, 0, 1.56667, 1, 0, 4.87267, 0, 1.6, 1, 0, 4.82418, 0, 1.63333, 1, 0, 4.7769, 0, 1.66667, 1, 0, 4.73118, 0, 1.7, 1, 0, 4.68824, 0, 1.73333, 1, 0, 4.6479, 0, 1.76667, 1, 0, 4.61052, 0, 1.8, 1, 0, 4.57643, 0, 1.83333, 1, 0, 4.54599, 0, 1.86667, 1, 0, 4.52111, 0, 1.9, 1, 0, 4.50091, 0, 1.93333, 1, 0, 4.48575, 0, 1.96667, 1, 0, 4.47597, 0, 2.03333, 1, 0, 4.47597, 0, 2.06667, 1, 0, 4.48575, 0, 2.1, 1, 0, 4.50091, 0, 2.13333, 1, 0, 4.52111, 0, 2.16667, 1, 0, 4.54599, 0, 2.2, 1, 0, 4.57643, 0, 2.23333, 1, 0, 4.61052, 0, 2.26667, 1, 0, 4.6479, 0, 2.3, 1, 0, 4.68824, 0, 2.33333, 1, 0, 4.73118, 0, 2.36667, 1, 0, 4.7769, 0, 2.4, 1, 0, 4.82418, 0, 2.43333, 1, 0, 4.87267, 0, 2.46667, 1, 0, 4.92204, 0, 2.53333, 1, 0, 5.0218, 0, 2.56667, 1, 0, 5.07117, 0, 2.6, 1, 0, 5.11966, 0, 2.63333, 1, 0, 5.16694, 0, 2.66667, 1, 0, 5.21266, 0, 2.7, 1, 0, 5.2556, 0, 2.73333, 1, 0, 5.29594, 0, 2.76667, 1, 0, 5.33332, 0, 2.8, 1, 0, 5.36741, 0, 2.83333, 1, 0, 5.39785, 0, 2.86667, 1, 0, 5.42273, 0, 2.9, 1, 0, 5.44293, 0, 2.93333, 1, 0, 5.45809, 0, 2.96667, 1, 0, 5.46787, 0, 3.03333, 1, 0, 5.46787, 0, 3.06667, 1, 0, 5.45809, 0, 3.1, 1, 0, 5.44293, 0, 3.13333, 1, 0, 5.42273, 0, 3.16667, 1, 0, 5.39785, 0, 3.2, 1, 0, 5.36741, 0, 3.23333, 1, 0, 5.33332, 0, 3.26667, 1, 0, 5.29594, 0, 3.3, 1, 0, 5.2556, 0, 3.33333, 1, 0, 5.21266, 0, 3.36667, 1, 0, 5.16694, 0, 3.4, 1, 0, 5.11966, 0, 3.43333, 1, 0, 5.07117, 0, 3.46667, 1, 0, 5.0218, 0, 3.53333, 1, 0, 4.92204, 0, 3.56667, 1, 0, 4.87267, 0, 3.6, 1, 0, 4.82418, 0, 3.63333, 1, 0, 4.7769, 0, 3.66667, 1, 0, 4.73118, 0, 3.7, 1, 0, 4.68824, 0, 3.73333, 1, 0, 4.6479, 0, 3.76667, 1, 0, 4.61052, 0, 3.8, 1, 0, 4.57643, 0, 3.83333, 1, 0, 4.54599, 0, 3.86667, 1, 0, 4.52111, 0, 3.9, 1, 0, 4.50091, 0, 3.93333, 1, 0, 4.48575, 0, 3.96667, 1, 0, 4.47597, 0, 4, 1, 0, 4.47192, 0)
+tracks/1/type = "rotation_3d"
+tracks/1/imported = true
+tracks/1/enabled = true
+tracks/1/path = NodePath("Cube")
+tracks/1/interp = 1
+tracks/1/loop_wrap = true
+tracks/1/keys = PackedFloat32Array(0, 1, 0, 0, 0, 1, 0.0333333, 1, 0, 0, 0, 1, 0.0666667, 1, 0, 0.00151201, 0, 0.999999, 0.1, 1, 0, 0.00546872, 0, 0.999985, 0.133333, 1, 0, 0.0122798, 0, 0.999925, 0.166667, 1, 0, 0.0218313, 0, 0.999762, 0.2, 1, 0, 0.0348087, 0, 0.999394, 0.233333, 1, 0, 0.0501801, 0, 0.99874, 0.266667, 1, 0, 0.0678245, 0, 0.997697, 0.3, 1, 0, 0.0876163, 0, 0.996154, 0.333333, 1, 0, 0.109426, 0, 0.993995, 0.366667, 1, 0, 0.133686, 0, 0.991024, 0.4, 1, 0, 0.15957, 0, 0.987187, 0.433333, 1, 0, 0.186929, 0, 0.982373, 0.466667, 1, 0, 0.215607, 0, 0.97648, 0.5, 1, 0, 0.245445, 0, 0.96941, 0.533333, 1, 0, 0.276612, 0, 0.960982, 0.566667, 1, 0, 0.308487, 0, 0.951229, 0.6, 1, 0, 0.340898, 0, 0.9401, 0.633333, 1, 0, 0.373671, 0, 0.927562, 0.666667, 1, 0, 0.406631, 0, 0.913593, 0.7, 1, 0, 0.439716, 0, 0.898137, 0.9, 1, 0, 0.627151, 0, 0.778897, 0.933333, 1, 0, 0.655087, 0, 0.755553, 0.966667, 1, 0, 0.681764, 0, 0.731572, 1, 1, 0, 0.707107, 0, 0.707107, 1.03333, 1, 0, 0.730861, 0, 0.682527, 1.06667, 1, 0, 0.753247, 0, 0.657737, 1.1, 1, 0, 0.774315, 0, 0.632801, 1.13333, 1, 0, 0.794111, 0, 0.607772, 1.16667, 1, 0, 0.812685, 0, 0.582703, 1.2, 1, 0, 0.829967, 0, 0.557813, 1.23333, 1, 0, 0.846145, 0, 0.532953, 1.26667, 1, 0, 0.861266, 0, 0.508154, 1.3, 1, 0, 0.875375, 0, 0.483445, 1.33333, 1, 0, 0.888513, 0, 0.458851, 1.36667, 1, 0, 0.900652, 0, 0.434541, 1.4, 1, 0, 0.911921, 0, 0.410365, 1.43333, 1, 0, 0.922358, 0, 0.386336, 1.46667, 1, 0, 0.931999, 0, 0.362461, 1.5, 1, 0, 0.940877, 0, 0.338749, 1.53333, 1, 0, 0.948987, 0, 0.315317, 1.56667, 1, 0, 0.956409, 0, 0.292032, 1.6, 1, 0, 0.96317, 0, 0.268895, 1.63333, 1, 0, 0.969295, 0, 0.245902, 1.66667, 1, 0, 0.974807, 0, 0.223049, 1.73333, 1, 0, 0.984056, 0, 0.17786, 1.8, 1, 0, 0.991109, 0, 0.133055, 1.96667, 1, 0, 0.999755, 0, 0.0221424, 2, 1, 0, -1, 0, 4.37114e-08, 2.13333, 1, 0, -0.996028, 0, 0.0890421, 2.2, 1, 0, -0.990981, 0, 0.134, 2.26667, 1, 0, -0.983779, 0, 0.179386, 2.33333, 1, 0, -0.974314, 0, 0.225193, 2.36667, 1, 0, -0.96867, 0, 0.248351, 2.4, 1, 0, -0.9624, 0, 0.271637, 2.43333, 1, 0, -0.955482, 0, 0.295049, 2.46667, 1, 0, -0.947895, 0, 0.318584, 2.5, 1, 0, -0.939613, 0, 0.342239, 2.53333, 1, 0, -0.930565, 0, 0.366127, 2.56667, 1, 0, -0.920758, 0, 0.390135, 2.6, 1, 0, -0.910163, 0, 0.414251, 2.63333, 1, 0, -0.898749, 0, 0.438463, 2.66667, 1, 0, -0.886486, 0, 0.462755, 2.7, 1, 0, -0.87326, 0, 0.487254, 2.73333, 1, 0, -0.859102, 0, 0.511804, 2.76667, 1, 0, -0.843977, 0, 0.53638, 2.8, 1, 0, -0.827847, 0, 0.560954, 2.83333, 1, 0, -0.810678, 0, 0.585492, 2.86667, 1, 0, -0.792309, 0, 0.610121, 2.9, 1, 0, -0.772804, 0, 0.634645, 2.93333, 1, 0, -0.752127, 0, 0.659018, 2.96667, 1, 0, -0.73024, 0, 0.683191, 3, 1, 0, -0.707107, 0, 0.707107, 3.03333, 1, 0, -0.682544, 0, 0.730844, 3.06667, 1, 0, -0.656773, 0, 0.754088, 3.13333, 1, 0, -0.60189, 0, 0.798579, 3.3, 1, 0, -0.450256, 0, 0.8929, 3.33333, 1, 0, -0.418563, 0, 0.908188, 3.36667, 1, 0, -0.386933, 0, 0.922108, 3.4, 1, 0, -0.355418, 0, 0.934708, 3.43333, 1, 0, -0.324169, 0, 0.945999, 3.46667, 1, 0, -0.293338, 0, 0.956009, 3.5, 1, 0, -0.263076, 0, 0.964775, 3.53333, 1, 0, -0.233919, 0, 0.972256, 3.56667, 1, 0, -0.205725, 0, 0.97861, 3.6, 1, 0, -0.178635, 0, 0.983916, 3.63333, 1, 0, -0.152786, 0, 0.988259, 3.66667, 1, 0, -0.12831, 0, 0.991734, 3.7, 1, 0, -0.105926, 0, 0.994374, 3.73333, 1, 0, -0.085263, 0, 0.996359, 3.76667, 1, 0, -0.0664384, 0, 0.997791, 3.8, 1, 0, -0.0495637, 0, 0.998771, 3.83333, 1, 0, -0.0347467, 0, 0.999396, 3.86667, 1, 0, -0.0228789, 0, 0.999738, 3.9, 1, 0, -0.0133716, 0, 0.999911, 3.93333, 1, 0, -0.00632425, 0, 0.99998, 3.96667, 1, 0, -0.00183459, 0, 0.999998, 4, 1, 0, 8.74228e-08, 0, 1)
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_8ueji"]
+_data = {
+"CubeAction": SubResource("Animation_xov8i")
+}
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_b8hx4"]
+animation = &"CubeAction"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5uahd"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_6eg86"]
+states/CubeAction/node = SubResource("AnimationNodeAnimation_b8hx4")
+states/CubeAction/position = Vector2(501, 100)
+transitions = ["Start", "CubeAction", SubResource("AnimationNodeStateMachineTransition_5uahd")]
+
+[node name="TargetCursor" type="Node3D"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+
+[node name="3D Arrow" type="Node3D" parent="."]
+
+[node name="Cube" type="MeshInstance3D" parent="3D Arrow"]
+transform = Transform3D(0.668764, 0, 0.743474, 0, 1, 0, -0.743474, 0, 0.668764, 0, 5.19359, 0)
+mesh = SubResource("ArrayMesh_o3lsx")
+skeleton = NodePath("")
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="3D Arrow"]
+libraries = {
+"": SubResource("AnimationLibrary_8ueji")
+}
+
+[node name="AnimationTree" type="AnimationTree" parent="."]
+root_node = NodePath("../3D Arrow")
+tree_root = SubResource("AnimationNodeStateMachine_6eg86")
+anim_player = NodePath("../3D Arrow/AnimationPlayer")

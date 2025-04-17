@@ -246,7 +246,7 @@ func set_active_character(character:BattleCharacter):
 	PlayerTurnCamera.make_current()
 		
 func set_target_cursor_position(Character:BattleCharacter):
-	TargetCursor.position = Vector3(Character.position.x, Character.position.y + 3, Character.position.z + 6)
+	TargetCursor.position = Vector3(Character.position.x, Character.position.y + 2.5, Character.position.z + 6)
 	TargetCursor.show()
 
 func set_active_ability(ability:Ability):
