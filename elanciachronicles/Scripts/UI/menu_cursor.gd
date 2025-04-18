@@ -15,6 +15,13 @@ var previous_game_states:Enums.GAME_STATE
 @export var ConfirmSFX:AudioStreamPlayer3D
 @export var CancelSFX:AudioStreamPlayer3D
 
+@export var AbilityPanelControl:Control
+@export var AbilityNameLabel:Label
+@export var AbilityPowerLabel:Label
+@export var AbilityRangeLabel:Label
+@export var AbilityAPLabel:Label
+@export var AbilityDescriptionLabel:Label
+
 func _ready():
 	Globals.GameStateUpdated.connect(_on_game_state_updated)
 
@@ -59,6 +66,19 @@ func _process(delta):
 			get_menu_item_at_index(previous_index).button_unfocused()
 		if get_menu_item_at_index(cursor_index) != null:
 			get_menu_item_at_index(cursor_index).button_focused()
+			
+		# Updates the Ability Panel with the info about the currently focused ability
+		if get_menu_item_at_index(cursor_index) is ActionMenuButton or get_menu_item_at_index(cursor_index) is SpecialContainer:
+			var FocusedAbility = get_menu_item_at_index(cursor_index).NextAbility
+			if FocusedAbility != null:
+				AbilityNameLabel.text = FocusedAbility.AbilityName
+				AbilityPowerLabel.text = "Power: " + str(FocusedAbility.Power)
+				AbilityRangeLabel.text = "Range: " + str(FocusedAbility.MinRange) + "-" + str(FocusedAbility.MaxRange)
+				AbilityAPLabel.text = "AP Cost: " + str(FocusedAbility.APCost)
+				AbilityDescriptionLabel.text = FocusedAbility.Description
+				AbilityPanelControl.show()
+			else:
+				AbilityPanelControl.hide()
 			
 		# Set the cursor offset accordingly to match the type of button being selected
 		_set_cursor_offset()
@@ -132,7 +152,7 @@ func backtrack_menu():
 		active = true
 		CancelSFX.play()
 		if menu_parent is BattleMenu:
-			Globals.UpdateGameState(menu_parent.VisibleState)
+			Globals.UpdateGameState(menu_parent.VisibleStates[0])
 
 func clear_previous_menus():
 	previous_menus.clear()

@@ -41,6 +41,7 @@ var TargetCharacter:BattleCharacter
 @export var RepositionButton:ActionMenuButton
 @export var FollowUpMenuControl:Node
 @export var FollowUpMenuContainer:Container
+@export var AbilityPanelControl:Node
 
 @export var PartyLinesControl:Node
 @export var EnemyLinesControl:Node
@@ -350,10 +351,11 @@ func _on_ability_button_pressed():
 				RepositionMenuControl.add_child(MenuCursor)
 				return
 		elif ActiveAbility.AbilityName == "Defend":
+			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ANIMATING)
 			await ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
 			_on_end_turn()
 			return
-		elif ActiveAbility.AbilityName == "Open Special Menu":
+		elif ActiveAbility.AbilityName == "Special":
 			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_SPECIALS)
 			_special_menu_setup()
 			SpecialMenuControl.show()
@@ -435,11 +437,13 @@ func _on_character_button_pressed():
 						TextBox.display_one_off_text(TargetCharacter.BattlerName + " already has full health!")
 						return
 					else:
+						Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ANIMATING)
 						await ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
 						_on_end_turn()
 						
 				elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
 					await ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
+					Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ANIMATING)
 					_on_end_turn()
 			else:
 				var TextBox = TextBoxScene.instantiate()
@@ -504,12 +508,12 @@ func _on_melee_type_button_pressed():
 		var CurrentButton = MenuCursor.get_menu_item_at_index(MenuCursor.cursor_index) as ActionMenuButton
 		AttackQueue.append(CurrentButton.NextAbility)
 	if AttackQueue.size() == 3:
+		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ANIMATING)
 		await ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
 		_on_end_turn()
 
 func _on_special_button_focused():
 	var CurrentSpecialContainer = MenuCursor.get_menu_item_at_index(MenuCursor.cursor_index) as SpecialContainer
-	SpecialDescriptionBox.text = CurrentSpecialContainer.NextAbility.Description
 	
 func _on_special_button_selected():
 	ActiveAbility = (MenuCursor.get_menu_item_at_index(MenuCursor.cursor_index) as SpecialContainer).NextAbility

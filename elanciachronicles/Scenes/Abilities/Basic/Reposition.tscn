@@ -5,4 +5,4 @@
 [node name="Reposition" type="Node"]
 script = ExtResource("1_anp6h")
 AbilityName = "Reposition"
-Description = "Character moves closer to or further away from the enemy."
+Description = "Move forward or backward and change your positioning. You can move again after repositioning!"

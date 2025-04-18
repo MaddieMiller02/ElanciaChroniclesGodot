@@ -6,7 +6,7 @@
 script = ExtResource("1_el2dk")
 AbilityName = "Get Off Me"
 Description = "Xan attacks all enemies on the frontline and pushes them back one position Deals Slash damage."
-Power = 5
+Power = 15
 Physical = true
 HitRate = 85
 APCost = 4

@@ -83,7 +83,7 @@ theme_override_constants/h_separation = 350
 theme_override_constants/v_separation = 80
 columns = 2
 script = ExtResource("5_e0q65")
-VisibleState = 3
+VisibleStates = Array[int]([3])
 ControlNode = NodePath("..")
 
 [node name="Control_Melee" type="Control" parent="Control_ActionMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
@@ -103,25 +103,15 @@ expand_mode = 1
 [node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/GridContainer/Control_Melee"]
 layout_mode = 0
 offset_left = 28.0
-offset_top = 3.555
+offset_top = 20.0
 offset_right = 324.0
-offset_bottom = 51.555
+offset_bottom = 53.0
 
 [node name="Label" type="Label" parent="Control_ActionMenu/GridContainer/Control_Melee/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Melee Attack"
 horizontal_alignment = 1
-
-[node name="InfoLabel" type="Label" parent="Control_ActionMenu/GridContainer/Control_Melee"]
-layout_mode = 0
-offset_top = 42.15
-offset_right = 345.0
-offset_bottom = 60.15
-theme_override_font_sizes/font_size = 13
-text = "Range: 1-2, Power: Varies, AP Cost: Varies"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Control_Ranged" type="Control" parent="Control_ActionMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
 layout_mode = 2
@@ -140,24 +130,15 @@ expand_mode = 1
 [node name="MarginContainer" type="MarginContainer" parent="Control_ActionMenu/GridContainer/Control_Ranged"]
 layout_mode = 0
 offset_left = 28.0
-offset_top = 3.55
+offset_top = 15.0
 offset_right = 324.0
-offset_bottom = 51.55
+offset_bottom = 63.0
 
 [node name="Label" type="Label" parent="Control_ActionMenu/GridContainer/Control_Ranged/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Ranged Attack"
 horizontal_alignment = 1
-
-[node name="InfoLabel" type="Label" parent="Control_ActionMenu/GridContainer/Control_Ranged"]
-offset_top = 42.15
-offset_right = 345.0
-offset_bottom = 60.15
-theme_override_font_sizes/font_size = 13
-text = "Range: 3-4, Power: 4, AP Cost: 4"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Control_Specials" type="Control" parent="Control_ActionMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
 layout_mode = 2
@@ -327,10 +308,82 @@ theme_override_constants/h_separation = 25
 theme_override_constants/v_separation = 25
 columns = 3
 script = ExtResource("5_e0q65")
-VisibleState = 5
+VisibleStates = Array[int]([5])
 ControlNode = NodePath("../../../..")
 
-[node name="SpecialDescriptionLabel" type="Label" parent="Control_SpecialsMenu/MarginContainer/VBoxContainer"]
+[node name="Control_AbilityPanel" type="Control" parent="."]
+layout_mode = 3
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+offset_top = -40.0
+offset_right = 40.0
+grow_vertical = 0
+
+[node name="TextureRect" type="TextureRect" parent="Control_AbilityPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 17.0
+offset_top = -466.0
+offset_right = 733.965
+offset_bottom = -72.575
+grow_horizontal = 0
+grow_vertical = 0
+scale = Vector2(1, 0.545)
+texture = ExtResource("6_pq5mx")
+
+[node name="MarginContainer" type="MarginContainer" parent="Control_AbilityPanel"]
+layout_mode = 1
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 4.0
+offset_top = -465.0
+offset_right = 742.0
+offset_bottom = -235.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_constants/margin_left = 40
+theme_override_constants/margin_top = 30
+theme_override_constants/margin_right = 40
+theme_override_constants/margin_bottom = 30
+
+[node name="HBoxContainer" type="HBoxContainer" parent="Control_AbilityPanel/MarginContainer" node_paths=PackedStringArray("ControlNode")]
+layout_mode = 2
+size_flags_vertical = 0
+theme_override_constants/separation = 31
+alignment = 1
+script = ExtResource("5_e0q65")
+VisibleStates = Array[int]([3, 5])
+ControlNode = NodePath("../..")
+
+[node name="AbilityNameLabel" type="Label" parent="Control_AbilityPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Ability: TEST"
+
+[node name="RangeLabel" type="Label" parent="Control_AbilityPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Range: N/A"
+
+[node name="PowerLabel" type="Label" parent="Control_AbilityPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "Power: N/A"
+
+[node name="APCostLabel" type="Label" parent="Control_AbilityPanel/MarginContainer/HBoxContainer"]
+layout_mode = 2
+theme_override_font_sizes/font_size = 18
+text = "AP Cost: N/A"
+
+[node name="AbilityDescriptionLabel" type="Label" parent="Control_AbilityPanel/MarginContainer"]
 custom_minimum_size = Vector2(100, 100)
 layout_mode = 2
 size_flags_vertical = 3
@@ -518,7 +571,7 @@ grow_vertical = 0
 theme_override_constants/h_separation = 350
 theme_override_constants/v_separation = 80
 script = ExtResource("5_e0q65")
-VisibleState = 4
+VisibleStates = Array[int]([4])
 ControlNode = NodePath("..")
 
 [node name="Control_Light" type="Control" parent="Control_MeleeMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
@@ -549,6 +602,7 @@ text = "Light"
 horizontal_alignment = 1
 
 [node name="InfoLabel" type="Label" parent="Control_MeleeMenu/GridContainer/Control_Light"]
+layout_mode = 0
 offset_top = 42.15
 offset_right = 345.0
 offset_bottom = 60.15
@@ -585,6 +639,7 @@ text = "Medium"
 horizontal_alignment = 1
 
 [node name="InfoLabel" type="Label" parent="Control_MeleeMenu/GridContainer/Control_Medium"]
+layout_mode = 0
 offset_top = 42.15
 offset_right = 345.0
 offset_bottom = 60.15
@@ -621,6 +676,7 @@ text = "Heavy"
 horizontal_alignment = 1
 
 [node name="InfoLabel" type="Label" parent="Control_MeleeMenu/GridContainer/Control_Heavy"]
+layout_mode = 0
 offset_top = 42.15
 offset_right = 345.0
 offset_bottom = 60.15
@@ -659,7 +715,7 @@ theme_override_constants/h_separation = 350
 theme_override_constants/v_separation = 80
 columns = 2
 script = ExtResource("5_e0q65")
-VisibleState = 7
+VisibleStates = Array[int]([7])
 ControlNode = NodePath("..")
 
 [node name="Control_Backward" type="Control" parent="Control_RepositionMenu/GridContainer"]
@@ -744,7 +800,7 @@ theme_override_constants/h_separation = 350
 theme_override_constants/v_separation = 80
 columns = 2
 script = ExtResource("5_e0q65")
-VisibleState = 8
+VisibleStates = Array[int]([8])
 ControlNode = NodePath("..")
 
 [node name="Control_No" type="Control" parent="Control_FollowUpMenu/GridContainer"]
@@ -814,7 +870,7 @@ offset_bottom = 775.0
 scale = Vector2(0.12, 0.12)
 theme_override_constants/separation = 200
 
-[node name="MenuCursor" parent="." node_paths=PackedStringArray("menu_parent") instance=ExtResource("7_4qu8s")]
+[node name="MenuCursor" parent="." node_paths=PackedStringArray("menu_parent", "AbilityPanelControl", "AbilityNameLabel", "AbilityPowerLabel", "AbilityRangeLabel", "AbilityAPLabel", "AbilityDescriptionLabel") instance=ExtResource("7_4qu8s")]
 anchors_preset = 0
 anchor_right = 0.0
 anchor_bottom = 0.0
@@ -825,3 +881,9 @@ offset_bottom = 1018.0
 grow_horizontal = 1
 grow_vertical = 1
 menu_parent = NodePath("../Control_ActionMenu/GridContainer")
+AbilityPanelControl = NodePath("../Control_AbilityPanel")
+AbilityNameLabel = NodePath("../Control_AbilityPanel/MarginContainer/HBoxContainer/AbilityNameLabel")
+AbilityPowerLabel = NodePath("../Control_AbilityPanel/MarginContainer/HBoxContainer/RangeLabel")
+AbilityRangeLabel = NodePath("../Control_AbilityPanel/MarginContainer/HBoxContainer/PowerLabel")
+AbilityAPLabel = NodePath("../Control_AbilityPanel/MarginContainer/HBoxContainer/APCostLabel")
+AbilityDescriptionLabel = NodePath("../Control_AbilityPanel/MarginContainer/AbilityDescriptionLabel")

@@ -5,10 +5,10 @@
 [node name="RangedAttack" type="Node"]
 script = ExtResource("1_f0rik")
 AbilityName = "Ranged Attack"
-Description = "A basic ranged attack."
+Description = "Use a firearm or some other projectile to strike your enemy from a distance!"
 MinRange = 2
 MaxRange = 3
-Power = 4
+Power = 10
 Physical = true
 HitRate = 90
 APCost = 4

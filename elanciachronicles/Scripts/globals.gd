@@ -11,4 +11,4 @@ var CurrentGameState:Enums.GAME_STATE = Enums.GAME_STATE.OVERWORLD
 func UpdateGameState(NewState:Enums.GAME_STATE):
 	CurrentGameState = NewState
 	GameStateUpdated.emit()
-	print(CurrentGameState)
+	print("Game state updated to " + str(CurrentGameState))

@@ -4,5 +4,5 @@
 
 [node name="OpenSpecialMenu" type="Node"]
 script = ExtResource("1_tn8bx")
-AbilityName = "Open Special Menu"
-Description = "Not an actual ability, do not use in battle. Opens the Special menu when the appropriate button is pressed."
+AbilityName = "Special"
+Description = "Use character-specific special moves to attack or heal."

@@ -18,7 +18,7 @@
 [ext_resource type="PackedScene" uid="uid://dkm8w7oi1bg7y" path="res://Scenes/Abilities/Basic/HeavyAttack.tscn" id="11_eiv7w"]
 [ext_resource type="PackedScene" uid="uid://cdl7164ipiua8" path="res://Scenes/Abilities/Basic/OpenSpecialMenu.tscn" id="15_s8f3g"]
 
-[node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIControl", "PartyUIContainer", "EnemyUIControl", "EnemyUIContainer", "TurnOrderUIContainer", "ActionMenuContainer", "MeleeMenuContainer", "MeleeMenuControl", "RangedAttackButton", "SpecialMenuContainer", "SpecialMenuControl", "SpecialDescriptionBox", "RepositionMenuControl", "RepositionMenuContainer", "RepositionButton", "FollowUpMenuControl", "FollowUpMenuContainer", "PartyLinesControl", "EnemyLinesControl", "MenuCursor", "TargetCursor", "PlayerTurnCamera")]
+[node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIControl", "PartyUIContainer", "EnemyUIControl", "EnemyUIContainer", "TurnOrderUIContainer", "ActionMenuContainer", "MeleeMenuContainer", "MeleeMenuControl", "RangedAttackButton", "SpecialMenuContainer", "SpecialMenuControl", "RepositionMenuControl", "RepositionMenuContainer", "RepositionButton", "FollowUpMenuControl", "FollowUpMenuContainer", "AbilityPanelControl", "PartyLinesControl", "EnemyLinesControl", "MenuCursor", "TargetCursor", "PlayerTurnCamera")]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 script = ExtResource("1_iposc")
 PartyControlNode = NodePath("CurrentParty")
@@ -34,12 +34,12 @@ MeleeMenuControl = NodePath("BattleCanvas/Control_MeleeMenu")
 RangedAttackButton = NodePath("BattleCanvas/Control_ActionMenu/GridContainer/Control_Ranged")
 SpecialMenuContainer = NodePath("BattleCanvas/Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer")
 SpecialMenuControl = NodePath("BattleCanvas/Control_SpecialsMenu")
-SpecialDescriptionBox = NodePath("BattleCanvas/Control_SpecialsMenu/MarginContainer/VBoxContainer/SpecialDescriptionLabel")
 RepositionMenuControl = NodePath("BattleCanvas/Control_RepositionMenu")
 RepositionMenuContainer = NodePath("BattleCanvas/Control_RepositionMenu/GridContainer")
 RepositionButton = NodePath("BattleCanvas/Control_ActionMenu/GridContainer/Control_Reposition")
 FollowUpMenuControl = NodePath("BattleCanvas/Control_FollowUpMenu")
 FollowUpMenuContainer = NodePath("BattleCanvas/Control_FollowUpMenu/GridContainer")
+AbilityPanelControl = NodePath("BattleCanvas/Control_AbilityPanel")
 PartyLinesControl = NodePath("Control_PartyLines")
 EnemyLinesControl = NodePath("Control_EnemyLines")
 MenuCursor = NodePath("BattleCanvas/MenuCursor")
@@ -198,11 +198,6 @@ NextAbility = NodePath("../../../../DefaultAbilities/MeleeAttack")
 [node name="Control_Ranged" parent="BattleCanvas/Control_ActionMenu/GridContainer" index="1" node_paths=PackedStringArray("NextAbility")]
 NextAbility = NodePath("../../../../DefaultAbilities/RangedAttack")
 
-[node name="InfoLabel" parent="BattleCanvas/Control_ActionMenu/GridContainer/Control_Ranged" index="2"]
-layout_mode = 0
-offset_top = 39.525
-offset_bottom = 61.525
-
 [node name="Control_Specials" parent="BattleCanvas/Control_ActionMenu/GridContainer" index="2" node_paths=PackedStringArray("NextAbility")]
 NextAbility = NodePath("../../../../DefaultAbilities/OpenSpecialMenu")
 
@@ -216,7 +211,6 @@ NextAbility = NodePath("../../../../DefaultAbilities/Defend")
 NextAbility = NodePath("../../../../DefaultAbilities/LightAttack")
 
 [node name="InfoLabel" parent="BattleCanvas/Control_MeleeMenu/GridContainer/Control_Light" index="2"]
-layout_mode = 0
 offset_top = 45.0
 offset_bottom = 67.0
 
@@ -224,7 +218,6 @@ offset_bottom = 67.0
 NextAbility = NodePath("../../../../DefaultAbilities/MediumAttack")
 
 [node name="InfoLabel" parent="BattleCanvas/Control_MeleeMenu/GridContainer/Control_Medium" index="2"]
-layout_mode = 0
 offset_top = 45.0
 offset_bottom = 67.0
 
@@ -232,7 +225,6 @@ offset_bottom = 67.0
 NextAbility = NodePath("../../../../DefaultAbilities/HeavyAttack")
 
 [node name="InfoLabel" parent="BattleCanvas/Control_MeleeMenu/GridContainer/Control_Heavy" index="2"]
-layout_mode = 0
 offset_top = 45.0
 offset_bottom = 67.0
 
