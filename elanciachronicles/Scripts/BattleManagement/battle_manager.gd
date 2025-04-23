@@ -304,7 +304,6 @@ func _on_character_died():
 			var DeadCharacter = BattleCharacters[i]
 			var DeadCharacterIndex = TurnOrder.find(DeadCharacter)
 			
-			#TODO: REMOVE THIS CHARACTER FROM THE CHARACTER UI
 			#TODO: REMOVE THIS CHARACTER'S ROW FROM VIEW
 			
 			TurnOrder.pop_at(DeadCharacterIndex)
@@ -314,9 +313,18 @@ func _on_character_died():
 			if DeadCharacter is PartyMember:
 				DeadCharacterIndex = PartyMembers.find(DeadCharacter)
 				PartyMembers.pop_at(DeadCharacterIndex)
-			#else:
-				#DeadCharacterIndex = Enemies.find(DeadCharacter)
-				#Enemies.pop_at(DeadCharacterIndex)
+				for j in range(PartyUIContainer.get_child_count()):
+					if (PartyUIContainer.get_child(j) as CharacterUI).Character == DeadCharacter:
+						PartyUIContainer.get_child(j).queue_free()
+				
+			else:
+				DeadCharacterIndex = Enemies.find(DeadCharacter)
+				Enemies.pop_at(DeadCharacterIndex)
+				
+				# Remove character from UI
+				for j in range(EnemyUIContainer.get_child_count()):
+					if (EnemyUIContainer.get_child(j) as CharacterUI).Character == DeadCharacter:
+						EnemyUIContainer.get_child(j).queue_free()
 			
 			return
 	
