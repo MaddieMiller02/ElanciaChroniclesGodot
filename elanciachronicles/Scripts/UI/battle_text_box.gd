@@ -8,7 +8,7 @@ func display_damage_message(AbilityUsed:Ability, User:BattleCharacter, Target:Ba
 	self.show()
 	
 	Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ANIMATING)
-	await get_tree().create_timer(3.0).timeout
+	await Globals.GameStateUpdated
 	
 	self.hide()
 	
@@ -19,7 +19,7 @@ func display_weak_damage_message(AbilityUsed:Ability, User:BattleCharacter, Targ
 	self.show()
 	
 	Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ANIMATING)
-	await get_tree().create_timer(3.0).timeout
+	await Globals.GameStateUpdated
 	
 	self.hide()
 	
@@ -30,7 +30,7 @@ func display_heal_message(AbilityUsed:Ability, User:BattleCharacter, Target:Batt
 	self.show()
 	
 	Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ANIMATING)
-	await get_tree().create_timer(3.0).timeout
+	await Globals.GameStateUpdated
 	
 	self.hide()
 	
@@ -42,7 +42,7 @@ func display_missed_message(AbilityUsed:Ability, User:BattleCharacter):
 	self.show()
 	
 	Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ANIMATING)
-	await get_tree().create_timer(3.0).timeout
+	await Globals.GameStateUpdated
 	
 	self.hide()
 	
@@ -54,7 +54,7 @@ func display_defend_message(User:BattleCharacter, RegainedAP:int):
 	self.show()
 	
 	Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ANIMATING)
-	await get_tree().create_timer(3.0).timeout
+	await Globals.GameStateUpdated
 	
 	self.hide()
 	
@@ -66,7 +66,7 @@ func display_reposition_message(User:BattleCharacter, Direction:String):
 	self.show()
 	
 	Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ANIMATING)
-	await get_tree().create_timer(3.0).timeout
+	await Globals.GameStateUpdated
 	
 	self.hide()
 	
@@ -77,7 +77,7 @@ func display_reposition_failed_message(User:BattleCharacter, Direction:String):
 	
 	self.show()
 	
-	await get_tree().create_timer(3.0).timeout
+	await Globals.GameStateUpdated
 	
 	self.hide()
 	
@@ -88,7 +88,7 @@ func display_one_off_text(text:String):
 	
 	self.show()
 	
-	await get_tree().create_timer(3.0).timeout
+	await Globals.GameStateUpdated
 	
 	self.hide()
 	

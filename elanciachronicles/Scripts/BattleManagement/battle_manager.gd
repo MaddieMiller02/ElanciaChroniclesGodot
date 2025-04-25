@@ -277,11 +277,12 @@ func _special_menu_setup():
 func _on_end_turn():
 	if FollowUpPrompt == true and ActiveCharacter is PartyMember:
 		
+		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_FOLLOW_UP)
+		
 		var TextBox = TextBoxScene.instantiate()
 		add_child(TextBox)
 		TextBox.display_one_off_text("Would you like to pass your turn and perform a follow up?")
 		
-		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_FOLLOW_UP)
 		MenuCursor.change_menu(FollowUpMenuContainer)
 		MenuCursor.previous_menus.clear()
 		FollowUpMenuControl.add_child(MenuCursor)
