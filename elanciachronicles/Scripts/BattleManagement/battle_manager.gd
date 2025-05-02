@@ -160,6 +160,7 @@ func _ready():
 	set_active_character(TurnOrder[0])
 
 func set_active_character(character:BattleCharacter):
+	AttackQueue.clear()
 	#if ActiveAbility != null:
 		#await ActiveAbility.AbilityFinished
 	
@@ -244,7 +245,7 @@ func set_active_character(character:BattleCharacter):
 	MenuCursor.clear_previous_menus()
 	
 	# Set the camera position to the default
-	PlayerTurnCamera.make_current()
+	#PlayerTurnCamera.make_current()
 		
 func set_target_cursor_position(Character:BattleCharacter):
 	TargetCursor.position = Vector3(Character.position.x, Character.position.y + 2.5, Character.position.z + 6)
@@ -296,7 +297,6 @@ func _on_end_turn():
 		TurnOrderUIContainer.move_child(TurnOrderUIContainer.get_child(0), -1)
 		set_active_character(TurnOrder[0])
 		
-	AttackQueue.clear()
 	ActiveCharacter.HasRepositioned = false
 		
 func _on_character_died():

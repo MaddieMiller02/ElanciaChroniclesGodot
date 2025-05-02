@@ -63,7 +63,10 @@ const TextBoxScene = preload("res://Scenes/UI/BattleTextBox.tscn")
 @export var CharacterModel:Node3D
 @export var Animator:AnimationTree
 var Destination:Vector3
-var DestinationReached:bool = true
+@export var DestinationReached:bool = true
+var DamagedAnimation1:bool = false
+var DamagedAnimation2:bool = false
+var DamagedAnimation3:bool = false
 
 # Camera points
 @export var DefaultCamera:Camera3D
@@ -83,6 +86,7 @@ var DestinationReached:bool = true
 @export var HealSFX:AudioStreamPlayer3D
 @export var HealSoundDelay:float
 @export var DeathSFX:AudioStreamPlayer3D
+var PlayDeathAnimation:bool = false
 
 func _ready() -> void:
 	# Appends every child of the "Specials" node to the SpecialList
@@ -97,26 +101,26 @@ func _process(delta):
 		emit_signal("HasDied")
 		EmittedDeathSignal = true
 		IsDead = true
-		if DeathSFX != null:
-			DeathSFX.play()
-		if Animator != null:
-			await Animator.animation_finished
-		if self is Enemy:
-			self.hide()
 		
 	# Move to destination and animate if applicable
 	if not DestinationReached:
+		Animator.set("parameters/conditions/stopped", false)
+		Animator.set("parameters/conditions/running", true)
 		CharacterModel.look_at(global_position + position.direction_to(Destination), Vector3.UP)
 		CharacterModel.rotate_y(deg_to_rad(180))
 		if not StepDelay:
 			run_sound_with_delay()
 		position += position.direction_to(Destination) * 10 * delta
 		if position.distance_to(Destination) < 0.3:
-			print("Destination reached!")
 			position = Destination
 			CharacterModel.rotation = Vector3.ZERO
 			DestinationReached = true
 			DestinationReachedSignal.emit()
+	else:
+		Animator.set("parameters/conditions/running", false)
+		Animator.set("parameters/conditions/stopped", true)
+			
+	#print(BattlerName + str(DestinationReached))
 
 func turn_started():
 	WeaknessHit = false
@@ -125,13 +129,7 @@ func take_damage(damage:int):
 	CurrentHP -= damage
 	if CurrentHP < 0:
 		CurrentHP = 0
-	HPChanged.emit()
-	
-	# Animate character taking damage
-	if Animator != null:
-		Animator.set("parameters/conditions/Damaged", true)
-		await get_tree().create_timer(1.0).timeout
-		Animator.set("parameters/conditions/Damaged", false)	
+	HPChanged.emit()	
 	
 func heal(damage:int):
 	CurrentHP += damage
@@ -182,6 +180,33 @@ func follow_up_boost(PowerLevel:int):
 		add_child(TextBox)
 		TextBox.display_one_off_text("Turn passed! Xan's Strength and Defense temporarily powered up!")
 		
+
+func damage_animation():
+	# Animate character taking damage
+	if Animator != null:
+		if IsDead:
+			Animator.set("parameters/conditions/Died", true)
+			if DeathSFX != null:
+				DeathSFX.play()
+			PlayDeathAnimation = true
+			await Animator.animation_finished
+		elif DamagedAnimation1 != true:
+			DamagedAnimation1 = true
+			Animator.set("parameters/conditions/Damaged", true)
+		elif DamagedAnimation2 != true:
+			DamagedAnimation2 = true
+			Animator.set("parameters/conditions/Damage 2", true)
+		else:
+			DamagedAnimation3 = true
+			Animator.set("parameters/conditions/Damage 3", true)
+		
+func reset_damage_animations():
+	DamagedAnimation1 = false
+	DamagedAnimation2 = false
+	DamagedAnimation3 = false 
+	Animator.set("parameters/conditions/Damaged", false)
+	Animator.set("parameters/conditions/Damage 2", false)
+	Animator.set("parameters/conditions/Damage 3", false)
 
 # Set destination and trigger movement in _process
 func set_destination(NewDestination:Vector3):
@@ -242,3 +267,6 @@ func get_destination_reached() -> bool:
 	
 func get_is_dead() -> bool:
 	return IsDead
+	
+func get_play_death_animation() -> bool:
+	return PlayDeathAnimation

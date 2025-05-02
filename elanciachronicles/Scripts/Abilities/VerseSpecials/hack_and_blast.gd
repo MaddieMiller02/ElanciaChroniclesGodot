@@ -56,11 +56,15 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			Target.dodge_sound()
 		else:
 			User.light_melee_sound()
+			await get_tree().create_timer(User.LightSoundDelay + 0.25).timeout
+			Target.damage_animation()
 		await get_tree().create_timer(0.1).timeout
 		User.Animator.set("parameters/conditions/Hack and Blast", false)
 		await User.Animator.animation_finished
 		User.ImpactCamera2.make_current()
 		User.ranged_sound()
+		await get_tree().create_timer(User.RangedSoundDelay - 0.2).timeout
+		Target.damage_animation()
 		await get_tree().create_timer(0.25).timeout
 		if Missed:
 			Target.dodge_sound()
@@ -70,5 +74,6 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	CurrentManager.PlayerTurnCamera.make_current()
 	move_to_start(User, Target)
 	await User.DestinationReachedSignal
+	Target.reset_damage_animations()
 	
 	emit_signal("AbilityFinished")

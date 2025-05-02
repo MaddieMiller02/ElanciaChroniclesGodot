@@ -45,8 +45,12 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	
 	# Animate attack
 	if User.Animator != null:
+			User.rotation = Vector3.ZERO
 			User.look_at(Target.position)
-			User.rotate_y(deg_to_rad(90))
+			if User is PartyMember:
+				User.rotate_y(deg_to_rad(90))
+			else:
+				User.rotate_y(deg_to_rad(-90))
 			
 			User.Animator.set("parameters/conditions/RangedAttack", true)
 			User.ranged_sound()
@@ -54,6 +58,18 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			await get_tree().create_timer(1.0).timeout
 			User.Animator.set("parameters/conditions/RangedAttack", false)
 			await get_tree().create_timer(0.3447).timeout
+			# Hold camera for target's damage animation
+			if Target.Animator != null and not Missed:
+				print("Making target's camera current!")
+				Target.DefaultCamera.make_current()
+				Target.damage_animation()
+				if Target.IsDefending:
+					await get_tree().create_timer(2).timeout
+				else:
+					await get_tree().create_timer(1.0).timeout
+					Target.reset_damage_animations()
+					await get_tree().create_timer(2.0).timeout
+					#await Target.Animator.animation_finished
 			
 			# Trigger damage or dodge animation for enemy character
 			
@@ -62,14 +78,8 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			if Missed:
 				Target.dodge_sound()
 				await get_tree().create_timer(0.25).timeout
-			await get_tree().create_timer(2).timeout
+				await get_tree().create_timer(2).timeout
 			print("Animation finished")
-			
-	# Hold camera for target's damage animation
-	if Target.Animator != null:
-		print("Making target's camera current!")
-		Target.DefaultCamera.make_current()
-		await get_tree().create_timer(2).timeout
 				
 	CurrentManager.PlayerTurnCamera.make_current()
 			

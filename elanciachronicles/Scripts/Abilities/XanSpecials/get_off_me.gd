@@ -65,6 +65,9 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		else:
 			User.medium_melee_sound()
 		User.Animator.set("parameters/Melee Attack Machine/conditions/Medium Attack", true)
+		await get_tree().create_timer(User.MediumSoundDelay + 0.3).timeout
+		for i in range(EnemiesToMove.size()):
+			EnemiesToMove[i].damage_animation()
 		await get_tree().create_timer(1).timeout#Reposition enemy backwaard
 		for i in range(EnemiesToMove.size()):
 				Target = EnemiesToMove[i]
@@ -75,6 +78,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 				var position_marker_position = position_marker.position
 				Target.position.x = (position_line_position.x + position_marker_position.x) + 1
 				CurrentManager.set_target_cursor_position(Target)
+				Target.reset_damage_animations()
 		User.Animator.set("parameters/Melee Attack Machine/conditions/Medium Attack", false)
 		User.Animator.set("parameters/conditions/Melee Attack", false)
 		await User.Animator.animation_finished

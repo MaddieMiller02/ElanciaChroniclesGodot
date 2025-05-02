@@ -21,7 +21,7 @@ func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 				if Target.CurrentPosition == 0 and CurrentPosition != 2:
 					print("Repositioning backward, enemy is too close")
 					CurrentManager.MenuCursor.cursor_index = 1
-					Reposition.perform_ability(self, Target, CurrentManager)
+					await Reposition.perform_ability(self, Target, CurrentManager)
 					
 					# Let the enemy act again
 					CurrentManager.set_active_character(self)
@@ -31,7 +31,7 @@ func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 				elif Target.CurrentPosition >= 1 and CurrentPosition != 0:
 					print("Repositioning forward, enemy is too far")
 					CurrentManager.MenuCursor.cursor_index = 0
-					Reposition.perform_ability(self, Target, CurrentManager)
+					await Reposition.perform_ability(self, Target, CurrentManager)
 					
 					# Let the enemy act again
 					CurrentManager.set_active_character(self)
@@ -39,20 +39,20 @@ func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 					
 			# Perform a ranged attack if in range and has enough AP, defend otherwise
 			if RangedAttack.in_range(self, Target):
-				RangedAttack.perform_ability(self, Target, CurrentManager)
+				await RangedAttack.perform_ability(self, Target, CurrentManager)
 			elif MeleeAttack.in_range(self, Target):
 				CurrentManager.AttackQueue.append(LightAttack)
 				CurrentManager.AttackQueue.append(MediumAttack)
 				CurrentManager.AttackQueue.append(HeavyAttack)
-				MeleeAttack.perform_ability(self, Target, CurrentManager)
+				await MeleeAttack.perform_ability(self, Target, CurrentManager)
 			else:
-				Defend.perform_ability(self, self, CurrentManager)
+				await Defend.perform_ability(self, self, CurrentManager)
 				
 			super.perform_turn(party, CurrentManager)
 		
 		# Defend if character doesn't have enough AP to attack
 		else:
-			Defend.perform_ability(self, self, CurrentManager)
+			await Defend.perform_ability(self, self, CurrentManager)
 			super.perform_turn(party, CurrentManager)
 			
 	else:

@@ -66,6 +66,8 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			Target.dodge_sound()
 		else:
 			User.heavy_melee_sound()
+			await get_tree().create_timer(User.HeavySoundDelay + 0.4).timeout
+			Target.damage_animation()
 		await get_tree().create_timer(0.1).timeout
 		User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", false)
 		User.Animator.set("parameters/conditions/Melee Attack", false)
@@ -75,5 +77,6 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	move_to_start(User, Target)
 	await User.DestinationReachedSignal
 	await get_tree().create_timer(0.5).timeout
+	Target.reset_damage_animations()
 	
 	emit_signal("AbilityFinished")

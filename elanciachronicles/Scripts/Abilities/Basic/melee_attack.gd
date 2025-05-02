@@ -3,6 +3,8 @@ extends Ability
 var Missed:bool = false
 
 func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManager:BattleManager):
+	var AttackQueue:Array[Ability] = CurrentManager.AttackQueue
+	
 	# Calculations
 	var Damage = 0
 	for i in range(CurrentManager.AttackQueue.size()):
@@ -58,10 +60,12 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		
 		# Enter the Melee Attack Machine
 		print("Melee animation started")
+		if User is Enemy:
+			User.rotate_y(deg_to_rad(-90))
 		User.Animator.set("parameters/conditions/Melee Attack", true)
-
+		
 		# Queue each subsequent animation without cutting off the previous one
-		for i in range(CurrentManager.AttackQueue.size()):
+		for i in range(AttackQueue.size()):
 			# Set the camera angle
 			if i == 0:
 				User.DefaultCamera.make_current()
@@ -70,42 +74,53 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			elif i == 2:
 				User.ImpactCamera2.make_current()
 			
-			if CurrentManager.AttackQueue[i].AbilityName == "Light Melee Attack":
+			if AttackQueue[i].AbilityName == "Light Melee Attack":
 				print("Light attack animation queued")
-				if Missed:
-					Target.dodge_sound()
-				else:
-					User.light_melee_sound()
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Light Attack", true)
 				await get_tree().create_timer(0.3).timeout
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Light Attack", false)
-			elif CurrentManager.AttackQueue[i].AbilityName == "Medium Melee Attack":
-				print("Medium attack animation queued")
 				if Missed:
+					await get_tree().create_timer(User.LightSoundDelay).timeout
 					Target.dodge_sound()
 				else:
-					User.medium_melee_sound()
+					User.light_melee_sound()
+					await get_tree().create_timer(User.LightSoundDelay).timeout
+					Target.damage_animation()
+			elif AttackQueue[i].AbilityName == "Medium Melee Attack":
+				print("Medium attack animation queued")
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Medium Attack", true)
 				await get_tree().create_timer(0.3).timeout
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Medium Attack", false)
-			elif CurrentManager.AttackQueue[i].AbilityName == "Heavy Melee Attack":
-				print("Heavy attack animation queued")
 				if Missed:
+					await get_tree().create_timer(User.MediumSoundDelay).timeout
 					Target.dodge_sound()
 				else:
-					User.heavy_melee_sound()
+					User.medium_melee_sound()
+					await get_tree().create_timer(User.MediumSoundDelay).timeout
+					Target.damage_animation()
+			elif AttackQueue[i].AbilityName == "Heavy Melee Attack":
+				print("Heavy attack animation queued")
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", true)
 				await get_tree().create_timer(0.4).timeout
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Heavy Attack", false)
+				if Missed:
+					await get_tree().create_timer(User.HeavySoundDelay).timeout
+					Target.dodge_sound()
+				else:
+					User.heavy_melee_sound()
+					await get_tree().create_timer(User.HeavySoundDelay).timeout
+					Target.damage_animation()
 				
 			await User.Animator.animation_finished
-				
-		# If this is the last animation, return to the root animation tree, and reset the camera 
+		# If this is the last animation, return to the root animation tree, and reset the camera
+		Target.reset_damage_animations()
 		User.Animator.set("parameters/conditions/Melee Attack", false)
 		CurrentManager.PlayerTurnCamera.make_current()
 		
+	Missed = false
 	move_to_start(User, Target)
 	await User.DestinationReachedSignal
+	#User.rotation = Vector3.ZERO
 	await get_tree().create_timer(0.5).timeout
 	
 	emit_signal("AbilityFinished")

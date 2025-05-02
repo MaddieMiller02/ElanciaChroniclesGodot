@@ -1,0 +1,287 @@
+[gd_resource type="AnimationNodeStateMachine" load_steps=55 format=3 uid="uid://b6bsmfikdae1h"]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_panyf"]
+animation = &"DAMAGE ANIM"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_f4lmv"]
+animation = &"DAMAGE ANIM"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_hqmr6"]
+animation = &"DAMAGE ANIM"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_32irs"]
+animation = &"DEATH ANIM"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_gj72o"]
+animation = &"DEFEND ANIM"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_k7pyw"]
+animation = &"ATK LIGHT ANIM (0-30)"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_3pcr6"]
+animation = &"SHOOT MID ANIM"
+use_custom_timeline = true
+timeline_length = 3.967
+stretch_time_scale = false
+start_offset = 1.3
+loop_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_1cs7v"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v1vsv"]
+xfade_time = 0.15
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_msdhi"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_x46n3"]
+"states/ATK LIGHT ANIM (0-30)/node" = SubResource("AnimationNodeAnimation_k7pyw")
+"states/ATK LIGHT ANIM (0-30)/position" = Vector2(412, 100)
+"states/SHOOT MID ANIM/node" = SubResource("AnimationNodeAnimation_3pcr6")
+"states/SHOOT MID ANIM/position" = Vector2(703, 100)
+transitions = ["Start", "ATK LIGHT ANIM (0-30)", SubResource("AnimationNodeStateMachineTransition_1cs7v"), "ATK LIGHT ANIM (0-30)", "SHOOT MID ANIM", SubResource("AnimationNodeStateMachineTransition_v1vsv"), "SHOOT MID ANIM", "End", SubResource("AnimationNodeStateMachineTransition_msdhi")]
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_h3v6e"]
+resource_local_to_scene = true
+animation = &"IDLE ANIM"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_tl24d"]
+animation = &"ITEM ANIM"
+use_custom_timeline = true
+timeline_length = 2.667
+stretch_time_scale = false
+start_offset = 1.133
+loop_mode = 0
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_qlrd3"]
+animation = &"ATK HEAVY ANIM (0-23)"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_73rnv"]
+animation = &"ATK LIGHT ANIM (0-30)"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_sgehc"]
+animation = &"ATK MEDIUM ANIM (0-26)"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6n7kc"]
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"Light Attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_np21p"]
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"Medium Attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_jl3qw"]
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"Heavy Attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_oknvw"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Medium Attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ws301"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Light Attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_g631q"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Heavy Attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ncere"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Medium Attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8nqs0"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_erwt7"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_733pb"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Heavy Attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_ban3j"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Light Attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3320d"]
+xfade_time = 0.3
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachine" id="AnimationNodeStateMachine_xmhws"]
+"states/ATK HEAVY ANIM (0-23)/node" = SubResource("AnimationNodeAnimation_qlrd3")
+"states/ATK HEAVY ANIM (0-23)/position" = Vector2(440, 183)
+"states/ATK LIGHT ANIM (0-30)/node" = SubResource("AnimationNodeAnimation_73rnv")
+"states/ATK LIGHT ANIM (0-30)/position" = Vector2(440, 21)
+"states/ATK MEDIUM ANIM (0-26)/node" = SubResource("AnimationNodeAnimation_sgehc")
+"states/ATK MEDIUM ANIM (0-26)/position" = Vector2(628, 100)
+transitions = ["Start", "ATK LIGHT ANIM (0-30)", SubResource("AnimationNodeStateMachineTransition_6n7kc"), "Start", "ATK MEDIUM ANIM (0-26)", SubResource("AnimationNodeStateMachineTransition_np21p"), "Start", "ATK HEAVY ANIM (0-23)", SubResource("AnimationNodeStateMachineTransition_jl3qw"), "ATK LIGHT ANIM (0-30)", "ATK MEDIUM ANIM (0-26)", SubResource("AnimationNodeStateMachineTransition_oknvw"), "ATK MEDIUM ANIM (0-26)", "ATK LIGHT ANIM (0-30)", SubResource("AnimationNodeStateMachineTransition_ws301"), "ATK MEDIUM ANIM (0-26)", "ATK HEAVY ANIM (0-23)", SubResource("AnimationNodeStateMachineTransition_g631q"), "ATK HEAVY ANIM (0-23)", "ATK MEDIUM ANIM (0-26)", SubResource("AnimationNodeStateMachineTransition_ncere"), "ATK MEDIUM ANIM (0-26)", "End", SubResource("AnimationNodeStateMachineTransition_8nqs0"), "ATK HEAVY ANIM (0-23)", "End", SubResource("AnimationNodeStateMachineTransition_erwt7"), "ATK LIGHT ANIM (0-30)", "ATK HEAVY ANIM (0-23)", SubResource("AnimationNodeStateMachineTransition_733pb"), "ATK HEAVY ANIM (0-23)", "ATK LIGHT ANIM (0-30)", SubResource("AnimationNodeStateMachineTransition_ban3j"), "ATK LIGHT ANIM (0-30)", "End", SubResource("AnimationNodeStateMachineTransition_3320d")]
+graph_offset = Vector2(-213, -89)
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_0ujr2"]
+animation = &"RUN ANIM (72-144)"
+
+[sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_ijlyw"]
+animation = &"SHOOT MID ANIM"
+use_custom_timeline = true
+timeline_length = 4.044
+stretch_time_scale = false
+start_offset = 1.222
+loop_mode = 0
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_it6yb"]
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"RangedAttack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mrrgt"]
+break_loop_at_end = true
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_461ua"]
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"Damaged"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_gyr46"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_v5h1s"]
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"Melee Attack"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_qybf8"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_0fm0y"]
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mstmo"]
+xfade_time = 0.3
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"Defend"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_of5fn"]
+xfade_time = 0.3
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"Defend"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3bqaw"]
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"Item"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_16k13"]
+reset = false
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_2t0oj"]
+switch_mode = 1
+advance_mode = 2
+advance_expression = "get_destination_reached() == false"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_nia5g"]
+switch_mode = 1
+advance_mode = 2
+advance_expression = "get_destination_reached() == true"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6ur4p"]
+switch_mode = 1
+advance_mode = 2
+advance_condition = &"Hack and Blast"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sthsm"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_onlvd"]
+advance_mode = 2
+advance_condition = &"Died"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_8ssuu"]
+advance_mode = 2
+advance_condition = &"Died"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_4wcee"]
+advance_mode = 2
+advance_condition = &"Damage 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_6hwjt"]
+advance_mode = 2
+advance_condition = &"Damage 3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5abur"]
+advance_mode = 2
+advance_condition = &"Damage 2"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_bh7co"]
+switch_mode = 2
+advance_mode = 2
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_sjp8m"]
+advance_mode = 2
+advance_condition = &"Damage 3"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5mx6u"]
+switch_mode = 2
+advance_mode = 2
+advance_condition = &"Damage 3"
+
+[resource]
+resource_local_to_scene = true
+"states/DAMAGE ANIM/node" = SubResource("AnimationNodeAnimation_hqmr6")
+"states/DAMAGE ANIM/position" = Vector2(585, 168)
+"states/DAMAGE ANIM 2/node" = SubResource("AnimationNodeAnimation_panyf")
+"states/DAMAGE ANIM 2/position" = Vector2(585, 246.205)
+"states/DAMAGE ANIM 3/node" = SubResource("AnimationNodeAnimation_f4lmv")
+"states/DAMAGE ANIM 3/position" = Vector2(578.408, 342.83)
+"states/DEATH ANIM/node" = SubResource("AnimationNodeAnimation_32irs")
+"states/DEATH ANIM/position" = Vector2(428, -79)
+"states/DEFEND ANIM/node" = SubResource("AnimationNodeAnimation_gj72o")
+"states/DEFEND ANIM/position" = Vector2(226, -117)
+"states/Hack and Blast Machine/node" = SubResource("AnimationNodeStateMachine_x46n3")
+"states/Hack and Blast Machine/position" = Vector2(7, 168)
+"states/IDLE ANIM/node" = SubResource("AnimationNodeAnimation_h3v6e")
+"states/IDLE ANIM/position" = Vector2(226, 95)
+"states/ITEM ANIM/node" = SubResource("AnimationNodeAnimation_tl24d")
+"states/ITEM ANIM/position" = Vector2(226, 210)
+"states/Melee Attack Machine/node" = SubResource("AnimationNodeStateMachine_xmhws")
+"states/Melee Attack Machine/position" = Vector2(550, 16)
+"states/RUN ANIM (72-144)/node" = SubResource("AnimationNodeAnimation_0ujr2")
+"states/RUN ANIM (72-144)/position" = Vector2(-47, -9)
+"states/SHOOT MID ANIM/node" = SubResource("AnimationNodeAnimation_ijlyw")
+"states/SHOOT MID ANIM/position" = Vector2(670, 95)
+states/Start/position = Vector2(-197, 95)
+transitions = ["IDLE ANIM", "SHOOT MID ANIM", SubResource("AnimationNodeStateMachineTransition_it6yb"), "SHOOT MID ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_mrrgt"), "IDLE ANIM", "DAMAGE ANIM", SubResource("AnimationNodeStateMachineTransition_461ua"), "DAMAGE ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_gyr46"), "IDLE ANIM", "Melee Attack Machine", SubResource("AnimationNodeStateMachineTransition_v5h1s"), "Melee Attack Machine", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_qybf8"), "Start", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_0fm0y"), "IDLE ANIM", "DEFEND ANIM", SubResource("AnimationNodeStateMachineTransition_mstmo"), "DEFEND ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_of5fn"), "IDLE ANIM", "ITEM ANIM", SubResource("AnimationNodeStateMachineTransition_3bqaw"), "ITEM ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_16k13"), "IDLE ANIM", "RUN ANIM (72-144)", SubResource("AnimationNodeStateMachineTransition_2t0oj"), "RUN ANIM (72-144)", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_nia5g"), "IDLE ANIM", "Hack and Blast Machine", SubResource("AnimationNodeStateMachineTransition_6ur4p"), "Hack and Blast Machine", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_sthsm"), "IDLE ANIM", "DEATH ANIM", SubResource("AnimationNodeStateMachineTransition_onlvd"), "DEFEND ANIM", "DEATH ANIM", SubResource("AnimationNodeStateMachineTransition_8ssuu"), "DAMAGE ANIM", "DAMAGE ANIM 2", SubResource("AnimationNodeStateMachineTransition_4wcee"), "DAMAGE ANIM 2", "DAMAGE ANIM 3", SubResource("AnimationNodeStateMachineTransition_6hwjt"), "IDLE ANIM", "DAMAGE ANIM 2", SubResource("AnimationNodeStateMachineTransition_5abur"), "DAMAGE ANIM 2", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_bh7co"), "IDLE ANIM", "DAMAGE ANIM 3", SubResource("AnimationNodeStateMachineTransition_sjp8m"), "DAMAGE ANIM 3", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_5mx6u")]
+graph_offset = Vector2(-228.592, 125.278)

@@ -1,0 +1,283 @@
+[gd_scene load_steps=18 format=3 uid="uid://d3od1a50wjpjk"]
+
+[ext_resource type="Texture2D" uid="uid://pnho70oa50d6" path="res://Art/UI/ui_movement_blue.png" id="1_4h4gm"]
+[ext_resource type="Script" path="res://Scripts/BattleManagement/battle_manager.gd" id="1_iposc"]
+[ext_resource type="Texture2D" uid="uid://cybnd3p1ovf7j" path="res://Art/UI/ui_movement_red.png" id="2_1a5q0"]
+[ext_resource type="PackedScene" uid="uid://b0kkabubbo5u7" path="res://Scenes/UI/BattleCanvas.tscn" id="3_vmr8g"]
+[ext_resource type="AudioStream" uid="uid://bvnv5temg2ook" path="res://Audio/Music/55_-_Battle_Theme_2_Enmity.mp3" id="4_cisby"]
+[ext_resource type="PackedScene" uid="uid://cs8tmi1ub8grw" path="res://Scenes/PlayerData/CurrentParty.tscn" id="5_isfwl"]
+[ext_resource type="PackedScene" uid="uid://duvkajc20mui7" path="res://Scenes/UI/TargetCursor.tscn" id="5_rq0xl"]
+[ext_resource type="PackedScene" uid="uid://n43vi87y3d5k" path="res://Scenes/BattleAreas/FirstBattle.tscn" id="6_vah62"]
+[ext_resource type="PackedScene" uid="uid://bkaff4lqkrgs2" path="res://Scenes/Abilities/Basic/RangedAttack.tscn" id="8_3rrvi"]
+[ext_resource type="PackedScene" uid="uid://bsyja3aiguuui" path="res://Scenes/Abilities/Basic/MeleeAttack.tscn" id="8_5ypse"]
+[ext_resource type="PackedScene" uid="uid://cudxa1nlapdcx" path="res://Scenes/Characters/Battles/Enemies/SailorBattle.tscn" id="8_t4j1w"]
+[ext_resource type="PackedScene" uid="uid://cbxfie77qxd0t" path="res://Scenes/Abilities/Basic/Reposition.tscn" id="9_0vs8f"]
+[ext_resource type="PackedScene" uid="uid://cx6qd40y4cbtl" path="res://Scenes/Abilities/Basic/LightAttack.tscn" id="9_jvtn3"]
+[ext_resource type="PackedScene" uid="uid://2oavxmvjipxe" path="res://Scenes/Abilities/Basic/Defend.tscn" id="10_fxb1c"]
+[ext_resource type="PackedScene" uid="uid://c3luj5mvjwf4t" path="res://Scenes/Abilities/Basic/MediumAttack.tscn" id="10_in3c6"]
+[ext_resource type="PackedScene" uid="uid://dkm8w7oi1bg7y" path="res://Scenes/Abilities/Basic/HeavyAttack.tscn" id="11_eiv7w"]
+[ext_resource type="PackedScene" uid="uid://cdl7164ipiua8" path="res://Scenes/Abilities/Basic/OpenSpecialMenu.tscn" id="15_s8f3g"]
+
+[node name="BattleTemplate" type="Node3D" node_paths=PackedStringArray("PartyControlNode", "EnemyControlNode", "PartyUIControl", "PartyUIContainer", "EnemyUIControl", "EnemyUIContainer", "TurnOrderUIContainer", "ActionMenuContainer", "MeleeMenuContainer", "MeleeMenuControl", "RangedAttackButton", "SpecialMenuContainer", "SpecialMenuControl", "RepositionMenuControl", "RepositionMenuContainer", "RepositionButton", "FollowUpMenuControl", "FollowUpMenuContainer", "AbilityPanelControl", "PartyLinesControl", "EnemyLinesControl", "MenuCursor", "TargetCursor", "PlayerTurnCamera")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+script = ExtResource("1_iposc")
+PartyControlNode = NodePath("CurrentParty")
+EnemyControlNode = NodePath("FirstBattle/Enemies")
+PartyUIControl = NodePath("BattleCanvas/Control_PartyUI")
+PartyUIContainer = NodePath("BattleCanvas/Control_PartyUI/GridContainer")
+EnemyUIControl = NodePath("BattleCanvas/Control_EnemyUI")
+EnemyUIContainer = NodePath("BattleCanvas/Control_EnemyUI/GridContainer")
+TurnOrderUIContainer = NodePath("BattleCanvas/Control_TurnOrderUI/HBoxContainer")
+ActionMenuContainer = NodePath("BattleCanvas/Control_ActionMenu/GridContainer")
+MeleeMenuContainer = NodePath("BattleCanvas/Control_MeleeMenu/GridContainer")
+MeleeMenuControl = NodePath("BattleCanvas/Control_MeleeMenu")
+RangedAttackButton = NodePath("BattleCanvas/Control_ActionMenu/GridContainer/Control_Ranged")
+SpecialMenuContainer = NodePath("BattleCanvas/Control_SpecialsMenu/MarginContainer/VBoxContainer/ScrollContainer/GridContainer")
+SpecialMenuControl = NodePath("BattleCanvas/Control_SpecialsMenu")
+RepositionMenuControl = NodePath("BattleCanvas/Control_RepositionMenu")
+RepositionMenuContainer = NodePath("BattleCanvas/Control_RepositionMenu/GridContainer")
+RepositionButton = NodePath("BattleCanvas/Control_ActionMenu/GridContainer/Control_Reposition")
+FollowUpMenuControl = NodePath("BattleCanvas/Control_FollowUpMenu")
+FollowUpMenuContainer = NodePath("BattleCanvas/Control_FollowUpMenu/GridContainer")
+AbilityPanelControl = NodePath("BattleCanvas/Control_AbilityPanel")
+PartyLinesControl = NodePath("Control_PartyLines")
+EnemyLinesControl = NodePath("Control_EnemyLines")
+MenuCursor = NodePath("BattleCanvas/MenuCursor")
+TargetCursor = NodePath("TargetCursor")
+PlayerTurnCamera = NodePath("PlayerTurnCamera")
+
+[node name="PlayerTurnCamera" type="Camera3D" parent="."]
+transform = Transform3D(-0.625828, 0.201869, -0.753384, -3.45828e-08, 0.965926, 0.258819, 0.779961, 0.161976, -0.604504, -12.2201, 3.37162, -2.89031)
+
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="."]
+transform = Transform3D(-0.870311, -0.426521, 0.24625, 0.470738, -0.57341, 0.670527, -0.144791, 0.699486, 0.699825, -16.2304, 4.4172, 10.636)
+light_energy = 1.3
+shadow_enabled = true
+
+[node name="Control_PartyLines" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -1, 0, 0)
+
+[node name="PartyLine1" type="Sprite3D" parent="Control_PartyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5, 0, 6)
+visible = false
+texture = ExtResource("1_4h4gm")
+
+[node name="FrontlinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="MidlinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine1"]
+
+[node name="BacklinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="PartyLine2" type="Sprite3D" parent="Control_PartyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5, 0, 3)
+visible = false
+texture = ExtResource("1_4h4gm")
+
+[node name="FrontlinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="MidlinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine2"]
+
+[node name="BacklinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="PartyLine3" type="Sprite3D" parent="Control_PartyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5, 0, 0)
+visible = false
+texture = ExtResource("1_4h4gm")
+
+[node name="FrontlinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="MidlinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine3"]
+
+[node name="BacklinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="PartyLine4" type="Sprite3D" parent="Control_PartyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5, 0, -3)
+visible = false
+texture = ExtResource("1_4h4gm")
+
+[node name="FrontlinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="MidlinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine4"]
+
+[node name="BacklinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="PartyLine5" type="Sprite3D" parent="Control_PartyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, -5, 0, -6)
+visible = false
+texture = ExtResource("1_4h4gm")
+
+[node name="FrontlinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="MidlinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine5"]
+
+[node name="BacklinePositionMarker" type="Node3D" parent="Control_PartyLines/PartyLine5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="Control_EnemyLines" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1, 0, 0)
+
+[node name="EnemyLine1" type="Sprite3D" parent="Control_EnemyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5, 0, 6)
+visible = false
+texture = ExtResource("2_1a5q0")
+
+[node name="FrontlinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="MidlinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine1"]
+
+[node name="BacklinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine1"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="EnemyLine2" type="Sprite3D" parent="Control_EnemyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5, 0, 3)
+visible = false
+texture = ExtResource("2_1a5q0")
+
+[node name="FrontlinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="MidlinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine2"]
+
+[node name="BacklinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine2"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="EnemyLine3" type="Sprite3D" parent="Control_EnemyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5, 0, 0)
+visible = false
+texture = ExtResource("2_1a5q0")
+
+[node name="FrontlinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="MidlinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine3"]
+
+[node name="BacklinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine3"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="EnemyLine4" type="Sprite3D" parent="Control_EnemyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5, 0, -3)
+visible = false
+texture = ExtResource("2_1a5q0")
+
+[node name="FrontlinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="MidlinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine4"]
+
+[node name="BacklinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine4"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="EnemyLine5" type="Sprite3D" parent="Control_EnemyLines"]
+transform = Transform3D(1, 0, 0, 0, -4.37114e-08, -1, 0, 1, -4.37114e-08, 5, 0, -6)
+visible = false
+texture = ExtResource("2_1a5q0")
+
+[node name="FrontlinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -4, 0, 0)
+
+[node name="MidlinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine5"]
+
+[node name="BacklinePositionMarker" type="Node3D" parent="Control_EnemyLines/EnemyLine5"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 4, 0, 0)
+
+[node name="BattleCanvas" parent="." instance=ExtResource("3_vmr8g")]
+
+[node name="Control_Melee" parent="BattleCanvas/Control_ActionMenu/GridContainer" index="0" node_paths=PackedStringArray("NextAbility")]
+NextAbility = NodePath("../../../../DefaultAbilities/MeleeAttack")
+
+[node name="Control_Ranged" parent="BattleCanvas/Control_ActionMenu/GridContainer" index="1" node_paths=PackedStringArray("NextAbility")]
+NextAbility = NodePath("../../../../DefaultAbilities/RangedAttack")
+
+[node name="Control_Specials" parent="BattleCanvas/Control_ActionMenu/GridContainer" index="2" node_paths=PackedStringArray("NextAbility")]
+NextAbility = NodePath("../../../../DefaultAbilities/OpenSpecialMenu")
+
+[node name="Control_Reposition" parent="BattleCanvas/Control_ActionMenu/GridContainer" index="3" node_paths=PackedStringArray("NextAbility")]
+NextAbility = NodePath("../../../../DefaultAbilities/Reposition")
+
+[node name="Control_Defend" parent="BattleCanvas/Control_ActionMenu/GridContainer" index="4" node_paths=PackedStringArray("NextAbility")]
+NextAbility = NodePath("../../../../DefaultAbilities/Defend")
+
+[node name="Control_Light" parent="BattleCanvas/Control_MeleeMenu/GridContainer" index="0" node_paths=PackedStringArray("NextAbility")]
+NextAbility = NodePath("../../../../DefaultAbilities/LightAttack")
+
+[node name="InfoLabel" parent="BattleCanvas/Control_MeleeMenu/GridContainer/Control_Light" index="2"]
+offset_top = 45.0
+offset_bottom = 67.0
+
+[node name="Control_Medium" parent="BattleCanvas/Control_MeleeMenu/GridContainer" index="1" node_paths=PackedStringArray("NextAbility")]
+NextAbility = NodePath("../../../../DefaultAbilities/MediumAttack")
+
+[node name="InfoLabel" parent="BattleCanvas/Control_MeleeMenu/GridContainer/Control_Medium" index="2"]
+offset_top = 45.0
+offset_bottom = 67.0
+
+[node name="Control_Heavy" parent="BattleCanvas/Control_MeleeMenu/GridContainer" index="2" node_paths=PackedStringArray("NextAbility")]
+NextAbility = NodePath("../../../../DefaultAbilities/HeavyAttack")
+
+[node name="InfoLabel" parent="BattleCanvas/Control_MeleeMenu/GridContainer/Control_Heavy" index="2"]
+offset_top = 45.0
+offset_bottom = 67.0
+
+[node name="Control_Backward" parent="BattleCanvas/Control_RepositionMenu/GridContainer" index="0" node_paths=PackedStringArray("ImageScene")]
+ImageScene = NodePath("UI_Hexagon1")
+
+[node name="Control_Forward" parent="BattleCanvas/Control_RepositionMenu/GridContainer" index="1" node_paths=PackedStringArray("ImageScene")]
+ImageScene = NodePath("UI_Hexagon1")
+
+[node name="TargetCursor" parent="." instance=ExtResource("5_rq0xl")]
+visible = false
+
+[node name="CurrentParty" parent="." instance=ExtResource("5_isfwl")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
+
+[node name="FirstBattle" parent="." instance=ExtResource("6_vah62")]
+
+[node name="SailorBattle" parent="FirstBattle/Enemies" index="0"]
+DefaultPosition = 0
+CurrentPosition = 0
+
+[node name="SailorBattle2" parent="FirstBattle/Enemies" index="1"]
+Speed = 9
+DefaultPosition = 2
+CurrentPosition = 2
+
+[node name="SailorBattle3" parent="FirstBattle/Enemies" index="2" instance=ExtResource("8_t4j1w")]
+Speed = 7
+
+[node name="DefaultAbilities" type="Node" parent="."]
+
+[node name="MeleeAttack" parent="DefaultAbilities" instance=ExtResource("8_5ypse")]
+
+[node name="LightAttack" parent="DefaultAbilities" instance=ExtResource("9_jvtn3")]
+
+[node name="MediumAttack" parent="DefaultAbilities" instance=ExtResource("10_in3c6")]
+
+[node name="HeavyAttack" parent="DefaultAbilities" instance=ExtResource("11_eiv7w")]
+
+[node name="RangedAttack" parent="DefaultAbilities" instance=ExtResource("8_3rrvi")]
+
+[node name="Reposition" parent="DefaultAbilities" instance=ExtResource("9_0vs8f")]
+
+[node name="Defend" parent="DefaultAbilities" instance=ExtResource("10_fxb1c")]
+
+[node name="OpenSpecialMenu" parent="DefaultAbilities" instance=ExtResource("15_s8f3g")]
+
+[node name="BattleMusic" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("4_cisby")
+volume_db = -6.0
+autoplay = true
+parameters/looping = true
+
+[editable path="BattleCanvas"]
+[editable path="CurrentParty"]
+[editable path="FirstBattle"]
