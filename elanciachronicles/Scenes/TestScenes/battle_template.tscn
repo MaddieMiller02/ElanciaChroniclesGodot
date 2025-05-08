@@ -6,7 +6,6 @@
 [ext_resource type="Texture2D" uid="uid://cybnd3p1ovf7j" path="res://Art/UI/ui_movement_red.png" id="2_1a5q0"]
 [ext_resource type="Texture2D" uid="uid://btxohqrergbl3" path="res://Art/3DModels/Environments/ship_wood.png" id="3_rhhol"]
 [ext_resource type="PackedScene" uid="uid://b0kkabubbo5u7" path="res://Scenes/UI/BattleCanvas.tscn" id="3_vmr8g"]
-[ext_resource type="AudioStream" uid="uid://bvnv5temg2ook" path="res://Audio/Music/55_-_Battle_Theme_2_Enmity.mp3" id="4_cisby"]
 [ext_resource type="Texture2D" uid="uid://ccg17dg0lgpkh" path="res://Art/3DModels/Environments/ship_wood_2.png" id="4_qs4bu"]
 [ext_resource type="Texture2D" uid="uid://cce240a7v6bno" path="res://Art/3DModels/Environments/textures/water.png" id="5_fa0tm"]
 [ext_resource type="PackedScene" uid="uid://cs8tmi1ub8grw" path="res://Scenes/PlayerData/CurrentParty.tscn" id="5_isfwl"]
@@ -21,6 +20,7 @@
 [ext_resource type="PackedScene" uid="uid://c3luj5mvjwf4t" path="res://Scenes/Abilities/Basic/MediumAttack.tscn" id="10_in3c6"]
 [ext_resource type="PackedScene" uid="uid://dkm8w7oi1bg7y" path="res://Scenes/Abilities/Basic/HeavyAttack.tscn" id="11_eiv7w"]
 [ext_resource type="PackedScene" uid="uid://cdl7164ipiua8" path="res://Scenes/Abilities/Basic/OpenSpecialMenu.tscn" id="15_s8f3g"]
+[ext_resource type="AudioStream" uid="uid://bhx6acguqjxo3" path="res://Audio/Music/PS1Enmity_01.mp3" id="21_24wjq"]
 
 [sub_resource type="ProceduralSkyMaterial" id="ProceduralSkyMaterial_3hmn7"]
 sky_top_color = Color(0.170588, 0.605533, 0.808528, 1)
@@ -214,7 +214,7 @@ environment = SubResource("Environment_h2jcg")
 [node name="Environment" type="Node3D" parent="."]
 
 [node name="ship" type="Node3D" parent="Environment"]
-transform = Transform3D(1.295, 0, 0, 0, 1.295, 0, 0, 0, 1.295, -38, 0, -6.41612)
+transform = Transform3D(-1.295, 0, -1.13212e-07, 0, 1.295, 0, 1.13212e-07, 0, -1.295, 6.05659, 0, 10.8645)
 
 [node name="Base" type="MeshInstance3D" parent="Environment/ship"]
 transform = Transform3D(26.9234, 0, 0, 0, 1, 0, 0, 0, 8.60116, 15.2685, -6.1211, 5.76728)
@@ -457,10 +457,9 @@ Speed = 7
 [node name="OpenSpecialMenu" parent="DefaultAbilities" instance=ExtResource("15_s8f3g")]
 
 [node name="BattleMusic" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("4_cisby")
+stream = ExtResource("21_24wjq")
 volume_db = -6.0
 autoplay = true
-parameters/looping = true
 
 [editable path="BattleCanvas"]
 [editable path="CurrentParty"]
