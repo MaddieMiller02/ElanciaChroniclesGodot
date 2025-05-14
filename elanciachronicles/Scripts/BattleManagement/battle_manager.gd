@@ -53,8 +53,14 @@ var TargetCharacter:BattleCharacter
 # Camera variables
 @export var PlayerTurnCamera:Camera3D
 
+# Music references
+@export var BattleMusic:AudioStreamPlayer
+@export var VictoryMusic:AudioStreamPlayer
+@export var DefeatMusic:AudioStreamPlayer
+
 func _ready():
 	Globals.UpdateGameState(Enums.GAME_STATE.BATTLE)
+	Globals.GameStateUpdated.connect(_on_game_state_changed)
 	
 	# Set up arrays, UI, and positioning for party members
 	for i in range(PartyControlNode.get_child_count()):
@@ -160,6 +166,15 @@ func _ready():
 	set_active_character(TurnOrder[0])
 
 func set_active_character(character:BattleCharacter):
+	# If all enemies have been defeated, end the battle
+	if Enemies.size() <= 0:
+		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_WON)
+		return
+		
+	elif PartyMembers.size() <= 0:
+		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_LOST)
+		return
+	
 	AttackQueue.clear()
 	#if ActiveAbility != null:
 		#await ActiveAbility.AbilityFinished
@@ -556,3 +571,11 @@ func _on_follow_up_button_pressed():
 		PartyUIControl.add_child(MenuCursor)
 		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_PARTY)
 		
+		
+func _on_game_state_changed():
+	if Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_WON:
+		BattleMusic.stop()
+		VictoryMusic.play()
+	elif Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_LOST:
+		BattleMusic.stop()
+		DefeatMusic.play()

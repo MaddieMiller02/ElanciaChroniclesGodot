@@ -86,6 +86,7 @@ var DamagedAnimation3:bool = false
 @export var HealSFX:AudioStreamPlayer3D
 @export var HealSoundDelay:float
 @export var DeathSFX:AudioStreamPlayer3D
+var DeathSFXPlayed:bool = false
 var PlayDeathAnimation:bool = false
 
 func _ready() -> void:
@@ -106,14 +107,17 @@ func _process(delta):
 	if not DestinationReached:
 		Animator.set("parameters/conditions/stopped", false)
 		Animator.set("parameters/conditions/running", true)
-		CharacterModel.look_at(global_position + position.direction_to(Destination), Vector3.UP)
-		CharacterModel.rotate_y(deg_to_rad(180))
+		look_at(global_position + position.direction_to(Destination), Vector3.UP)
+		if self is PartyMember:
+			rotate_y(deg_to_rad(90))
+		else:
+			rotate_y(deg_to_rad(-90))
 		if not StepDelay:
 			run_sound_with_delay()
 		position += position.direction_to(Destination) * 10 * delta
 		if position.distance_to(Destination) < 0.3:
 			position = Destination
-			CharacterModel.rotation = Vector3.ZERO
+			rotation = Vector3.ZERO
 			DestinationReached = true
 			DestinationReachedSignal.emit()
 	else:
@@ -186,17 +190,22 @@ func damage_animation():
 	if Animator != null:
 		if IsDead:
 			Animator.set("parameters/conditions/Died", true)
-			if DeathSFX != null:
+			print("Death animation triggered")
+			if DeathSFX != null and !DeathSFXPlayed:
 				DeathSFX.play()
+				DeathSFXPlayed = true
 			PlayDeathAnimation = true
 			await Animator.animation_finished
 		elif DamagedAnimation1 != true:
+			print("Damage animation 1 triggered")
 			DamagedAnimation1 = true
 			Animator.set("parameters/conditions/Damaged", true)
 		elif DamagedAnimation2 != true:
+			print("Damage animation 2 triggered")
 			DamagedAnimation2 = true
 			Animator.set("parameters/conditions/Damage 2", true)
 		else:
+			print("Damage animation 3 triggered")
 			DamagedAnimation3 = true
 			Animator.set("parameters/conditions/Damage 3", true)
 		
@@ -207,6 +216,7 @@ func reset_damage_animations():
 	Animator.set("parameters/conditions/Damaged", false)
 	Animator.set("parameters/conditions/Damage 2", false)
 	Animator.set("parameters/conditions/Damage 3", false)
+	print("Damage animations reset!")
 
 # Set destination and trigger movement in _process
 func set_destination(NewDestination:Vector3):

@@ -1,0 +1,36 @@
+[gd_scene load_steps=8 format=3 uid="uid://dmxh0k84xy7nw"]
+
+[ext_resource type="PackedScene" uid="uid://5yjvot7b46b0" path="res://Art/3DModels/Environments/ship.blend" id="1_bbcv6"]
+[ext_resource type="Texture2D" uid="uid://7h7a5sv0ufuk" path="res://Art/3DModels/Environments/textures/metal.jpg" id="2_jwevo"]
+[ext_resource type="Texture2D" uid="uid://cy1idqncrhxbe" path="res://Art/3DModels/Environments/textures/log.png" id="3_a3dlm"]
+[ext_resource type="Texture2D" uid="uid://p10m3sba7542" path="res://Art/3DModels/Environments/textures/wood.png" id="4_h84vw"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fe3v8"]
+shading_mode = 0
+albedo_color = Color(0.172833, 0.172833, 0.172833, 1)
+albedo_texture = ExtResource("2_jwevo")
+uv1_scale = Vector3(100, 100, 100)
+uv1_triplanar = true
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fhwyo"]
+shading_mode = 0
+albedo_color = Color(0.633757, 0.633757, 0.633757, 1)
+albedo_texture = ExtResource("3_a3dlm")
+uv1_scale = Vector3(12.51, -0.65, 5.735)
+uv1_triplanar = true
+uv1_triplanar_sharpness = 4.75682
+texture_filter = 0
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_deavp"]
+shading_mode = 0
+albedo_texture = ExtResource("4_h84vw")
+uv1_scale = Vector3(14.55, 68.89, 41.915)
+texture_filter = 0
+
+[node name="ship" instance=ExtResource("1_bbcv6")]
+
+[node name="Base" parent="." index="0"]
+surface_material_override/0 = SubResource("StandardMaterial3D_fe3v8")
+surface_material_override/1 = SubResource("StandardMaterial3D_fhwyo")
+surface_material_override/2 = SubResource("StandardMaterial3D_deavp")

@@ -55,7 +55,8 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		if Missed:
 			Target.dodge_sound()
 		else:
-			User.light_melee_sound()
+			if !Target.IsDead:
+				User.light_melee_sound()
 			await get_tree().create_timer(User.LightSoundDelay + 0.25).timeout
 			Target.damage_animation()
 		await get_tree().create_timer(0.1).timeout
