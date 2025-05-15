@@ -18,12 +18,12 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	TextBox.display_defend_message(User, User.CurrentAP - StartingAP)
 	
 	# Activate defend animation
-	if User.Animator != null:
-		User.Animator.set("parameters/conditions/Defend", true)
-		await get_tree().create_timer(0.1).timeout
-		User.Animator.set("parameters/conditions/Defend", false)
-		await get_tree().create_timer(3).timeout
-		
+	#if User.Animator != null:
+		#User.Animator.set("parameters/conditions/Defend", true)
+		#await get_tree().create_timer(0.1).timeout
+		#User.Animator.set("parameters/conditions/Defend", false)
 	User.IsDefending = true
+	await get_tree().create_timer(3).timeout
+		
 	
 	emit_signal("AbilityFinished")

@@ -23,11 +23,11 @@
 [ext_resource type="AudioStream" uid="uid://do8ekjo7lyrxy" path="res://Audio/Music/29_-_Victory_Theme_1_A_Foxs_Tale.mp3" id="22_7t41e"]
 [ext_resource type="AudioStream" uid="uid://ccy8e62bivdq8" path="res://Audio/Music/WhatIveDone1C.mp3" id="26_jaetf"]
 
-[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_rb2w7"]
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_at2pg"]
 panorama = ExtResource("2_5s54g")
 
 [sub_resource type="Sky" id="Sky_a2r22"]
-sky_material = SubResource("PanoramaSkyMaterial_rb2w7")
+sky_material = SubResource("PanoramaSkyMaterial_at2pg")
 
 [sub_resource type="Environment" id="Environment_3qlce"]
 background_mode = 2

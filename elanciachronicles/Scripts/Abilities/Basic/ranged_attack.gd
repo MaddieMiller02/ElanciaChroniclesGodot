@@ -66,10 +66,10 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 				if Target.IsDefending:
 					await get_tree().create_timer(2).timeout
 				else:
-					await get_tree().create_timer(1.0).timeout
-					Target.reset_damage_animations()
+					#await get_tree().create_timer(1.0).timeout
 					await get_tree().create_timer(2.0).timeout
 					#await Target.Animator.animation_finished
+				Target.reset_damage_animations()
 			
 			# Trigger damage or dodge animation for enemy character
 			

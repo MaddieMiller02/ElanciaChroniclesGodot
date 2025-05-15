@@ -186,18 +186,15 @@ advance_mode = 2
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mstmo"]
 xfade_time = 0.3
-switch_mode = 1
 advance_mode = 2
-advance_condition = &"Defend"
+advance_expression = "get_is_defending() == true"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_of5fn"]
 xfade_time = 0.3
-switch_mode = 1
 advance_mode = 2
-advance_condition = &"Defend"
+advance_expression = "get_is_defending() == false"
 
 [sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_3bqaw"]
-switch_mode = 1
 advance_mode = 2
 advance_condition = &"Item"
 
@@ -280,4 +277,4 @@ resource_local_to_scene = true
 "states/SHOOT MID ANIM/position" = Vector2(670, 95)
 states/Start/position = Vector2(-197, 95)
 transitions = ["IDLE ANIM", "SHOOT MID ANIM", SubResource("AnimationNodeStateMachineTransition_it6yb"), "SHOOT MID ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_mrrgt"), "IDLE ANIM", "DAMAGE ANIM", SubResource("AnimationNodeStateMachineTransition_461ua"), "DAMAGE ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_gyr46"), "IDLE ANIM", "Melee Attack Machine", SubResource("AnimationNodeStateMachineTransition_v5h1s"), "Melee Attack Machine", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_qybf8"), "Start", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_0fm0y"), "IDLE ANIM", "DEFEND ANIM", SubResource("AnimationNodeStateMachineTransition_mstmo"), "DEFEND ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_of5fn"), "IDLE ANIM", "ITEM ANIM", SubResource("AnimationNodeStateMachineTransition_3bqaw"), "ITEM ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_16k13"), "IDLE ANIM", "RUN ANIM (72-144)", SubResource("AnimationNodeStateMachineTransition_2t0oj"), "RUN ANIM (72-144)", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_nia5g"), "IDLE ANIM", "Hack and Blast Machine", SubResource("AnimationNodeStateMachineTransition_6ur4p"), "Hack and Blast Machine", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_sthsm"), "IDLE ANIM", "DEATH ANIM", SubResource("AnimationNodeStateMachineTransition_onlvd"), "DEFEND ANIM", "DEATH ANIM", SubResource("AnimationNodeStateMachineTransition_8ssuu"), "DAMAGE ANIM", "DAMAGE ANIM 2", SubResource("AnimationNodeStateMachineTransition_4wcee"), "DAMAGE ANIM 2", "DAMAGE ANIM 3", SubResource("AnimationNodeStateMachineTransition_6hwjt"), "IDLE ANIM", "DAMAGE ANIM 2", SubResource("AnimationNodeStateMachineTransition_5abur"), "IDLE ANIM", "DAMAGE ANIM 3", SubResource("AnimationNodeStateMachineTransition_sjp8m"), "DAMAGE ANIM 3", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_5mx6u")]
-graph_offset = Vector2(-228.592, 70.8804)
+graph_offset = Vector2(-537.592, -1.1196)

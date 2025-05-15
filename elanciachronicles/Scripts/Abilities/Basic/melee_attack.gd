@@ -65,6 +65,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		User.Animator.set("parameters/conditions/Melee Attack", true)
 		
 		# Queue each subsequent animation without cutting off the previous one
+		Target.reset_damage_animations()
 		for i in range(AttackQueue.size()):
 			# Set the camera angle
 			if i == 0:
@@ -83,8 +84,8 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 					await get_tree().create_timer(User.LightSoundDelay).timeout
 					Target.dodge_sound()
 				else:
-					if !Target.IsDead:
-						User.light_melee_sound()
+					#if !Target.IsDead:
+					User.light_melee_sound()
 					await get_tree().create_timer(User.LightSoundDelay).timeout
 					Target.damage_animation()
 			elif AttackQueue[i].AbilityName == "Medium Melee Attack":
@@ -96,8 +97,8 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 					await get_tree().create_timer(User.MediumSoundDelay).timeout
 					Target.dodge_sound()
 				else:
-					if !Target.IsDead:
-						User.medium_melee_sound()
+					#if !Target.IsDead:
+					User.medium_melee_sound()
 					await get_tree().create_timer(User.MediumSoundDelay).timeout
 					Target.damage_animation()
 			elif AttackQueue[i].AbilityName == "Heavy Melee Attack":
@@ -109,8 +110,8 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 					await get_tree().create_timer(User.HeavySoundDelay).timeout
 					Target.dodge_sound()
 				else:
-					if !Target.IsDead:
-						User.heavy_melee_sound()
+					#if !Target.IsDead:
+					User.heavy_melee_sound()
 					await get_tree().create_timer(User.HeavySoundDelay).timeout
 					Target.damage_animation()
 				

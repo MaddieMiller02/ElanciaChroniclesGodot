@@ -118,6 +118,7 @@ func _process(delta):
 		if position.distance_to(Destination) < 0.3:
 			position = Destination
 			rotation = Vector3.ZERO
+			await get_tree().create_timer(0.01).timeout
 			DestinationReached = true
 			DestinationReachedSignal.emit()
 	else:
@@ -187,7 +188,7 @@ func follow_up_boost(PowerLevel:int):
 
 func damage_animation():
 	# Animate character taking damage
-	if Animator != null:
+	if Animator != null and !IsDefending:
 		if IsDead:
 			Animator.set("parameters/conditions/Died", true)
 			print("Death animation triggered")
@@ -277,6 +278,9 @@ func get_destination_reached() -> bool:
 	
 func get_is_dead() -> bool:
 	return IsDead
+	
+func get_is_defending() -> bool:
+	return IsDefending
 	
 func get_play_death_animation() -> bool:
 	return PlayDeathAnimation
