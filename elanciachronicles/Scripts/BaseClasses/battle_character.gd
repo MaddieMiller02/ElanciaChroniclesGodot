@@ -88,6 +88,7 @@ var DamagedAnimation3:bool = false
 @export var DeathSFX:AudioStreamPlayer3D
 var DeathSFXPlayed:bool = false
 var PlayDeathAnimation:bool = false
+var IsLastHit = true;
 
 func _ready() -> void:
 	# Appends every child of the "Specials" node to the SpecialList
@@ -189,12 +190,13 @@ func follow_up_boost(PowerLevel:int):
 func damage_animation():
 	# Animate character taking damage
 	if Animator != null and !IsDefending:
-		if IsDead:
+		if IsDead and IsLastHit:
 			Animator.set("parameters/conditions/Died", true)
 			print("Death animation triggered")
 			if DeathSFX != null and !DeathSFXPlayed:
 				DeathSFX.play()
 				DeathSFXPlayed = true
+				print("Death animation should be playing")
 			PlayDeathAnimation = true
 			await Animator.animation_finished
 		elif DamagedAnimation1 != true:
@@ -253,6 +255,12 @@ func dodge_sound():
 func heal_sound():
 	await get_tree().create_timer(HealSoundDelay).timeout
 	HealSFX.play()
+	
+func gain_passive_ap():
+	CurrentAP += (MaxAP * 0.2)
+	if CurrentAP > MaxAP:
+		CurrentAP = MaxAP
+	APChanged.emit()
 
 # These Getters return the "active" value of each stat, those being the default value plus the temp value
 func get_strength() -> int:

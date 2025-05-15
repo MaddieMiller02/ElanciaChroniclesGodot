@@ -65,6 +65,8 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		User.Animator.set("parameters/conditions/Melee Attack", true)
 		
 		# Queue each subsequent animation without cutting off the previous one
+		Target.IsLastHit = false
+		
 		Target.reset_damage_animations()
 		for i in range(AttackQueue.size()):
 			# Set the camera angle
@@ -75,6 +77,10 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 			elif i == 2:
 				User.ImpactCamera2.make_current()
 			
+			# Ensures that death animation only plays on the last hit
+			if i == AttackQueue.size() -1:
+				Target.IsLastHit = true
+				
 			if AttackQueue[i].AbilityName == "Light Melee Attack":
 				print("Light attack animation queued")
 				User.Animator.set("parameters/Melee Attack Machine/conditions/Light Attack", true)

@@ -1,4 +1,4 @@
-[gd_resource type="AnimationNodeStateMachine" load_steps=44 format=3 uid="uid://cpo35ry5l1lt0"]
+[gd_resource type="AnimationNodeStateMachine" load_steps=47 format=3 uid="uid://cpo35ry5l1lt0"]
 
 [sub_resource type="AnimationNodeAnimation" id="AnimationNodeAnimation_5ev7c"]
 animation = &"DAMAGE ANIM (0-60)"
@@ -198,6 +198,18 @@ advance_condition = &"Damage 2"
 advance_mode = 2
 advance_condition = &"Damage 3"
 
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_mucmb"]
+advance_mode = 2
+advance_condition = &"Died"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_5nbj8"]
+advance_mode = 2
+advance_condition = &"Died"
+
+[sub_resource type="AnimationNodeStateMachineTransition" id="AnimationNodeStateMachineTransition_atjwn"]
+advance_mode = 2
+advance_condition = &"Died"
+
 [resource]
 resource_local_to_scene = true
 "states/DAMAGE ANIM/node" = SubResource("AnimationNodeAnimation_hqmr6")
@@ -207,7 +219,7 @@ resource_local_to_scene = true
 "states/DAMAGE ANIM (0-60) 2/node" = SubResource("AnimationNodeAnimation_5ev7c")
 "states/DAMAGE ANIM (0-60) 2/position" = Vector2(585, 354.062)
 "states/DEATH ANIM/node" = SubResource("AnimationNodeAnimation_32irs")
-"states/DEATH ANIM/position" = Vector2(428, -79)
+"states/DEATH ANIM/position" = Vector2(835, -44)
 "states/DEFEND ANIM/node" = SubResource("AnimationNodeAnimation_gj72o")
 "states/DEFEND ANIM/position" = Vector2(226, -117)
 "states/IDLE ANIM/node" = SubResource("AnimationNodeAnimation_h3v6e")
@@ -219,5 +231,5 @@ resource_local_to_scene = true
 "states/SHOOT MID ANIM/node" = SubResource("AnimationNodeAnimation_ijlyw")
 "states/SHOOT MID ANIM/position" = Vector2(670, 95)
 states/Start/position = Vector2(-197, 95)
-transitions = ["IDLE ANIM", "SHOOT MID ANIM", SubResource("AnimationNodeStateMachineTransition_it6yb"), "SHOOT MID ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_mrrgt"), "IDLE ANIM", "DAMAGE ANIM", SubResource("AnimationNodeStateMachineTransition_461ua"), "DAMAGE ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_gyr46"), "IDLE ANIM", "Melee Attack Machine", SubResource("AnimationNodeStateMachineTransition_v5h1s"), "Melee Attack Machine", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_qybf8"), "Start", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_0fm0y"), "IDLE ANIM", "DEFEND ANIM", SubResource("AnimationNodeStateMachineTransition_mstmo"), "DEFEND ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_of5fn"), "IDLE ANIM", "RUN ANIM (72-144)", SubResource("AnimationNodeStateMachineTransition_2t0oj"), "RUN ANIM (72-144)", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_nia5g"), "IDLE ANIM", "DEATH ANIM", SubResource("AnimationNodeStateMachineTransition_onlvd"), "DEFEND ANIM", "DEATH ANIM", SubResource("AnimationNodeStateMachineTransition_8ssuu"), "DAMAGE ANIM", "DAMAGE ANIM (0-60)", SubResource("AnimationNodeStateMachineTransition_6hlum"), "DAMAGE ANIM (0-60)", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_11dqn"), "DAMAGE ANIM (0-60)", "DAMAGE ANIM (0-60) 2", SubResource("AnimationNodeStateMachineTransition_7gwvv"), "DAMAGE ANIM (0-60) 2", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_piuva"), "IDLE ANIM", "DAMAGE ANIM (0-60)", SubResource("AnimationNodeStateMachineTransition_4qp6u"), "IDLE ANIM", "DAMAGE ANIM (0-60) 2", SubResource("AnimationNodeStateMachineTransition_r50i2")]
-graph_offset = Vector2(-484.075, -189.361)
+transitions = ["IDLE ANIM", "SHOOT MID ANIM", SubResource("AnimationNodeStateMachineTransition_it6yb"), "SHOOT MID ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_mrrgt"), "IDLE ANIM", "DAMAGE ANIM", SubResource("AnimationNodeStateMachineTransition_461ua"), "DAMAGE ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_gyr46"), "IDLE ANIM", "Melee Attack Machine", SubResource("AnimationNodeStateMachineTransition_v5h1s"), "Melee Attack Machine", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_qybf8"), "Start", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_0fm0y"), "IDLE ANIM", "DEFEND ANIM", SubResource("AnimationNodeStateMachineTransition_mstmo"), "DEFEND ANIM", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_of5fn"), "IDLE ANIM", "RUN ANIM (72-144)", SubResource("AnimationNodeStateMachineTransition_2t0oj"), "RUN ANIM (72-144)", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_nia5g"), "IDLE ANIM", "DEATH ANIM", SubResource("AnimationNodeStateMachineTransition_onlvd"), "DEFEND ANIM", "DEATH ANIM", SubResource("AnimationNodeStateMachineTransition_8ssuu"), "DAMAGE ANIM", "DAMAGE ANIM (0-60)", SubResource("AnimationNodeStateMachineTransition_6hlum"), "DAMAGE ANIM (0-60)", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_11dqn"), "DAMAGE ANIM (0-60)", "DAMAGE ANIM (0-60) 2", SubResource("AnimationNodeStateMachineTransition_7gwvv"), "DAMAGE ANIM (0-60) 2", "IDLE ANIM", SubResource("AnimationNodeStateMachineTransition_piuva"), "IDLE ANIM", "DAMAGE ANIM (0-60)", SubResource("AnimationNodeStateMachineTransition_4qp6u"), "IDLE ANIM", "DAMAGE ANIM (0-60) 2", SubResource("AnimationNodeStateMachineTransition_r50i2"), "DAMAGE ANIM (0-60)", "DEATH ANIM", SubResource("AnimationNodeStateMachineTransition_mucmb"), "DAMAGE ANIM", "DEATH ANIM", SubResource("AnimationNodeStateMachineTransition_5nbj8"), "DAMAGE ANIM (0-60) 2", "DEATH ANIM", SubResource("AnimationNodeStateMachineTransition_atjwn")]
+graph_offset = Vector2(-484.075, -120.217)

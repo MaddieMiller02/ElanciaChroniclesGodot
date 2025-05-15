@@ -250,6 +250,9 @@ func set_active_character(character:BattleCharacter):
 		#ActiveCharacter.Animator.set("parameters/conditions/Defend", false)
 	ActiveCharacter.IsDefending = false
 	
+	# Restore this character's AP by a small amount every turn
+	ActiveCharacter.gain_passive_ap()
+	
 	if ActiveCharacter is PartyMember:
 		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_MENU_NORMAL)
 		MenuCursor.change_menu(ActionMenuContainer)

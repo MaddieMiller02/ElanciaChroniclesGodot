@@ -51,6 +51,9 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	await User.DestinationReachedSignal
 	
 	if User.Animator != null:
+		
+		# First hit
+		Target.IsLastHit = false
 		User.Animator.set("parameters/conditions/Hack and Blast", true)
 		if Missed:
 			Target.dodge_sound()
@@ -62,6 +65,9 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		await get_tree().create_timer(0.1).timeout
 		User.Animator.set("parameters/conditions/Hack and Blast", false)
 		await User.Animator.animation_finished
+		
+		# Second hit
+		Target.IsLastHit = true
 		User.ImpactCamera2.make_current()
 		User.ranged_sound()
 		await get_tree().create_timer(User.RangedSoundDelay - 0.2).timeout
