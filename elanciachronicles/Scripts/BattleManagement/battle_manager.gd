@@ -582,3 +582,4 @@ func _on_game_state_changed():
 	elif Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_LOST:
 		BattleMusic.stop()
 		DefeatMusic.play()
+	set_target_cursor_position(ActiveCharacter)

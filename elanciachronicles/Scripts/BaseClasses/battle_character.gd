@@ -212,6 +212,7 @@ func damage_animation():
 			DamagedAnimation3 = true
 			Animator.set("parameters/conditions/Damage 3", true)
 		
+		
 func reset_damage_animations():
 	DamagedAnimation1 = false
 	DamagedAnimation2 = false

@@ -76,6 +76,9 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		if Missed:
 			Target.dodge_sound()
 		await User.Animator.animation_finished
+		Target.Animator.set("parameters/conditions/Damaged", false)
+		Target.Animator.set("parameters/conditions/Damage 2", false)
+		Target.Animator.set("parameters/conditions/Damage 3", false)
 		#await get_tree().create_timer(4.967).timeout
 	
 	CurrentManager.PlayerTurnCamera.make_current()
