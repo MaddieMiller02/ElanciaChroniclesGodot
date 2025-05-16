@@ -357,7 +357,7 @@ func _on_ability_button_pressed():
 		TextBox.display_one_off_text("You don't have any items right now!")
 		return
 	
-	# If the cahracter does not have enough AP for an attack, do not let them proceed
+	# If the character does not have enough AP for an attack, do not let them proceed
 	if ActiveAbility.APCost > ActiveCharacter.CurrentAP:
 		var TextBox = TextBoxScene.instantiate()
 		add_child(TextBox)
@@ -533,7 +533,16 @@ func _on_melee_type_button_pressed():
 	# If there are less than 3 attacks in the attack cue, append this attack to the queue
 	if AttackQueue.size() <= 3:
 		var CurrentButton = MenuCursor.get_menu_item_at_index(MenuCursor.cursor_index) as ActionMenuButton
-		AttackQueue.append(CurrentButton.NextAbility)
+		var ap_buffer = ActiveCharacter.CurrentAP - CurrentButton.NextAbility.APCost
+		for i in range(AttackQueue.size()):
+			ap_buffer -= AttackQueue[i].APCost
+		print("AP Buffer: " + str(ap_buffer))
+		if ap_buffer > (1 - AttackQueue.size()):
+			AttackQueue.append(CurrentButton.NextAbility)
+		else:
+			var TextBox = TextBoxScene.instantiate()
+			add_child(TextBox)
+			TextBox.display_one_off_text("Not enough AP")
 	if AttackQueue.size() == 3:
 		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_ANIMATING)
 		await ActiveAbility.perform_ability(ActiveCharacter, TargetCharacter, self)
