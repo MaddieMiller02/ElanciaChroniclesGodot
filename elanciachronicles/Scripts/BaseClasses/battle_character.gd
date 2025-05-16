@@ -258,7 +258,7 @@ func heal_sound():
 	HealSFX.play()
 	
 func gain_passive_ap():
-	CurrentAP += (MaxAP * 0.2)
+	CurrentAP += (MaxAP * 0.1)
 	if CurrentAP > MaxAP:
 		CurrentAP = MaxAP
 	APChanged.emit()

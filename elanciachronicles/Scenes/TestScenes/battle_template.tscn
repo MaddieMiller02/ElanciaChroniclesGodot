@@ -271,6 +271,22 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
 [node name="FirstBattle" parent="." instance=ExtResource("6_vah62")]
 
+[node name="SailorBattle" parent="FirstBattle/Enemies" index="0"]
+DefaultPosition = 0
+CurrentPosition = 0
+
+[node name="SailorBattle2" parent="FirstBattle/Enemies" index="1"]
+Speed = 9
+CurrentAP = 12
+MaxAP = 12
+DefaultPosition = 2
+CurrentPosition = 2
+
+[node name="SailorBattle3" parent="FirstBattle/Enemies" index="2" instance=ExtResource("8_t4j1w")]
+Speed = 7
+CurrentAP = 8
+MaxAP = 8
+
 [node name="Environment" type="Node3D" parent="FirstBattle"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
 
@@ -281,18 +297,6 @@ material = SubResource("StandardMaterial3D_qrc0h")
 
 [node name="ship" parent="FirstBattle/Environment" instance=ExtResource("3_35fkw")]
 transform = Transform3D(-1.295, 0, -1.13212e-07, 0, 1.295, 0, 1.13212e-07, 0, -1.295, -13.8216, -9.41694, 3.47836)
-
-[node name="SailorBattle" parent="FirstBattle/Enemies" index="0"]
-DefaultPosition = 0
-CurrentPosition = 0
-
-[node name="SailorBattle2" parent="FirstBattle/Enemies" index="1"]
-Speed = 9
-DefaultPosition = 2
-CurrentPosition = 2
-
-[node name="SailorBattle3" parent="FirstBattle/Enemies" index="2" instance=ExtResource("8_t4j1w")]
-Speed = 7
 
 [node name="DefaultAbilities" type="Node" parent="."]
 
