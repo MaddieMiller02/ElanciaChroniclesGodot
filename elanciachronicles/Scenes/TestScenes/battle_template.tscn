@@ -75,16 +75,6 @@ DefeatMusic = NodePath("DefeatMusic")
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
 environment = SubResource("Environment_3qlce")
 
-[node name="Environment" type="Node3D" parent="."]
-
-[node name="water" type="CSGBox3D" parent="Environment"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.33261, 0)
-size = Vector3(10000, 1, 10000)
-material = SubResource("StandardMaterial3D_qrc0h")
-
-[node name="ship" parent="Environment" instance=ExtResource("3_35fkw")]
-transform = Transform3D(-1.295, 0, -1.13212e-07, 0, 1.295, 0, 1.13212e-07, 0, -1.295, -13.8216, -9.41694, 3.47836)
-
 [node name="PlayerTurnCamera" type="Camera3D" parent="."]
 transform = Transform3D(-0.625828, 0.201869, -0.753384, -3.45828e-08, 0.965926, 0.258819, 0.779961, 0.161976, -0.604504, -12.2201, 3.37162, -2.89031)
 
@@ -280,6 +270,17 @@ visible = false
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 6)
 
 [node name="FirstBattle" parent="." instance=ExtResource("6_vah62")]
+
+[node name="Environment" type="Node3D" parent="FirstBattle"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, -6)
+
+[node name="water" type="CSGBox3D" parent="FirstBattle/Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.33261, 0)
+size = Vector3(10000, 1, 10000)
+material = SubResource("StandardMaterial3D_qrc0h")
+
+[node name="ship" parent="FirstBattle/Environment" instance=ExtResource("3_35fkw")]
+transform = Transform3D(-1.295, 0, -1.13212e-07, 0, 1.295, 0, 1.13212e-07, 0, -1.295, -13.8216, -9.41694, 3.47836)
 
 [node name="SailorBattle" parent="FirstBattle/Enemies" index="0"]
 DefaultPosition = 0

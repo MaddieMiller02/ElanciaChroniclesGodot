@@ -805,11 +805,12 @@ script = ExtResource("5_e0q65")
 VisibleStates = Array[int]([8])
 ControlNode = NodePath("..")
 
-[node name="Control_No" type="Control" parent="Control_FollowUpMenu/GridContainer"]
+[node name="Control_No" type="Control" parent="Control_FollowUpMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
 layout_mode = 2
 script = ExtResource("7_opgly")
 DefaultBackground = ExtResource("5_r7qec")
 FocusedBackground = ExtResource("3_fncp4")
+ImageScene = NodePath("UI_Hexagon1")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_FollowUpMenu/GridContainer/Control_No"]
 layout_mode = 0
@@ -831,11 +832,12 @@ theme_override_font_sizes/font_size = 25
 text = "No"
 horizontal_alignment = 1
 
-[node name="Control_Yes" type="Control" parent="Control_FollowUpMenu/GridContainer"]
+[node name="Control_Yes" type="Control" parent="Control_FollowUpMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
 layout_mode = 2
 script = ExtResource("7_opgly")
 DefaultBackground = ExtResource("5_r7qec")
 FocusedBackground = ExtResource("3_fncp4")
+ImageScene = NodePath("UI_Hexagon1")
 
 [node name="UI_Hexagon1" type="TextureRect" parent="Control_FollowUpMenu/GridContainer/Control_Yes"]
 layout_mode = 0

@@ -55,6 +55,7 @@ func _process(delta):
 			var current_menu_item := get_menu_item_at_index(cursor_index)
 			if current_menu_item != null:
 				if current_menu_item.has_method("cursor_select"):
+					current_menu_item.button_unfocused()
 					current_menu_item.cursor_select()
 					ConfirmSFX.play()
 					
@@ -163,7 +164,8 @@ func _set_cursor_offset():
 	else:
 		cursor_offset = Vector2(45, -15)
 
-func _on_game_state_updated():
+func _on_game_state_updated():	
+	# Hide or show the cursor based on current state
 	if Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_NORMAL or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_SELECTING_TARGET_PARTY or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_MELEE or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_SPECIALS or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_FOLLOW_UP:
 		self.visible = true
 		active = true
