@@ -189,7 +189,7 @@ func follow_up_boost(PowerLevel:int):
 
 func damage_animation():
 	# Animate character taking damage
-	if Animator != null and !IsDefending:
+	if Animator != null:
 		if IsDead and IsLastHit:
 			Animator.set("parameters/conditions/Died", true)
 			print("Death animation triggered")
@@ -199,18 +199,19 @@ func damage_animation():
 				print("Death animation should be playing")
 			PlayDeathAnimation = true
 			await Animator.animation_finished
-		elif DamagedAnimation1 != true:
-			print("Damage animation 1 triggered")
-			DamagedAnimation1 = true
-			Animator.set("parameters/conditions/Damaged", true)
-		elif DamagedAnimation2 != true:
-			print("Damage animation 2 triggered")
-			DamagedAnimation2 = true
-			Animator.set("parameters/conditions/Damage 2", true)
-		else:
-			print("Damage animation 3 triggered")
-			DamagedAnimation3 = true
-			Animator.set("parameters/conditions/Damage 3", true)
+		if !IsDefending:
+			if DamagedAnimation1 != true:
+				print("Damage animation 1 triggered")
+				DamagedAnimation1 = true
+				Animator.set("parameters/conditions/Damaged", true)
+			elif DamagedAnimation2 != true:
+				print("Damage animation 2 triggered")
+				DamagedAnimation2 = true
+				Animator.set("parameters/conditions/Damage 2", true)
+			else:
+				print("Damage animation 3 triggered")
+				DamagedAnimation3 = true
+				Animator.set("parameters/conditions/Damage 3", true)
 		
 		
 func reset_damage_animations():
