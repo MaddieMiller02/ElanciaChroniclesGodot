@@ -7,7 +7,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 	# AP restoration
 	var StartingAP:int = User.CurrentAP
 	print("Starting AP: " + str(StartingAP))
-	var RegainedAP:int = User.MaxAP / 3
+	var RegainedAP:int = User.MaxAP / 2
 	print("Calculated AP Regain: " + str(RegainedAP))
 	User.regain_ap(RegainedAP)
 	print("Final AP: " + str(User.CurrentAP))
