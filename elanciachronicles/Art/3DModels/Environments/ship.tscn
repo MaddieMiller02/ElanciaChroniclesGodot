@@ -25,7 +25,7 @@ texture_filter = 0
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_deavp"]
 shading_mode = 0
 albedo_texture = ExtResource("4_h84vw")
-uv1_scale = Vector3(14.55, 68.89, 41.915)
+uv1_scale = Vector3(79.415, 179.155, 43.98)
 texture_filter = 0
 
 [node name="ship" instance=ExtResource("1_bbcv6")]
