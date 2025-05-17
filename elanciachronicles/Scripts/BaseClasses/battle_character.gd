@@ -178,13 +178,13 @@ func follow_up_boost(PowerLevel:int):
 		TempMagic += (PowerLevel * 2)
 		var TextBox = TextBoxScene.instantiate()
 		add_child(TextBox)
-		TextBox.display_one_off_text("Turn passed! Verse's Speed and Magic temporarily powered up!")
+		TextBox.display_timer_text("Turn passed! Verse's Speed and Magic temporarily powered up!")
 	if BattlerName == "Xan":
 		TempStrength += (PowerLevel * 2)
 		TempDefense += (PowerLevel * 2)
 		var TextBox = TextBoxScene.instantiate()
 		add_child(TextBox)
-		TextBox.display_one_off_text("Turn passed! Xan's Strength and Defense temporarily powered up!")
+		TextBox.display_timer_text("Turn passed! Xan's Strength and Defense temporarily powered up!")
 		
 
 func damage_animation():

@@ -239,23 +239,11 @@ NextAbility = NodePath("../../../../DefaultAbilities/Defend")
 [node name="Control_Light" parent="BattleCanvas/Control_MeleeMenu/GridContainer" index="0" node_paths=PackedStringArray("NextAbility")]
 NextAbility = NodePath("../../../../DefaultAbilities/LightAttack")
 
-[node name="InfoLabel" parent="BattleCanvas/Control_MeleeMenu/GridContainer/Control_Light" index="2"]
-offset_top = 45.0
-offset_bottom = 67.0
-
 [node name="Control_Medium" parent="BattleCanvas/Control_MeleeMenu/GridContainer" index="1" node_paths=PackedStringArray("NextAbility")]
 NextAbility = NodePath("../../../../DefaultAbilities/MediumAttack")
 
-[node name="InfoLabel" parent="BattleCanvas/Control_MeleeMenu/GridContainer/Control_Medium" index="2"]
-offset_top = 45.0
-offset_bottom = 67.0
-
 [node name="Control_Heavy" parent="BattleCanvas/Control_MeleeMenu/GridContainer" index="2" node_paths=PackedStringArray("NextAbility")]
 NextAbility = NodePath("../../../../DefaultAbilities/HeavyAttack")
-
-[node name="InfoLabel" parent="BattleCanvas/Control_MeleeMenu/GridContainer/Control_Heavy" index="2"]
-offset_top = 45.0
-offset_bottom = 67.0
 
 [node name="Control_Backward" parent="BattleCanvas/Control_RepositionMenu/GridContainer" index="0" node_paths=PackedStringArray("ImageScene")]
 ImageScene = NodePath("UI_Hexagon1")

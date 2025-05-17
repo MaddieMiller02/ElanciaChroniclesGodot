@@ -88,7 +88,18 @@ func display_one_off_text(text:String):
 	
 	self.show()
 	
-	await Globals.GameStateUpdated
+	await Globals.GameStateUpdated 
+	
+	self.hide()
+	
+	queue_free()
+	
+func display_timer_text(text:String):
+	text_label.text = text
+	
+	self.show()
+	
+	await get_tree().create_timer(3).timeout
 	
 	self.hide()
 	

@@ -440,6 +440,7 @@ func _on_character_button_pressed():
 			# Mark that this character has Followed Up so they cannot do so again until the next round.
 			ActiveCharacter.HasFollowedUp = true
 			TargetCharacter.HasFollowedUp = true
+			TargetCharacter.HasRepositioned = false
 			
 			# Increases the Follow Up Level, and boosts the next character's stats accordingly
 			FollowUpLevel += 1
