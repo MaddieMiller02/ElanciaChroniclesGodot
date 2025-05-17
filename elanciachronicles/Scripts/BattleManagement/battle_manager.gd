@@ -165,6 +165,10 @@ func _ready():
 	
 	set_active_character(TurnOrder[0])
 
+func _process(delta):
+	if Input.is_action_just_pressed("reset"):
+			get_tree().change_scene_to_file("res://Scenes/TestScenes/battle_template.tscn")
+
 func set_active_character(character:BattleCharacter):
 	# If all enemies have been defeated, end the battle
 	if Enemies.size() <= 0:

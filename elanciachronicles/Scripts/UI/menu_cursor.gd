@@ -30,9 +30,6 @@ func _process(delta):
 		var input := Vector2.ZERO
 		previous_index = cursor_index
 		
-		if Input.is_action_just_pressed("reset"):
-			get_tree().change_scene_to_file("res://Scenes/TestScenes/battle_template.tscn")
-		
 		# Controls cursor movement
 		if Input.is_action_just_pressed("ui_up"):
 			input.y -= 1
