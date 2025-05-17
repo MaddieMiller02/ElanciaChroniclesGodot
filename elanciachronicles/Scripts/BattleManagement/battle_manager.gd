@@ -559,17 +559,23 @@ func _on_special_button_focused():
 func _on_special_button_selected():
 	ActiveAbility = (MenuCursor.get_menu_item_at_index(MenuCursor.cursor_index) as SpecialContainer).NextAbility
 	
-	# Open the single-enemy targeting menu if attack target type is single and enemy
-	if ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
-		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY)
-		MenuCursor.change_menu(EnemyUIContainer)
-		EnemyUIControl.add_child(MenuCursor)
-			
-	# For moves that target party members (such as healing moves like First Aid)
-	elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE_ALLY:
-		Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_PARTY)
-		MenuCursor.change_menu(PartyUIContainer)
-		PartyUIControl.add_child(MenuCursor)
+	if ActiveAbility.APCost > ActiveCharacter.CurrentAP:
+		var TextBox = TextBoxScene.instantiate()
+		add_child(TextBox)
+		TextBox.display_one_off_text("Not enough AP!")
+	
+	else:
+		# Open the single-enemy targeting menu if attack target type is single and enemy
+		if ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE:
+			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY)
+			MenuCursor.change_menu(EnemyUIContainer)
+			EnemyUIControl.add_child(MenuCursor)
+				
+		# For moves that target party members (such as healing moves like First Aid)
+		elif ActiveAbility.TargetType == Enums.TARGET_TYPE.SINGLE_ALLY:
+			Globals.UpdateGameState(Enums.GAME_STATE.BATTLE_SELECTING_TARGET_PARTY)
+			MenuCursor.change_menu(PartyUIContainer)
+			PartyUIControl.add_child(MenuCursor)
 
 func _on_weakness_hit():
 	if ActiveCharacter is PartyMember:
