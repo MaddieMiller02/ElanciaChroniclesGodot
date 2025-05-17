@@ -53,12 +53,14 @@ func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 					CurrentManager.AttackQueue.append(HeavyAttack)
 					await MeleeAttack.perform_ability(self, Target, CurrentManager)
 				else:
+					Animator.set("parameters/conditions/Defending", true)
 					await Defend.perform_ability(self, self, CurrentManager)
 					
 				super.perform_turn(party, CurrentManager)
 			
 			# Defend if character doesn't have enough AP to attack
 			else:
+				Animator.set("parameters/conditions/Defending", true)
 				await Defend.perform_ability(self, self, CurrentManager)
 				super.perform_turn(party, CurrentManager)
 				
@@ -92,12 +94,14 @@ func perform_turn(party:Array[PartyMember], CurrentManager:BattleManager):
 				
 				# Otherwise, defend
 				else:
+					Animator.set("parameters/conditions/Defending", true)
 					await Defend.perform_ability(self, self, CurrentManager)
 				
 				super.perform_turn(party, CurrentManager)
 				
 			# Defend if character doesn't have enough AP to attack
 			else:
+				Animator.set("parameters/conditions/Defending", true)
 				await Defend.perform_ability(self, self, CurrentManager)
 				super.perform_turn(party, CurrentManager)
 			

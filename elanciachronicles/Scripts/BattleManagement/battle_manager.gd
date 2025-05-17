@@ -244,10 +244,11 @@ func set_active_character(character:BattleCharacter):
 	set_target_cursor_position(ActiveCharacter)
 	
 	# Deactivate defend animation
-	#if ActiveCharacter.Animator != null and ActiveCharacter.IsDefending:
-		#ActiveCharacter.Animator.set("parameters/conditions/Defend", true)
-		#await get_tree().create_timer(0.1).timeout
-		#ActiveCharacter.Animator.set("parameters/conditions/Defend", false)
+	if ActiveCharacter.Animator != null and ActiveCharacter.IsDefending:
+		ActiveCharacter.Animator.set("parameters/conditions/Defend", true)
+		await get_tree().create_timer(0.1).timeout
+		ActiveCharacter.Animator.set("parameters/conditions/Defend", false)
+		await get_tree().create_timer(0.4).timeout
 	ActiveCharacter.IsDefending = false
 	
 	# Restore this character's AP by a small amount every turn
