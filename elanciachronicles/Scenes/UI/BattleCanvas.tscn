@@ -594,25 +594,15 @@ expand_mode = 1
 [node name="MarginContainer" type="MarginContainer" parent="Control_MeleeMenu/GridContainer/Control_Light"]
 layout_mode = 0
 offset_left = 28.0
-offset_top = 3.55
+offset_top = 15.955
 offset_right = 324.0
-offset_bottom = 51.55
+offset_bottom = 63.955
 
 [node name="Label" type="Label" parent="Control_MeleeMenu/GridContainer/Control_Light/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Light"
 horizontal_alignment = 1
-
-[node name="InfoLabel" type="Label" parent="Control_MeleeMenu/GridContainer/Control_Light"]
-layout_mode = 0
-offset_top = 42.15
-offset_right = 345.0
-offset_bottom = 60.15
-theme_override_font_sizes/font_size = 13
-text = "Power: 2, AP Cost: 1"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Control_Medium" type="Control" parent="Control_MeleeMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
 layout_mode = 2
@@ -631,25 +621,15 @@ expand_mode = 1
 [node name="MarginContainer" type="MarginContainer" parent="Control_MeleeMenu/GridContainer/Control_Medium"]
 layout_mode = 0
 offset_left = 28.0
-offset_top = 3.55
+offset_top = 17.0
 offset_right = 324.0
-offset_bottom = 51.55
+offset_bottom = 65.0
 
 [node name="Label" type="Label" parent="Control_MeleeMenu/GridContainer/Control_Medium/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Medium"
 horizontal_alignment = 1
-
-[node name="InfoLabel" type="Label" parent="Control_MeleeMenu/GridContainer/Control_Medium"]
-layout_mode = 0
-offset_top = 42.15
-offset_right = 345.0
-offset_bottom = 60.15
-theme_override_font_sizes/font_size = 13
-text = "Power: 3, AP Cost: 2"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Control_Heavy" type="Control" parent="Control_MeleeMenu/GridContainer" node_paths=PackedStringArray("ImageScene")]
 layout_mode = 2
@@ -668,25 +648,15 @@ expand_mode = 1
 [node name="MarginContainer" type="MarginContainer" parent="Control_MeleeMenu/GridContainer/Control_Heavy"]
 layout_mode = 0
 offset_left = 28.0
-offset_top = 3.55
+offset_top = 16.0
 offset_right = 324.0
-offset_bottom = 51.55
+offset_bottom = 64.0
 
 [node name="Label" type="Label" parent="Control_MeleeMenu/GridContainer/Control_Heavy/MarginContainer"]
 layout_mode = 2
 theme_override_font_sizes/font_size = 25
 text = "Heavy"
 horizontal_alignment = 1
-
-[node name="InfoLabel" type="Label" parent="Control_MeleeMenu/GridContainer/Control_Heavy"]
-layout_mode = 0
-offset_top = 42.15
-offset_right = 345.0
-offset_bottom = 60.15
-theme_override_font_sizes/font_size = 13
-text = "Power: 4, AP Cost: 3"
-horizontal_alignment = 1
-vertical_alignment = 1
 
 [node name="Control_RepositionMenu" type="Control" parent="."]
 visible = false
