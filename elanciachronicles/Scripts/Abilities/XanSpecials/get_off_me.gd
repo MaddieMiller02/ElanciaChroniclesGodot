@@ -71,7 +71,7 @@ func perform_ability(User:BattleCharacter, Target:BattleCharacter, CurrentManage
 		await get_tree().create_timer(1).timeout#Reposition enemy backwaard
 		for i in range(EnemiesToMove.size()):
 				Target = EnemiesToMove[i]
-				Target.CurrentPosition += 1
+				Target.CurrentPosition += 2
 				var position_line = CurrentManager.EnemyLinesControl.get_child(Target.get_index())
 				var position_marker = position_line.get_child(Target.CurrentPosition)
 				var position_line_position = position_line.position
