@@ -1,4 +1,4 @@
-[gd_scene load_steps=12 format=3 uid="uid://b0kkabubbo5u7"]
+[gd_scene load_steps=13 format=3 uid="uid://b0kkabubbo5u7"]
 
 [ext_resource type="Script" path="res://Scripts/BaseClasses/action_menu_button.gd" id="2_c6mnl"]
 [ext_resource type="Texture2D" uid="uid://c62kcexfhw3dw" path="res://Art/UI/ui_hexagon_purple.png" id="3_fncp4"]
@@ -10,6 +10,7 @@
 [ext_resource type="PackedScene" uid="uid://brslib2v2l2h8" path="res://Scenes/UI/MenuCursor.tscn" id="7_4qu8s"]
 [ext_resource type="Script" path="res://Scripts/BaseClasses/ui_button.gd" id="7_opgly"]
 [ext_resource type="Texture2D" uid="uid://d3w6q28e6cvtq" path="res://Art/UI/battle_won_graphic.png" id="8_kbant"]
+[ext_resource type="Texture2D" uid="uid://dmn2vokkvrwmi" path="res://Art/YellowCursor.png" id="9_o6rj1"]
 [ext_resource type="Texture2D" uid="uid://bnkrirhdxijmp" path="res://Art/UI/battle_lost_graphic.png" id="9_wooeq"]
 
 [node name="BattleCanvas" type="CanvasLayer"]
@@ -873,6 +874,10 @@ offset_right = 2575.0
 offset_bottom = 775.0
 scale = Vector2(0.12, 0.12)
 theme_override_constants/separation = 200
+
+[node name="Sprite2D" type="Sprite2D" parent="Control_TurnOrderUI"]
+position = Vector2(75, 136)
+texture = ExtResource("9_o6rj1")
 
 [node name="Control_BattleWonUI" type="Control" parent="."]
 visible = false
