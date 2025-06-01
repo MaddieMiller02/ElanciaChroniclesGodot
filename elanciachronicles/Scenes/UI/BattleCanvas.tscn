@@ -1,4 +1,4 @@
-[gd_scene load_steps=13 format=3 uid="uid://b0kkabubbo5u7"]
+[gd_scene load_steps=15 format=3 uid="uid://b0kkabubbo5u7"]
 
 [ext_resource type="Script" path="res://Scripts/BaseClasses/action_menu_button.gd" id="2_c6mnl"]
 [ext_resource type="Texture2D" uid="uid://c62kcexfhw3dw" path="res://Art/UI/ui_hexagon_purple.png" id="3_fncp4"]
@@ -12,6 +12,8 @@
 [ext_resource type="Texture2D" uid="uid://d3w6q28e6cvtq" path="res://Art/UI/battle_won_graphic.png" id="8_kbant"]
 [ext_resource type="Texture2D" uid="uid://dmn2vokkvrwmi" path="res://Art/YellowCursor.png" id="9_o6rj1"]
 [ext_resource type="Texture2D" uid="uid://bnkrirhdxijmp" path="res://Art/UI/battle_lost_graphic.png" id="9_wooeq"]
+[ext_resource type="Script" path="res://Scripts/UI/proceed_screen.gd" id="10_ti7no"]
+[ext_resource type="PackedScene" uid="uid://biyadyibb2veq" path="res://Scenes/Menus/EndingScreen.tscn" id="11_38881"]
 
 [node name="BattleCanvas" type="CanvasLayer"]
 
@@ -855,6 +857,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("10_ti7no")
+next_scene = ExtResource("11_38881")
 
 [node name="ColorRect" type="ColorRect" parent="Control_BattleWonUI"]
 custom_minimum_size = Vector2(10000, 10000)
@@ -889,6 +893,8 @@ layout_mode = 3
 anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
+script = ExtResource("10_ti7no")
+next_scene = ExtResource("11_38881")
 
 [node name="ColorRect" type="ColorRect" parent="Control_BattleLostUI"]
 custom_minimum_size = Vector2(10000, 10000)

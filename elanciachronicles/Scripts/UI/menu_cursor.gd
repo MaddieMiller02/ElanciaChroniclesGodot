@@ -10,6 +10,7 @@ var scroller:ScrollContainer
 var active:bool = false
 var previous_menus:Array[Container]
 var previous_game_states:Enums.GAME_STATE
+@export var visible_states:Array[Enums.GAME_STATE]
 
 @export var MoveSFX:AudioStreamPlayer3D
 @export var ConfirmSFX:AudioStreamPlayer3D
@@ -24,6 +25,9 @@ var previous_game_states:Enums.GAME_STATE
 
 func _ready():
 	Globals.GameStateUpdated.connect(_on_game_state_updated)
+	
+	#if menu_parent != null:
+		#set_cursor_from_index(cursor_index)
 
 func _process(delta):
 	if active:
@@ -40,6 +44,7 @@ func _process(delta):
 		if Input.is_action_just_pressed("ui_right"):
 			input.x += 1
 		
+		#if input != Vector2.ZERO:
 		if menu_parent is VBoxContainer:
 			set_cursor_from_index(cursor_index + input.y)
 		elif menu_parent is HBoxContainer:
@@ -58,6 +63,7 @@ func _process(delta):
 					current_menu_item.button_unfocused()
 					current_menu_item.cursor_select()
 					ConfirmSFX.play()
+					
 					
 		# Backtracks to the previous menu if player presses cancel button
 		if Input.is_action_just_pressed("ui_cancel"):
@@ -82,7 +88,8 @@ func _process(delta):
 				AbilityPanelControl.hide()
 			
 		# Set the cursor offset accordingly to match the type of button being selected
-		_set_cursor_offset()
+		if Globals.CurrentGameState != Enums.GAME_STATE.TITLE_SCREEN:
+			_set_cursor_offset()
 		
 	elif get_menu_item_at_index(cursor_index) != null:
 		get_menu_item_at_index(cursor_index).button_unfocused()
@@ -94,7 +101,7 @@ func get_menu_item_at_index(index:int) -> UIButton:
 		
 		# Prevents the cursor from moving to an index with no item
 		if index >= menu_parent.get_child_count() or index < 0:
-			print("Index invalid")
+			print("Index " + str(index) +  " invalid")
 			return null
 			
 		return menu_parent.get_child(index) as UIButton
@@ -126,6 +133,7 @@ func change_menu(new_menu:Container):
 		get_menu_item_at_index(cursor_index).button_unfocused()
 		
 	# Reset the cursor index
+	set_cursor_from_index(0)
 	cursor_index = 0
 	
 	# Hide the previous menu if it is not a character UI display
@@ -166,7 +174,8 @@ func _set_cursor_offset():
 
 func _on_game_state_updated():	
 	# Hide or show the cursor based on current state
-	if Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_NORMAL or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_SELECTING_TARGET_PARTY or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_MELEE or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_SPECIALS or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_FOLLOW_UP:
+	#if Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_NORMAL or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_SELECTING_TARGET_ENEMY or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_SELECTING_TARGET_PARTY or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_MELEE or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_SPECIALS or Globals.CurrentGameState == Enums.GAME_STATE.BATTLE_MENU_FOLLOW_UP:
+	if Globals.CurrentGameState in visible_states:
 		self.visible = true
 		active = true
 	else:

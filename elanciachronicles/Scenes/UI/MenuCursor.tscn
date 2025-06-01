@@ -17,6 +17,7 @@ grow_vertical = 2
 texture = ExtResource("1_bhrxa")
 stretch_mode = 4
 script = ExtResource("2_fnm23")
+visible_states = Array[int]([3, 4, 5, 6, 7, 8, 12, 13, 16])
 MoveSFX = NodePath("Move")
 ConfirmSFX = NodePath("Confirm")
 CancelSFX = NodePath("Cancel")

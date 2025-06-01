@@ -11,7 +11,7 @@ config_version=5
 [application]
 
 config/name="ElanciaChronicles"
-run/main_scene="res://Scenes/TestScenes/battle_template.tscn"
+run/main_scene="res://Scenes/Menus/TitleScreen.tscn"
 config/features=PackedStringArray("4.3", "Forward Plus")
 run/max_fps=24
 config/icon="res://icon.svg"

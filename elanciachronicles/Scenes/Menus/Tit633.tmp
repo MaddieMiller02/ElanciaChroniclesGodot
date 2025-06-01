@@ -1,0 +1,158 @@
+[gd_scene load_steps=11 format=3 uid="uid://cf4aiefjqeaqw"]
+
+[ext_resource type="Texture2D" uid="uid://c24doactuux8n" path="res://Art/Textures/cloudy sunset.png" id="1_5rrsw"]
+[ext_resource type="Script" path="res://Scripts/MainScenes/title_screen.gd" id="1_duty5"]
+[ext_resource type="Texture2D" uid="uid://cce240a7v6bno" path="res://Art/3DModels/Environments/textures/water.png" id="2_58hve"]
+[ext_resource type="Texture2D" uid="uid://ped7hdcr8yju" path="res://Art/UI/Game Logo.png" id="3_bkqr7"]
+[ext_resource type="PackedScene" uid="uid://brslib2v2l2h8" path="res://Scenes/UI/MenuCursor.tscn" id="4_3wigp"]
+[ext_resource type="Script" path="res://Scripts/BaseClasses/ui_button.gd" id="6_0okep"]
+
+[sub_resource type="PanoramaSkyMaterial" id="PanoramaSkyMaterial_t7sxb"]
+panorama = ExtResource("1_5rrsw")
+
+[sub_resource type="Sky" id="Sky_a2r22"]
+sky_material = SubResource("PanoramaSkyMaterial_t7sxb")
+
+[sub_resource type="Environment" id="Environment_43a3p"]
+background_mode = 2
+sky = SubResource("Sky_a2r22")
+tonemap_mode = 2
+glow_enabled = true
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kr61k"]
+shading_mode = 0
+albedo_texture = ExtResource("2_58hve")
+uv1_scale = Vector3(-1000, -1000, -1000)
+texture_filter = 0
+
+[node name="TitleScreen" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_duty5")
+
+[node name="Environment" type="Node3D" parent="."]
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="Environment"]
+environment = SubResource("Environment_43a3p")
+
+[node name="water" type="CSGBox3D" parent="Environment"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -6.33261, 0)
+size = Vector3(10000, 1, 10000)
+material = SubResource("StandardMaterial3D_kr61k")
+
+[node name="Camera3D" type="Camera3D" parent="Environment"]
+transform = Transform3D(-0.258819, 0, 0.965926, 0, 1, 0, -0.965926, 0, -0.258819, 0, 6.07125, 0)
+
+[node name="Logo" type="TextureRect" parent="."]
+layout_mode = 1
+anchors_preset = -1
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_left = 240.0
+offset_top = -152.0
+offset_right = 240.0
+offset_bottom = -152.0
+grow_horizontal = 2
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("3_bkqr7")
+stretch_mode = 4
+
+[node name="Label" type="Label" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -400.0
+offset_top = -140.0
+offset_right = 399.0
+offset_bottom = -23.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.540065, 0.473227, 0.277429, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.721569)
+theme_override_colors/font_outline_color = Color(0.212305, 0.212305, 0.212305, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 91
+text = "BATTLE DEMO"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Control_TitleMenu" type="Control" parent="."]
+layout_mode = 2
+anchors_preset = 0
+offset_left = 549.0
+offset_top = 587.0
+offset_right = 1382.0
+offset_bottom = 935.0
+
+[node name="MenuCursor" parent="Control_TitleMenu" node_paths=PackedStringArray("menu_parent") instance=ExtResource("4_3wigp")]
+layout_mode = 2
+anchors_preset = 0
+anchor_right = 0.0
+anchor_bottom = 0.0
+offset_top = 289.0
+offset_right = 833.0
+offset_bottom = 339.0
+scale = Vector2(2, 2)
+menu_parent = NodePath("../VBoxContainer")
+cursor_offset = Vector2(0, 0)
+
+[node name="VBoxContainer" type="VBoxContainer" parent="Control_TitleMenu"]
+layout_mode = 0
+offset_right = 833.0
+offset_bottom = 359.0
+alignment = 1
+
+[node name="PlayBattleButton" type="Label" parent="Control_TitleMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.540065, 0.473227, 0.277429, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.721569)
+theme_override_colors/font_outline_color = Color(0.212305, 0.212305, 0.212305, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 66
+text = "PLAY BATTLE"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_0okep")
+
+[node name="ViewControlsButton" type="Label" parent="Control_TitleMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.540065, 0.473227, 0.277429, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.721569)
+theme_override_colors/font_outline_color = Color(0.212305, 0.212305, 0.212305, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 66
+text = "VIEW CONTROLS"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_0okep")
+
+[node name="ExitGameButton" type="Label" parent="Control_TitleMenu/VBoxContainer"]
+layout_mode = 2
+theme_override_colors/font_color = Color(0.540065, 0.473227, 0.277429, 1)
+theme_override_colors/font_shadow_color = Color(0, 0, 0, 0.721569)
+theme_override_colors/font_outline_color = Color(0.212305, 0.212305, 0.212305, 1)
+theme_override_constants/shadow_offset_x = 5
+theme_override_constants/shadow_offset_y = 5
+theme_override_constants/outline_size = 20
+theme_override_constants/shadow_outline_size = 35
+theme_override_font_sizes/font_size = 66
+text = "EXIT GAME"
+horizontal_alignment = 1
+vertical_alignment = 1
+script = ExtResource("6_0okep")
