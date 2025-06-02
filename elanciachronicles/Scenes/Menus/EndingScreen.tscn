@@ -1,28 +1,20 @@
-[gd_scene load_steps=5 format=3 uid="uid://biyadyibb2veq"]
+[gd_scene load_steps=3 format=3 uid="uid://cxhtk5dlv2u3w"]
 
-[ext_resource type="Script" path="res://Scripts/UI/proceed_screen.gd" id="1_2u7al"]
-[ext_resource type="AudioStream" uid="uid://cla3kxft3b37r" path="res://Audio/Music/17_-_Cooldown_Chapter_End_Credits.mp3" id="2_hdgqa"]
-[ext_resource type="PackedScene" uid="uid://cf4aiefjqeaqw" path="res://Scenes/Menus/TitleScreen.tscn" id="2_t6mf1"]
-[ext_resource type="Texture2D" uid="uid://c6sv6rrmcuj7c" path="res://Art/UI/credits_screen.png" id="3_85slg"]
+[ext_resource type="Texture2D" uid="uid://c6sv6rrmcuj7c" path="res://Art/UI/credits_screen.png" id="1_6mecg"]
+[ext_resource type="AudioStream" uid="uid://cla3kxft3b37r" path="res://Audio/Music/17_-_Cooldown_Chapter_End_Credits.mp3" id="2_r8yyq"]
 
 [node name="EndingScreen" type="Control"]
 layout_mode = 3
-anchors_preset = 15
-anchor_right = 1.0
-anchor_bottom = 1.0
-grow_horizontal = 2
-grow_vertical = 2
-script = ExtResource("1_2u7al")
-next_scene = ExtResource("2_t6mf1")
-
-[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
-stream = ExtResource("2_hdgqa")
-volume_db = -6.0
-autoplay = true
-parameters/looping = true
+anchors_preset = 0
 
 [node name="TextureRect" type="TextureRect" parent="."]
 layout_mode = 0
 offset_right = 40.0
 offset_bottom = 40.0
-texture = ExtResource("3_85slg")
+texture = ExtResource("1_6mecg")
+
+[node name="AudioStreamPlayer" type="AudioStreamPlayer" parent="."]
+stream = ExtResource("2_r8yyq")
+volume_db = -6.0
+autoplay = true
+parameters/looping = true

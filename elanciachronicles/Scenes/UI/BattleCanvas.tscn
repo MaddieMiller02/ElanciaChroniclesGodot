@@ -13,7 +13,7 @@
 [ext_resource type="Texture2D" uid="uid://dmn2vokkvrwmi" path="res://Art/YellowCursor.png" id="9_o6rj1"]
 [ext_resource type="Texture2D" uid="uid://bnkrirhdxijmp" path="res://Art/UI/battle_lost_graphic.png" id="9_wooeq"]
 [ext_resource type="Script" path="res://Scripts/UI/proceed_screen.gd" id="10_ti7no"]
-[ext_resource type="PackedScene" uid="uid://biyadyibb2veq" path="res://Scenes/Menus/EndingScreen.tscn" id="11_38881"]
+[ext_resource type="PackedScene" uid="uid://cxhtk5dlv2u3w" path="res://Scenes/Menus/EndingScreen.tscn" id="11_rhcff"]
 
 [node name="BattleCanvas" type="CanvasLayer"]
 
@@ -858,7 +858,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("10_ti7no")
-next_scene = ExtResource("11_38881")
+next_scene = ExtResource("11_rhcff")
 
 [node name="ColorRect" type="ColorRect" parent="Control_BattleWonUI"]
 custom_minimum_size = Vector2(10000, 10000)
@@ -894,7 +894,7 @@ anchors_preset = 0
 offset_right = 40.0
 offset_bottom = 40.0
 script = ExtResource("10_ti7no")
-next_scene = ExtResource("11_38881")
+next_scene = ExtResource("11_rhcff")
 
 [node name="ColorRect" type="ColorRect" parent="Control_BattleLostUI"]
 custom_minimum_size = Vector2(10000, 10000)
